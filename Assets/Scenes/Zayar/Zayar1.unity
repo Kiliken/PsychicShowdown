@@ -254,6 +254,9 @@ MonoBehaviour:
   jumpForce: 10
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  jumpCount: 0
+  maxJumps: 3
+  jumpCdTime: 2
   playerHeight: 2
   groundLayer:
     serializedVersion: 2
@@ -344,7 +347,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1919068183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1237149547
@@ -566,17 +570,16 @@ Transform:
   m_GameObject: {fileID: 1919068180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.9, z: -4.73}
+  m_LocalPosition: {x: 0, y: 1.0900002, z: -4.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1237149546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1919068183}
   - {fileID: 572862473}
   - {fileID: 1517338413}
   - {fileID: 1237149546}

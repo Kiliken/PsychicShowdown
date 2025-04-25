@@ -18,8 +18,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] float jumpForce = 10f;
     [SerializeField] float jumpCooldown = 0.25f;
-    //[SerializeField] float airMultiplier = 0.4f;
+    [SerializeField] float airMultiplier = 0.4f;
     private bool canJump = true;
+    int jumpsLeft = 3;
+    [SerializeField] int maxJumps = 3;
+    [SerializeField] float jumpCdTime = 2f;
+    float jumpCdTimer = 0f;
 
     [Header("Ground Check")]
     public float playerHeight = 2f;
@@ -41,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         orientation = gameObject.transform;
+
+        jumpsLeft = maxJumps;
     }
 
 
@@ -49,6 +55,17 @@ public class PlayerMovement : MonoBehaviour
         if(playerActive){
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
             PlayerInput();
+
+            if(jumpsLeft != maxJumps){
+                if(jumpCdTimer < jumpCdTime){
+                    jumpCdTimer += Time.deltaTime;
+                }
+                else{
+                    jumpsLeft++;
+                    jumpCdTimer = 0;
+                    Debug.Log("Jump Count Restored: "+ jumpsLeft);
+                }
+            }
         }
     }
 
@@ -73,11 +90,14 @@ public class PlayerMovement : MonoBehaviour
 
         // removed grounded since there is a triple jump
         if (Input.GetButtonDown("Jump") && canJump){
-            canJump = false;
-            //Debug.Log("jump");
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
+            if(jumpsLeft > 0){
+                jumpsLeft--;
+                Debug.Log("Jump Count: "+ jumpsLeft);
+                Jump();
+            }
+            else{
+                Debug.Log("Max jumped");
+            }
         }
     }
 
@@ -85,6 +105,11 @@ public class PlayerMovement : MonoBehaviour
     private void Move(){
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        if (grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        else if (!grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
 
@@ -100,8 +125,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump(){
+        canJump = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        Invoke(nameof(ResetJump), jumpCooldown);
     }
 
 
