@@ -17,18 +17,28 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] float jumpForce = 10f;
-    [SerializeField] float jumpCooldown = 0.25f;
+    [SerializeField] float jumpCooldown = 0.25f; //cooldown in-between
     [SerializeField] float airMultiplier = 0.4f;
     private bool canJump = true;
     int jumpsLeft = 3;
     [SerializeField] int maxJumps = 3;
-    [SerializeField] float jumpCdTime = 2f;
+    [SerializeField] float jumpCdTime = 2f; // recharge cooldown
     float jumpCdTimer = 0f;
+
+    [Header("Dashing")]
+    [SerializeField] float dashForce = 70f;
+    [SerializeField] float dashCooldown = 0.5f;
+    private bool canDash = true;
+    int dashesLeft = 3;
+    [SerializeField] int maxDashes = 3;
+    [SerializeField] float dashCdTime = 3f;
+    float dashCdTimer = 0f;
 
     [Header("Ground Check")]
     public float playerHeight = 2f;
     public LayerMask groundLayer;
-    bool grounded = false;
+    [SerializeField] bool grounded = false;
+    [SerializeField] bool hitGround = false; // for jumping
 
     [Header("Slope Handling")]
     [SerializeField] float maxSlopeAngle = 40f;
@@ -38,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Space(10)]
     Rigidbody rb;
+    [SerializeField] GameObject playerModel;
 
 
     // Start is called before the first frame update
@@ -53,17 +64,36 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         if(playerActive){
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f, groundLayer);
+            
+            // restore player jumps once they landed
+            if(grounded && !hitGround && canJump){
+                hitGround = true;
+                jumpsLeft = maxJumps;
+                Debug.Log("Jumps recharged");
+            }
+
             PlayerInput();
 
-            if(jumpsLeft != maxJumps){
-                if(jumpCdTimer < jumpCdTime){
-                    jumpCdTimer += Time.deltaTime;
+            // if(jumpsLeft != maxJumps){
+            //     if(jumpCdTimer < jumpCdTime){
+            //         jumpCdTimer += Time.deltaTime;
+            //     }
+            //     else{
+            //         jumpsLeft++;
+            //         jumpCdTimer = 0;
+            //         Debug.Log("Jump Count Restored: "+ jumpsLeft);
+            //     }
+            // }
+
+            if(dashesLeft != maxDashes){
+                if(dashCdTimer < dashCdTime){
+                    dashCdTimer += Time.deltaTime;
                 }
                 else{
-                    jumpsLeft++;
-                    jumpCdTimer = 0;
-                    Debug.Log("Jump Count Restored: "+ jumpsLeft);
+                    dashesLeft++;
+                    dashCdTimer = 0;
+                    Debug.Log("Dash restored: " + dashesLeft);
                 }
             }
         }
@@ -74,6 +104,9 @@ public class PlayerMovement : MonoBehaviour
         if(playerActive){
             Move();
             SpeedControl();
+            if(moveDirection != Vector3.zero){
+                RotatePlayer();
+            }
         }
     }
 
@@ -99,12 +132,22 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Max jumped");
             }
         }
+
+        if(Input.GetButtonDown("DashK1") && canDash){
+            if(dashesLeft > 0){
+                dashesLeft--;
+                Debug.Log("Dash Count: "+ dashesLeft);
+                Dash();
+            }
+            else{
+                Debug.Log("Max dashed");
+            }
+        }
     }
 
 
     private void Move(){
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -124,7 +167,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void RotatePlayer()
+    {
+        float angle = Mathf.Atan2(horizontalInput, verticalInput);
+        angle = angle * Mathf.Rad2Deg;
+        playerModel.transform.eulerAngles = new Vector3(0, angle, 0);
+    }
+
     private void Jump(){
+        grounded = false;
+        hitGround = false;
         canJump = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -137,6 +189,21 @@ public class PlayerMovement : MonoBehaviour
     {
         //exitingSlope = false;
         canJump = true;
+    }
+
+    private void Dash(){
+        canDash = false;
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if(horizontalInput != 0 || verticalInput != 0)
+            rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
+        else
+            rb.AddForce(transform.forward * dashForce * 2, ForceMode.Impulse);
+
+        Invoke(nameof(ResetDash), dashCooldown);
+    }
+
+    private void ResetDash(){
+        canDash = true;
     }
 
 
