@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion;
 
 public class PlayerMovement : MonoBehaviour
 {
+    Rigidbody rb;
+    [SerializeField] GameObject playerModel;
+    [SerializeField] Transform playerCam;
     public bool playerActive = true;
+
+    [Space(10)]
+
     [Header("Movement")]
     private float moveSpeed = 0f;
     [SerializeField] float moveSpeedDefault = 10f;
@@ -14,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     private Vector3 moveDirection;
     Transform orientation;
+    private Quaternion targetModelRotation;
 
     [Header("Jumping")]
     [SerializeField] float jumpForce = 10f;
@@ -46,11 +56,6 @@ public class PlayerMovement : MonoBehaviour
     //private bool exitingSlope;
 
 
-    [Space(10)]
-    Rigidbody rb;
-    [SerializeField] GameObject playerModel;
-
-
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody>();
@@ -74,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             PlayerInput();
+            
 
             // if(jumpsLeft != maxJumps){
             //     if(jumpCdTimer < jumpCdTime){
@@ -104,10 +110,21 @@ public class PlayerMovement : MonoBehaviour
         if(playerActive){
             Move();
             SpeedControl();
-            if(moveDirection != Vector3.zero){
-                RotatePlayer();
+            if (moveDirection != Vector3.zero)
+            {
+                targetModelRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        // if(moveDirection != Vector3.zero){
+        //     RotatePlayer();
+        // }
+
+        // player rotation
+        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetModelRotation, 10f * Time.deltaTime);
     }
 
 
@@ -147,7 +164,19 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void Move(){
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        // get camera forward/right directions
+        Vector3 camForward = playerCam.forward;
+        Vector3 camRight = playerCam.right;
+        camForward.y = 0; // no vertical rotation
+        camRight.y = 0;
+
+        // get relative directions
+        Vector3 forwardRelative = verticalInput * camForward;
+        Vector3 rightRelative = horizontalInput * camRight;
+
+        //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = forwardRelative + rightRelative;
 
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -167,12 +196,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void RotatePlayer()
-    {
-        float angle = Mathf.Atan2(horizontalInput, verticalInput);
-        angle = angle * Mathf.Rad2Deg;
-        playerModel.transform.eulerAngles = new Vector3(0, angle, 0);
-    }
+    // private void RotatePlayer()
+    // {
+    //     // float angle = Mathf.Atan2(moveDirection.x, moveDirection.y);
+    //     // angle = angle * Mathf.Rad2Deg;
+    //     // playerModel.transform.eulerAngles = new Vector3(0, angle, 0);
+
+    //     // Quaternion toRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
+    //     // playerModel.transform.rotation = Quaternion.RotateTowards(playerModel.transform.rotation, toRotation, 720 * Time.deltaTime);
+    // }
 
     private void Jump(){
         grounded = false;
