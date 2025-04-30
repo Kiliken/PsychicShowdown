@@ -154,11 +154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1237149546}
-  camDistance: 7
+  camDistance: 6.5
   camVertAngleMin: -45
   camVertAngleMax: 45
-  offsetX: 0
-  offsetY: 2
+  offsetX: 2.5
+  offsetY: 1.5
   RotSpeedX: 2
   RotSpeedY: 2
   invertX: 0

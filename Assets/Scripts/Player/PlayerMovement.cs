@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canJump = true;
     int jumpsLeft = 3;
     [SerializeField] int maxJumps = 3;
-    [SerializeField] float jumpCdTime = 2f; // recharge cooldown
-    float jumpCdTimer = 0f;
+    // [SerializeField] float jumpCdTime = 2f; // recharge cooldown
+    // float jumpCdTimer = 0f;
 
     [Header("Dashing")]
     [SerializeField] float dashForce = 70f;
@@ -112,13 +112,14 @@ public class PlayerMovement : MonoBehaviour
             SpeedControl();
             if (moveDirection != Vector3.zero)
             {
+                // calculate target rotation
                 targetModelRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
             }
         }
     }
 
-    private void LateUpdate()
-    {
+
+    private void LateUpdate(){
         // if(moveDirection != Vector3.zero){
         //     RotatePlayer();
         // }
@@ -164,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void Move(){
-
         // get camera forward/right directions
         Vector3 camForward = playerCam.forward;
         Vector3 camRight = playerCam.right;
@@ -196,6 +196,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     // private void RotatePlayer()
     // {
     //     // float angle = Mathf.Atan2(moveDirection.x, moveDirection.y);
@@ -205,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
     //     // Quaternion toRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
     //     // playerModel.transform.rotation = Quaternion.RotateTowards(playerModel.transform.rotation, toRotation, 720 * Time.deltaTime);
     // }
+
 
     private void Jump(){
         grounded = false;
@@ -217,11 +219,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void ResetJump()
-    {
+    private void ResetJump(){
         //exitingSlope = false;
         canJump = true;
     }
+
 
     private void Dash(){
         canDash = false;
@@ -234,13 +236,14 @@ public class PlayerMovement : MonoBehaviour
         Invoke(nameof(ResetDash), dashCooldown);
     }
 
+
     private void ResetDash(){
         canDash = true;
     }
 
 
     // see if slope movement is needed later
-    private bool OnSlope() {
+    private bool OnSlope(){
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -250,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private Vector3 GetSlopeMoveDirection() { 
+    private Vector3 GetSlopeMoveDirection(){ 
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }
