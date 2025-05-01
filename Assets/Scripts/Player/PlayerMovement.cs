@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] GameObject playerModel;
-    [SerializeField] Transform playerCam;
+    public Transform playerCam;
     public bool playerActive = true;
 
     [Space(10)]
@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpCooldown = 0.25f; //cooldown in-between
     [SerializeField] float airMultiplier = 0.4f;
     private bool canJump = true;
-    int jumpsLeft = 3;
-    [SerializeField] int maxJumps = 3;
+    public int jumpsLeft = 3;
+    public int maxJumps = 3;
     // [SerializeField] float jumpCdTime = 2f; // recharge cooldown
     // float jumpCdTimer = 0f;
 
@@ -39,10 +39,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashForce = 70f;
     [SerializeField] float dashCooldown = 0.5f;
     private bool canDash = true;
-    int dashesLeft = 3;
-    [SerializeField] int maxDashes = 3;
+    public int dashesLeft = 3;
+    public int maxDashes = 3;
     [SerializeField] float dashCdTime = 3f;
-    float dashCdTimer = 0f;
+    public float dashCdTimer = 0f;
 
     [Header("Ground Check")]
     public float playerHeight = 2f;
@@ -110,8 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if(playerActive){
             Move();
             SpeedControl();
-            if (moveDirection != Vector3.zero)
-            {
+            if (moveDirection != Vector3.zero){
                 // calculate target rotation
                 targetModelRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
             }

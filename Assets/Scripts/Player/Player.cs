@@ -4,30 +4,47 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int playerNo = 1;    // 1 or 2
+    PlayerMovement movementScript;
+    ObjHolder objHolder;
+    Transform shootPos;
     [SerializeField] Transform playerCam;
-    [SerializeField] Transform ObjPosL;
-    [SerializeField] Transform ObjPosR;
-    public float ObjDetectionRange = 20f;
+    [SerializeField] Transform objPosL;
+    [SerializeField] Transform objPosR;
+    public float objDetectionRange = 20f;
     GameObject currentTargetObj;    // object currently in player crosshair
     ThrowableObject leftObject;    // object holding in left
     ThrowableObject rightObject;    // object holding in right
     private bool holdingObjL = false;
     private bool holdingObjR = false;
-    [SerializeField] private bool TriggerInUseL = false;
-    private bool TriggerInUseR = false;
+    private bool triggerInUseL = false; // checking if triggers are being pressed
+    private bool triggerInUseR = false;
+
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start(){
+        // set up player cam in other scripts
+        movementScript = GetComponent<PlayerMovement>();
+        movementScript.playerCam = playerCam;
+        objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
+        objHolder.playerCam = playerCam;
+        shootPos = playerCam.GetChild(0).transform;
+
     }
 
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
+        ObjectDetection();
+        PlayerInput();
+    }
+
+
+    // detect pickable objects in front of player
+    private void ObjectDetection(){
         // object detection
         RaycastHit hit;
-        if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, ObjDetectionRange, LayerMask.GetMask("Object"))){
+        if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, LayerMask.GetMask("Object"))){
             if(hit.transform.gameObject != currentTargetObj){
                 currentTargetObj = hit.transform.gameObject;
                 Debug.Log(hit.transform.name);
@@ -37,58 +54,72 @@ public class Player : MonoBehaviour
             currentTargetObj = null;
             Debug.Log("target emptied");
         }
+    }
 
-        // grab/throw objects
+
+    // grab/throw objects
+    private void PlayerInput(){
         // Left Trigger
         if(Input.GetAxisRaw("GrabThrowL1") != 0){
-            if(!TriggerInUseL){
+            if(!triggerInUseL){
                 // grab
                 if(!holdingObjL && currentTargetObj){
                     leftObject = currentTargetObj.GetComponent<ThrowableObject>();
                     if(leftObject.canGrab){
                         Debug.Log("Left grab");
-                        leftObject.GrabObject(ObjPosL, playerCam.GetChild(0).transform);
+                        leftObject.GrabObject(objPosL, shootPos, playerNo);
                         holdingObjL = true;
                     }
                 }
-                // throw
+                // aim
                 else if(holdingObjL && leftObject.canThrow){
-                    Debug.Log("Left throw");
-                    leftObject.ThrowObject();
-                    holdingObjL = false;
+                    Debug.Log("Left aim");
+                    leftObject.aiming = true;
                 }
 
-                TriggerInUseL = true;
+                triggerInUseL = true;
             }
+
         }
-        else if(Input.GetAxisRaw("GrabThrowL1") == 0 && TriggerInUseL){
-            TriggerInUseL = false;
+        else if(Input.GetAxisRaw("GrabThrowL1") == 0 && triggerInUseL){
+            // throw
+            if(holdingObjL && leftObject.canThrow && leftObject.aiming){
+                Debug.Log("Left throw");
+                leftObject.ThrowObject();
+                holdingObjL = false;
+            }
+            triggerInUseL = false;
         }
 
         // Right Trigger
         if(Input.GetAxisRaw("GrabThrowR1") != 0){
-            if(!TriggerInUseR){
+            if(!triggerInUseR){
                 // grab
                 if(!holdingObjR && currentTargetObj){
                     rightObject = currentTargetObj.GetComponent<ThrowableObject>();
                     if(rightObject.canGrab){
                         Debug.Log("Right grab");
-                        rightObject.GrabObject(ObjPosR, playerCam.GetChild(0).transform);
+                        rightObject.GrabObject(objPosR, shootPos, playerNo);
                         holdingObjR = true;
                     }
                 }
-                // throw
+                // aim
                 else if(holdingObjR && rightObject.canThrow){
-                    Debug.Log("Right throw");
-                    rightObject.ThrowObject();
-                    holdingObjR = false;
+                    Debug.Log("Right aim");
+                    rightObject.aiming = true;
                 }
 
-                TriggerInUseR = true;
+                triggerInUseR = true;
             }
         }
-        else if(Input.GetAxisRaw("GrabThrowR1") == 0 && TriggerInUseR){
-            TriggerInUseR = false;
+        else if(Input.GetAxisRaw("GrabThrowR1") == 0 && triggerInUseR){
+            // throw
+            if(holdingObjR && rightObject.canThrow && rightObject.aiming){
+                Debug.Log("Right throw");
+                rightObject.ThrowObject();
+                holdingObjR = false;
+            }
+            triggerInUseR = false;
         }
     }
 }

@@ -5,59 +5,88 @@ using UnityEngine;
 
 public class ThrowableObject : MonoBehaviour
 {
+    protected Rigidbody rb;
+    protected ObjHitbox hitbox;
+    public int objectID = 0;    // ID for showing object on UI, etc.
+    [SerializeField] protected int objectSize = 0; // 0:small, 1:medium, 2:large
     public bool canGrab = true;
     public bool canThrow = false;
-    public bool inPosition = false;
-    private bool thrown = false;
-    public float throwSpeed = 50f;
-    private float grabMoveSpeed = 10f;
+    public bool aiming = false;
+    protected bool thrown = false;
+
+    // THROW SPEEDS
+    protected float[] throwSpeeds = new float[]{120f, 80f, 50f}; // S, M, L
+    [SerializeField] protected float throwSpeed = 150f;
+    // GRAB SPEEDS
+    protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L
+    [SerializeField] protected float grabSpeed = 30f;
+
     public Transform grabbedTransform;
     public Transform shootPos;
-    Rigidbody rb;
+    public int holdingPlayer = 0;
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         rb = GetComponent<Rigidbody>();
+        hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
+        throwSpeed = throwSpeeds[objectSize];
+        grabSpeed = grabSpeeds[objectSize];
     }
 
+
     // Update is called once per frame
-    void Update()
-    {
-        if(!thrown){
-            if(!canGrab && !inPosition){
-                if(Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
-                    transform.position = Vector3.MoveTowards(transform.position, grabbedTransform.position,grabMoveSpeed * Time.deltaTime);
-                }
-                else{
-                    inPosition = true;
-                }
+    void Update(){
+        if(aiming){
+            transform.position = shootPos.position;
+            transform.rotation = grabbedTransform.parent.transform.rotation;
+        }
+        else if(!thrown && !canGrab){
+            if(Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
+                transform.position = Vector3.MoveTowards(transform.position, grabbedTransform.position,grabSpeed * Time.deltaTime);
             }
-            else if(inPosition){
-                // move along player
+            else{
                 transform.position = grabbedTransform.position;
                 transform.rotation = grabbedTransform.parent.transform.rotation;
-
                 canThrow = true;
             }
         }
-        
-        
     }
 
-    public void GrabObject(Transform posTransform, Transform shootTransform){
+
+    public void GrabObject(Transform posTransform, Transform shootTransform, int player){
         grabbedTransform = posTransform;
         shootPos = shootTransform;
+        holdingPlayer = player;
         rb.useGravity = false;
+        GetComponent<MeshCollider>().enabled = false;
         canGrab = false;
     }
 
+
     public void ThrowObject(){
-        inPosition = false;
-        transform.position = shootPos.position;
-        rb.useGravity = true;
         thrown = true;
+        aiming = false;
+        rb.useGravity = true;
+        GetComponent<MeshCollider>().enabled = true;
+        // activate hit box
+        hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
+    }
+
+
+    private void OnCollisionEnter(Collision collision){
+        if(thrown){
+            if(collision.gameObject.tag == "Ground"){
+                // break or effect
+                // ObjectEffect();
+            }
+        }
+    }
+
+
+    // override with new script
+    public virtual void ObjectEffect(){
+        //Destroy(this.gameObject);
     }
 }

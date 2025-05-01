@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ObjHolder : MonoBehaviour
 {
-    [SerializeField] Transform playerCam;
+    public Transform playerCam;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -12,8 +14,7 @@ public class ObjHolder : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         transform.rotation = playerCam.rotation;
     }
 }
