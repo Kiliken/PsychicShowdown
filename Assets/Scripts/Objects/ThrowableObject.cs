@@ -40,6 +40,8 @@ public class ThrowableObject : MonoBehaviour
         if(aiming){
             transform.position = shootPos.position;
             transform.rotation = grabbedTransform.parent.transform.rotation;
+            if(GetComponent<MeshRenderer>().enabled)
+                GetComponent<MeshRenderer>().enabled = false;
         }
         else if(!thrown && !canGrab){
             if(Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
@@ -68,6 +70,7 @@ public class ThrowableObject : MonoBehaviour
         thrown = true;
         aiming = false;
         rb.useGravity = true;
+        GetComponent<MeshRenderer>().enabled = true;
         GetComponent<MeshCollider>().enabled = true;
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);

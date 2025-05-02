@@ -8,7 +8,11 @@ public class Player : MonoBehaviour
     PlayerMovement movementScript;
     ObjHolder objHolder;
     Transform shootPos;
-    [SerializeField] Transform playerCam;
+    [SerializeField] Transform playerCam;   // camera transform
+    [SerializeField] Camera cam;     // camera
+    [SerializeField] float defaultZoom = 60f;
+    [SerializeField] float adsZoom = 30f;
+    [SerializeField] float adsSpeed = 120f;
     [SerializeField] Transform objPosL;
     [SerializeField] Transform objPosR;
     public float objDetectionRange = 20f;
@@ -19,6 +23,8 @@ public class Player : MonoBehaviour
     private bool holdingObjR = false;
     private bool triggerInUseL = false; // checking if triggers are being pressed
     private bool triggerInUseR = false;
+    private bool leftAiming = false;
+    private bool rightAiming = false;
 
 
     // Start is called before the first frame update
@@ -29,6 +35,8 @@ public class Player : MonoBehaviour
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
+
+        cam = playerCam.gameObject.GetComponent<Camera>();
 
     }
 
@@ -82,6 +90,11 @@ public class Player : MonoBehaviour
                 triggerInUseL = true;
             }
 
+            if(holdingObjL && leftObject.aiming && !rightAiming){
+                cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
+                leftAiming = true;
+            }
+
         }
         else if(Input.GetAxisRaw("GrabThrowL1") == -1 && triggerInUseL){
             // throw
@@ -91,6 +104,10 @@ public class Player : MonoBehaviour
                 holdingObjL = false;
             }
             triggerInUseL = false;
+        }
+        else if(cam.fieldOfView < defaultZoom && !rightAiming){
+            cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, defaultZoom, adsSpeed * Time.deltaTime);
+            leftAiming = false;
         }
 
         // Right Trigger
@@ -113,6 +130,11 @@ public class Player : MonoBehaviour
 
                 triggerInUseR = true;
             }
+
+            if(holdingObjR && rightObject.aiming && !leftAiming){
+                cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
+                rightAiming = true;
+            }
         }
         else if(Input.GetAxisRaw("GrabThrowR1") == -1 && triggerInUseR){
             // throw
@@ -122,6 +144,10 @@ public class Player : MonoBehaviour
                 holdingObjR = false;
             }
             triggerInUseR = false;
+        }
+        else if(cam.fieldOfView < defaultZoom && !leftAiming){
+            cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, defaultZoom, adsSpeed * Time.deltaTime);
+            rightAiming = false;
         }
     }
 }
