@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6b0f53288480a9a469ed7f37b1482fd1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,10 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2074ed466c4d744da205e8d4dc0d32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectID: 0
   objectSize: 0
   canGrab: 1
   canThrow: 0
-  inPosition: 0
+  aiming: 0
   throwSpeed: 150
   grabSpeed: 30
   grabbedTransform: {fileID: 0}

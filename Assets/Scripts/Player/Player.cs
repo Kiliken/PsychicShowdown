@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public int maxHP = 100;
     public int hp = 80;
 
+
     // Start is called before the first frame update
     void Start(){
         // set up player cam in other scripts

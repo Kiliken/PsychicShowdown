@@ -48,6 +48,11 @@ public class CameraController : MonoBehaviour
         //     Debug.Log("X: " + Input.GetAxis("Cam1X") + " Y: " + Input.GetAxis("Cam1Y"));
         // }
 
+        // third-person shoulder swap
+        if(Input.GetButtonDown("ShoulderSwap1")){
+            offsetX = -offsetX;
+        }
+
         Quaternion targetRotation = Quaternion.Euler(rotationX, rotationY, 0);
         Vector3 pivotOffset = targetRotation * new Vector3(offsetX, offsetY, 0);    // include offset
         Vector3 focusPosition = followTarget.position + pivotOffset;
