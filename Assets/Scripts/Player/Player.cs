@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     private bool leftAiming = false;
     private bool rightAiming = false;
 
+    //temporary player hp (remove after implementing actual hp)
+    public int maxHP = 100;
+    public int hp = 80;
 
     // Start is called before the first frame update
     void Start(){
