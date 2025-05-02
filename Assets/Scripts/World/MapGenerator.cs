@@ -39,12 +39,14 @@ public class MapGenerator : MonoBehaviour
     public void GenerateMap()
     {
         float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight,seed, noiseScale, octaves, persistence, lacunarity, offset);
+        float[,] falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, mapHeight);
 
         Color[] colorMap = new Color[mapWidth * mapHeight];
         for (int y=0; y < mapHeight; y++)
         {
             for (int x=0; x < mapWidth; x++)
             {
+                noiseMap[x, y] = noiseMap[x, y] - falloffMap[x, y];
                 float currentheight = noiseMap[x, y];
                 for (int i=0; i < regions.Length; i++)
                 {
@@ -82,6 +84,11 @@ public class MapGenerator : MonoBehaviour
             octaves = 0;
 
     }
+
+    private void Start()
+    {
+        GenerateMap();
+    }
 }
 
 [System.Serializable]
@@ -91,3 +98,5 @@ public struct TerrainType
     public float height;
     public Color color;
 }
+
+
