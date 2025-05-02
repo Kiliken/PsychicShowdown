@@ -58,12 +58,24 @@ public class DebugController : MonoBehaviour
 
     private void HandleInput()
     {
-        for(int i=0; i<CommandList.commandList.Count; i++)
+        input = input.Substring(0, input.Length-1) + " @";
+        string[] proprieties = input.Split(' ');
+
+        for (int i=0; i<CommandList.commandList.Count; i++)
         {
             DebugCommandBase commandBase = CommandList.commandList[i] as DebugCommandBase;
 
             if(input.Contains(commandBase.commandId))
-                (CommandList.commandList[i] as DebugCommand).Invoke();
+            {
+                if (CommandList.commandList[i] as DebugCommand != null)
+                    (CommandList.commandList[i] as DebugCommand).Invoke();
+                else if (CommandList.commandList[i] as DebugCommand<string> != null)
+                {
+                    (CommandList.commandList[i] as DebugCommand<string>).Invoke(proprieties[1]);
+                }
+            }
+            
+            
         }
     }
 
