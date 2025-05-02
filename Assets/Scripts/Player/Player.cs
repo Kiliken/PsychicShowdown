@@ -59,8 +59,10 @@ public class Player : MonoBehaviour
 
     // grab/throw objects
     private void PlayerInput(){
-        // Left Trigger
-        if(Input.GetAxisRaw("GrabThrowL1") != 0){
+        //Debug.Log(Input.GetAxisRaw("GrabThrowL1"));
+        // Left Trigger 
+        // xbox axis is 0
+        if(Input.GetAxisRaw("GrabThrowL1") != -1){
             if(!triggerInUseL){
                 // grab
                 if(!holdingObjL && currentTargetObj){
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour
             }
 
         }
-        else if(Input.GetAxisRaw("GrabThrowL1") == 0 && triggerInUseL){
+        else if(Input.GetAxisRaw("GrabThrowL1") == -1 && triggerInUseL){
             // throw
             if(holdingObjL && leftObject.canThrow && leftObject.aiming){
                 Debug.Log("Left throw");
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
         }
 
         // Right Trigger
-        if(Input.GetAxisRaw("GrabThrowR1") != 0){
+        if(Input.GetAxisRaw("GrabThrowR1") != -1){
             if(!triggerInUseR){
                 // grab
                 if(!holdingObjR && currentTargetObj){
@@ -112,7 +114,7 @@ public class Player : MonoBehaviour
                 triggerInUseR = true;
             }
         }
-        else if(Input.GetAxisRaw("GrabThrowR1") == 0 && triggerInUseR){
+        else if(Input.GetAxisRaw("GrabThrowR1") == -1 && triggerInUseR){
             // throw
             if(holdingObjR && rightObject.canThrow && rightObject.aiming){
                 Debug.Log("Right throw");
