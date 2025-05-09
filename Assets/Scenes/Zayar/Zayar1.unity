@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 1897762663}
   - component: {fileID: 1897762662}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: NormalObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1375,9 +1375,17 @@ PrefabInstance:
       value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: camSenADS
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 242891519}
+    - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: camSenNormal
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 9168094254459669775, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: m_Name
       value: Player

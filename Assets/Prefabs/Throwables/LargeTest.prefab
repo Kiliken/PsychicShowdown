@@ -80,6 +80,14 @@ PrefabInstance:
       propertyPath: objectSize
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
+      propertyPath: grabbedRotation
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
+      propertyPath: grabbedRotation.y
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

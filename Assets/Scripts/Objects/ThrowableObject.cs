@@ -25,6 +25,8 @@ public class ThrowableObject : MonoBehaviour
     public Transform grabbedTransform;
     public Transform shootPos;
     public int holdingPlayer = 0;
+    [SerializeField] Vector3 grabbedRotation;
+    
     
     [SerializeField] protected float destroyAfterSec = 3f;
     protected float destroyTimer = 0f;
@@ -54,7 +56,7 @@ public class ThrowableObject : MonoBehaviour
             }
             else{
                 transform.position = grabbedTransform.position;
-                transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(0, 90f, 0);;
+                transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(grabbedRotation.x, grabbedRotation.y, grabbedRotation.z);;
                 canThrow = true;
             }
         }

@@ -9,10 +9,16 @@ public class Player : MonoBehaviour
     ObjHolder objHolder;
     Transform shootPos;
     [SerializeField] Transform playerCam;   // camera transform
-    [SerializeField] Camera cam;     // camera
+    Camera cam;     // camera
+    CameraController camController;
+
     [SerializeField] float defaultZoom = 60f;
     [SerializeField] float adsZoom = 30f;
     [SerializeField] float adsSpeed = 120f;
+    [SerializeField] float camSenNormal = 0.1f;   // camera sensitivity normal
+    [SerializeField] float camSenADS = 0.05f;    // camera sensitivity ADS
+
+
     [SerializeField] Transform objPosL;
     [SerializeField] Transform objPosR;
     [SerializeField] LayerMask objLayerMask; // both object and obstacle (large objects)
@@ -24,8 +30,10 @@ public class Player : MonoBehaviour
     private bool holdingObjR = false;
     private bool triggerInUseL = false; // checking if triggers are being pressed
     private bool triggerInUseR = false;
-    private bool leftAiming = false;
-    private bool rightAiming = false;
+    [SerializeField] private bool leftAiming = false;
+    [SerializeField] private bool rightAiming = false;
+    private bool aimCanceledL = false;
+    private bool aimCanceledR = false;
 
     //temporary player hp (remove after implementing actual hp)
     public int maxHP = 100;
@@ -42,6 +50,7 @@ public class Player : MonoBehaviour
         shootPos = playerCam.GetChild(0).transform;
 
         cam = playerCam.gameObject.GetComponent<Camera>();
+        camController = playerCam.gameObject.GetComponent<CameraController>();
 
     }
 
@@ -75,8 +84,8 @@ public class Player : MonoBehaviour
         //Debug.Log(Input.GetAxisRaw("GrabThrowL1"));
         // Left Trigger 
         // xbox axis is 0
-        if(Input.GetAxisRaw("GrabThrowL1") != -1){
-            if(!triggerInUseL){
+        if(Input.GetAxisRaw("GrabThrowL1") != -1 && !aimCanceledL){
+            if(!triggerInUseL && !rightAiming){
                 // grab
                 if(!holdingObjL && currentTargetObj){
                     leftObject = currentTargetObj.GetComponent<ThrowableObject>();
@@ -90,20 +99,29 @@ public class Player : MonoBehaviour
                 else if(holdingObjL && leftObject.canThrow){
                     Debug.Log("Left aim");
                     leftObject.aiming = true;
+                    camController.RotSpeedX = camController.RotSpeedY = camSenADS;
                 }
 
                 triggerInUseL = true;
             }
 
             if(holdingObjL && leftObject.aiming && !rightAiming){
+                if(Input.GetButtonDown("AimCancel1")){
+                    aimCanceledL = true;
+                    leftObject.aiming = false;
+                    leftObject.ShowHideObject(true);
+                }
                 cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
                 leftAiming = true;
             }
 
         }
         else if(Input.GetAxisRaw("GrabThrowL1") == -1 && triggerInUseL){
+            if(aimCanceledL){
+                aimCanceledL = false;
+            }
             // throw
-            if(holdingObjL && leftObject.canThrow && leftObject.aiming){
+            else if(holdingObjL && leftObject.canThrow && leftObject.aiming){
                 Debug.Log("Left throw");
                 leftObject.ThrowObject();
                 holdingObjL = false;
@@ -113,11 +131,12 @@ public class Player : MonoBehaviour
         else if(cam.fieldOfView < defaultZoom && !rightAiming){
             cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, defaultZoom, adsSpeed * Time.deltaTime);
             leftAiming = false;
+            camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
         }
 
         // Right Trigger
-        if(Input.GetAxisRaw("GrabThrowR1") != -1){
-            if(!triggerInUseR){
+        if(Input.GetAxisRaw("GrabThrowR1") != -1 && !aimCanceledR){
+            if(!triggerInUseR && !leftAiming){
                 // grab
                 if(!holdingObjR && currentTargetObj){
                     rightObject = currentTargetObj.GetComponent<ThrowableObject>();
@@ -131,17 +150,26 @@ public class Player : MonoBehaviour
                 else if(holdingObjR && rightObject.canThrow){
                     Debug.Log("Right aim");
                     rightObject.aiming = true;
+                    camController.RotSpeedX = camController.RotSpeedY = camSenADS;
                 }
 
                 triggerInUseR = true;
             }
 
             if(holdingObjR && rightObject.aiming && !leftAiming){
+                if(Input.GetButtonDown("AimCancel1")){
+                    aimCanceledR = true;
+                    rightObject.aiming = false;
+                    rightObject.ShowHideObject(true);
+                }
                 cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
                 rightAiming = true;
             }
         }
         else if(Input.GetAxisRaw("GrabThrowR1") == -1 && triggerInUseR){
+            if(aimCanceledR){
+                aimCanceledR = false;
+            }
             // throw
             if(holdingObjR && rightObject.canThrow && rightObject.aiming){
                 Debug.Log("Right throw");
@@ -153,6 +181,7 @@ public class Player : MonoBehaviour
         else if(cam.fieldOfView < defaultZoom && !leftAiming){
             cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, defaultZoom, adsSpeed * Time.deltaTime);
             rightAiming = false;
+            camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
         }
     }
 }
