@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Zayar/Zayar1.unity
     guid: a3a28f0e322e3e549a065b924550b9a6
+  - enabled: 1
+    path: Assets/Scenes/Chen/Chen1.unity
+    guid: f10a5360d0e003e4d85e74ec7a5f63a5
   m_configObjects: {}
