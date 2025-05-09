@@ -13,6 +13,7 @@ public class ThrowableObject : MonoBehaviour
     public bool canThrow = false;
     public bool aiming = false;
     protected bool thrown = false;
+    protected bool effectActivated = false;
 
     // THROW SPEEDS
     protected float[] throwSpeeds = new float[]{120f, 80f, 50f}; // S, M, L
@@ -24,6 +25,10 @@ public class ThrowableObject : MonoBehaviour
     public Transform grabbedTransform;
     public Transform shootPos;
     public int holdingPlayer = 0;
+    
+    [SerializeField] protected float destroyAfterSec = 3f;
+    protected float destroyTimer = 0f;
+
 
 
     // Start is called before the first frame update
@@ -53,6 +58,14 @@ public class ThrowableObject : MonoBehaviour
                 canThrow = true;
             }
         }
+        else if(effectActivated){
+            if(destroyTimer < destroyAfterSec){
+                destroyTimer += Time.deltaTime;
+            }
+            else{
+                Destroy(this.gameObject);
+            }
+        }
     }
 
 
@@ -72,6 +85,7 @@ public class ThrowableObject : MonoBehaviour
         rb.useGravity = true;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<MeshCollider>().enabled = true;
+        GetComponent<MeshCollider>().excludeLayers = 0;
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
@@ -80,9 +94,9 @@ public class ThrowableObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision){
         if(thrown){
-            if(collision.gameObject.tag == "Ground"){
+            if(collision.gameObject.layer == 6 || collision.gameObject.layer == 10){
                 // break or effect
-                // ObjectEffect();
+                ObjectEffect();
             }
         }
     }
@@ -90,6 +104,10 @@ public class ThrowableObject : MonoBehaviour
 
     // override with new script
     public virtual void ObjectEffect(){
+        if(effectActivated) return;
+
+        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player");
+        effectActivated = true;
         //Destroy(this.gameObject);
     }
 }

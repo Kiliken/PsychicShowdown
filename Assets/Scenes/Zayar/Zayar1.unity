@@ -964,10 +964,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!65 &1897762663
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -978,7 +978,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1307,6 +1307,10 @@ PrefabInstance:
     - target: {fileID: 399021365240190082, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: dashCollisionMask.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playerCam

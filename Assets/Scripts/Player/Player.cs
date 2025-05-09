@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] float adsSpeed = 120f;
     [SerializeField] Transform objPosL;
     [SerializeField] Transform objPosR;
+    [SerializeField] LayerMask objLayerMask; // both object and obstacle (large objects)
     public float objDetectionRange = 20f;
     GameObject currentTargetObj;    // object currently in player crosshair
     ThrowableObject leftObject;    // object holding in left
@@ -56,8 +57,8 @@ public class Player : MonoBehaviour
     private void ObjectDetection(){
         // object detection
         RaycastHit hit;
-        if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, LayerMask.GetMask("Object"))){
-            if(hit.transform.gameObject != currentTargetObj){
+        if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask)){
+            if(hit.transform.gameObject.tag == "Object" && hit.transform.gameObject != currentTargetObj){
                 currentTargetObj = hit.transform.gameObject;
                 Debug.Log(hit.transform.name);
             }

@@ -423,6 +423,9 @@ MonoBehaviour:
   adsSpeed: 120
   objPosL: {fileID: 7905273318132535730}
   objPosR: {fileID: 8532837585937744301}
+  objLayerMask:
+    serializedVersion: 2
+    m_Bits: 1152
   objDetectionRange: 20
   maxHP: 100
   hp: 80

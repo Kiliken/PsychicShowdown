@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjHitbox : MonoBehaviour
 {
     private int holdingPlayer = 0;
+    public bool hit = false;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class ObjHitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (hit) return;
         // may need to change tags to hurtbox later
         // damage player 1
         if(other.gameObject.tag == "Player1" && holdingPlayer == 2){
@@ -40,5 +42,7 @@ public class ObjHitbox : MonoBehaviour
             Debug.Log("Hit player 2");
             transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
         }
+        hit = true;
+        GetComponent<BoxCollider>().enabled = false;
     }
 }

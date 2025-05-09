@@ -7,7 +7,7 @@ public class SampleVariant : ThrowableObject
     // add object effects here
     public override void ObjectEffect()
     {
-        //base.ObjectEffect();
+        base.ObjectEffect();    // base method
         Debug.Log("Variant effect");
         //Destroy(this.gameObject);
     }
