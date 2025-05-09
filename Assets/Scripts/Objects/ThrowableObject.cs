@@ -54,7 +54,7 @@ public class ThrowableObject : MonoBehaviour
             }
             else{
                 transform.position = grabbedTransform.position;
-                transform.rotation = grabbedTransform.parent.transform.rotation;
+                transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(0, 90f, 0);;
                 canThrow = true;
             }
         }
@@ -70,6 +70,11 @@ public class ThrowableObject : MonoBehaviour
 
 
     public void GrabObject(Transform posTransform, Transform shootTransform, int player){
+        if(objectSize == 2){
+            rb.isKinematic = false;
+            GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
+        }
+        
         grabbedTransform = posTransform;
         shootPos = shootTransform;
         holdingPlayer = player;
@@ -85,7 +90,7 @@ public class ThrowableObject : MonoBehaviour
         rb.useGravity = true;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<MeshCollider>().enabled = true;
-        GetComponent<MeshCollider>().excludeLayers = 0;
+        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
@@ -106,8 +111,15 @@ public class ThrowableObject : MonoBehaviour
     public virtual void ObjectEffect(){
         if(effectActivated) return;
 
-        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player");
+        Debug.Log("thrown object collided");
+        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object");
         effectActivated = true;
+        hitbox.hit = true;
         //Destroy(this.gameObject);
+    }
+
+
+    public void ShowHideObject(bool show){
+        GetComponent<MeshRenderer>().enabled = show;
     }
 }

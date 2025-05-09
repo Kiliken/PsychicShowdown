@@ -5,8 +5,9 @@ using UnityEngine;
 public class SampleVariant : ThrowableObject
 {
     // add object effects here
-    public override void ObjectEffect()
-    {
+    public override void ObjectEffect(){
+        if(effectActivated) return;
+        
         base.ObjectEffect();    // base method
         Debug.Log("Variant effect");
         //Destroy(this.gameObject);

@@ -18,6 +18,10 @@ public class CameraController : MonoBehaviour
     [SerializeField] bool invertY = false;
     private float invertXVal = 1f;
     private float invertYVal = 1f;
+    // camera collision
+    [SerializeField] LayerMask cameraCollisionLayers; 
+    [SerializeField] float cameraCollisionRadius = 0.3f;    // sphere cast radius
+    [SerializeField] float cameraMinDistance = 1f;  // minimum distance from player
 
 
     // Start is called before the first frame update
@@ -57,7 +61,20 @@ public class CameraController : MonoBehaviour
         Vector3 pivotOffset = targetRotation * new Vector3(offsetX, offsetY, 0);    // include offset
         Vector3 focusPosition = followTarget.position + pivotOffset;
 
-        transform.position = focusPosition - targetRotation * new Vector3(0, 0, camDistance);
+        //transform.position = focusPosition - targetRotation * new Vector3(0, 0, camDistance);
+
+        Vector3 desiredCameraPos = focusPosition - targetRotation * new Vector3(0, 0, camDistance);
+        Vector3 direction = desiredCameraPos - focusPosition;
+        float targetDistance = camDistance;
+
+        if (Physics.SphereCast(focusPosition, cameraCollisionRadius, direction.normalized, out RaycastHit hit, camDistance, cameraCollisionLayers))
+        {
+            targetDistance = Mathf.Clamp(hit.distance, cameraMinDistance, camDistance);
+        }
+
+        // Final camera position after applying  camera collision
+        transform.position = focusPosition - targetRotation * new Vector3(0, 0, targetDistance);
+
         transform.rotation = targetRotation;
     }
 }

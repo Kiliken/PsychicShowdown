@@ -30,19 +30,37 @@ public class ObjHitbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (hit) return;
+        
+        // if(other.gameObject.tag == "Player1" && holdingPlayer == 2){
+        //     // apply damage
+        //     Debug.Log("Hit player 1");
+        //     transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
+        //     hit = true;
+        //     GetComponent<BoxCollider>().enabled = false;
+        // }
+        // else if(other.gameObject.tag == "Player2" && holdingPlayer == 1){
+        //     // apply damage
+        //     Debug.Log("Hit player 2");
+        //     transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
+        //     hit = true;
+        //     GetComponent<BoxCollider>().enabled = false;
+        // }
+
         // may need to change tags to hurtbox later
-        // damage player 1
-        if(other.gameObject.tag == "Player1" && holdingPlayer == 2){
-            // apply damage
-            Debug.Log("Hit player 1");
+        if((other.gameObject.tag == "Player1" && holdingPlayer == 2) || (other.gameObject.tag == "Player2" && holdingPlayer == 1)){
+            if(holdingPlayer == 2){
+                Debug.Log("Hit player 1");
+                // apply damage to player 1
+            }
+            else if(holdingPlayer == 1){
+                Debug.Log("Hit player 2");
+                // apply damage to player 2
+            }
+
             transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
+            hit = true;
+            GetComponent<BoxCollider>().enabled = false;
         }
-        else if(other.gameObject.tag == "Player2" && holdingPlayer == 1){
-            // apply damage
-            Debug.Log("Hit player 2");
-            transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
-        }
-        hit = true;
-        GetComponent<BoxCollider>().enabled = false;
+        
     }
 }

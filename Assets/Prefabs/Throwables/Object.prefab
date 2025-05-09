@@ -100,7 +100,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -148,9 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2074ed466c4d744da205e8d4dc0d32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colLayerMask:
-    serializedVersion: 2
-    m_Bits: 1088
   objectID: 0
   objectSize: 0
   canGrab: 1
@@ -161,6 +158,7 @@ MonoBehaviour:
   grabbedTransform: {fileID: 0}
   shootPos: {fileID: 0}
   holdingPlayer: 0
+  destroyAfterSec: 3
 --- !u!1 &8778124300028352206
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +257,7 @@ BoxCollider:
     m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 1527
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

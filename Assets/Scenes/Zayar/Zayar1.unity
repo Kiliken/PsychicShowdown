@@ -164,6 +164,11 @@ MonoBehaviour:
   RotSpeedY: 0.1
   invertX: 0
   invertY: 0
+  cameraCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1088
+  cameraCollisionRadius: 0.3
+  cameraMinDistance: 1
 --- !u!81 &242891517
 AudioListener:
   m_ObjectHideFlags: 0
@@ -512,6 +517,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 399021365240190082, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
   m_PrefabInstance: {fileID: 8049700009167452547}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1243408059
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.062109
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.434536
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638423743631214255, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_Name
+      value: LargeTest
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
 --- !u!1 &1271750288
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +618,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!65 &1271750290
@@ -978,7 +1040,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1340,3 +1402,4 @@ SceneRoots:
   - {fileID: 1887518524}
   - {fileID: 1271750293}
   - {fileID: 1897762666}
+  - {fileID: 1243408059}
