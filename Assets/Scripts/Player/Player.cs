@@ -100,6 +100,8 @@ public class Player : MonoBehaviour
                     Debug.Log("Left aim");
                     leftObject.aiming = true;
                     camController.RotSpeedX = camController.RotSpeedY = camSenADS;
+                    if(holdingObjR)
+                        rightObject.ShowHideObject(false);
                 }
 
                 triggerInUseL = true;
@@ -110,6 +112,8 @@ public class Player : MonoBehaviour
                     aimCanceledL = true;
                     leftObject.aiming = false;
                     leftObject.ShowHideObject(true);
+                    if(holdingObjR)
+                        rightObject.ShowHideObject(true);
                 }
                 cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
                 leftAiming = true;
@@ -126,6 +130,10 @@ public class Player : MonoBehaviour
                 leftObject.ThrowObject();
                 holdingObjL = false;
             }
+
+            if(holdingObjR)
+                rightObject.ShowHideObject(true);
+            
             triggerInUseL = false;
         }
         else if(cam.fieldOfView < defaultZoom && !rightAiming){
@@ -151,6 +159,8 @@ public class Player : MonoBehaviour
                     Debug.Log("Right aim");
                     rightObject.aiming = true;
                     camController.RotSpeedX = camController.RotSpeedY = camSenADS;
+                    if(holdingObjL)
+                        leftObject.ShowHideObject(false);
                 }
 
                 triggerInUseR = true;
@@ -161,6 +171,8 @@ public class Player : MonoBehaviour
                     aimCanceledR = true;
                     rightObject.aiming = false;
                     rightObject.ShowHideObject(true);
+                    if(holdingObjL)
+                        leftObject.ShowHideObject(true);
                 }
                 cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
                 rightAiming = true;
@@ -171,11 +183,15 @@ public class Player : MonoBehaviour
                 aimCanceledR = false;
             }
             // throw
-            if(holdingObjR && rightObject.canThrow && rightObject.aiming){
+            else if(holdingObjR && rightObject.canThrow && rightObject.aiming){
                 Debug.Log("Right throw");
                 rightObject.ThrowObject();
                 holdingObjR = false;
             }
+
+            if(holdingObjL)
+                leftObject.ShowHideObject(true);
+            
             triggerInUseR = false;
         }
         else if(cam.fieldOfView < defaultZoom && !leftAiming){

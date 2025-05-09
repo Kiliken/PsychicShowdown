@@ -26,6 +26,7 @@ public class ThrowableObject : MonoBehaviour
     public Transform shootPos;
     public int holdingPlayer = 0;
     [SerializeField] Vector3 grabbedRotation;
+    [SerializeField] Vector3 shootRotation;
     
     
     [SerializeField] protected float destroyAfterSec = 3f;
@@ -46,7 +47,7 @@ public class ThrowableObject : MonoBehaviour
     void Update(){
         if(aiming){
             transform.position = shootPos.position;
-            transform.rotation = grabbedTransform.parent.transform.rotation;
+            transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
             if(GetComponent<MeshRenderer>().enabled)
                 GetComponent<MeshRenderer>().enabled = false;
         }
@@ -56,7 +57,7 @@ public class ThrowableObject : MonoBehaviour
             }
             else{
                 transform.position = grabbedTransform.position;
-                transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(grabbedRotation.x, grabbedRotation.y, grabbedRotation.z);;
+                transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(grabbedRotation.x, grabbedRotation.y, grabbedRotation.z);
                 canThrow = true;
             }
         }

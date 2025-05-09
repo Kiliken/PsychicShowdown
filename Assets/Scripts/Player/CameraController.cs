@@ -36,16 +36,16 @@ public class CameraController : MonoBehaviour
         invertYVal = invertY ? -1 : 1;
         
         // diagonal input
-        if(Input.GetAxisRaw("Cam1X") != 0 && Input.GetAxisRaw("Cam1Y") != 0){
-            rotationX += Input.GetAxisRaw("Cam1Y") * invertYVal * RotSpeedX * 1.6f;
+        if(Input.GetAxisRaw("CamX1") != 0 && Input.GetAxisRaw("CamY1") != 0){
+            rotationX += Input.GetAxisRaw("CamY1") * invertYVal * RotSpeedX * 1.6f;
             rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-            rotationY += Input.GetAxisRaw("Cam1X") * invertXVal *  RotSpeedY * 1.6f;
+            rotationY += Input.GetAxisRaw("CamX1") * invertXVal *  RotSpeedY * 1.6f;
         }
         // normal input
         else{
-            rotationX += Input.GetAxis("Cam1Y") * invertYVal * RotSpeedX;
+            rotationX += Input.GetAxis("CamY1") * invertYVal * RotSpeedX;
             rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-            rotationY += Input.GetAxis("Cam1X") * invertXVal *  RotSpeedY;
+            rotationY += Input.GetAxis("CamX1") * invertXVal *  RotSpeedY;
         }
         
         // if(Input.GetAxis("Cam1X") != 0 || Input.GetAxis("Cam1Y") != 0){

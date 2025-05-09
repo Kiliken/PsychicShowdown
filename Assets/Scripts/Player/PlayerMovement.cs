@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("DashK1") && canDash && dashesLeft > 0){
+        if (Input.GetButtonDown("Dash1") && canDash && dashesLeft > 0){
             Dash();
         }
     }
