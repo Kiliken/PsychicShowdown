@@ -96,7 +96,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -142,7 +142,7 @@ MonoBehaviour:
   camDistance: 6.5
   camVertAngleMin: -45
   camVertAngleMax: 45
-  offsetX: 3
+  offsetX: 2
   offsetY: 1.5
   RotSpeedX: 0.1
   RotSpeedY: 0.1
@@ -153,6 +153,9 @@ MonoBehaviour:
     m_Bits: 1088
   cameraCollisionRadius: 0.3
   cameraMinDistance: 1
+  camXInput: CamX1
+  camYInput: CamY1
+  shldrSwapBtn: ShoulderSwap1
 --- !u!114 &1001549543190950324
 MonoBehaviour:
   m_ObjectHideFlags: 0

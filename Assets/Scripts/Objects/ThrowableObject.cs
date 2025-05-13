@@ -10,6 +10,7 @@ public class ThrowableObject : MonoBehaviour
     public int objectID = 0;    // ID for showing object on UI, etc.
     [SerializeField] protected int objectSize = 0; // 0:small, 1:medium, 2:large
     public bool canGrab = true;
+    protected bool grabbed = false;
     public bool canThrow = false;
     public bool aiming = false;
     protected bool thrown = false;
@@ -28,7 +29,8 @@ public class ThrowableObject : MonoBehaviour
     [SerializeField] Vector3 grabbedRotation;
     [SerializeField] Vector3 shootRotation;
     
-    
+    [SerializeField] protected float disableHitboxVelo = 20f;    // the magnitude of the velocity to disable the hitbox when thrown
+    protected bool objectDisabled = false;
     [SerializeField] protected float destroyAfterSec = 3f;
     protected float destroyTimer = 0f;
 
@@ -45,6 +47,7 @@ public class ThrowableObject : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        // aim
         if(aiming){
             transform.position = shootPos.position;
             transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
@@ -52,16 +55,24 @@ public class ThrowableObject : MonoBehaviour
                 GetComponent<MeshRenderer>().enabled = false;
         }
         else if(!thrown && !canGrab){
-            if(Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
+            // grab
+            if(!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
                 transform.position = Vector3.MoveTowards(transform.position, grabbedTransform.position,grabSpeed * Time.deltaTime);
             }
+            // snap to player
             else{
                 transform.position = grabbedTransform.position;
                 transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(grabbedRotation.x, grabbedRotation.y, grabbedRotation.z);
                 canThrow = true;
+                grabbed = true;
             }
         }
-        else if(effectActivated){
+        // if thrown and low velocity, disable hitbox and collider
+        else if(thrown && rb.velocity.magnitude > 0 && rb.velocity.magnitude < disableHitboxVelo){
+            DisableObject();
+        }
+        // set object to be destoryed after collision/effect activation
+        if(effectActivated){
             if(destroyTimer < destroyAfterSec){
                 destroyTimer += Time.deltaTime;
             }
@@ -69,6 +80,7 @@ public class ThrowableObject : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        //Debug.Log(rb.velocity.magnitude);
     }
 
 
@@ -88,7 +100,6 @@ public class ThrowableObject : MonoBehaviour
 
 
     public void ThrowObject(){
-        thrown = true;
         aiming = false;
         rb.useGravity = true;
         GetComponent<MeshRenderer>().enabled = true;
@@ -97,6 +108,7 @@ public class ThrowableObject : MonoBehaviour
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
+        thrown = true;
     }
 
 
@@ -115,14 +127,24 @@ public class ThrowableObject : MonoBehaviour
         if(effectActivated) return;
 
         Debug.Log("thrown object collided");
-        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object");
+        //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
         effectActivated = true;
-        hitbox.hit = true;
+        //hitbox.hit = true;  // change later
         //Destroy(this.gameObject);
     }
 
 
     public void ShowHideObject(bool show){
         GetComponent<MeshRenderer>().enabled = show;
+    }
+
+
+    public void DisableObject(){
+        if(objectDisabled) return;
+
+        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object");
+        hitbox.hit = true;
+        objectDisabled = true;
+        Debug.Log("object disabled");
     }
 }

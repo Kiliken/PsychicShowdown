@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     PlayerMovement movementScript;
     ObjHolder objHolder;
     Transform shootPos;
-    [SerializeField] Transform playerCam;   // camera transform
+    public Transform playerCam;   // camera transform
     Camera cam;     // camera
     CameraController camController;
 
@@ -30,14 +30,18 @@ public class Player : MonoBehaviour
     private bool holdingObjR = false;
     private bool triggerInUseL = false; // checking if triggers are being pressed
     private bool triggerInUseR = false;
-    [SerializeField] private bool leftAiming = false;
-    [SerializeField] private bool rightAiming = false;
+    private bool leftAiming = false;
+    private bool rightAiming = false;
     private bool aimCanceledL = false;
     private bool aimCanceledR = false;
 
     //temporary player hp (remove after implementing actual hp)
     public int maxHP = 100;
     public int hp = 80;
+
+    public string grabThrowLeftBtn = "GrabThrowL1";
+    public string grabThrowRightBtn = "GrabThrowR1";
+    public string aimCancelBtn = "AimCancel1";
 
 
     // Start is called before the first frame update
@@ -84,7 +88,7 @@ public class Player : MonoBehaviour
         //Debug.Log(Input.GetAxisRaw("GrabThrowL1"));
         // Left Trigger 
         // xbox axis is 0
-        if(Input.GetAxisRaw("GrabThrowL1") != -1 && !aimCanceledL){
+        if(Input.GetAxisRaw(grabThrowLeftBtn) != -1 && !aimCanceledL){
             if(!triggerInUseL && !rightAiming){
                 // grab
                 if(!holdingObjL && currentTargetObj){
@@ -108,7 +112,7 @@ public class Player : MonoBehaviour
             }
 
             if(holdingObjL && leftObject.aiming && !rightAiming){
-                if(Input.GetButtonDown("AimCancel1")){
+                if(Input.GetButtonDown(aimCancelBtn)){
                     aimCanceledL = true;
                     leftObject.aiming = false;
                     leftObject.ShowHideObject(true);
@@ -120,7 +124,7 @@ public class Player : MonoBehaviour
             }
 
         }
-        else if(Input.GetAxisRaw("GrabThrowL1") == -1 && triggerInUseL){
+        else if(Input.GetAxisRaw(grabThrowLeftBtn) == -1 && triggerInUseL){
             if(aimCanceledL){
                 aimCanceledL = false;
             }
@@ -143,7 +147,7 @@ public class Player : MonoBehaviour
         }
 
         // Right Trigger
-        if(Input.GetAxisRaw("GrabThrowR1") != -1 && !aimCanceledR){
+        if(Input.GetAxisRaw(grabThrowRightBtn) != -1 && !aimCanceledR){
             if(!triggerInUseR && !leftAiming){
                 // grab
                 if(!holdingObjR && currentTargetObj){
@@ -167,7 +171,7 @@ public class Player : MonoBehaviour
             }
 
             if(holdingObjR && rightObject.aiming && !leftAiming){
-                if(Input.GetButtonDown("AimCancel1")){
+                if(Input.GetButtonDown(aimCancelBtn)){
                     aimCanceledR = true;
                     rightObject.aiming = false;
                     rightObject.ShowHideObject(true);
@@ -178,7 +182,7 @@ public class Player : MonoBehaviour
                 rightAiming = true;
             }
         }
-        else if(Input.GetAxisRaw("GrabThrowR1") == -1 && triggerInUseR){
+        else if(Input.GetAxisRaw(grabThrowRightBtn) == -1 && triggerInUseR){
             if(aimCanceledR){
                 aimCanceledR = false;
             }

@@ -260,9 +260,10 @@ GameObject:
   - component: {fileID: 8043326217203727453}
   - component: {fileID: 873118057066495994}
   - component: {fileID: 2663017856048644406}
+  - component: {fileID: 6823707848414057955}
   - component: {fileID: 2248099444933129275}
   - component: {fileID: 4688077051249154267}
-  - component: {fileID: 6823707848414057955}
+  - component: {fileID: 8952799167496086818}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -360,6 +361,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &6823707848414057955
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168094254459669775}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!114 &2248099444933129275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,10 +445,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 1
   playerCam: {fileID: 0}
-  cam: {fileID: 0}
   defaultZoom: 60
   adsZoom: 30
   adsSpeed: 120
+  camSenNormal: 0.1
+  camSenADS: 0.05
   objPosL: {fileID: 7905273318132535730}
   objPosR: {fileID: 8532837585937744301}
   objLayerMask:
@@ -429,30 +458,20 @@ MonoBehaviour:
   objDetectionRange: 20
   maxHP: 100
   hp: 80
---- !u!54 &6823707848414057955
-Rigidbody:
+  grabThrowLeftBtn: GrabThrowL1
+  grabThrowRightBtn: GrabThrowR1
+  aimCancelBtn: AimCancel1
+--- !u!114 &8952799167496086818
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9168094254459669775}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 2
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cad72bcf98bdd344b23ef89436ad534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playstation: 1
+  cameraControllerScript: {fileID: 0}

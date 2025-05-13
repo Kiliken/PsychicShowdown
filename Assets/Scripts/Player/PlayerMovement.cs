@@ -56,6 +56,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxSlopeAngle = 40f;
     private RaycastHit slopeHit;
 
+    public string moveXInput = "Horizontal";
+    public string moveYInput = "Vertical";
+    public string jumpBtn = "Jump";
+    public string dashBtn = "Dash1";
+
 
     void Start(){
         rb = GetComponent<Rigidbody>();
@@ -104,21 +109,21 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void PlayerInput(){
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = Input.GetAxisRaw(moveXInput);
+        verticalInput = Input.GetAxisRaw(moveYInput);
 
         if (!isDashing){
             moveSpeed = (horizontalInput != 0 || verticalInput != 0) ? moveSpeedDefault : 0f;
         }
 
-        if (Input.GetButtonDown("Jump") && canJump){
+        if (Input.GetButtonDown(jumpBtn) && canJump){
             if (jumpsLeft > 0){
                 jumpsLeft--;
                 Jump();
             }
         }
 
-        if (Input.GetButtonDown("Dash1") && canDash && dashesLeft > 0){
+        if (Input.GetButtonDown(dashBtn) && canDash && dashesLeft > 0){
             Dash();
         }
     }

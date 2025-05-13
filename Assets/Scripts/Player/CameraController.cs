@@ -23,6 +23,10 @@ public class CameraController : MonoBehaviour
     [SerializeField] float cameraCollisionRadius = 0.3f;    // sphere cast radius
     [SerializeField] float cameraMinDistance = 1f;  // minimum distance from player
 
+    public string camXInput = "CamX1";
+    public string camYInput = "CamY1";
+    public string shldrSwapBtn = "ShoulderSwap1";
+
 
     // Start is called before the first frame update
     void Start(){
@@ -35,25 +39,35 @@ public class CameraController : MonoBehaviour
         invertXVal = invertX ? -1 : 1;
         invertYVal = invertY ? -1 : 1;
         
-        // diagonal input
-        if(Input.GetAxisRaw("CamX1") != 0 && Input.GetAxisRaw("CamY1") != 0){
-            rotationX += Input.GetAxisRaw("CamY1") * invertYVal * RotSpeedX * 1.6f;
-            rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-            rotationY += Input.GetAxisRaw("CamX1") * invertXVal *  RotSpeedY * 1.6f;
-        }
-        // normal input
-        else{
-            rotationX += Input.GetAxis("CamY1") * invertYVal * RotSpeedX;
-            rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-            rotationY += Input.GetAxis("CamX1") * invertXVal *  RotSpeedY;
-        }
+        // // diagonal input
+        // if(Input.GetAxisRaw(camXInput) != 0 && Input.GetAxisRaw(camYInput) != 0){
+        //     rotationX += Input.GetAxisRaw(camYInput) * invertYVal * RotSpeedX * 1.6f;
+        //     rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
+        //     rotationY += Input.GetAxisRaw(camXInput) * invertXVal *  RotSpeedY * 1.6f;
+        // }
+        // // normal input
+        // else{
+        //     rotationX += Input.GetAxis(camYInput) * invertYVal * RotSpeedX;
+        //     rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
+        //     rotationY += Input.GetAxis(camXInput) * invertXVal *  RotSpeedY;
+        // }
+
+        //increase speed if diagonal input
+        float diagonalSpd = 1f;
+        if(Input.GetAxisRaw(camXInput) != 0 && Input.GetAxisRaw(camYInput) != 0)
+            diagonalSpd = 1.5f;
+
+        rotationX += Input.GetAxis(camYInput) * invertYVal * RotSpeedX * diagonalSpd;
+        rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
+        rotationY += Input.GetAxis(camXInput) * invertXVal *  RotSpeedY * diagonalSpd;
+        
         
         // if(Input.GetAxis("Cam1X") != 0 || Input.GetAxis("Cam1Y") != 0){
         //     Debug.Log("X: " + Input.GetAxis("Cam1X") + " Y: " + Input.GetAxis("Cam1Y"));
         // }
 
         // third-person shoulder swap
-        if(Input.GetButtonDown("ShoulderSwap1")){
+        if(Input.GetButtonDown(shldrSwapBtn)){
             offsetX = -offsetX;
         }
 

@@ -58,6 +58,7 @@ public class ObjHitbox : MonoBehaviour
             }
 
             transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
+            transform.parent.GetComponent<ThrowableObject>().DisableObject();
             hit = true;
             GetComponent<BoxCollider>().enabled = false;
         }
