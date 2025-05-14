@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
+    public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
 
 
     // Start is called before the first frame update
@@ -85,10 +86,10 @@ public class Player : MonoBehaviour
 
     // grab/throw objects
     private void PlayerInput(){
-        //Debug.Log(Input.GetAxisRaw("GrabThrowL1"));
+        //Debug.Log(Input.GetAxisRaw(grabThrowLeftBtn));
         // Left Trigger 
         // xbox axis is 0
-        if(Input.GetAxisRaw(grabThrowLeftBtn) != -1 && !aimCanceledL){
+        if(Input.GetAxisRaw(grabThrowLeftBtn) != triggerNegative && !aimCanceledL){
             if(!triggerInUseL && !rightAiming){
                 // grab
                 if(!holdingObjL && currentTargetObj){
@@ -124,7 +125,7 @@ public class Player : MonoBehaviour
             }
 
         }
-        else if(Input.GetAxisRaw(grabThrowLeftBtn) == -1 && triggerInUseL){
+        else if(Input.GetAxisRaw(grabThrowLeftBtn) == triggerNegative && triggerInUseL){
             if(aimCanceledL){
                 aimCanceledL = false;
             }
@@ -147,7 +148,7 @@ public class Player : MonoBehaviour
         }
 
         // Right Trigger
-        if(Input.GetAxisRaw(grabThrowRightBtn) != -1 && !aimCanceledR){
+        if(Input.GetAxisRaw(grabThrowRightBtn) != triggerNegative && !aimCanceledR){
             if(!triggerInUseR && !leftAiming){
                 // grab
                 if(!holdingObjR && currentTargetObj){
@@ -182,7 +183,7 @@ public class Player : MonoBehaviour
                 rightAiming = true;
             }
         }
-        else if(Input.GetAxisRaw(grabThrowRightBtn) == -1 && triggerInUseR){
+        else if(Input.GetAxisRaw(grabThrowRightBtn) == triggerNegative && triggerInUseR){
             if(aimCanceledR){
                 aimCanceledR = false;
             }

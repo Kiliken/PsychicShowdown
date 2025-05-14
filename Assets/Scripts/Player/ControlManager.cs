@@ -10,9 +10,9 @@ public class ControlManager : MonoBehaviour
     CameraController cameraControllerScript;
 
     // P1 PLAYSTATION
-    private string moveX1_P = "Horizontal";
-    private string moveY1_P = "Vertical";
-    private string jump1_P = "Jump";
+    private string moveX1_P = "Horizontal1";
+    private string moveY1_P = "Vertical1";
+    private string jump1_P = "Jump1";
     private string dash1_P = "Dash1";
     private string camX1_P = "CamX1";
     private string camY1_P = "CamY1";
@@ -36,6 +36,34 @@ public class ControlManager : MonoBehaviour
     private string aimCancelBtn2_P = "AimCancel2";
     // private string blockL2_P = "BlockL2";
     // private string blockR2_P = "BlockR2";
+
+    // P1 XBOX
+    private string moveX1_X = "Horizontal1";
+    private string moveY1_X = "Vertical1";
+    private string jump1_X = "Jump1X";
+    private string dash1_X = "Dash1X";
+    private string camX1_X = "CamX1X";
+    private string camY1_X = "CamY1X";
+    private string shldrSwap1_X = "ShoulderSwap1X";
+    private string grabThrowLeftBtn1_X = "GrabThrowL1X";
+    private string grabThrowRightBtn1_X = "GrabThrowR1X";
+    private string aimCancelBtn1_X = "AimCancel1X";
+    // private string blockL1_X = "BlockL1X";
+    // private string blockR1_X = "BlockR1X";
+
+    // P2 XBOX
+    private string moveX2_X = "Horizontal2";
+    private string moveY2_X = "Vertical2";
+    private string jump2_X = "Jump2X";
+    private string dash2_X = "Dash2X";
+    private string camX2_X = "CamX2X";
+    private string camY2_X = "CamY2X";
+    private string shldrSwap2_X = "ShoulderSwap2X";
+    private string grabThrowLeftBtn2_X = "GrabThrowL2X";
+    private string grabThrowRightBtn2_X = "GrabThrowR2X";
+    private string aimCancelBtn2_X = "AimCancel2X";
+    // private string blockL2_X = "BlockL2X";
+    // private string blockR2_X = "BlockR2X";
 
 
     void Awake(){
@@ -95,6 +123,36 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowRightBtn = grabThrowRightBtn2_P;
                 playerScript.aimCancelBtn = aimCancelBtn2_P;
             }
+            playerScript.triggerNegative = -1;
+        }
+        else{
+            if(playerScript.playerNo == 1){
+                Debug.Log("Player 1 Xbox controls");
+                playerMovementScript.moveXInput = moveX1_X;
+                playerMovementScript.moveYInput = moveY1_X;
+                playerMovementScript.jumpBtn = jump1_X;
+                playerMovementScript.dashBtn = dash1_X;
+                cameraControllerScript.camXInput = camX1_X;
+                cameraControllerScript.camYInput = camY1_X;
+                cameraControllerScript.shldrSwapBtn = shldrSwap1_X;
+                playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_X;
+                playerScript.grabThrowRightBtn = grabThrowRightBtn1_X;
+                playerScript.aimCancelBtn = aimCancelBtn1_X;
+            }
+            else{
+                Debug.Log("Player 2 Xbox controls");
+                playerMovementScript.moveXInput = moveX2_X;
+                playerMovementScript.moveYInput = moveY2_X;
+                playerMovementScript.jumpBtn = jump2_X;
+                playerMovementScript.dashBtn = dash2_X;
+                cameraControllerScript.camXInput = camX2_X;
+                cameraControllerScript.camYInput = camY2_X;
+                cameraControllerScript.shldrSwapBtn = shldrSwap2_X;
+                playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_X;
+                playerScript.grabThrowRightBtn = grabThrowRightBtn2_X;
+                playerScript.aimCancelBtn = aimCancelBtn2_X;
+            }
+            playerScript.triggerNegative = 0;
         }
     }
 }

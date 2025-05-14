@@ -56,9 +56,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxSlopeAngle = 40f;
     private RaycastHit slopeHit;
 
-    public string moveXInput = "Horizontal";
-    public string moveYInput = "Vertical";
-    public string jumpBtn = "Jump";
+    public string moveXInput = "Horizontal1";
+    public string moveYInput = "Vertical1";
+    public string jumpBtn = "Jump1";
     public string dashBtn = "Dash1";
 
 
