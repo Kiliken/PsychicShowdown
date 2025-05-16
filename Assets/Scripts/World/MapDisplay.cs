@@ -11,6 +11,8 @@ public class MapDisplay : MonoBehaviour
     MeshFilter meshFilter;
     [SerializeField]
     MeshRenderer meshRenderer;
+    [SerializeField]
+    MeshCollider meshCollider;
     
     public void DrawTexture(Texture2D texture)
     {
@@ -18,9 +20,10 @@ public class MapDisplay : MonoBehaviour
         textureRenderer.transform.localScale = new Vector3(texture.width, 1, texture.height);
     }
 
-    public void DrawMesh(MeshData meshData, Texture2D texture)
+    public void DrawMesh(MeshData meshData)// or Texture2D texture
     {
         meshFilter.sharedMesh = meshData.CreateMesh();
+        meshCollider.sharedMesh = meshData.CreateMesh();
         //meshRenderer.sharedMaterial.mainTexture = texture;
     }
 }

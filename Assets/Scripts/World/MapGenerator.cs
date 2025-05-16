@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap, ColorMap, Mesh};
+    public enum DrawMode { NoiseMap, Mesh};
 
     [SerializeField]
     DrawMode drawMode;
@@ -52,25 +52,30 @@ public class MapGenerator : MonoBehaviour
             {
                 noiseMap[x, y] = noiseMap[x, y] - falloffMap[x, y];
                 float currentheight = noiseMap[x, y];
-                for (int i=0; i < regions.Length; i++)
+                /*for (int i=0; i < regions.Length; i++)
                 {
                     if(currentheight <= regions[i].height)
                     {
                         colorMap[y * mapWidth + x] = regions[i].color;
                         break;
                     }
-                }
+                } */
             }
         }
 
         MapDisplay display = FindAnyObjectByType<MapDisplay>();
         if (drawMode == DrawMode.NoiseMap)
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
-        else if (drawMode == DrawMode.ColorMap)
-            display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
-        else if (drawMode == DrawMode.Mesh)
-            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve), TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
         //else if (drawMode == DrawMode.ColorMap)
+        //    display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+        else if (drawMode == DrawMode.Mesh)
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve)); // TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight)
+        //else if (drawMode == DrawMode.ColorMap)
+
+    }
+
+    public void GenerateObjects()
+    {
 
     }
 
@@ -92,7 +97,10 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
+        seed = Random.Range(6,4587);
         GenerateMap();
+        //generate object randomly
+
     }
 }
 
