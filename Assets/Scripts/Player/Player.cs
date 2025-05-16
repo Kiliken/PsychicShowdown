@@ -36,8 +36,8 @@ public class Player : MonoBehaviour
     private bool aimCanceledR = false;
 
     //temporary player hp (remove after implementing actual hp)
-    public int maxHP = 100;
-    public int hp = 80;
+    public int maxHP = 15;
+    public int hp = 14;
 
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
