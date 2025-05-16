@@ -15,10 +15,13 @@ public class ThrowableObject : MonoBehaviour
     public bool aiming = false;
     protected bool thrown = false;
     protected bool effectActivated = false;
+    // DAMAGES
+    protected int[] damages = new int[]{10, 15, 20}; // S, M, L
+    [SerializeField] public int damage = 10;
 
     // THROW SPEEDS
     protected float[] throwSpeeds = new float[]{120f, 80f, 50f}; // S, M, L
-    [SerializeField] protected float throwSpeed = 150f;
+    [SerializeField] protected float throwSpeed = 120f;
     // GRAB SPEEDS
     protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L
     [SerializeField] protected float grabSpeed = 30f;
@@ -40,6 +43,7 @@ public class ThrowableObject : MonoBehaviour
     void Start(){
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
+        damage = damages[objectSize];
         throwSpeed = throwSpeeds[objectSize];
         grabSpeed = grabSpeeds[objectSize];
     }

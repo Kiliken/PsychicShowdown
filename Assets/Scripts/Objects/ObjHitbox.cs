@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjHitbox : MonoBehaviour
 {
+    ThrowableObject objectScript;
     private int holdingPlayer = 0;
     public bool hit = false;
 
@@ -11,7 +12,7 @@ public class ObjHitbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        objectScript = transform.parent.GetComponent<ThrowableObject>();
     }
 
     // Update is called once per frame
@@ -49,16 +50,17 @@ public class ObjHitbox : MonoBehaviour
         // may need to change tags to hurtbox later
         if((other.gameObject.tag == "Player1" && holdingPlayer == 2) || (other.gameObject.tag == "Player2" && holdingPlayer == 1)){
             if(holdingPlayer == 2){
-                Debug.Log("Hit player 1");
+                Debug.Log("Hit player 1 " + other.gameObject.name);
                 // apply damage to player 1
             }
             else if(holdingPlayer == 1){
-                Debug.Log("Hit player 2");
+                Debug.Log("Hit player 2 " + other.gameObject.name);
                 // apply damage to player 2
             }
 
-            transform.parent.GetComponent<ThrowableObject>().ObjectEffect();
-            transform.parent.GetComponent<ThrowableObject>().DisableObject();
+            other.gameObject.transform.parent.GetComponent<Player>().ReceiveDamage(objectScript.damage);
+            objectScript.ObjectEffect();
+            objectScript.DisableObject();
             hit = true;
             GetComponent<BoxCollider>().enabled = false;
         }

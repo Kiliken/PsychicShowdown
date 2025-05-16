@@ -1520,15 +1520,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3403919869766787633, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -2.06
       objectReference: {fileID: 0}
     - target: {fileID: 3403919869766787633, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4.42
       objectReference: {fileID: 0}
     - target: {fileID: 3403919869766787633, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.02
+      value: 5.14
       objectReference: {fileID: 0}
     - target: {fileID: 3403919869766787633, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1686,7 +1686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: dashCollisionMask.m_Bits
-      value: 1024
+      value: 1088
       objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playerNo
@@ -1704,9 +1704,13 @@ PrefabInstance:
       propertyPath: camSenNormal
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: objLayerMask.m_Bits
+      value: 1152
+      objectReference: {fileID: 0}
     - target: {fileID: 8952799167496086818, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playstation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9168094254459669775, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: m_Name

@@ -205,4 +205,16 @@ public class Player : MonoBehaviour
             camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
         }
     }
+
+    public void ReceiveDamage(int damage){
+        //take damage
+        hp = Mathf.Max(0, Mathf.Min(hp - damage, maxHP));
+        Debug.Log("Player " + playerNo + " received " + damage + " damage.");
+
+        // disable hurtbox for splitsecond
+        // player dead
+        if(hp <= 0){
+            Debug.Log("Player " + playerNo + " dead.");
+        }
+    }
 }
