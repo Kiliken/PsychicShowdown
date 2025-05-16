@@ -26,6 +26,7 @@ TO DO:
 @ splitscreen camera
 @ player hurtbox
 @ objects damage player
+- sync FPS for object grabbing and camera speed
 - adjust movement speeds
 - adjust objects
 ---AFTER ALPHA---

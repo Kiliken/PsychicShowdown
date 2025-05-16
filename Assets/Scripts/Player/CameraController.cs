@@ -12,8 +12,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] float offsetX = 0f;
     public float offsetXTarget = 0f;
     [SerializeField] float offsetY = 2f;
-    public float RotSpeedX = 0.1f;
-    public float RotSpeedY = 0.1f;
+    public float RotSpeedX = 3f;
+    public float RotSpeedY = 3f;
     private float rotationX;
     private float rotationY;
     [SerializeField] bool invertX = false;

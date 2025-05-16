@@ -24,7 +24,8 @@ public class ThrowableObject : MonoBehaviour
     protected float[] throwSpeeds = new float[]{120f, 80f, 50f}; // S, M, L
     [SerializeField] protected float throwSpeed = 120f;
     // GRAB SPEEDS
-    protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L
+    //protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L 30 20 10
+    protected float[] grabSpeeds = new float[]{0.7f, 0.5f, 0.4f}; // S, M, L 30 20 10
     [SerializeField] protected float grabSpeed = 30f;
 
     public Transform grabbedTransform;
@@ -63,7 +64,7 @@ public class ThrowableObject : MonoBehaviour
         else if(!thrown && !canGrab){
             // grab
             if(!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
-                transform.position = Vector3.Lerp(transform.position, grabbedTransform.position, grabSpeed * Time.deltaTime);
+                //transform.position = Vector3.Lerp(transform.position, grabbedTransform.position, grabSpeed * Time.deltaTime);
             }
             // snap to player
             else{
@@ -87,6 +88,16 @@ public class ThrowableObject : MonoBehaviour
             }
         }
         //Debug.Log(rb.velocity.magnitude);
+    }
+
+    void FixedUpdate()
+    {
+        if(!thrown && !canGrab){
+            // grab
+            if(!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
+                rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed));
+            }
+        }
     }
 
 

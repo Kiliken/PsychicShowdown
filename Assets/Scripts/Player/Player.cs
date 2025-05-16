@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] float defaultZoom = 60f;
     [SerializeField] float adsZoom = 30f;
     [SerializeField] float adsSpeed = 120f;
-    [SerializeField] float camSenNormal = 0.1f;   // camera sensitivity normal
-    [SerializeField] float camSenADS = 0.05f;    // camera sensitivity ADS
+    [SerializeField] float camSenNormal = 3f;   // camera sensitivity normal
+    [SerializeField] float camSenADS = 0.5f;    // camera sensitivity ADS
 
 
     [SerializeField] Transform objPosL;
