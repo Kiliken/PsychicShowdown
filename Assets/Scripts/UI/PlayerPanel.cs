@@ -10,7 +10,7 @@ public class PlayerPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
         player = playerObject.GetComponent<Player>();
         GetComponentInChildren<JumpDotsUI>().player = playerMovement;
         GetComponentInChildren<DashDotsUI>().player = playerMovement;
