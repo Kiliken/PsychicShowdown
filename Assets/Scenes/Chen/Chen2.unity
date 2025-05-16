@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 1919068183}
   - component: {fileID: 1919068182}
   - component: {fileID: 1919068181}
+  - component: {fileID: 1919068184}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1066,6 +1067,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+--- !u!114 &1919068184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919068180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1001 &2017136614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1261,6 +1306,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 20997361328344490, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20997361328344490, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 428547847121994213, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1345,10 +1398,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1601461961}
+    - target: {fileID: 1483227208369135401, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483227208369135401, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1492594262250465197, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1237149549}
+    - target: {fileID: 1814557651360255959, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1601461961}
     - target: {fileID: 3042999342792780733, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
       propertyPath: player
       value: 
@@ -1361,6 +1426,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5050364651800520671, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1237149549}
+    - target: {fileID: 5540894111347011274, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1601461961}
+    - target: {fileID: 5589811686798843963, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589811686798843963, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366792004884030255, guid: c6eaf48c9853edf4493e1cd5111e33d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1237149549}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
