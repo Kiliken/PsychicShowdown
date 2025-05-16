@@ -1,0 +1,84 @@
+Psychic Showdown Checklist (Zayar)
+
+TO DO:
+@ Basic movement
+@ Third person camera
+@ Jumping (Up to 3 times, cooldown) 
+@ Dashing (Up to 3 times, cooldown) 
+@ crosshair
+@ basic items
+@ grabbing items
+@ grab items with tags
+@ throwing items
+@ rework dash
+@ remove wall clinging
+@ aim camera zoom
+@ ads aim slow
+@ hide object when holding aim
+@ shoulder flip using R3
+@ camera collider
+@ cancel throwing
+@ hide both objects when holding aim
+@ shoot rotation
+@ disable object hitbox when magnitude of velocity is less than 10
+@ InputSettings script for p1/p2 input and playstation/xbox input
+@ player 2
+@ splitscreen camera
+@ player hurtbox
+@ objects damage player
+- adjust movement speeds
+- adjust objects
+---AFTER ALPHA---
+- keep object and model seperate
+- adjust camera according to size of object held (none - near, large - far)
+- object hurtbox
+- guarding with objects
+- game pausing
+
+
+UNSURE:
+- Disable hitbox after collision? (yes for now)
+- change jump condition to fall velocity speed?
+- make player temporarily invincible (disable hurtbox) after taking a hit?
+
+
+BUGS:
+@ object position is not updated when throwing
+@ objects going through walls when you throw them (make large objects kinematic)
+@ when you aim high, the object already collides with the ground
+- When dashing on uneven surfaces, the player will temporarily clip into the ground
+
+
+NOTES:
+- movement speeds, etc will probably need adjustments
+- highlight items red, turns to green when grabbable
+- items shoot in a straight line
+- When items are grabbed, they will move to your position
+
+
+PLAYER INPUTS:
+Playstation:
+P1:
+- Horizontal: x axis
+- Vertical: y axis
+- Jump (joystick button 1): jump
+- Dash1 (joystick button 2): dash
+- CamX1 (3rd axis): cam x axis
+- CamY1 (6th axis): cam y axis
+- GrabThrowL1 (4th axis): left grab/throw
+- GrabThrowR1 (5th axis): right grab/throw
+- BlockL1 (joystick button 4): left block
+- BlockR1 (joystick button 5): right block
+- ShoulderSwap1 (joystick button 11): shoulder swap
+- AimCancel1 (joystick button 3): aim cancel
+
+- Pause (accessed by both, joystick button 9): pause
+
+
+
+
+
+
+
+
+
