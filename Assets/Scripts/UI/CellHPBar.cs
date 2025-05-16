@@ -9,6 +9,7 @@ public class CellHPBar : MonoBehaviour
     public Transform container;
     public int maxHP = 15;
     public int currentHP = 10;
+    [SerializeField] int playerNum;
 
     private List<GameObject> cells = new List<GameObject>();
 
@@ -25,7 +26,15 @@ public class CellHPBar : MonoBehaviour
 
             //set anchored position
             RectTransform rt = cell.GetComponent<RectTransform>();
-            rt.localPosition = new Vector2(i * (cellWidth + cellSpacing), 0);
+            if (playerNum == 1)
+            {
+                rt.localPosition = new Vector2(i * (cellWidth + cellSpacing), 0);
+            }
+            else if (playerNum == 2)
+            {
+                rt.localPosition = new Vector2(i * (0f - cellWidth - cellSpacing), 0);
+            }
+            
         }
 
         UpdateHPBar();
