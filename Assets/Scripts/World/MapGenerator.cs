@@ -37,6 +37,8 @@ public class MapGenerator : MonoBehaviour
 
     [Space(12)]    
     public bool autoUpdate;
+    [SerializeField]
+    bool isTitle;
 
     [Header("Object generator")]
     [SerializeField]
@@ -57,7 +59,11 @@ public class MapGenerator : MonoBehaviour
         {
             for (int x=0; x < mapWidth; x++)
             {
+
+                
                 noiseMap[x, y] = noiseMap[x, y] - falloffMap[x, y];
+
+
                 float currentheight = noiseMap[x, y];
                 /*for (int i=0; i < regions.Length; i++)
                 {
@@ -89,6 +95,7 @@ public class MapGenerator : MonoBehaviour
         MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
         
         GameObject thisObj;
+        Color thisColor = Color.white;
         float objectHeight = 0;
         
 
@@ -111,7 +118,8 @@ public class MapGenerator : MonoBehaviour
                         if(rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.red);
+                            ColorUtility.TryParseHtmlString("#503D35", out thisColor);
+                            propertyBlock.SetColor("_BaseColor", thisColor);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         else
@@ -128,13 +136,15 @@ public class MapGenerator : MonoBehaviour
                         if (rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.yellow);
+                            ColorUtility.TryParseHtmlString("#716749", out thisColor);
+                            propertyBlock.SetColor("_BaseColor", thisColor);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         else
                         {
                             thisObj = Instantiate(prefabs[3], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.gray);
+                            ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
+                            propertyBlock.SetColor("_BaseColor", thisColor);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
@@ -143,13 +153,15 @@ public class MapGenerator : MonoBehaviour
                         if (rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.gray);
+                            ColorUtility.TryParseHtmlString("#39483c", out thisColor);
+                            propertyBlock.SetColor("_BaseColor", thisColor);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         else
                         {
                             thisObj = Instantiate(prefabs[2], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.green);
+                            ColorUtility.TryParseHtmlString("#44774d", out thisColor);
+                            propertyBlock.SetColor("_BaseColor", thisColor);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
@@ -186,9 +198,23 @@ public class MapGenerator : MonoBehaviour
     private void Start()
     {
         seed = Random.Range(6,4587);
-        GenerateMap();
-        GenerateObjects();
 
+        if (!isTitle)
+        {
+            GenerateMap();
+            GenerateObjects();
+        }
+
+    }
+
+    private void Update()
+    {
+        if (isTitle)
+        {
+            offset.y += 0.75f * Time.deltaTime;
+            offset.x += 0.75f * Time.deltaTime;
+            GenerateMap();
+        }
     }
 }
 
