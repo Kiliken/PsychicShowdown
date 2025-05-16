@@ -86,12 +86,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f67e341fedc224097fe7d80e4da496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectID: 0
   objectSize: 0
   canGrab: 1
   canThrow: 0
-  inPosition: 0
+  aiming: 0
+  damage: 10
   throwSpeed: 150
   grabSpeed: 30
   grabbedTransform: {fileID: 0}
   shootPos: {fileID: 0}
   holdingPlayer: 0
+  grabbedRotation: {x: 0, y: 0, z: 0}
+  shootRotation: {x: 0, y: 0, z: 0}
+  disableHitboxVelo: 20
+  destroyAfterSec: 3
+  effectParticle: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}

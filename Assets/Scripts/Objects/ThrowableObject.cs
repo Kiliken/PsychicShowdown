@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class ThrowableObject : MonoBehaviour
     protected bool thrown = false;
     protected bool effectActivated = false;
     // DAMAGES
-    protected int[] damages = new int[]{10, 15, 20}; // S, M, L
+    protected int[] damages = new int[]{1, 2, 3}; // S, M, L
     [SerializeField] public int damage = 10;
 
     // THROW SPEEDS
@@ -36,6 +37,7 @@ public class ThrowableObject : MonoBehaviour
     protected bool objectDisabled = false;
     [SerializeField] protected float destroyAfterSec = 3f;
     protected float destroyTimer = 0f;
+    [SerializeField] protected GameObject effectParticle;
 
 
 
@@ -108,7 +110,7 @@ public class ThrowableObject : MonoBehaviour
         rb.useGravity = true;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<MeshCollider>().enabled = true;
-        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
+        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
@@ -132,6 +134,9 @@ public class ThrowableObject : MonoBehaviour
 
         Debug.Log("thrown object collided");
         //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
+        if(effectParticle != null){
+            Instantiate(effectParticle, transform.position, quaternion.identity);
+        }
         effectActivated = true;
         //hitbox.hit = true;  // change later
         //Destroy(this.gameObject);

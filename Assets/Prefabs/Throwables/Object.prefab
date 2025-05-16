@@ -100,7 +100,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   canGrab: 1
   canThrow: 0
   aiming: 0
+  damage: 10
   throwSpeed: 150
   grabSpeed: 30
   grabbedTransform: {fileID: 0}
@@ -162,6 +163,7 @@ MonoBehaviour:
   shootRotation: {x: 0, y: 0, z: 0}
   disableHitboxVelo: 20
   destroyAfterSec: 3
+  effectParticle: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}
 --- !u!1 &8778124300028352206
 GameObject:
   m_ObjectHideFlags: 0
