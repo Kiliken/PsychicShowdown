@@ -12,6 +12,7 @@ public class PlayerPanel : MonoBehaviour
     {
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         player = playerObject.GetComponent<Player>();
+        player.hpBar = GetComponentInChildren<CellHPBar>();
         GetComponentInChildren<JumpDotsUI>().player = playerMovement;
         GetComponentInChildren<DashDotsUI>().player = playerMovement;
         GetComponentInChildren<CellHPBar>().player = player;

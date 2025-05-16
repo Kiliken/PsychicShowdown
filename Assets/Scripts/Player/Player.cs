@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
     public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
+    public CellHPBar hpBar;
 
 
     // Start is called before the first frame update
@@ -209,6 +210,7 @@ public class Player : MonoBehaviour
     public void ReceiveDamage(int damage){
         //take damage
         hp = Mathf.Max(0, Mathf.Min(hp - damage, maxHP));
+        hpBar.UpdateHPBar();
         Debug.Log("Player " + playerNo + " received " + damage + " damage.");
 
         // disable hurtbox for splitsecond
