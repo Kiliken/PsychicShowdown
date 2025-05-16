@@ -63,7 +63,7 @@ public class ThrowableObject : MonoBehaviour
         else if(!thrown && !canGrab){
             // grab
             if(!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
-                transform.position = Vector3.MoveTowards(transform.position, grabbedTransform.position,grabSpeed * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, grabbedTransform.position, grabSpeed * Time.deltaTime);
             }
             // snap to player
             else{

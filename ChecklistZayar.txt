@@ -31,9 +31,17 @@ TO DO:
 ---AFTER ALPHA---
 - keep object and model seperate
 - adjust camera according to size of object held (none - near, large - far)
+- fix bug?
 - object hurtbox
 - guarding with objects
 - game pausing
+- fix audio listener issue (update volume according to distance from player positions?)
+- add object models
+- add player models
+- add player animations
+- add sound effects
+- add music loop
+- add a way for UI to be controllable with controller
 
 
 UNSURE:
