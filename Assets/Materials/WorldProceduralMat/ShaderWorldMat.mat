@@ -155,10 +155,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GrassHeigthBlend: -204.77
-    - _Level1heightBlend: 3
+    - _Level1heightBlend: 2
     - _Level1heightMap: 0
-    - _Level2HeightBlend: 6.96
-    - _Level3HeightBlend: 11.16
+    - _Level2HeightBlend: 7
+    - _Level3HeightBlend: 12
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
