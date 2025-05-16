@@ -88,6 +88,8 @@ public class MapGenerator : MonoBehaviour
         LayerMask ground = LayerMask.NameToLayer("Ground");
         RaycastHit hit;
         MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+        
+        GameObject thisObj;
         float objectHeight = 0;
         
 
@@ -101,45 +103,34 @@ public class MapGenerator : MonoBehaviour
             if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
             {
                 objectHeight = 50f - hit.distance;
-                /*switch (true)
+                switch (true)
                 {
-                    case true when (objectHeight > 2f):
+                    case true when (objectHeight < 2f):
                             //shell or rock 
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_Color", Color.yellow);
+                            propertyBlock.SetColor("_BaseColor", Color.green);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                             break;
-                    case true when (objectHeight > 7f):
+                    case true when (objectHeight < 7f):
                             // plants or rock
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_Color", Color.black);
+                            propertyBlock.SetColor("_BaseColor", Color.yellow);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                             break;
-                    case true when (objectHeight > 12f):
+                    case true when (objectHeight < 12f):
                             //granade or rock
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_Color", Color.gray);
+                            propertyBlock.SetColor("_BaseColor", Color.black);
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                             break;
                     default:
                         thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                        propertyBlock.SetColor("_Color", Color.green);
+                        propertyBlock.SetColor("_BaseColor", Color.gray);
                         thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                             //rock or wall
                         break;
 
-                }*/
-               
-                //HERE HERE HERE
-
-                propertyBlock.SetColor("_Color", Random.ColorHSV());
-                GameObject thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                thisObj.transform.position = Vector3.zero;
-                Debug.Log(thisObj.transform.position);
-                //thisObj.SetActive(false);
-                
-                //- prefabs[0].transform.localScale * .5f
+                }
             }
         }
 
