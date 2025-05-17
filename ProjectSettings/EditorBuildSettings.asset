@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Paolo/ProceduralTest.unity
-    guid: c2ab15ead7390634a8a1fe8988228c96
+    path: Assets/Scenes/Zayar/TitleScreen.unity
+    guid: 4d177a49123d6c849873b01b4352d54d
   - enabled: 1
-    path: Assets/Scenes/Zayar/Zayar1.unity
-    guid: a3a28f0e322e3e549a065b924550b9a6
-  - enabled: 1
-    path: Assets/Scenes/Chen/Chen1.unity
-    guid: f10a5360d0e003e4d85e74ec7a5f63a5
+    path: Assets/Scenes/Alpha/AlphaTest.unity
+    guid: 9714ad78df090dd4f81e827df2dbf617
   m_configObjects: {}

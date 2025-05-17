@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] float defaultZoom = 60f;
     [SerializeField] float adsZoom = 30f;
     [SerializeField] float adsSpeed = 120f;
-    [SerializeField] float camSenNormal = 0.1f;   // camera sensitivity normal
-    [SerializeField] float camSenADS = 0.05f;    // camera sensitivity ADS
+    [SerializeField] float camSenNormal = 3f;   // camera sensitivity normal
+    [SerializeField] float camSenADS = 0.5f;    // camera sensitivity ADS
 
 
     [SerializeField] Transform objPosL;
@@ -36,13 +36,14 @@ public class Player : MonoBehaviour
     private bool aimCanceledR = false;
 
     //temporary player hp (remove after implementing actual hp)
-    public int maxHP = 100;
-    public int hp = 80;
+    public int maxHP = 15;
+    public int hp = 14;
 
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
     public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
+    public CellHPBar hpBar;
 
 
     // Start is called before the first frame update
@@ -209,6 +210,7 @@ public class Player : MonoBehaviour
     public void ReceiveDamage(int damage){
         //take damage
         hp = Mathf.Max(0, Mathf.Min(hp - damage, maxHP));
+        hpBar.UpdateHPBar();
         Debug.Log("Player " + playerNo + " received " + damage + " damage.");
 
         // disable hurtbox for splitsecond

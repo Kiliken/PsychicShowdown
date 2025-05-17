@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CellHPBar : MonoBehaviour
 {
-
+    public Player player;
     public GameObject hpCellPrefab;
     public Transform container;
     public int maxHP = 15;
@@ -36,21 +36,17 @@ public class CellHPBar : MonoBehaviour
             }
             
         }
-
-        UpdateHPBar();
     }
 
     public void UpdateHPBar()
     {
+
+        maxHP = player.maxHP;
+        currentHP = player.hp;
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].SetActive(i < currentHP);
         }
     }
 
-    public void TakeDamage(int amount)
-    {
-        currentHP = Mathf.Max(currentHP - amount, 0);
-        UpdateHPBar();
-    }
 }

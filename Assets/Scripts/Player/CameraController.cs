@@ -6,12 +6,14 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform followTarget;    // player transform
     [SerializeField] float camDistance = 7f;
+    public float camDistanceTarget = 7f;
     [SerializeField] float camVertAngleMin = -45f;
     [SerializeField] float camVertAngleMax = 45f;
     [SerializeField] float offsetX = 0f;
+    public float offsetXTarget = 0f;
     [SerializeField] float offsetY = 2f;
-    public float RotSpeedX = 0.1f;
-    public float RotSpeedY = 0.1f;
+    public float RotSpeedX = 3f;
+    public float RotSpeedY = 3f;
     private float rotationX;
     private float rotationY;
     [SerializeField] bool invertX = false;
@@ -30,7 +32,8 @@ public class CameraController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
-        
+        camDistanceTarget = camDistance;
+        offsetXTarget = offsetX;
     }
 
 
