@@ -6,7 +6,7 @@ public class GameSettings : MonoBehaviour
 {
     void Awake()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("gameSettings");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameSettings");
 
         if (objs.Length > 1)
         {
