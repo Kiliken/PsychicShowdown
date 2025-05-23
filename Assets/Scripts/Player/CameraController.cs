@@ -41,11 +41,9 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if (!playerActive) return;
-
         invertXVal = invertX ? -1 : 1;
         invertYVal = invertY ? -1 : 1;
-        
+
         // // diagonal input
         // if(Input.GetAxisRaw(camXInput) != 0 && Input.GetAxisRaw(camYInput) != 0){
         //     rotationX += Input.GetAxisRaw(camYInput) * invertYVal * RotSpeedX * 1.6f;
@@ -59,24 +57,29 @@ public class CameraController : MonoBehaviour
         //     rotationY += Input.GetAxis(camXInput) * invertXVal *  RotSpeedY;
         // }
 
-        //increase speed if diagonal input
-        float diagonalSpd = 1f;
-        if(Input.GetAxisRaw(camXInput) != 0 && Input.GetAxisRaw(camYInput) != 0)
-            diagonalSpd = 1.5f;
+        if (playerActive)
+        {
+            //increase speed if diagonal input
+            float diagonalSpd = 1f;
+            if (Input.GetAxisRaw(camXInput) != 0 && Input.GetAxisRaw(camYInput) != 0)
+                diagonalSpd = 1.5f;
 
-        rotationX += Input.GetAxis(camYInput) * invertYVal * RotSpeedX * diagonalSpd;
-        rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-        rotationY += Input.GetAxis(camXInput) * invertXVal *  RotSpeedY * diagonalSpd;
-        
-        
-        // if(Input.GetAxis("Cam1X") != 0 || Input.GetAxis("Cam1Y") != 0){
-        //     Debug.Log("X: " + Input.GetAxis("Cam1X") + " Y: " + Input.GetAxis("Cam1Y"));
-        // }
+            rotationX += Input.GetAxis(camYInput) * invertYVal * RotSpeedX * diagonalSpd;
+            rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
+            rotationY += Input.GetAxis(camXInput) * invertXVal * RotSpeedY * diagonalSpd;
 
-        // third-person shoulder swap
-        if(Input.GetButtonDown(shldrSwapBtn)){
-            offsetX = -offsetX;
+
+            // if(Input.GetAxis("Cam1X") != 0 || Input.GetAxis("Cam1Y") != 0){
+            //     Debug.Log("X: " + Input.GetAxis("Cam1X") + " Y: " + Input.GetAxis("Cam1Y"));
+            // }
+
+            // third-person shoulder swap
+            if (Input.GetButtonDown(shldrSwapBtn))
+            {
+                offsetX = -offsetX;
+            }
         }
+        
 
         Quaternion targetRotation = Quaternion.Euler(rotationX, rotationY, 0);
         Vector3 pivotOffset = targetRotation * new Vector3(offsetX, offsetY, 0);    // include offset
