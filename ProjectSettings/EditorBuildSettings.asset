@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Alpha/AlphaTest.unity
     guid: 9714ad78df090dd4f81e827df2dbf617
+  - enabled: 1
+    path: Assets/Scenes/Alpha/AlphaPort.unity
+    guid: 94b9c54953a80c2489f23657184d77cf
+  - enabled: 1
+    path: Assets/Scenes/Alpha/AlphaPortFHD.unity
+    guid: 04fbbd362d649cb40b756b1a69660fee
   m_configObjects: {}
