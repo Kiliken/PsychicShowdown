@@ -166,12 +166,24 @@ PrefabInstance:
       value: PlayerCam2
       objectReference: {fileID: 0}
     - target: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
+      propertyPath: offsetX
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
+      propertyPath: offsetY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
       propertyPath: RotSpeedX
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
       propertyPath: RotSpeedY
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
+      propertyPath: rotationY
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
       propertyPath: followTarget
@@ -1206,7 +1218,7 @@ PrefabInstance:
       objectReference: {fileID: 175280573}
     - target: {fileID: 1572386696005393296, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: camSenNormal
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2946448219689330281, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: playstation
@@ -1238,19 +1250,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.13052654
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9914449
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1258,11 +1270,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -165
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860524186992154569, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009890718155433043, guid: 1699ad11627f40948844959c3a565980, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009890718155433043, guid: 1699ad11627f40948844959c3a565980, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009890718155433043, guid: 1699ad11627f40948844959c3a565980, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2647,11 +2671,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7246655691164257712, guid: a6e2cfde55f50564da64856b99275765, type: 3}
       propertyPath: RotSpeedX
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7246655691164257712, guid: a6e2cfde55f50564da64856b99275765, type: 3}
       propertyPath: RotSpeedY
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7246655691164257712, guid: a6e2cfde55f50564da64856b99275765, type: 3}
       propertyPath: followTarget
@@ -2744,7 +2768,7 @@ PrefabInstance:
       objectReference: {fileID: 242891519}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: camSenNormal
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: objLayerMask.m_Bits
