@@ -91,6 +91,7 @@ P1:
 - object adjustments
 - UI adjustments
 - camera adjustments
+- bug fixes
 
 
 
