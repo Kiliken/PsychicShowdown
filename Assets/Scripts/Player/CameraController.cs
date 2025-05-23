@@ -29,6 +29,8 @@ public class CameraController : MonoBehaviour
     public string camYInput = "CamY1";
     public string shldrSwapBtn = "ShoulderSwap1";
 
+    public bool playerActive = true;
+
 
     // Start is called before the first frame update
     void Start(){
@@ -39,6 +41,8 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        if (!playerActive) return;
+
         invertXVal = invertX ? -1 : 1;
         invertYVal = invertY ? -1 : 1;
         

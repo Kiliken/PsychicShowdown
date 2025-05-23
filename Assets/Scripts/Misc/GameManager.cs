@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         player1.gameManager = this;
         player2.gameManager = this;
         timer.gameManager = this;
-        timer.timer = timeLimit;
+        timer.StartTimer(timeLimit);
         gameStarted = true;
     }
 
@@ -50,9 +50,14 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(int winner)
     {
+        if (gameEnded) return;
+
         // disable inputs for both Players
-        player1.playerActive = false;
-        player2.playerActive = false;
+        player1.SetPlayerActive(false);
+        player2.SetPlayerActive(false);
+
+        // pause timer
+        timer.timerActive = false;
 
         // add draw
         if (winner == 1)
@@ -69,6 +74,8 @@ public class GameManager : MonoBehaviour
         {
             drawText.SetActive(true);
         }
+
+        gameEnded = true;
     }
 
 

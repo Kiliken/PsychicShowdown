@@ -50,6 +50,12 @@ public class Player : MonoBehaviour
     public GameManager gameManager;
 
 
+    private void Awake()
+    {
+        hp = maxHP;
+    }
+
+
     // Start is called before the first frame update
     void Start(){
         // set up player cam in other scripts
@@ -231,5 +237,12 @@ public class Player : MonoBehaviour
 
             Debug.Log("Player " + playerNo + " dead.");
         }
+    }
+
+    public void SetPlayerActive(bool a)
+    {
+        playerActive = a;
+        movementScript.playerActive = a;
+        camController.playerActive = a;
     }
 }

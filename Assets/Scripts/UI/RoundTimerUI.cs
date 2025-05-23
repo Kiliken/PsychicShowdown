@@ -7,6 +7,8 @@ public class RoundTimerUI : MonoBehaviour
     public float roundDuration = 120f; // 2 minutes
     public float timer;
     private bool timeOut = false;
+    public bool timerActive = false;
+
 
     public Text timerText; // Legacy UI Text component
 
@@ -17,7 +19,7 @@ public class RoundTimerUI : MonoBehaviour
 
     void Update()
     {
-        if (timeOut) return;
+        if (!timerActive || timeOut) return;
 
         timer -= Time.deltaTime;
         timer = Mathf.Max(timer, 0f);
@@ -32,5 +34,11 @@ public class RoundTimerUI : MonoBehaviour
             gameManager.CompareHP();
             timeOut = true;
         }
+    }
+
+    public void StartTimer(float time)
+    {
+        timer = time;
+        timerActive = true;
     }
 }
