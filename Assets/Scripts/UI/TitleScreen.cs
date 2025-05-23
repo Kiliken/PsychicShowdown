@@ -18,6 +18,6 @@ public class TitleScreen : MonoBehaviour
     }
 
     public void LoadPlayScene(){
-        SceneManager.LoadScene("AlphaTest");
+        SceneManager.LoadScene("AlphaPortFHD");
     }
 }

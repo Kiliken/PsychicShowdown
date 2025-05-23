@@ -29,7 +29,7 @@ public class DebugController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Backspace))
+        if(Input.GetKeyDown(KeyCode.Backslash))
             showConsole = !showConsole;
         
         if (input.Contains("\n"))
