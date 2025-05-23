@@ -85,6 +85,12 @@ P1:
 - Pause (accessed by both, joystick button 9): pause
 
 
+- game manager for win conditions, timer
+- player win/draw screens (temporary)
+- in-game adjustments
+- object adjustments
+- UI adjustments
+- camera adjustments
 
 
 
