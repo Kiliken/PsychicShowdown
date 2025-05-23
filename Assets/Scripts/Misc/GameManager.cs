@@ -1,0 +1,90 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    [SerializeField] Player player1;
+    [SerializeField] Player player2;
+    [SerializeField] RoundTimerUI timer;
+    [SerializeField] GameObject player1WinText;
+    [SerializeField] GameObject player2WinText;
+    [SerializeField] GameObject drawText;
+
+
+    public float timeLimit = 120f;
+    public float timeRemaining;
+    public bool gameStarted = false;
+    public bool gameEnded = false;
+
+
+    private void Awake()
+    {
+        
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //player1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<Player>();
+        //player2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player>();
+        //timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<RoundTimerUI>();
+        //player1WinText = GameObject.FindGameObjectWithTag("P1WinText");
+        //player2WinText = GameObject.FindGameObjectWithTag("P2WinText");
+
+        player1.gameManager = this;
+        player2.gameManager = this;
+        timer.gameManager = this;
+        timer.timer = timeLimit;
+        gameStarted = true;
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+
+    public void GameOver(int winner)
+    {
+        // disable inputs for both Players
+        player1.playerActive = false;
+        player2.playerActive = false;
+
+        // add draw
+        if (winner == 1)
+        {
+            // player 1 winner, display text
+            player1WinText.SetActive(true);
+        }
+        else if(winner == 2)
+        {
+            // player 2 winner, display text
+            player2WinText.SetActive(true);
+        }
+        else
+        {
+            drawText.SetActive(true);
+        }
+    }
+
+
+    public void CompareHP()
+    {
+        if(player1.hp > player2.hp)
+        {
+            GameOver(1);
+        }
+        else if(player2.hp > player1.hp)
+        {
+            GameOver(2);
+        }
+        else
+        {
+            GameOver(0);
+        }
+    }
+}

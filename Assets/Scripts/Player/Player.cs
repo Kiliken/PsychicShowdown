@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     [SerializeField] Transform objPosL;
     [SerializeField] Transform objPosR;
     [SerializeField] LayerMask objLayerMask; // both object and obstacle (large objects)
+    public CellHPBar hpBar;
+
     public float objDetectionRange = 20f;
     GameObject currentTargetObj;    // object currently in player crosshair
     ThrowableObject leftObject;    // object holding in left
@@ -36,14 +38,16 @@ public class Player : MonoBehaviour
     private bool aimCanceledR = false;
 
     //temporary player hp (remove after implementing actual hp)
-    public int maxHP = 15;
-    public int hp = 14;
+    public int maxHP = 10;
+    public int hp = 10;
 
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
     public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
-    public CellHPBar hpBar;
+
+    public bool playerActive = true;
+    public GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -63,6 +67,8 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        if (!playerActive) return;
+
         ObjectDetection();
         PlayerInput();
     }
@@ -208,6 +214,8 @@ public class Player : MonoBehaviour
     }
 
     public void ReceiveDamage(int damage){
+        if (!playerActive) return;
+
         //take damage
         hp = Mathf.Max(0, Mathf.Min(hp - damage, maxHP));
         hpBar.UpdateHPBar();
@@ -216,6 +224,11 @@ public class Player : MonoBehaviour
         // disable hurtbox for splitsecond
         // player dead
         if(hp <= 0){
+            if (playerNo == 1)
+                gameManager.GameOver(2);
+            else
+                gameManager.GameOver(1);
+
             Debug.Log("Player " + playerNo + " dead.");
         }
     }

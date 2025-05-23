@@ -80,6 +80,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2494185979427425891, guid: d0882807edd6e234399d1e064176c885, type: 3}
+    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: shootRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: shootRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: grabbedRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: grabbedRotation.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8638423743631214255, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Name
       value: Tree

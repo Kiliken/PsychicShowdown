@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock
       objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
+      propertyPath: objectSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8444663803039825899, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Mesh
       value: 

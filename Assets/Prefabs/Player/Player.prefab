@@ -568,12 +568,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   objDetectionRange: 20
-  maxHP: 100
-  hp: 80
+  maxHP: 10
+  hp: 10
   grabThrowLeftBtn: GrabThrowL1
   grabThrowRightBtn: GrabThrowR1
   aimCancelBtn: AimCancel1
   triggerNegative: -1
+  hpBar: {fileID: 0}
 --- !u!114 &8952799167496086818
 MonoBehaviour:
   m_ObjectHideFlags: 0

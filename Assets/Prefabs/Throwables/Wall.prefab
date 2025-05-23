@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 8733429697405204941, guid: c9fb93435ff35dd43a48263eadb2b314, type: 3}
+    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: shootRotation.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: grabbedRotation.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8638423743631214255, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Name
       value: Wall

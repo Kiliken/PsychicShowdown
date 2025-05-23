@@ -3,18 +3,22 @@ using UnityEngine.UI;
 
 public class RoundTimerUI : MonoBehaviour
 {
+    public GameManager gameManager;
     public float roundDuration = 120f; // 2 minutes
-    private float timer;
+    public float timer;
+    private bool timeOut = false;
 
     public Text timerText; // Legacy UI Text component
 
     void Start()
     {
-        timer = roundDuration;
+        //timer = roundDuration;
     }
 
     void Update()
     {
+        if (timeOut) return;
+
         timer -= Time.deltaTime;
         timer = Mathf.Max(timer, 0f);
 
@@ -22,5 +26,11 @@ public class RoundTimerUI : MonoBehaviour
         int seconds = Mathf.FloorToInt(timer % 60f);
 
         timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+
+        if(timer <= 0)
+        {
+            gameManager.CompareHP();
+            timeOut = true;
+        }
     }
 }
