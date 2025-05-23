@@ -214,6 +214,12 @@ public class MapGenerator : MonoBehaviour
             offset.y += 0.75f * Time.deltaTime;
             offset.x += 0.75f * Time.deltaTime;
             GenerateMap();
+
+            if(offset.y >= 100f)
+            {
+                offset.y = 0f;
+                offset.x = 0f;
+            }
         }
     }
 }
