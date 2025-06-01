@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap, Mesh};
+    public enum DrawMode { NoiseMap, Mesh };
 
     [Header("Mesh Generator")]
     [SerializeField]
@@ -30,12 +30,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     int octaves;
     [SerializeField]
-    [Range(0,1)]
+    [Range(0, 1)]
     float persistence;
     [SerializeField]
     float lacunarity;
 
-    [Space(12)]    
+    [Space(12)]
     public bool autoUpdate;
     [SerializeField]
     bool isTitle;
@@ -51,16 +51,16 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap()
     {
-        float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight,seed, noiseScale, octaves, persistence, lacunarity, offset);
+        float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistence, lacunarity, offset);
         float[,] falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, mapHeight);
 
         Color[] colorMap = new Color[mapWidth * mapHeight];
-        for (int y=0; y < mapHeight; y++)
+        for (int y = 0; y < mapHeight; y++)
         {
-            for (int x=0; x < mapWidth; x++)
+            for (int x = 0; x < mapWidth; x++)
             {
 
-                
+
                 noiseMap[x, y] = noiseMap[x, y] - falloffMap[x, y];
 
 
@@ -93,19 +93,20 @@ public class MapGenerator : MonoBehaviour
         LayerMask ground = LayerMask.NameToLayer("Ground");
         RaycastHit hit;
         MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
-        
+
         GameObject thisObj;
         Color thisColor = Color.white;
         float objectHeight = 0;
-        
+
 
 
         //Debug.Log(genCursor);
 
-        for (int i= 0; i< 50f; i++) {
-            
+        for (int i = 0; i < 50f; i++)
+        {
+
             genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
-            
+
             if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
             {
                 int rand;
@@ -115,37 +116,37 @@ public class MapGenerator : MonoBehaviour
                 {
                     case true when (objectHeight < 2f):
                         //shell or rock
-                        if(rand != 0)
+                        if (rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                             ColorUtility.TryParseHtmlString("#503D35", out thisColor);
                             propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         else
                         {
                             thisObj = Instantiate(prefabs[1], hit.point, Quaternion.identity);
                             propertyBlock.SetColor("_BaseColor", Color.gray);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
 
-                            break;
+                        break;
                     case true when (objectHeight < 7f):
                         // plants or rock
-                        
+
                         if (rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                             ColorUtility.TryParseHtmlString("#716749", out thisColor);
                             propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         else
                         {
                             thisObj = Instantiate(prefabs[3], hit.point, Quaternion.identity);
                             ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
                             propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
                     case true when (objectHeight < 12f):
@@ -155,22 +156,22 @@ public class MapGenerator : MonoBehaviour
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                             ColorUtility.TryParseHtmlString("#39483c", out thisColor);
                             propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         else
                         {
                             thisObj = Instantiate(prefabs[2], hit.point, Quaternion.identity);
                             ColorUtility.TryParseHtmlString("#44774d", out thisColor);
                             propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
                     default:
-                        
-                            thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.gray);
-                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        
+
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        propertyBlock.SetColor("_BaseColor", Color.gray);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+
                         break;
 
                 }
@@ -197,7 +198,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-        seed = Random.Range(6,4587);
+        seed = Random.Range(6, 4587);
 
         if (!isTitle)
         {
@@ -215,7 +216,7 @@ public class MapGenerator : MonoBehaviour
             offset.x += 0.75f * Time.deltaTime;
             GenerateMap();
 
-            if(offset.y >= 100f)
+            if (offset.y >= 100f)
             {
                 offset.y = 0f;
                 offset.x = 0f;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7729192965805647326
+--- !u!1001 &6954979684750999831
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,28 +10,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 839408575251315959, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 839408575251315959, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 0.64
       objectReference: {fileID: 0}
     - target: {fileID: 839408575251315959, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Size.z
-      value: 2
+      value: 2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 839408575251315959, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
+      propertyPath: m_Center.y
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 991471368745433408, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4013275331872712965, guid: 4e555e9de384031498c2ce9273bb86af, type: 3}
-    - target: {fileID: 991471368745433408, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 991471368745433408, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8610358766980727464, guid: 96a93ca464e20a14dacf368f99fca323, type: 3}
     - target: {fileID: 3403919869766787633, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -74,16 +70,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7571878978571524054, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: OLD_Clam
       objectReference: {fileID: 0}
-    - target: {fileID: 7658884572979897920, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
-      propertyPath: objectSize
+    - target: {fileID: 7571878978571524054, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8444663803039825899, guid: 5338350a8582b214ea4189c488feb9e4, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4013275331872712965, guid: 4e555e9de384031498c2ce9273bb86af, type: 3}
+      objectReference: {fileID: 8610358766980727464, guid: 96a93ca464e20a14dacf368f99fca323, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

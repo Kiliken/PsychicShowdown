@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ThrowableObject : MonoBehaviour
 {
+    protected GameObject model;
     protected Rigidbody rb;
     protected ObjHitbox hitbox;
     public int objectID = 0;    // ID for showing object on UI, etc.
@@ -17,15 +18,15 @@ public class ThrowableObject : MonoBehaviour
     protected bool thrown = false;
     protected bool effectActivated = false;
     // DAMAGES
-    protected int[] damages = new int[]{1, 2, 3}; // S, M, L
+    protected int[] damages = new int[] { 1, 2, 3 }; // S, M, L
     [SerializeField] public int damage = 10;
 
     // THROW SPEEDS
-    protected float[] throwSpeeds = new float[]{120f, 80f, 50f}; // S, M, L
+    protected float[] throwSpeeds = new float[] { 120f, 80f, 50f }; // S, M, L
     [SerializeField] protected float throwSpeed = 120f;
     // GRAB SPEEDS
     //protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L 30 20 10
-    protected float[] grabSpeeds = new float[]{0.7f, 0.5f, 0.4f}; // S, M, L 30 20 10
+    protected float[] grabSpeeds = new float[] { 0.7f, 0.5f, 0.4f }; // S, M, L 30 20 10
     [SerializeField] protected float grabSpeed = 30f;
 
     public Transform grabbedTransform;
@@ -33,7 +34,7 @@ public class ThrowableObject : MonoBehaviour
     public int holdingPlayer = 0;
     [SerializeField] Vector3 grabbedRotation;
     [SerializeField] Vector3 shootRotation;
-    
+
     [SerializeField] protected float disableHitboxVelo = 20f;    // the magnitude of the velocity to disable the hitbox when thrown
     protected bool objectDisabled = false;
     [SerializeField] protected float destroyAfterSec = 3f;
@@ -43,7 +44,9 @@ public class ThrowableObject : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
+        model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
         damage = damages[objectSize];
@@ -53,21 +56,26 @@ public class ThrowableObject : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         // aim
-        if(aiming){
+        if (aiming)
+        {
             transform.position = shootPos.position;
             transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
-            if(GetComponent<MeshRenderer>().enabled)
-                GetComponent<MeshRenderer>().enabled = false;
+            if (model.GetComponent<MeshRenderer>().enabled)
+                model.GetComponent<MeshRenderer>().enabled = false;
         }
-        else if(!thrown && !canGrab){
+        else if (!thrown && !canGrab)
+        {
             // grab
-            if(!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
+            if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
+            {
                 //transform.position = Vector3.Lerp(transform.position, grabbedTransform.position, grabSpeed * Time.deltaTime);
             }
             // snap to player
-            else{
+            else
+            {
                 transform.position = grabbedTransform.position;
                 transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(grabbedRotation.x, grabbedRotation.y, grabbedRotation.z);
                 canThrow = true;
@@ -75,15 +83,19 @@ public class ThrowableObject : MonoBehaviour
             }
         }
         // if thrown and low velocity, disable hitbox and collider
-        else if(thrown && rb.velocity.magnitude > 0 && rb.velocity.magnitude < disableHitboxVelo){
+        else if (thrown && rb.velocity.magnitude > 0 && rb.velocity.magnitude < disableHitboxVelo)
+        {
             DisableObject();
         }
         // set object to be destoryed after collision/effect activation
-        if(effectActivated){
-            if(destroyTimer < destroyAfterSec){
+        if (effectActivated)
+        {
+            if (destroyTimer < destroyAfterSec)
+            {
                 destroyTimer += Time.deltaTime;
             }
-            else{
+            else
+            {
                 Destroy(this.gameObject);
             }
         }
@@ -92,36 +104,41 @@ public class ThrowableObject : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!thrown && !canGrab){
+        if (!thrown && !canGrab)
+        {
             // grab
-            if(!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f){
+            if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
+            {
                 rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed));
             }
         }
     }
 
 
-    public void GrabObject(Transform posTransform, Transform shootTransform, int player){
-        if(objectSize == 2){
+    public void GrabObject(Transform posTransform, Transform shootTransform, int player)
+    {
+        if (objectSize == 2)
+        {
             rb.isKinematic = false;
-            GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
+            model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
         }
-        
+
         grabbedTransform = posTransform;
         shootPos = shootTransform;
         holdingPlayer = player;
         rb.useGravity = false;
-        GetComponent<MeshCollider>().enabled = false;
+        model.GetComponent<MeshCollider>().enabled = false;
         canGrab = false;
     }
 
 
-    public void ThrowObject(){
+    public void ThrowObject()
+    {
         aiming = false;
         rb.useGravity = true;
-        GetComponent<MeshRenderer>().enabled = true;
-        GetComponent<MeshCollider>().enabled = true;
-        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
+        model.GetComponent<MeshRenderer>().enabled = true;
+        model.GetComponent<MeshCollider>().enabled = true;
+        model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
@@ -129,9 +146,12 @@ public class ThrowableObject : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision){
-        if(thrown){
-            if(collision.gameObject.layer == 6 || collision.gameObject.layer == 10){
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (thrown)
+        {
+            if (collision.gameObject.layer == 6 || collision.gameObject.layer == 10)
+            {
                 // break or effect
                 ObjectEffect();
             }
@@ -140,12 +160,14 @@ public class ThrowableObject : MonoBehaviour
 
 
     // override with new script
-    public virtual void ObjectEffect(){
-        if(effectActivated) return;
+    public virtual void ObjectEffect()
+    {
+        if (effectActivated) return;
 
         Debug.Log("thrown object collided");
         //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
-        if(effectParticle != null){
+        if (effectParticle != null)
+        {
             Instantiate(effectParticle, transform.position, quaternion.identity);
         }
         effectActivated = true;
@@ -154,15 +176,17 @@ public class ThrowableObject : MonoBehaviour
     }
 
 
-    public void ShowHideObject(bool show){
-        GetComponent<MeshRenderer>().enabled = show;
+    public void ShowHideObject(bool show)
+    {
+        model.GetComponent<MeshRenderer>().enabled = show;
     }
 
 
-    public void DisableObject(){
-        if(objectDisabled) return;
+    public void DisableObject()
+    {
+        if (objectDisabled) return;
 
-        GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object");
+        model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object");
         hitbox.hit = true;
         objectDisabled = true;
         Debug.Log("object disabled");

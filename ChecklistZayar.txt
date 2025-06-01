@@ -28,10 +28,11 @@ TO DO:
 @ objects damage player
 @ sync FPS for object grabbing and camera speed
 @ game manager (handles win condition, timer, game start, etc.)
-- adjust movement speeds
-- adjust objects
+@ adjust movement speeds
+@ adjust objects
 ---AFTER ALPHA---
-- keep object and model seperate
+- adjust cooldowns
+@ keep object and model seperate
 - adjust camera according to size of object held (none - near, large - far)
 - fix bug?
 - object hurtbox
@@ -44,6 +45,15 @@ TO DO:
 - add sound effects
 - add music loop
 - add a way for UI to be controllable with controller
+
+
+Before school festival:
+- Since we only have 2 weeks, there will be no big changes
+- We will focus on making the game more visually appealing
+- player model will be added
+- some object models will be added
+- some sound effects will be added
+- parts of the game where the programming adjustments are needed will be done
 
 
 UNSURE:
@@ -64,6 +74,11 @@ NOTES:
 - highlight items red, turns to green when grabbable
 - items shoot in a straight line
 - When items are grabbed, they will move to your position
+
+Scene names:
+- AlphaPort
+- AlphaPortFHD
+- AlphaTest
 
 
 PLAYER INPUTS:

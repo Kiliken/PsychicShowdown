@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &322795535314744285
+--- !u!1001 &7669622755013610924
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,22 +11,18 @@ PrefabInstance:
     - target: {fileID: 1384582577959610425, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 2494185979427425891, guid: d0882807edd6e234399d1e064176c885, type: 3}
-    - target: {fileID: 1536645389035629966, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
-      propertyPath: m_Size.x
-      value: 3.78
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8733429697405204941, guid: c9fb93435ff35dd43a48263eadb2b314, type: 3}
     - target: {fileID: 1536645389035629966, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Size.y
-      value: 3.83
+      value: 4.09
       objectReference: {fileID: 0}
     - target: {fileID: 1536645389035629966, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Size.z
-      value: 3.06
+      value: 6.18
       objectReference: {fileID: 0}
     - target: {fileID: 1536645389035629966, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Center.y
-      value: 1.53
+      value: 1.99
       objectReference: {fileID: 0}
     - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_LocalScale.x
@@ -34,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3587196706580034376, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_LocalPosition.x
@@ -79,17 +75,9 @@ PrefabInstance:
     - target: {fileID: 7765357550001270418, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 2494185979427425891, guid: d0882807edd6e234399d1e064176c885, type: 3}
+      objectReference: {fileID: 8733429697405204941, guid: c9fb93435ff35dd43a48263eadb2b314, type: 3}
     - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
-      propertyPath: shootRotation.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
-      propertyPath: shootRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
-      propertyPath: grabbedRotation.x
+      propertyPath: shootRotation.y
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8411806565473924921, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
@@ -98,7 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8638423743631214255, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
       propertyPath: m_Name
-      value: Tree
+      value: OLD_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638423743631214255, guid: 8a92b502807f22041935484e8a7f0382, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
