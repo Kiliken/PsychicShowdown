@@ -13,14 +13,14 @@ public class GameManager : MonoBehaviour
 
 
     public float timeLimit = 120f;
-    public float timeRemaining;
+    //public float timeRemaining;
     public bool gameStarted = false;
     public bool gameEnded = false;
 
 
     private void Awake()
     {
-        
+
     }
 
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
         // pause timer
         timer.timerActive = false;
+        timer.gameObject.SetActive(false);
 
         // add draw
         if (winner == 1)
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
             // player 1 winner, display text
             player1WinText.SetActive(true);
         }
-        else if(winner == 2)
+        else if (winner == 2)
         {
             // player 2 winner, display text
             player2WinText.SetActive(true);
@@ -81,11 +82,11 @@ public class GameManager : MonoBehaviour
 
     public void CompareHP()
     {
-        if(player1.hp > player2.hp)
+        if (player1.hp > player2.hp)
         {
             GameOver(1);
         }
-        else if(player2.hp > player1.hp)
+        else if (player2.hp > player1.hp)
         {
             GameOver(2);
         }
