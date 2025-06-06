@@ -14,15 +14,14 @@ public class DebugController : MonoBehaviour
     uint qsize = 15;  // number of messages to keep
     Queue myLogQueue = new Queue();
 
-    void Awake()
-    {   /*
-        LOG = new DebugCommand("log", "logs", "log", () =>{
-            Debug.Log("Console Working Fine");
-        });
+    public string sceneName = null;
 
-        commandList = new List<object> {
-            LOG
-        };*/
+    void Awake()
+    {   
+        if(GetArg("-scene") != null)
+        {
+            sceneName = GetArg("-scene");
+        }
         
     }
 
