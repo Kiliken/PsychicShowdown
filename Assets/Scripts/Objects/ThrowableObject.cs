@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ThrowableObject : MonoBehaviour
 {
+    protected ObjSFXPlayer sfxPlayer;
     protected GameObject model;
     protected Rigidbody rb;
     protected ObjHitbox hitbox;
@@ -49,6 +50,7 @@ public class ThrowableObject : MonoBehaviour
         model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
+        sfxPlayer = GetComponent<ObjSFXPlayer>();
         damage = damages[objectSize];
         throwSpeed = throwSpeeds[objectSize];
         grabSpeed = grabSpeeds[objectSize];
@@ -166,6 +168,11 @@ public class ThrowableObject : MonoBehaviour
 
         Debug.Log("thrown object collided");
         //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
+
+        // play sfx
+        sfxPlayer.PlaySFX();
+
+        // instantiate hit effect
         if (effectParticle != null)
         {
             Instantiate(effectParticle, transform.position, quaternion.identity);

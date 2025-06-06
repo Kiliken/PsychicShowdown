@@ -51,8 +51,8 @@ TO DO:
 Before school festival:
 - Since we only have 2 weeks, there will be no big changes
 - We will focus on making the game more visually appealing
-- player model will be added
-- some object models will be added
+@ player model will be added
+@ some object models will be added
 - some sound effects will be added
 - parts of the game where the programming adjustments are needed will be done
 
@@ -120,6 +120,8 @@ SFX:
 - player death/lose
 - game end tune
 - BGM
+
+
 
 
 

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public int playerNo = 1;    // 1 or 2
     PlayerMovement movementScript;
+    PlayerSFXPlayer sfxPlayer;
     ObjHolder objHolder;
     Transform shootPos;
     public Transform playerCam;   // camera transform
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
 
+        sfxPlayer = GetComponent<PlayerSFXPlayer>();
     }
 
 
@@ -164,6 +166,9 @@ public class Player : MonoBehaviour
                 Debug.Log("Left throw");
                 leftObject.ThrowObject();
                 holdingObjL = false;
+
+                sfxPlayer.PlaySFX(0);   // DEBUG
+
             }
 
             if (holdingObjR)

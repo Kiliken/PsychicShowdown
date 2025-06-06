@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] GameObject playerModel;
     public Transform playerCam;
+    PlayerSFXPlayer sfxPlayer;
     public bool playerActive = true;
 
     [Header("Movement")]
@@ -68,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         orientation = gameObject.transform;
         jumpsLeft = maxJumps;
+
+        sfxPlayer = GetComponent<PlayerSFXPlayer>();
     }
 
 
@@ -188,6 +191,9 @@ public class PlayerMovement : MonoBehaviour
         canJump = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        sfxPlayer.PlaySFX(0);   // DEBUG
+
         Invoke(nameof(ResetJump), jumpCooldown);
     }
 
