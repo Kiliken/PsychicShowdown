@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureRenderer: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  meshCollider: {fileID: 0}
 --- !u!114 &8010685083104251286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,34 +62,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 1
-  mapWidth: 286
-  mapHeight: 297
+  mapWidth: 50
+  mapHeight: 50
   noiseScale: 25
+  meshHeightMultiplier: 3
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   seed: 10
   offset: {x: 0, y: 0}
-  octaves: 7
+  octaves: 4
   persistence: 0.5
   lacunarity: 2
-  autoUpdate: 1
-  regions:
-  - name: Water
-    height: 0.3
-    color: {r: 0.2028302, g: 0.41019222, b: 1, a: 0}
-  - name: Sand
-    height: 0.35
-    color: {r: 0.6901961, g: 0.64886993, b: 0.27450985, a: 0}
-  - name: Grass
-    height: 0.45
-    color: {r: 0.10654827, g: 0.4528302, b: 0, a: 0}
-  - name: Grass 2
-    height: 0.6
-    color: {r: 0, g: 0.3018868, b: 0.0012903034, a: 0}
-  - name: Rock
-    height: 0.7
-    color: {r: 0.3773585, g: 0.23587179, b: 0.10145959, a: 0}
-  - name: Rock 2
-    height: 0.9
-    color: {r: 0.254717, g: 0.12371968, b: 0, a: 0}
-  - name: Snow
-    height: 1
-    color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
+  autoUpdate: 0
+  isTitle: 0
+  generatorLimit: 200
+  prefabs:
+  - {fileID: 3420252350212449942, guid: 47cf63fdb46fe0341bed8c095d791677, type: 3}
+  - {fileID: 9081635536180426545, guid: 039657e75776bd34580a9e177db566a3, type: 3}
+  - {fileID: 8949717695086118722, guid: 34a77bcfb91c21b43aa594092eeec9c0, type: 3}
+  - {fileID: 4641032676551826091, guid: 1d4d753bf4368194f83122818db11d36, type: 3}
