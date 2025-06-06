@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     private float invertXVal = 1f;
     private float invertYVal = 1f;
     // camera collision
-    [SerializeField] LayerMask cameraCollisionLayers; 
+    [SerializeField] LayerMask cameraCollisionLayers;
     [SerializeField] float cameraCollisionRadius = 0.3f;    // sphere cast radius
     [SerializeField] float cameraMinDistance = 1f;  // minimum distance from player
 
@@ -33,14 +33,16 @@ public class CameraController : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
         camDistanceTarget = camDistance;
         offsetXTarget = offsetX;
     }
 
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         invertXVal = invertX ? -1 : 1;
         invertYVal = invertY ? -1 : 1;
 
@@ -79,7 +81,7 @@ public class CameraController : MonoBehaviour
                 offsetX = -offsetX;
             }
         }
-        
+
 
         Quaternion targetRotation = Quaternion.Euler(rotationX, rotationY, 0);
         Vector3 pivotOffset = targetRotation * new Vector3(offsetX, offsetY, 0);    // include offset

@@ -62,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
     public string dashBtn = "Dash1";
 
 
-    void Start(){
+    void Start()
+    {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         orientation = gameObject.transform;
@@ -70,21 +71,26 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void Update(){
-        if (playerActive){
+    void Update()
+    {
+        if (playerActive)
+        {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f, groundLayer);
 
-            if (grounded && !hitGround && canJump){
+            if (grounded && !hitGround && canJump)
+            {
                 hitGround = true;
                 jumpsLeft = maxJumps;
             }
 
             PlayerInput();
 
-            if (dashesLeft != maxDashes){
+            if (dashesLeft != maxDashes)
+            {
                 if (dashCdTimer < dashCdTime)
                     dashCdTimer += Time.deltaTime;
-                else{
+                else
+                {
                     dashesLeft++;
                     dashCdTimer = 0;
                 }
@@ -93,8 +99,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void FixedUpdate(){
-        if (playerActive && !isDashing){
+    private void FixedUpdate()
+    {
+        if (playerActive && !isDashing)
+        {
             Move();
             SpeedControl();
             if (moveDirection != Vector3.zero)
@@ -103,33 +111,40 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void LateUpdate(){
+    private void LateUpdate()
+    {
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetModelRotation, 10f * Time.deltaTime);
     }
 
 
-    private void PlayerInput(){
+    private void PlayerInput()
+    {
         horizontalInput = Input.GetAxisRaw(moveXInput);
         verticalInput = Input.GetAxisRaw(moveYInput);
 
-        if (!isDashing){
+        if (!isDashing)
+        {
             moveSpeed = (horizontalInput != 0 || verticalInput != 0) ? moveSpeedDefault : 0f;
         }
 
-        if (Input.GetButtonDown(jumpBtn) && canJump){
-            if (jumpsLeft > 0){
+        if (Input.GetButtonDown(jumpBtn) && canJump)
+        {
+            if (jumpsLeft > 0)
+            {
                 jumpsLeft--;
                 Jump();
             }
         }
 
-        if (Input.GetButtonDown(dashBtn) && canDash && dashesLeft > 0){
+        if (Input.GetButtonDown(dashBtn) && canDash && dashesLeft > 0)
+        {
             Dash();
         }
     }
 
 
-    private void Move(){
+    private void Move()
+    {
         Vector3 camForward = playerCam.forward;
         Vector3 camRight = playerCam.right;
         camForward.y = 0;
@@ -145,7 +160,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 start = rb.position + new Vector3(0, 0.5f, 0);
         Vector3 start2 = rb.position + new Vector3(0, -0.5f, 0);
         Vector3 direction = moveDirection.normalized;
-        if (!Physics.Raycast(start, direction, out RaycastHit hit, 1f, dashCollisionMask) && !Physics.Raycast(start2, direction, out RaycastHit hit2, 1f, dashCollisionMask)){
+        if (!Physics.Raycast(start, direction, out RaycastHit hit, 1f, dashCollisionMask) && !Physics.Raycast(start2, direction, out RaycastHit hit2, 1f, dashCollisionMask))
+        {
             if (grounded)
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
             else
@@ -154,16 +170,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void SpeedControl(){
+    private void SpeedControl()
+    {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if (flatVel.magnitude > moveSpeed){
+        if (flatVel.magnitude > moveSpeed)
+        {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
 
 
-    private void Jump(){
+    private void Jump()
+    {
         grounded = false;
         hitGround = false;
         canJump = false;
@@ -173,19 +192,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void ResetJump(){
+    private void ResetJump()
+    {
         canJump = true;
     }
 
 
-    private void Dash(){
+    private void Dash()
+    {
         if (!canDash || isDashing) return;
         if (dashRoutine != null) StopCoroutine(dashRoutine);
         dashRoutine = StartCoroutine(DashCoroutine());
     }
 
 
-    private IEnumerator DashCoroutine(){
+    private IEnumerator DashCoroutine()
+    {
         canDash = false;
         isDashing = true;
         dashesLeft--;
@@ -197,7 +219,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 target = start + direction * maxDashDistance;
 
         // raycast into dashing direction and check if there is an object
-        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask)){
+        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
+        {
             target = hit.point - direction * dashStopPadding;
         }
 
@@ -207,7 +230,8 @@ public class PlayerMovement : MonoBehaviour
         if (disableGravityDuringDash) rb.useGravity = false;
         if (resetVelocityOnDash) rb.velocity = Vector3.zero;
 
-        while (elapsed < duration){
+        while (elapsed < duration)
+        {
             float t = elapsed / duration;
             Vector3 newPos = Vector3.Lerp(start, target, t);
             rb.MovePosition(newPos);
@@ -223,12 +247,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void ResetDash(){
+    private void ResetDash()
+    {
         canDash = true;
     }
 
 
-    private bool OnSlope(){
+    private bool OnSlope()
+    {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
@@ -238,7 +264,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private Vector3 GetSlopeMoveDirection(){
+    private Vector3 GetSlopeMoveDirection()
+    {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }

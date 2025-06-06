@@ -32,6 +32,7 @@ TO DO:
 @ adjust objects
 ---AFTER ALPHA---
 - adjust cooldowns
+- adjust camera
 @ keep object and model seperate
 - adjust camera according to size of object held (none - near, large - far)
 - fix bug?
@@ -67,6 +68,7 @@ BUGS:
 @ objects going through walls when you throw them (make large objects kinematic)
 @ when you aim high, the object already collides with the ground
 - When dashing on uneven surfaces, the player will temporarily clip into the ground
+@ jumps aren't recharged when touching uneven surfaces
 
 
 NOTES:
@@ -107,6 +109,18 @@ P1:
 - UI adjustments
 - camera adjustments
 - bug fixes
+
+SFX:
+- jump
+- dash
+- pick up object
+- throw object
+- object hit
+- player take damage
+- player death/lose
+- game end tune
+- BGM
+
 
 
 

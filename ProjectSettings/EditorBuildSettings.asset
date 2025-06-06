@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Alpha/AlphaPortFHD.unity
     guid: 04fbbd362d649cb40b756b1a69660fee
+  - enabled: 1
+    path: Assets/Scenes/Zayar/Zayar2.unity
+    guid: 11da390d02fb4d945a39ae27475976ec
   m_configObjects: {}

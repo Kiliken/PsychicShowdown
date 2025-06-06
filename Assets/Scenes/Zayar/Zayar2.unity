@@ -1851,7 +1851,7 @@ PrefabInstance:
     - target: {fileID: 8010685083104251286, guid: eaa00d7bb24ed984abcac12741c09a99, type: 3}
       propertyPath: prefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 3420252350212449942, guid: 4110e4047e2367345a5264bf3ade9e97, type: 3}
+      objectReference: {fileID: 3420252350212449942, guid: 47cf63fdb46fe0341bed8c095d791677, type: 3}
     - target: {fileID: 8010685083104251286, guid: eaa00d7bb24ed984abcac12741c09a99, type: 3}
       propertyPath: prefabs.Array.data[1]
       value: 
@@ -1863,7 +1863,7 @@ PrefabInstance:
     - target: {fileID: 8010685083104251286, guid: eaa00d7bb24ed984abcac12741c09a99, type: 3}
       propertyPath: prefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 4641032676551826091, guid: ea0756441158ec7439203f7b318c5497, type: 3}
+      objectReference: {fileID: 4641032676551826091, guid: 1d4d753bf4368194f83122818db11d36, type: 3}
     - target: {fileID: 8010685083104251286, guid: eaa00d7bb24ed984abcac12741c09a99, type: 3}
       propertyPath: regions.Array.data[0].height
       value: 0.1
@@ -2943,6 +2943,10 @@ PrefabInstance:
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: objLayerMask.m_Bits
       value: 1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377435682262810927, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8952799167496086818, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playstation
