@@ -1304,7 +1304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946448219689330281, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: playstation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3163432690832641604, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: m_Name

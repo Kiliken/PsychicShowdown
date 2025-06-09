@@ -184,9 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relativeToPlayer: 1
-  lowVolume: 0.01
-  medVolume: 0.05
-  highVolume: 0.1
+  lowVolume: 0.05
+  medVolume: 0.1
+  highVolume: 0.5
   nearDist: 20
   farDist: 60
 --- !u!54 &3405408981316816088
@@ -226,7 +226,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a274be143eb206c429a85fa3816dc849, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e466fc7e49f1dca4dbd113a8514b6c31, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.01
   m_Pitch: 1

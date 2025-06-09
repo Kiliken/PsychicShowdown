@@ -124,6 +124,9 @@ public class Player : MonoBehaviour
                         Debug.Log("Left grab");
                         leftObject.GrabObject(objPosL, shootPos, playerNo);
                         holdingObjL = true;
+
+                        sfxPlayer.PlaySFX(2);
+
                     }
                 }
                 // aim
@@ -167,7 +170,7 @@ public class Player : MonoBehaviour
                 leftObject.ThrowObject();
                 holdingObjL = false;
 
-                sfxPlayer.PlaySFX(0);   // DEBUG
+                sfxPlayer.PlaySFX(3);
 
             }
 
@@ -197,6 +200,9 @@ public class Player : MonoBehaviour
                         Debug.Log("Right grab");
                         rightObject.GrabObject(objPosR, shootPos, playerNo);
                         holdingObjR = true;
+
+                        sfxPlayer.PlaySFX(2);
+
                     }
                 }
                 // aim
@@ -238,6 +244,8 @@ public class Player : MonoBehaviour
                 Debug.Log("Right throw");
                 rightObject.ThrowObject();
                 holdingObjR = false;
+
+                sfxPlayer.PlaySFX(3);
             }
 
             if (holdingObjL)

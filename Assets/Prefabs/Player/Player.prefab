@@ -494,9 +494,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d572123dfdb834dbc0c47f7aa30863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultVolume: 0.1
+  defaultVolume: 0.4
   playerAudio:
-  - {fileID: 8300000, guid: a274be143eb206c429a85fa3816dc849, type: 3}
+  - {fileID: 8300000, guid: 462bbc3793abae243993096fd328df1c, type: 3}
+  - {fileID: 8300000, guid: 14bc3978a07c6514fb5deb9872d058b0, type: 3}
+  - {fileID: 8300000, guid: bbe45392d66d2e64e916e86def7c707e, type: 3}
+  - {fileID: 8300000, guid: 43cf7de507dc11142a47abe0131b2e7e, type: 3}
 --- !u!114 &8952799167496086818
 MonoBehaviour:
   m_ObjectHideFlags: 0

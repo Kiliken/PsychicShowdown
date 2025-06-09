@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-        sfxPlayer.PlaySFX(0);   // DEBUG
+        sfxPlayer.PlaySFX(0);
 
         Invoke(nameof(ResetJump), jumpCooldown);
     }
@@ -249,6 +249,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (disableGravityDuringDash) rb.useGravity = true;
         isDashing = false;
+
+        sfxPlayer.PlaySFX(1);
+
         Invoke(nameof(ResetDash), dashCooldown);
     }
 

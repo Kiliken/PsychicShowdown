@@ -31,7 +31,6 @@ TO DO:
 @ adjust movement speeds
 @ adjust objects
 ---AFTER ALPHA---
-- adjust cooldowns
 - adjust camera
 @ keep object and model seperate
 - adjust camera according to size of object held (none - near, large - far)
@@ -39,7 +38,7 @@ TO DO:
 - object hurtbox
 - guarding with objects
 - game pausing
-- fix audio listener issue (update volume according to distance from player positions?)
+@ fix audio listener issue (update volume according to distance from player positions?)
 - add object models
 - add player models
 - add player animations
