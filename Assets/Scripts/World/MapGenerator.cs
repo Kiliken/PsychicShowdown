@@ -115,7 +115,7 @@ public class MapGenerator : MonoBehaviour
                 switch (true)
                 {
                     case true when (objectHeight < 2f):
-                        //shell or rock
+                        //grass
                         if (rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
@@ -132,7 +132,7 @@ public class MapGenerator : MonoBehaviour
 
                         break;
                     case true when (objectHeight < 7f):
-                        // plants or rock
+                        // sand
 
                         if (rand != 0)
                         {
@@ -150,7 +150,7 @@ public class MapGenerator : MonoBehaviour
                         }
                         break;
                     case true when (objectHeight < 12f):
-                        //granade or rock
+                        //forest
                         if (rand != 0)
                         {
                             thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
@@ -167,11 +167,16 @@ public class MapGenerator : MonoBehaviour
                         }
                         break;
                     default:
-
-                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                        propertyBlock.SetColor("_BaseColor", Color.gray);
-                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-
+                        if (rand != 0)
+                        {
+                            thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                            propertyBlock.SetColor("_BaseColor", Color.gray);
+                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                        }
+                        else
+                        {
+                            thisObj = Instantiate(prefabs[4], hit.point, Quaternion.identity);
+                        }
                         break;
 
                 }
