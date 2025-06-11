@@ -45,7 +45,7 @@ public class ThrowableObject : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
@@ -58,7 +58,7 @@ public class ThrowableObject : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         // aim
         if (aiming)
@@ -170,7 +170,7 @@ public class ThrowableObject : MonoBehaviour
         //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
 
         // play sfx
-        sfxPlayer.PlaySFX();
+        sfxPlayer.PlaySFX(0);
 
         // instantiate hit effect
         if (effectParticle != null)

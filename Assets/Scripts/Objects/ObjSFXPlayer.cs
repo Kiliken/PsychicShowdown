@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjSFXPlayer : MonoBehaviour
 {
     AudioSource audioSource;
+    [SerializeField] AudioClip[] audioClips;
     [SerializeField] bool relativeToPlayer = true;
     [SerializeField] float lowVolume = 0.01f;
     [SerializeField] float medVolume = 0.5f;
@@ -37,8 +38,9 @@ public class ObjSFXPlayer : MonoBehaviour
 
     }
 
-    public void PlaySFX()
+    public void PlaySFX(int sfx)
     {
+        audioSource.clip = audioClips[sfx];
         if (relativeToPlayer)
         {
             // player1Dist = Vector3.Distance(transform.position, player1Pos.position);
