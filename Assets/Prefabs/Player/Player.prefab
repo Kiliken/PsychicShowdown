@@ -498,7 +498,7 @@ MonoBehaviour:
   playerAudio:
   - {fileID: 8300000, guid: 462bbc3793abae243993096fd328df1c, type: 3}
   - {fileID: 8300000, guid: 14bc3978a07c6514fb5deb9872d058b0, type: 3}
-  - {fileID: 8300000, guid: bbe45392d66d2e64e916e86def7c707e, type: 3}
+  - {fileID: 8300000, guid: 3b8e2f891893d2d43b8e6d8a72d89ece, type: 3}
   - {fileID: 8300000, guid: 43cf7de507dc11142a47abe0131b2e7e, type: 3}
 --- !u!114 &8952799167496086818
 MonoBehaviour:

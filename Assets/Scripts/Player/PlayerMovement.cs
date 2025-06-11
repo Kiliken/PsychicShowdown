@@ -208,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canDash || isDashing) return;
         if (dashRoutine != null) StopCoroutine(dashRoutine);
+        sfxPlayer.PlaySFX(1);
         dashRoutine = StartCoroutine(DashCoroutine());
     }
 
@@ -249,8 +250,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (disableGravityDuringDash) rb.useGravity = true;
         isDashing = false;
-
-        sfxPlayer.PlaySFX(1);
 
         Invoke(nameof(ResetDash), dashCooldown);
     }
