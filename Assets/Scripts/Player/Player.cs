@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         hp = maxHP;
+        hpBar.UpdateHPBar();
     }
 
 

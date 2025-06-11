@@ -11,6 +11,8 @@ public class RoundTimerUI : MonoBehaviour
 
 
     public Text timerText; // Legacy UI Text component
+    public Text timerText2;
+    public Text timerText3;
 
     void Start()
     {
@@ -28,8 +30,10 @@ public class RoundTimerUI : MonoBehaviour
         int seconds = Mathf.FloorToInt(timer % 60f);
 
         timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+        timerText2.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+        timerText3.text = string.Format("{0:0}:{1:00}", minutes, seconds);
 
-        if(timer <= 0)
+        if (timer <= 0)
         {
             gameManager.CompareHP();
             timeOut = true;

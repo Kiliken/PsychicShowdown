@@ -32,7 +32,7 @@ public class CellHPBar : MonoBehaviour
             }
             else if (playerNum == 2)
             {
-                rt.localPosition = new Vector2(i * (0f - cellWidth - cellSpacing), 0);
+                rt.localPosition = new Vector2(i * (cellWidth + cellSpacing) * -1, 0);
             }
             
         }
