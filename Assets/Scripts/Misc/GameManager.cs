@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,19 +65,24 @@ public class GameManager : MonoBehaviour
         if (winner == 1)
         {
             // player 1 winner, display text
-            player1WinText.SetActive(true);
+            //player1WinText.SetActive(true);
+            GameData.winner = 1;
         }
         else if (winner == 2)
         {
             // player 2 winner, display text
-            player2WinText.SetActive(true);
+            //player2WinText.SetActive(true);
+            GameData.winner = 2;
         }
         else
         {
-            drawText.SetActive(true);
+            //drawText.SetActive(true);
+            GameData.winner = 0;
         }
 
         gameEnded = true;
+
+        SceneManager.LoadScene(5);
     }
 
 

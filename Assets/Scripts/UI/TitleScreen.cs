@@ -24,4 +24,9 @@ public class TitleScreen : MonoBehaviour
     public void LoadPlayScene(){
         SceneManager.LoadScene(sceneToUse);
     }
+
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
