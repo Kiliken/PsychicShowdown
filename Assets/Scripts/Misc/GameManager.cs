@@ -12,11 +12,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player2WinText;
     [SerializeField] GameObject drawText;
 
-
     public float timeLimit = 120f;
     //public float timeRemaining;
     public bool gameStarted = false;
     public bool gameEnded = false;
+
+    //TEMPORARY
+    private float sceneChangeTime = 2f;
+    private float sceneChangeTimer = 0f;
+    private bool sceneChanged = false;
 
 
     private void Awake()
@@ -45,7 +49,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (gameEnded && !sceneChanged)
+        {
+            if (sceneChangeTimer < sceneChangeTime)
+            {
+                sceneChangeTimer += Time.deltaTime;
+            }
+            else
+            {
+                SceneManager.LoadScene("EndAndRestart");
+                sceneChanged = true;
+            }
+        }
     }
 
 
@@ -81,8 +96,6 @@ public class GameManager : MonoBehaviour
         }
 
         gameEnded = true;
-
-        SceneManager.LoadScene(5);
     }
 
 

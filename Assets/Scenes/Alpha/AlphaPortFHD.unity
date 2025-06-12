@@ -1635,6 +1635,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1902426033}
     - target: {fileID: 7369497625216515599, guid: 5dde55fbbe0ae554191d6103f9b3b372, type: 3}
+      propertyPath: timeLimit
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369497625216515599, guid: 5dde55fbbe0ae554191d6103f9b3b372, type: 3}
       propertyPath: player1WinText
       value: 
       objectReference: {fileID: 991145093}
@@ -1999,6 +2003,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8010685083104251286, guid: eaa00d7bb24ed984abcac12741c09a99, type: 3}
+      propertyPath: prefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010685083104251286, guid: eaa00d7bb24ed984abcac12741c09a99, type: 3}
+      propertyPath: prefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 6158476659521676308, guid: 4cdb7f8263229ce4a999f6ab3891620c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3434,7 +3446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8952799167496086818, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playstation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9168094254459669775, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: m_Name
