@@ -160,6 +160,7 @@ Material:
     - _Level2HeightBlend: 7
     - _Level3HeightBlend: 12
     - _Metallic: 0
+    - _NoiseAntiTileStrenght: 0.2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -175,6 +176,7 @@ Material:
     - _StoneHeigthBlend: -51.6
     - _Surface: 0
     - _Tiles: 0.5
+    - _Tiling: 10
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
