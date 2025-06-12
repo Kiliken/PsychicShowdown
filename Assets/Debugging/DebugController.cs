@@ -17,12 +17,20 @@ public class DebugController : MonoBehaviour
     public string sceneName = null;
 
     void Awake()
-    {   
-        if(GetArg("-scene") != null)
+    {
+        if (GetArg("-scene") != null)
         {
             sceneName = GetArg("-scene");
         }
-        
+    }
+
+    void Start()
+    {
+        if (GetArg("-controller") != null)
+        {
+            if (GameObject.Find("Player"))
+                (CommandList.commandList[3] as DebugCommand<string>).Invoke(GetArg("-controller"));
+        }
     }
 
     // Update is called once per frame

@@ -21,20 +21,23 @@ public class CommandList {
         ControlManager manager;
         if (x == "ps4")
         {
-            
             manager = GameObject.Find("Player").GetComponent<ControlManager>();
             manager.playstation = true;
+            manager.SetControls();
 
             manager = GameObject.Find("Player2").GetComponent<ControlManager>();
             manager.playstation = true;
+            manager.SetControls();
         }
         else if (x == "xbx")
         {
             manager = GameObject.Find("Player").GetComponent<ControlManager>();
             manager.playstation = false;
+            manager.SetControls();
 
             manager = GameObject.Find("Player2").GetComponent<ControlManager>();
             manager.playstation = false;
+            manager.SetControls();
         }
     });
 
