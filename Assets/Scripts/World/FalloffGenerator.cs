@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class FalloffGenerator {
+
+    static float pathFalloff = 5.0f;
     
     public static float[,] GenerateFalloffMap(int mapWidth, int mapHight)
     {
@@ -17,6 +20,14 @@ public static class FalloffGenerator {
 
                 float value = Mathf.Max(Mathf.Abs(x), Mathf.Abs(y));
                 map[i, j] = Evaluate(value);
+
+                if (i < (mapWidth / 2) + pathFalloff && i > (mapWidth / 2) - pathFalloff)
+                {
+                    float dist = i - (((float)mapWidth) / 2);
+                    //dist = MathF.Abs(dist);
+                    Debug.Log(dist);
+                    map[i, j] = 0f;
+                }
             }
         }
         return map;
