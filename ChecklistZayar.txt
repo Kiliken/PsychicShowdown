@@ -31,13 +31,7 @@ TO DO:
 @ adjust movement speeds
 @ adjust objects
 ---AFTER ALPHA---
-- adjust camera
 @ keep object and model seperate
-- adjust camera according to size of object held (none - near, large - far)
-- fix bug?
-- object hurtbox
-- guarding with objects
-- game pausing
 @ fix audio listener issue (update volume according to distance from player positions?)
 - add object models
 - add player models
@@ -45,6 +39,20 @@ TO DO:
 - add sound effects
 - add music loop
 - add a way for UI to be controllable with controller
+---FOR BETA---
+- fix bugs (@duck, @the ground, player aim invisible objects)
+- adjust camera according to size of object held (none - near, large - far)
+
+- adjust object sizes
+- adjust torii gates
+- lighting
+- i frames to dash
+- sprinting
+- make items easier to pick up (box cast, highlight)
+- make barrier smaller
+- special items
+- game menu and quitting
+
 
 
 Before school festival:

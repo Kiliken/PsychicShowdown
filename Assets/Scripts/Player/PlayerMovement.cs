@@ -225,10 +225,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 start = rb.position;
         Vector3 target = start + direction * maxDashDistance;
 
-        // raycast into dashing direction and check if there is an object
-        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
+        float sphereRadius = 1f; // Adjust based on player size (match your capsule collider radius)
+
+        if (Physics.SphereCast(start, sphereRadius, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
         {
             target = hit.point - direction * dashStopPadding;
+        }
+        if (Physics.SphereCast(start, sphereRadius, direction, out RaycastHit hitG, maxDashDistance, groundLayer))
+        {
+            target.y = hitG.point.y + 2.1f; // slightly above ground to avoid clipping
         }
 
         float elapsed = 0f;
@@ -240,8 +245,18 @@ public class PlayerMovement : MonoBehaviour
         while (elapsed < duration)
         {
             float t = elapsed / duration;
-            Vector3 newPos = Vector3.Lerp(start, target, t);
-            rb.MovePosition(newPos);
+            Vector3 horizontalPosition = Vector3.Lerp(start, target, t);
+
+            // Adjust height to match the ground
+            Vector3 rayOrigin = horizontalPosition + Vector3.up * 1.0f; // raise above ground
+            if (Physics.SphereCast(rayOrigin, sphereRadius, Vector3.down, out RaycastHit groundHit, 2.1f, groundLayer))
+            {
+                horizontalPosition.y = groundHit.point.y + 2.1f; // slightly above ground to avoid clipping
+                target.y = groundHit.point.y + 2.1f;
+
+            }
+
+            rb.MovePosition(horizontalPosition);
             elapsed += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
