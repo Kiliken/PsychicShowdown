@@ -14,7 +14,7 @@ public class ThrowableGrenade : ThrowableObject
     protected override void Start()
     {
         base.Start();
-        explosionHitbox = transform.GetChild(2).GetComponent<ExplosionHitbox>();
+        explosionHitbox = transform.Find("HitboxExplosion").GetComponent<ExplosionHitbox>();
     }
 
     protected override void Update()

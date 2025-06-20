@@ -33,25 +33,24 @@ TO DO:
 ---AFTER ALPHA---
 @ keep object and model seperate
 @ fix audio listener issue (update volume according to distance from player positions?)
-- add object models
-- add player models
-- add player animations
-- add sound effects
-- add music loop
-- add a way for UI to be controllable with controller
----FOR BETA---
-- fix bugs (@duck, @the ground, player aim invisible objects)
-- adjust camera according to size of object held (none - near, large - far)
+@ add object models
+@ add player models
+@ add sound effects
+@ add music loop
 
+---FOR BETA---
+@ fix bugs (@duck, @the ground, @player aim invisible objects)
+- adjust camera according to size of object held (none - near, large - far)
 - adjust object sizes
-- adjust torii gates
-- lighting
+@ adjust torii gates
+@ lighting
 - i frames to dash
 - sprinting
 - make items easier to pick up (box cast, highlight)
 - make barrier smaller
 - special items
 - game menu and quitting
+- add a way for UI to be controllable with controller
 
 
 

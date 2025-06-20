@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
                     leftObject.aiming = true;
                     camController.RotSpeedX = camController.RotSpeedY = camSenADS;
                     if (holdingObjR)
-                        rightObject.ShowHideObject(false);
+                        rightObject.ShowHideObject(false, false);
                 }
 
                 triggerInUseL = true;
@@ -149,9 +149,9 @@ public class Player : MonoBehaviour
                 {
                     aimCanceledL = true;
                     leftObject.aiming = false;
-                    leftObject.ShowHideObject(true);
+                    leftObject.ShowHideObject(true, true);
                     if (holdingObjR)
-                        rightObject.ShowHideObject(true);
+                        rightObject.ShowHideObject(true, false);
                 }
                 cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
                 leftAiming = true;
@@ -176,7 +176,7 @@ public class Player : MonoBehaviour
             }
 
             if (holdingObjR)
-                rightObject.ShowHideObject(true);
+                rightObject.ShowHideObject(true, false);
 
             triggerInUseL = false;
         }
@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
                     rightObject.aiming = true;
                     camController.RotSpeedX = camController.RotSpeedY = camSenADS;
                     if (holdingObjL)
-                        leftObject.ShowHideObject(false);
+                        leftObject.ShowHideObject(false, false);
                 }
 
                 triggerInUseR = true;
@@ -225,9 +225,9 @@ public class Player : MonoBehaviour
                 {
                     aimCanceledR = true;
                     rightObject.aiming = false;
-                    rightObject.ShowHideObject(true);
+                    rightObject.ShowHideObject(true, true);
                     if (holdingObjL)
-                        leftObject.ShowHideObject(true);
+                        leftObject.ShowHideObject(true, false);
                 }
                 cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, adsZoom, adsSpeed * Time.deltaTime);
                 rightAiming = true;
@@ -250,7 +250,7 @@ public class Player : MonoBehaviour
             }
 
             if (holdingObjL)
-                leftObject.ShowHideObject(true);
+                leftObject.ShowHideObject(true, false);
 
             triggerInUseR = false;
         }

@@ -428,7 +428,7 @@ MonoBehaviour:
   dashCdTime: 2
   dashCdTimer: 0
   dashDuration: 0.25
-  disableGravityDuringDash: 1
+  disableGravityDuringDash: 0
   resetVelocityOnDash: 1
   maxDashDistance: 10
   dashStopPadding: 0.1

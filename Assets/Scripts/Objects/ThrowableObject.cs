@@ -8,6 +8,7 @@ public class ThrowableObject : MonoBehaviour
 {
     protected ObjSFXPlayer sfxPlayer;
     protected GameObject model;
+    protected GameObject highlightEffect;
     protected Rigidbody rb;
     protected ObjHitbox hitbox;
     public int objectID = 0;    // ID for showing object on UI, etc.
@@ -41,6 +42,7 @@ public class ThrowableObject : MonoBehaviour
     [SerializeField] protected float destroyAfterSec = 3f;
     protected float destroyTimer = 0f;
     [SerializeField] protected GameObject effectParticle;
+    private bool objectVisible = true;
 
 
 
@@ -50,6 +52,7 @@ public class ThrowableObject : MonoBehaviour
         model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
+        highlightEffect = transform.Find("Effect").gameObject;
         sfxPlayer = GetComponent<ObjSFXPlayer>();
         damage = damages[objectSize];
         throwSpeed = throwSpeeds[objectSize];
@@ -65,8 +68,8 @@ public class ThrowableObject : MonoBehaviour
         {
             transform.position = shootPos.position;
             transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
-            if (model.GetComponent<MeshRenderer>().enabled)
-                model.GetComponent<MeshRenderer>().enabled = false;
+            if (objectVisible)
+                ShowHideObject(false, true);
         }
         else if (!thrown && !canGrab)
         {
@@ -138,12 +141,16 @@ public class ThrowableObject : MonoBehaviour
     {
         aiming = false;
         rb.useGravity = true;
-        model.GetComponent<MeshRenderer>().enabled = true;
+
+        ShowHideObject(true, true);
+        //model.GetComponent<MeshRenderer>().enabled = true;
         model.GetComponent<MeshCollider>().enabled = true;
         model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
+        if (highlightEffect)
+            highlightEffect.SetActive(false);
         thrown = true;
     }
 
@@ -183,9 +190,42 @@ public class ThrowableObject : MonoBehaviour
     }
 
 
-    public void ShowHideObject(bool show)
+    public void ShowHideObject(bool show, bool culling)
     {
-        model.GetComponent<MeshRenderer>().enabled = show;
+        //model.GetComponent<MeshRenderer>().enabled = show;
+        if (!culling)
+        {
+            model.GetComponent<MeshRenderer>().enabled = show;
+            if (highlightEffect)
+                highlightEffect.GetComponent<MeshRenderer>().enabled = show;
+        }
+        else
+        {
+            if (!show)
+            {
+                if (holdingPlayer == 1)
+                {
+                    model.layer = LayerMask.NameToLayer("P1Hide");
+                    if (highlightEffect)
+                        highlightEffect.layer = LayerMask.NameToLayer("P1Hide");
+                }
+                else
+                {
+                    model.layer = LayerMask.NameToLayer("P2Hide");
+                    if (highlightEffect)
+                        highlightEffect.layer = LayerMask.NameToLayer("P2Hide");
+                }
+            }
+            else
+            {
+                model.layer = LayerMask.NameToLayer("Object");
+                if (highlightEffect)
+                    highlightEffect.layer = LayerMask.NameToLayer("Object");
+            }
+        }
+
+
+        objectVisible = show;
     }
 
 
