@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 16dd58495750fdc469595e60b620f868, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3868f158d0ed5494fb31db46804cd938, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture_1:
@@ -72,14 +72,26 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level1Texture:
-        m_Texture: {fileID: 2800000, guid: 8e2ebcb0ff6187f4a87837a04e7f1234, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16dd58495750fdc469595e60b620f868, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level2Texture:
-        m_Texture: {fileID: 2800000, guid: 3868f158d0ed5494fb31db46804cd938, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8e2ebcb0ff6187f4a87837a04e7f1234, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level3Texture:
+        m_Texture: {fileID: 2800000, guid: 16dd58495750fdc469595e60b620f868, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Level4Texture:
+        m_Texture: {fileID: 2800000, guid: f01d45bc876d6104caf61af9bfbfe24c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Level5Texture:
+        m_Texture: {fileID: 2800000, guid: 73fef7c2067300c4f97da6f4c0899df1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Level6Texture:
         m_Texture: {fileID: 2800000, guid: 5af2e32099c5a2248863f4a28912b4d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -157,8 +169,11 @@ Material:
     - _GrassHeigthBlend: -204.77
     - _Level1heightBlend: 2
     - _Level1heightMap: 0
-    - _Level2HeightBlend: 7
-    - _Level3HeightBlend: 12
+    - _Level2HeightBlend: 3
+    - _Level3HeightBlend: 6.92
+    - _Level4HeightBlend: 8.2
+    - _Level5HeightBlend: 22.7
+    - _Level6HeightBlend: 24.1
     - _Metallic: 0
     - _NoiseAntiTileStrenght: 0.2
     - _OcclusionStrength: 1
