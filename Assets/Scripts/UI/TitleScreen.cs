@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.UI;
+using UnityEngine.Rendering.UI;
 
 public class TitleScreen : MonoBehaviour
 {
     string sceneToUse = string.Empty;
 
     [SerializeField] Transform worldObj;
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject settingsPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +33,17 @@ public class TitleScreen : MonoBehaviour
     public void LoadMenuScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void ShowSettingPanel()
+    {
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void ShowMainMenuPanel()
+    {
+        settingsPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
 }
