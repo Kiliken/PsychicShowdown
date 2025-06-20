@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class FalloffGenerator {
 
-    static float pathFalloff = 2.0f;
+    //static float pathFalloff = 2.0f;
     
     public static float[,] GenerateFalloffMap(int mapWidth, int mapHight)
     {

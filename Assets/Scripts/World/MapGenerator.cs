@@ -89,6 +89,7 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateObjects()
     {
+        Random.InitState(seed);
         Vector3 genCursor = Vector3.zero;
         LayerMask ground = LayerMask.NameToLayer("Ground");
         RaycastHit hit;
@@ -104,7 +105,7 @@ public class MapGenerator : MonoBehaviour
 
         for (int i = 0; i < 50f; i++)
         {
-
+            
             genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
 
             if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
