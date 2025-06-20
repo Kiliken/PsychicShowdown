@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class FalloffGenerator {
 
-    static float pathFalloff = 5.0f;
+    static float pathFalloff = 2.0f;
     
     public static float[,] GenerateFalloffMap(int mapWidth, int mapHight)
     {
@@ -21,13 +21,15 @@ public static class FalloffGenerator {
                 float value = Mathf.Max(Mathf.Abs(x), Mathf.Abs(y));
                 map[i, j] = Evaluate(value);
 
-                if (i < (mapWidth / 2) + pathFalloff && i > (mapWidth / 2) - pathFalloff)
+                /*if (i < (mapWidth / 2) + pathFalloff && i > (mapWidth / 2) - pathFalloff && Evaluate(value) < 0.25f)
                 {
-                    float dist = i - (((float)mapWidth) / 2);
-                    //dist = MathF.Abs(dist);
-                    Debug.Log(dist);
-                    map[i, j] = 0f;
-                }
+                    float dist = i - (((float)mapWidth) / 2) + 0.5f ;
+                    
+                    dist = MathF.Abs(dist) / (pathFalloff * 2);
+                    dist = (0.5f - dist);
+                    //Debug.Log(dist);
+                    map[i, j] = dist;
+                }*/
             }
         }
         return map;
