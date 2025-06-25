@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] GameObject playerModel;
+    [SerializeField] GameObject playerHurtbox;
     public Transform playerCam;
     PlayerSFXPlayer sfxPlayer;
     public bool playerActive = true;
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 0f;
     [SerializeField] float moveSpeedDefault = 10f;
+    [SerializeField] float moveSpeedSprint = 20f;
     [SerializeField] float moveSpeedDash = 100f;
     private float horizontalInput;
     private float verticalInput;
@@ -47,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private Coroutine dashRoutine;
 
+    [Header("Sprinting")]
+    [SerializeField] private bool isSprinting = false;
+
     [Header("Ground Check")]
     public float playerHeight = 2f;
     public LayerMask groundLayer;
@@ -71,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         jumpsLeft = maxJumps;
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
+        playerHurtbox = transform.Find("Hurtbox").gameObject;
     }
 
 
@@ -127,11 +133,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isDashing)
         {
-            moveSpeed = (horizontalInput != 0 || verticalInput != 0) ? moveSpeedDefault : 0f;
+            //moveSpeed = (horizontalInput != 0 || verticalInput != 0) ? moveSpeedDefault : 0f;
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
+                moveSpeed = (isSprinting) ? moveSpeedSprint : moveSpeedDefault;
+            }
+            else
+            {
+                moveSpeed = 0f;
+            }
         }
 
         if (Input.GetButtonDown(jumpBtn) && canJump)
         {
+            if (isSprinting) isSprinting = false;
+
             if (jumpsLeft > 0)
             {
                 jumpsLeft--;
@@ -139,8 +155,16 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetButtonDown("Sprint1X") && grounded)
+        {
+            Debug.Log("sprinting");
+            isSprinting = true;
+        }
+
         if (Input.GetButtonDown(dashBtn) && canDash && dashesLeft > 0)
         {
+            if (isSprinting) isSprinting = false;
+
             Dash();
         }
     }
@@ -218,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
         dashesLeft--;
+        playerHurtbox.SetActive(false); // temporarily disable hurtbox
 
         Vector3 direction = moveDirection.normalized;
         if (direction == Vector3.zero) direction = playerModel.transform.forward;   // dash into facing direction if no movement
@@ -227,7 +252,8 @@ public class PlayerMovement : MonoBehaviour
 
         float sphereRadius = 1f; // Adjust based on player size (match your capsule collider radius)
 
-        if (Physics.SphereCast(start, sphereRadius, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
+        //if (Physics.SphereCast(start, sphereRadius, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
+        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
         {
             target = hit.point - direction * dashStopPadding;
         }
@@ -265,6 +291,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (disableGravityDuringDash) rb.useGravity = true;
         isDashing = false;
+        playerHurtbox.SetActive(true); // re-enable hurtbox
 
         Invoke(nameof(ResetDash), dashCooldown);
     }

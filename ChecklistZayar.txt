@@ -40,11 +40,11 @@ TO DO:
 
 ---FOR BETA---
 @ fix bugs (@duck, @the ground, @player aim invisible objects)
-- adjust camera according to size of object held (none - near, large - far)
-- adjust object sizes
 @ adjust torii gates
 @ lighting
-- i frames to dash
+- adjust camera according to size of object held (none - near, large - far)
+- adjust object sizes
+@ i frames to dash
 - sprinting
 - make items easier to pick up (box cast, highlight)
 - make barrier smaller
@@ -70,6 +70,7 @@ UNSURE:
 
 
 BUGS:
+- map too high near spawn point and player goes through it
 @ object position is not updated when throwing
 @ objects going through walls when you throw them (make large objects kinematic)
 @ when you aim high, the object already collides with the ground
