@@ -80,7 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level3Texture:
-        m_Texture: {fileID: 2800000, guid: 16dd58495750fdc469595e60b620f868, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level4Texture:
@@ -151,7 +151,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Blend: 10
+    - _Blend: 1
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -198,6 +198,12 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Level1Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Level2Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Level3Color: {r: 0.4867924, g: 0.38343784, b: 0.24890701, a: 0}
+    - _Level4Color: {r: 0.2115508, g: 0.2528302, b: 0.09683872, a: 0}
+    - _Level5Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Level6Color: {r: 0.90943396, g: 0.90943396, b: 0.90943396, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2793218398579702275
