@@ -30,6 +30,7 @@ TO DO:
 @ game manager (handles win condition, timer, game start, etc.)
 @ adjust movement speeds
 @ adjust objects
+
 ---AFTER ALPHA---
 @ keep object and model seperate
 @ fix audio listener issue (update volume according to distance from player positions?)
@@ -37,6 +38,13 @@ TO DO:
 @ add player models
 @ add sound effects
 @ add music loop
+Before school festival:
+- Since we only have 2 weeks, there will be no big changes
+- We will focus on making the game more visually appealing
+@ player model will be added
+@ some object models will be added
+- some sound effects will be added
+- parts of the game where the programming adjustments are needed will be done
 
 ---FOR BETA---
 @ fix bugs (@duck, @the ground, @player aim invisible objects)
@@ -45,22 +53,25 @@ TO DO:
 - adjust camera according to size of object held (none - near, large - far)
 - adjust object sizes
 @ i frames to dash
-- sprinting
-- make items easier to pick up (box cast, highlight)
+@ sprinting
+@ make items easier to pick up (box cast, highlight)
+- CHECK OBJECT DETECTION FOR OBJECTS IN ENEMY HAND
 - make barrier smaller
 - special items
 - game menu and quitting
+
+Chen:
 - add a way for UI to be controllable with controller
+- rework player UI
+- rework main menu
+- rework game over menu
+- in-game menu (not Pause) for quitting the game
+- options menu
+- UI for objects holding in left and right hands
 
 
 
-Before school festival:
-- Since we only have 2 weeks, there will be no big changes
-- We will focus on making the game more visually appealing
-@ player model will be added
-@ some object models will be added
-- some sound effects will be added
-- parts of the game where the programming adjustments are needed will be done
+
 
 
 UNSURE:

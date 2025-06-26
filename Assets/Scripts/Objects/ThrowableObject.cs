@@ -12,7 +12,7 @@ public class ThrowableObject : MonoBehaviour
     protected Rigidbody rb;
     protected ObjHitbox hitbox;
     public int objectID = 0;    // ID for showing object on UI, etc.
-    [SerializeField] protected int objectSize = 0; // 0:small, 1:medium, 2:large
+    [SerializeField] public int objectSize = 0; // 0:small, 1:medium, 2:large
     public bool canGrab = true;
     protected bool grabbed = false;
     public bool canThrow = false;
@@ -197,8 +197,8 @@ public class ThrowableObject : MonoBehaviour
         if (!culling)
         {
             model.GetComponent<MeshRenderer>().enabled = show;
-            if (highlightEffect)
-                highlightEffect.GetComponent<MeshRenderer>().enabled = show;
+            //if (highlightEffect)
+            //    highlightEffect.GetComponent<MeshRenderer>().enabled = show;
         }
         else
         {

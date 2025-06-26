@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     CameraController camController;
 
     [SerializeField] float defaultZoom = 60f;
+    [SerializeField] float smallZoom = 60f; // for medium object
+    [SerializeField] float mediumZoom = 80f; // for medium object
+    [SerializeField] float largeZoom = 100f; // for large object
     [SerializeField] float adsZoom = 30f;
     [SerializeField] float adsSpeed = 120f;
     [SerializeField] float camSenNormal = 3f;   // camera sensitivity normal
@@ -27,7 +30,7 @@ public class Player : MonoBehaviour
     public CellHPBar hpBar;
 
     public float objDetectionRange = 20f;
-    GameObject currentTargetObj;    // object currently in player crosshair
+    [SerializeField] GameObject currentTargetObj;    // object currently in player crosshair
     [SerializeField] ThrowableObject leftObject;    // object holding in left
     [SerializeField] ThrowableObject rightObject;    // object holding in right
     private bool holdingObjL = false;
@@ -76,6 +79,8 @@ public class Player : MonoBehaviour
         camController = playerCam.gameObject.GetComponent<CameraController>();
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
+
+        defaultZoom = smallZoom;
     }
 
 
@@ -86,6 +91,7 @@ public class Player : MonoBehaviour
 
         ObjectDetection();
         PlayerInput();
+        GetCameraDistance();
     }
 
 
@@ -97,7 +103,7 @@ public class Player : MonoBehaviour
         if (Physics.SphereCast(playerCam.transform.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
-        if (hit.transform.gameObject.tag == "Object" && hit.transform.gameObject != currentTargetObj)
+        if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
         {
             currentTargetObj = hit.transform.gameObject;
             currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(true);
@@ -132,6 +138,8 @@ public class Player : MonoBehaviour
                         Debug.Log("Left grab");
                         leftObject.GrabObject(objPosL, shootPos, playerNo);
                         holdingObjL = true;
+
+                        //GetCameraDistance();
 
                         sfxPlayer.PlaySFX(2);
 
@@ -178,6 +186,9 @@ public class Player : MonoBehaviour
                 leftObject.ThrowObject();
                 holdingObjL = false;
 
+                //GetCameraDistance();
+
+
                 sfxPlayer.PlaySFX(3);
 
             }
@@ -208,6 +219,8 @@ public class Player : MonoBehaviour
                         Debug.Log("Right grab");
                         rightObject.GrabObject(objPosR, shootPos, playerNo);
                         holdingObjR = true;
+
+                        //GetCameraDistance();
 
                         sfxPlayer.PlaySFX(2);
 
@@ -253,6 +266,8 @@ public class Player : MonoBehaviour
                 rightObject.ThrowObject();
                 holdingObjR = false;
 
+                //GetCameraDistance();
+
                 sfxPlayer.PlaySFX(3);
             }
 
@@ -296,5 +311,25 @@ public class Player : MonoBehaviour
         playerActive = a;
         movementScript.playerActive = a;
         camController.playerActive = a;
+    }
+
+    public void GetCameraDistance()
+    {
+        //int l = (leftObject != null && holdingObjL) ? leftObject.objectSize : 0;
+        //int r = (rightObject != null && holdingObjR) ? rightObject.objectSize : 0;
+        //int largestSize = Mathf.Max(l, r);
+        //Debug.Log(largestSize);
+        //switch(largestSize)
+        //{
+        //    case 0:
+        //        defaultZoom = smallZoom; 
+        //        break;
+        //    case 1:
+        //        defaultZoom = mediumZoom;
+        //        break;
+        //    case 2:
+        //        defaultZoom = largeZoom;
+        //        break;
+        //}
     }
 }
