@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class Player : MonoBehaviour
     private bool rightAiming = false;
     private bool aimCanceledL = false;
     private bool aimCanceledR = false;
+
+    private float sphereRadius = 2f; // sphere radius for SphereCast
+
 
     //temporary player hp (remove after implementing actual hp)
     public int maxHP = 10;
@@ -90,16 +94,19 @@ public class Player : MonoBehaviour
     {
         // object detection
         RaycastHit hit;
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
+        if (Physics.SphereCast(playerCam.transform.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
+        //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
-            if (hit.transform.gameObject.tag == "Object" && hit.transform.gameObject != currentTargetObj)
-            {
-                currentTargetObj = hit.transform.gameObject;
-                Debug.Log(hit.transform.name);
-            }
+        if (hit.transform.gameObject.tag == "Object" && hit.transform.gameObject != currentTargetObj)
+        {
+            currentTargetObj = hit.transform.gameObject;
+            currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(true);
+            Debug.Log(hit.transform.name);
+        }
         }
         else if (currentTargetObj)
         {
+            currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(false);
             currentTargetObj = null;
             Debug.Log("target emptied");
         }

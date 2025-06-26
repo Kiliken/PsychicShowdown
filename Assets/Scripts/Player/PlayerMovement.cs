@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDashing = false;
     private Coroutine dashRoutine;
+    private float sphereRadius = 1f; // sphere radius for SphereCast
+
 
     [Header("Sprinting")]
     [SerializeField] private bool isSprinting = false;
@@ -141,12 +143,14 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 moveSpeed = 0f;
+                // cancel sprint
+                isSprinting = false;
             }
         }
 
         if (Input.GetButtonDown(jumpBtn) && canJump)
         {
-            if (isSprinting) isSprinting = false;
+            //if (isSprinting) isSprinting = false;
 
             if (jumpsLeft > 0)
             {
@@ -249,8 +253,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 start = rb.position;
         Vector3 target = start + direction * maxDashDistance;
-
-        float sphereRadius = 1f; // Adjust based on player size (match your capsule collider radius)
 
         //if (Physics.SphereCast(start, sphereRadius, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
         if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))

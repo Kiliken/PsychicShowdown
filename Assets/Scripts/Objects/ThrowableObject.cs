@@ -53,6 +53,7 @@ public class ThrowableObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
         highlightEffect = transform.Find("Effect").gameObject;
+        ShowHideHighlight(false);
         sfxPlayer = GetComponent<ObjSFXPlayer>();
         damage = damages[objectSize];
         throwSpeed = throwSpeeds[objectSize];
@@ -237,5 +238,11 @@ public class ThrowableObject : MonoBehaviour
         hitbox.hit = true;
         objectDisabled = true;
         Debug.Log("object disabled");
+    }
+
+    public void ShowHideHighlight(bool show)
+    {
+        if(!highlightEffect) return;
+        highlightEffect.GetComponent <MeshRenderer>().enabled = show;
     }
 }
