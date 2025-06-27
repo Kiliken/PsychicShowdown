@@ -2344,6 +2344,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 1780804937}
   settingsPanel: {fileID: 1002734657}
   firstButton: {fileID: 401725893}
+  firstSettingsButton: {fileID: 1771076292}
 --- !u!1001 &1660406700
 PrefabInstance:
   m_ObjectHideFlags: 0
