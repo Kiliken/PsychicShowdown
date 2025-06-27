@@ -135,6 +135,7 @@ public class ThrowableObject : MonoBehaviour
         holdingPlayer = player;
         rb.useGravity = false;
         model.GetComponent<MeshCollider>().enabled = false;
+        ShowHideHighlight(false);
         canGrab = false;
     }
 

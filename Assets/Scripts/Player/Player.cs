@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public Transform playerCam;   // camera transform
     Camera cam;     // camera
     CameraController camController;
+    [SerializeField] TextMeshProUGUI objectText; // for displaying the name of the object the player's crosshair is hovering on
 
     [SerializeField] float defaultZoom = 60f;
     [SerializeField] float smallZoom = 60f; // for medium object
@@ -80,6 +82,11 @@ public class Player : MonoBehaviour
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 
+        if (playerNo == 1)
+            objectText = GameObject.Find("Canvas/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
+        else
+            objectText = GameObject.Find("Canvas/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
+
         defaultZoom = smallZoom;
     }
 
@@ -103,16 +110,27 @@ public class Player : MonoBehaviour
         if (Physics.SphereCast(playerCam.transform.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
-        if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
-        {
-            currentTargetObj = hit.transform.gameObject;
-            currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(true);
-            Debug.Log(hit.transform.name);
-        }
+            if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
+            {
+                currentTargetObj = hit.transform.gameObject;
+                if (currentTargetObj.GetComponent<ThrowableObject>().canGrab && (!leftAiming && !rightAiming))
+                {
+                    currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(true);
+                    objectText.text = currentTargetObj.GetComponent<ThrowableObject>().objectName;
+                    Debug.Log(hit.transform.name);
+                }
+                else
+                {
+                    currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(false);
+                    objectText.text = "";
+                }
+                
+            }
         }
         else if (currentTargetObj)
         {
             currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(false);
+            objectText.text = "";
             currentTargetObj = null;
             Debug.Log("target emptied");
         }

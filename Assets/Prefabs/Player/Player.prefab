@@ -412,10 +412,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 5323096618604290763}
+  playerHurtbox: {fileID: 0}
   playerCam: {fileID: 0}
   playerActive: 1
   moveSpeed: 0
   moveSpeedDefault: 10
+  moveSpeedSprint: 20
   moveSpeedDash: 70
   jumpForce: 10
   jumpCooldown: 0.25
@@ -431,10 +433,11 @@ MonoBehaviour:
   disableGravityDuringDash: 0
   resetVelocityOnDash: 1
   maxDashDistance: 10
-  dashStopPadding: 0.1
+  dashStopPadding: 0.5
   dashCollisionMask:
     serializedVersion: 2
     m_Bits: 1088
+  isSprinting: 0
   playerHeight: 2.5
   groundLayer:
     serializedVersion: 2
@@ -460,7 +463,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 1
   playerCam: {fileID: 0}
+  objectText: {fileID: 0}
   defaultZoom: 60
+  smallZoom: 60
+  mediumZoom: 70
+  largeZoom: 80
   adsZoom: 30
   adsSpeed: 120
   camSenNormal: 0.1
@@ -472,6 +479,7 @@ MonoBehaviour:
     m_Bits: 1152
   hpBar: {fileID: 0}
   objDetectionRange: 20
+  currentTargetObj: {fileID: 0}
   leftObject: {fileID: 0}
   rightObject: {fileID: 0}
   maxHP: 10

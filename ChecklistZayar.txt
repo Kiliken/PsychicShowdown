@@ -50,15 +50,16 @@ Before school festival:
 @ fix bugs (@duck, @the ground, @player aim invisible objects)
 @ adjust torii gates
 @ lighting
-- adjust camera according to size of object held (none - near, large - far)
+@ adjust camera according to size of object held (none - near, large - far)
 - adjust object sizes
 @ i frames to dash
 @ sprinting
 @ make items easier to pick up (box cast, highlight)
+@ show object name under crosshair
 - CHECK OBJECT DETECTION FOR OBJECTS IN ENEMY HAND
 - make barrier smaller
 - special items
-- game menu and quitting
+
 
 Chen:
 - add a way for UI to be controllable with controller
