@@ -198,9 +198,9 @@ public class MapGenerator : MonoBehaviour
                         else
                         {
                             thisObj = Instantiate(prefabs[2], hit.point, Quaternion.identity);
-                            ColorUtility.TryParseHtmlString("#44774d", out thisColor);
-                            propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
+                            //propertyBlock.SetColor("_BaseColor", thisColor);
+                            //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
                     default:
