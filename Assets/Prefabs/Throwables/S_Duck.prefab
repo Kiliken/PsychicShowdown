@@ -287,6 +287,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: objectName
+      value: "\u30C0\u30C3\u30AD\u30FC (\u5C0F)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: shootRotation.y
       value: 270
       objectReference: {fileID: 0}

@@ -267,6 +267,10 @@ PrefabInstance:
       value: M_NewRock
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: objectName
+      value: "\u77F3 (\u4E2D)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: objectSize
       value: 1
       objectReference: {fileID: 0}

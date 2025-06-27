@@ -12,6 +12,7 @@ public class ThrowableObject : MonoBehaviour
     protected Rigidbody rb;
     protected ObjHitbox hitbox;
     public int objectID = 0;    // ID for showing object on UI, etc.
+    public string objectName = "Object (size)";
     [SerializeField] public int objectSize = 0; // 0:small, 1:medium, 2:large
     public bool canGrab = true;
     protected bool grabbed = false;
