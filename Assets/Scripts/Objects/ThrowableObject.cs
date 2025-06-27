@@ -22,7 +22,8 @@ public class ThrowableObject : MonoBehaviour
     protected bool effectActivated = false;
     // DAMAGES
     protected int[] damages = new int[] { 1, 2, 3 }; // S, M, L
-    [SerializeField] public int damage = 10;
+    [SerializeField] public int damage = 1;
+    [SerializeField] protected bool objSpecificDmg = false;
 
     // THROW SPEEDS
     protected float[] throwSpeeds = new float[] { 120f, 80f, 50f }; // S, M, L
@@ -30,20 +31,22 @@ public class ThrowableObject : MonoBehaviour
     // GRAB SPEEDS
     //protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L 30 20 10
     protected float[] grabSpeeds = new float[] { 0.7f, 0.5f, 0.4f }; // S, M, L 30 20 10
-    [SerializeField] protected float grabSpeed = 30f;
+    [SerializeField] protected float grabSpeed = 0.7f;
+    [SerializeField] protected bool objSpecificSpeed = false;
+
 
     public Transform grabbedTransform;
     public Transform shootPos;
     public int holdingPlayer = 0;
-    [SerializeField] Vector3 grabbedRotation;
-    [SerializeField] Vector3 shootRotation;
+    [SerializeField] protected Vector3 grabbedRotation;
+    [SerializeField] protected Vector3 shootRotation;
 
     [SerializeField] protected float disableHitboxVelo = 20f;    // the magnitude of the velocity to disable the hitbox when thrown
     protected bool objectDisabled = false;
     [SerializeField] protected float destroyAfterSec = 3f;
     protected float destroyTimer = 0f;
     [SerializeField] protected GameObject effectParticle;
-    private bool objectVisible = true;
+    protected bool objectVisible = true;
 
 
 
@@ -53,12 +56,17 @@ public class ThrowableObject : MonoBehaviour
         model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
-        highlightEffect = transform.Find("Effect").gameObject;
+        if(transform.Find("Effect"))
+            highlightEffect = transform.Find("Effect").gameObject;
         ShowHideHighlight(false);
         sfxPlayer = GetComponent<ObjSFXPlayer>();
-        damage = damages[objectSize];
-        throwSpeed = throwSpeeds[objectSize];
-        grabSpeed = grabSpeeds[objectSize];
+        if(!objSpecificDmg)
+            damage = damages[objectSize];
+        if (!objSpecificSpeed)
+        {
+            throwSpeed = throwSpeeds[objectSize];
+            grabSpeed = grabSpeeds[objectSize];
+        }
     }
 
 
@@ -140,7 +148,7 @@ public class ThrowableObject : MonoBehaviour
     }
 
 
-    public void ThrowObject()
+    public virtual void ThrowObject()
     {
         aiming = false;
         rb.useGravity = true;
@@ -158,7 +166,7 @@ public class ThrowableObject : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (thrown)
         {

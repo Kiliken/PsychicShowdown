@@ -231,6 +231,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3403919869766787633, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403919869766787633, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403919869766787633, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403919869766787633, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -287,12 +299,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: grabSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: objectName
-      value: "\u30C0\u30C3\u30AD\u30FC (\u5C0F)"
+      value: "\u30C0\u30C3\u30AD\u30FC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: objectSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: throwSpeed
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: objSpecificDmg
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: shootRotation.y
       value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: objSpecificSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: grabbedRotation.y

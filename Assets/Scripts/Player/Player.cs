@@ -14,12 +14,12 @@ public class Player : MonoBehaviour
     public Transform playerCam;   // camera transform
     Camera cam;     // camera
     CameraController camController;
-    [SerializeField] TextMeshProUGUI objectText; // for displaying the name of the object the player's crosshair is hovering on
+    TextMeshProUGUI objectText; // for displaying the name of the object the player's crosshair is hovering on
 
     [SerializeField] float defaultZoom = 60f;
-    [SerializeField] float smallZoom = 60f; // for medium object
-    [SerializeField] float mediumZoom = 70f; // for medium object
-    [SerializeField] float largeZoom = 80f; // for large object
+    float smallZoom = 60f; // for medium object
+    float mediumZoom = 80f; // for medium object
+    float largeZoom = 100f; // for large object
     [SerializeField] float adsZoom = 30f;
     [SerializeField] float adsSpeed = 120f;
     [SerializeField] float camSenNormal = 3f;   // camera sensitivity normal
@@ -340,14 +340,20 @@ public class Player : MonoBehaviour
         switch(largestSize)
         {
            case 0:
-               defaultZoom = smallZoom; 
-               break;
+                defaultZoom = smallZoom;
+                camController.offsetXTarget = camController.shoulderSwapped ? -4f : 4f;
+                objHolder.ChangeHolderPos(0);
+                break;
            case 1:
-               defaultZoom = mediumZoom;
-               break;
+                defaultZoom = mediumZoom;
+                camController.offsetXTarget = camController.shoulderSwapped ? -6f : 6f;
+                objHolder.ChangeHolderPos(1);
+                break;
            case 2:
-               defaultZoom = largeZoom;
-               break;
+                defaultZoom = largeZoom;
+                camController.offsetXTarget = camController.shoulderSwapped ? -8f : 8f;
+                objHolder.ChangeHolderPos(2);
+                break;
         }
     }
 }

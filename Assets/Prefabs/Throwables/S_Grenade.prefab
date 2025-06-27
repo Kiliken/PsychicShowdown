@@ -80,6 +80,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 450872778435669836, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 450872778435669836, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 450872778435669836, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 450872778435669836, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -177,14 +189,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectID: 0
-  objectName: "\u30B0\u30EC\u30CD\u30FC\u30C9 (\u5C0F)"
+  objectName: "\u30B0\u30EC\u30CD\u30FC\u30C9"
   objectSize: 0
   canGrab: 1
   canThrow: 0
   aiming: 0
   damage: 10
+  objSpecificDmg: 0
   throwSpeed: 120
   grabSpeed: 30
+  objSpecificSpeed: 0
   grabbedTransform: {fileID: 0}
   shootPos: {fileID: 0}
   holdingPlayer: 0
@@ -193,7 +207,7 @@ MonoBehaviour:
   disableHitboxVelo: 20
   destroyAfterSec: 3
   effectParticle: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}
-  explodeTime: 1
+  explodeTime: 0.5
   explosionDamage: 1
 --- !u!1001 &2296833048147463960
 PrefabInstance:

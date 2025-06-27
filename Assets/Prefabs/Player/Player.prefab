@@ -449,6 +449,7 @@ MonoBehaviour:
   moveYInput: Vertical1
   jumpBtn: Jump1
   dashBtn: Dash1
+  sprintBtn: Sprint1
 --- !u!114 &4688077051249154267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,11 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 1
   playerCam: {fileID: 0}
-  objectText: {fileID: 0}
   defaultZoom: 60
-  smallZoom: 60
-  mediumZoom: 70
-  largeZoom: 80
   adsZoom: 30
   adsSpeed: 120
   camSenNormal: 0.1

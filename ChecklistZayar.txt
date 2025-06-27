@@ -49,16 +49,15 @@ Before school festival:
 
 ---FOR BETA---
 @ fix bugs (@duck, @the ground, @player aim invisible objects)
-@ adjust torii gates
-@ lighting
 @ adjust camera according to size of object held (none - near, large - far)
-- adjust object sizes
 @ i frames to dash
 @ sprinting
 @ make items easier to pick up (box cast, highlight)
 @ show object name under crosshair
+- adjust object sizes
+- adjust camera offset according to object size
 - adjust player move speed, etc
-- make barrier smaller
+- make barrier/space smaller when the timer reaches a set time (discussion required)
 - special items
 
 
@@ -70,6 +69,15 @@ Chen:
 - in-game menu (not Pause) for quitting the game
 - options menu
 - UI for objects holding in left and right hands
+
+Paolo:
+@ torii gate size
+@ lighting
+@ shader rework
+- new terrain generation
+- grass
+- environment destruction
+- add new objects
 
 
 
