@@ -1415,9 +1415,17 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1572386696005393296, guid: 1699ad11627f40948844959c3a565980, type: 3}
+      propertyPath: largeZoom
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1572386696005393296, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 175280573}
+    - target: {fileID: 1572386696005393296, guid: 1699ad11627f40948844959c3a565980, type: 3}
+      propertyPath: mediumZoom
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 1572386696005393296, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: camSenNormal
       value: 2
@@ -3445,9 +3453,17 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: largeZoom
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 242891519}
+    - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: mediumZoom
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: camSenNormal
       value: 2

@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] float defaultZoom = 60f;
     [SerializeField] float smallZoom = 60f; // for medium object
-    [SerializeField] float mediumZoom = 80f; // for medium object
-    [SerializeField] float largeZoom = 100f; // for large object
+    [SerializeField] float mediumZoom = 70f; // for medium object
+    [SerializeField] float largeZoom = 80f; // for large object
     [SerializeField] float adsZoom = 30f;
     [SerializeField] float adsSpeed = 120f;
     [SerializeField] float camSenNormal = 3f;   // camera sensitivity normal
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
 
         ObjectDetection();
         PlayerInput();
-        GetCameraDistance();
+        //GetCameraDistance();
     }
 
 
@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
                         leftObject.GrabObject(objPosL, shootPos, playerNo);
                         holdingObjL = true;
 
-                        //GetCameraDistance();
+                        GetCameraDistance();
 
                         sfxPlayer.PlaySFX(2);
 
@@ -186,7 +186,7 @@ public class Player : MonoBehaviour
                 leftObject.ThrowObject();
                 holdingObjL = false;
 
-                //GetCameraDistance();
+                GetCameraDistance();
 
 
                 sfxPlayer.PlaySFX(3);
@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
 
             triggerInUseL = false;
         }
-        else if (cam.fieldOfView < defaultZoom && !rightAiming)
+        else if (Mathf.Abs(cam.fieldOfView - defaultZoom) > 0.01f && !rightAiming)
         {
             cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, defaultZoom, adsSpeed * Time.deltaTime);
             leftAiming = false;
@@ -220,7 +220,7 @@ public class Player : MonoBehaviour
                         rightObject.GrabObject(objPosR, shootPos, playerNo);
                         holdingObjR = true;
 
-                        //GetCameraDistance();
+                        GetCameraDistance();
 
                         sfxPlayer.PlaySFX(2);
 
@@ -266,7 +266,7 @@ public class Player : MonoBehaviour
                 rightObject.ThrowObject();
                 holdingObjR = false;
 
-                //GetCameraDistance();
+                GetCameraDistance();
 
                 sfxPlayer.PlaySFX(3);
             }
@@ -276,7 +276,7 @@ public class Player : MonoBehaviour
 
             triggerInUseR = false;
         }
-        else if (cam.fieldOfView < defaultZoom && !leftAiming)
+        else if (Mathf.Abs(cam.fieldOfView - defaultZoom) > 0.01f && !leftAiming)
         {
             cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, defaultZoom, adsSpeed * Time.deltaTime);
             rightAiming = false;
@@ -315,21 +315,21 @@ public class Player : MonoBehaviour
 
     public void GetCameraDistance()
     {
-        //int l = (leftObject != null && holdingObjL) ? leftObject.objectSize : 0;
-        //int r = (rightObject != null && holdingObjR) ? rightObject.objectSize : 0;
-        //int largestSize = Mathf.Max(l, r);
-        //Debug.Log(largestSize);
-        //switch(largestSize)
-        //{
-        //    case 0:
-        //        defaultZoom = smallZoom; 
-        //        break;
-        //    case 1:
-        //        defaultZoom = mediumZoom;
-        //        break;
-        //    case 2:
-        //        defaultZoom = largeZoom;
-        //        break;
-        //}
+        int l = (leftObject != null && holdingObjL) ? leftObject.objectSize : 0;
+        int r = (rightObject != null && holdingObjR) ? rightObject.objectSize : 0;
+        int largestSize = Mathf.Max(l, r);
+        Debug.Log(largestSize);
+        switch(largestSize)
+        {
+           case 0:
+               defaultZoom = smallZoom; 
+               break;
+           case 1:
+               defaultZoom = mediumZoom;
+               break;
+           case 2:
+               defaultZoom = largeZoom;
+               break;
+        }
     }
 }
