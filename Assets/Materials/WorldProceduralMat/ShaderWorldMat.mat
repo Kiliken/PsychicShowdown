@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level1Texture:
-        m_Texture: {fileID: 2800000, guid: 16dd58495750fdc469595e60b620f868, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level2Texture:
@@ -84,11 +84,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level4Texture:
-        m_Texture: {fileID: 2800000, guid: f01d45bc876d6104caf61af9bfbfe24c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16dd58495750fdc469595e60b620f868, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level5Texture:
-        m_Texture: {fileID: 2800000, guid: 73fef7c2067300c4f97da6f4c0899df1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Level6Texture:
@@ -198,11 +198,11 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Level1Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Level2Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Level3Color: {r: 0.4867924, g: 0.38343784, b: 0.24890701, a: 0}
-    - _Level4Color: {r: 0.2115508, g: 0.2528302, b: 0.09683872, a: 0}
-    - _Level5Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Level1Color: {r: 0.35902265, g: 0.46226418, b: 0.19842473, a: 0}
+    - _Level2Color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 0}
+    - _Level3Color: {r: 0.4716981, g: 0.3247028, b: 0.12682448, a: 0}
+    - _Level4Color: {r: 0.5, g: 0.44690615, b: 0.36084905, a: 0}
+    - _Level5Color: {r: 0.3018868, g: 0.23905894, b: 0.089711644, a: 0}
     - _Level6Color: {r: 0.90943396, g: 0.90943396, b: 0.90943396, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
