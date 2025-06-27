@@ -2126,6 +2126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldObj: {fileID: 1118820282}
+  mainMenuPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  firstButton: {fileID: 401725893}
+  firstSettingsButton: {fileID: 0}
 --- !u!1001 &1660406700
 PrefabInstance:
   m_ObjectHideFlags: 0
