@@ -57,7 +57,6 @@ Before school festival:
 @ sprinting
 @ make items easier to pick up (box cast, highlight)
 @ show object name under crosshair
-- CHECK OBJECT DETECTION FOR OBJECTS IN ENEMY HAND
 - adjust player move speed, etc
 - make barrier smaller
 - special items
@@ -71,6 +70,25 @@ Chen:
 - in-game menu (not Pause) for quitting the game
 - options menu
 - UI for objects holding in left and right hands
+
+
+
+SPECIAL OBJECTS:
+These are special objects with a lower spawn rate and/or spawn at a set time interval.
+
+Skull (small):
+- Once thrown, chases the other player and deal damage (cannot detect obstacles or large objects and will collide with them).
+- Once thrown, lights on fire like ghost rider and starts laughing.
+
+Spear (medium):
+- Once thrown, multiplies itself into 5-10 copies.
+
+Meteor (small):
+- Initially a small rock. Once thrown, it starts growing bigger and bigger until it hits something.
+- The damage it deals to the opponent will vary to the size it is at when it hits the enemy.
+
+Pudding/Flan (large):
+- When jumped on, makes the player jump up very high, giving them a high vantage point.
 
 
 

@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
     {
         // object detection
         RaycastHit hit;
-        if (Physics.SphereCast(playerCam.transform.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
+        if (Physics.SphereCast(shootPos.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
             if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
