@@ -38,6 +38,7 @@ TO DO:
 @ add player models
 @ add sound effects
 @ add music loop
+
 Before school festival:
 - Since we only have 2 weeks, there will be no big changes
 - We will focus on making the game more visually appealing
@@ -57,6 +58,7 @@ Before school festival:
 @ make items easier to pick up (box cast, highlight)
 @ show object name under crosshair
 - CHECK OBJECT DETECTION FOR OBJECTS IN ENEMY HAND
+- adjust player move speed, etc
 - make barrier smaller
 - special items
 

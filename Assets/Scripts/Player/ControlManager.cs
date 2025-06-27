@@ -14,6 +14,7 @@ public class ControlManager : MonoBehaviour
     private string moveY1_P = "Vertical1";
     private string jump1_P = "Jump1";
     private string dash1_P = "Dash1";
+    private string sprint1_P = "Sprint1";
     private string camX1_P = "CamX1";
     private string camY1_P = "CamY1";
     private string shldrSwap1_P = "ShoulderSwap1";
@@ -28,6 +29,7 @@ public class ControlManager : MonoBehaviour
     private string moveY2_P = "Vertical2";
     private string jump2_P = "Jump2";
     private string dash2_P = "Dash2";
+    private string sprint2_P = "Sprint2";
     private string camX2_P = "CamX2";
     private string camY2_P = "CamY2";
     private string shldrSwap2_P = "ShoulderSwap2";
@@ -42,6 +44,7 @@ public class ControlManager : MonoBehaviour
     private string moveY1_X = "Vertical1";
     private string jump1_X = "Jump1X";
     private string dash1_X = "Dash1X";
+    private string sprint1_X = "Sprint1X";
     private string camX1_X = "CamX1X";
     private string camY1_X = "CamY1X";
     private string shldrSwap1_X = "ShoulderSwap1X";
@@ -56,6 +59,7 @@ public class ControlManager : MonoBehaviour
     private string moveY2_X = "Vertical2";
     private string jump2_X = "Jump2X";
     private string dash2_X = "Dash2X";
+    private string sprint2_X = "Sprint2X";
     private string camX2_X = "CamX2X";
     private string camY2_X = "CamY2X";
     private string shldrSwap2_X = "ShoulderSwap2X";
@@ -103,6 +107,7 @@ public class ControlManager : MonoBehaviour
                 playerMovementScript.moveYInput = moveY1_P;
                 playerMovementScript.jumpBtn = jump1_P;
                 playerMovementScript.dashBtn = dash1_P;
+                playerMovementScript.sprintBtn = sprint1_P;
                 cameraControllerScript.camXInput = camX1_P;
                 cameraControllerScript.camYInput = camY1_P;
                 cameraControllerScript.shldrSwapBtn = shldrSwap1_P;
@@ -116,6 +121,7 @@ public class ControlManager : MonoBehaviour
                 playerMovementScript.moveYInput = moveY2_P;
                 playerMovementScript.jumpBtn = jump2_P;
                 playerMovementScript.dashBtn = dash2_P;
+                playerMovementScript.sprintBtn = sprint2_P;
                 cameraControllerScript.camXInput = camX2_P;
                 cameraControllerScript.camYInput = camY2_P;
                 cameraControllerScript.shldrSwapBtn = shldrSwap2_P;
@@ -132,6 +138,7 @@ public class ControlManager : MonoBehaviour
                 playerMovementScript.moveYInput = moveY1_X;
                 playerMovementScript.jumpBtn = jump1_X;
                 playerMovementScript.dashBtn = dash1_X;
+                playerMovementScript.sprintBtn = sprint1_X;
                 cameraControllerScript.camXInput = camX1_X;
                 cameraControllerScript.camYInput = camY1_X;
                 cameraControllerScript.shldrSwapBtn = shldrSwap1_X;
@@ -145,6 +152,7 @@ public class ControlManager : MonoBehaviour
                 playerMovementScript.moveYInput = moveY2_X;
                 playerMovementScript.jumpBtn = jump2_X;
                 playerMovementScript.dashBtn = dash2_X;
+                playerMovementScript.sprintBtn = sprint2_X;
                 cameraControllerScript.camXInput = camX2_X;
                 cameraControllerScript.camYInput = camY2_X;
                 cameraControllerScript.shldrSwapBtn = shldrSwap2_X;

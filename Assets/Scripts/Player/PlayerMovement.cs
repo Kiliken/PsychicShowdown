@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     public string moveYInput = "Vertical1";
     public string jumpBtn = "Jump1";
     public string dashBtn = "Dash1";
+    public string sprintBtn = "Sprint1";
 
 
     void Start()
@@ -159,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Sprint1X") && grounded)
+        if (Input.GetButtonDown(sprintBtn) && grounded)
         {
             Debug.Log("sprinting");
             isSprinting = true;
