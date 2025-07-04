@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Sprinting")]
-    [SerializeField] private bool isSprinting = false;
+    [SerializeField] public bool isSprinting = false;
 
     [Header("Ground Check")]
     public float playerHeight = 2f;

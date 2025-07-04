@@ -62,14 +62,15 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        hp = maxHP;
-        hpBar.UpdateHPBar();
+
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        hp = maxHP;
+        hpBar.UpdateHPBar();
         // set up player cam in other scripts
         movementScript = GetComponent<PlayerMovement>();
         movementScript.playerCam = playerCam;
@@ -124,7 +125,7 @@ public class Player : MonoBehaviour
                     currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(false);
                     objectText.text = "";
                 }
-                
+
             }
         }
         else if (currentTargetObj)
@@ -337,19 +338,19 @@ public class Player : MonoBehaviour
         int r = (rightObject != null && holdingObjR) ? rightObject.objectSize : 0;
         int largestSize = Mathf.Max(l, r);
         Debug.Log(largestSize);
-        switch(largestSize)
+        switch (largestSize)
         {
-           case 0:
+            case 0:
                 defaultZoom = smallZoom;
                 camController.offsetXTarget = camController.shoulderSwapped ? -4f : 4f;
                 objHolder.ChangeHolderPos(0);
                 break;
-           case 1:
+            case 1:
                 defaultZoom = mediumZoom;
                 camController.offsetXTarget = camController.shoulderSwapped ? -6f : 6f;
                 objHolder.ChangeHolderPos(1);
                 break;
-           case 2:
+            case 2:
                 defaultZoom = largeZoom;
                 camController.offsetXTarget = camController.shoulderSwapped ? -8f : 8f;
                 objHolder.ChangeHolderPos(2);

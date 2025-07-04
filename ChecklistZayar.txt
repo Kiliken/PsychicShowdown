@@ -57,9 +57,16 @@ Before school festival:
 - adjust object sizes
 - adjust camera offset according to object size
 - adjust player move speed, etc
+- new objects
+- make grenade explosion bigger
+- make aim faster
+- stop sprinting when aiming
+- jump effect
 - make barrier/space smaller when the timer reaches a set time (discussion required)
 - special items
-
+- hand animations
+- intro
+- new end screen
 
 Chen:
 - add a way for UI to be controllable with controller
