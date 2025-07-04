@@ -47,7 +47,7 @@ public class MapGenerator : MonoBehaviour
     GameObject[] prefabs;
     [SerializeField]
     GameObject grassPrefab;
-    string[] grassColors = { "#44774d", "#000000", "#FFFFFF" };
+    string[] grassColors = { "#FFFFFF", "#FFEBBD", "#C2FFFF", "#DBB5B7" };
 
     //[SerializeField]
     //TerrainType[] regions;
@@ -102,7 +102,40 @@ public class MapGenerator : MonoBehaviour
         Color thisColor = Color.white;
         float objectHeight = 0;
 
+        GameObject grassHolder = new GameObject("WorldGrass");
+        grassHolder.transform.position = Vector3.zero;
+        grassHolder.transform.rotation = Quaternion.identity;
+        grassHolder.isStatic = true;
+        //GRASS
+        for (int i = 0; i < 30f; i++)
+        {
 
+            genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
+
+            if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
+            {
+                objectHeight = 50f - hit.distance;
+
+                if (objectHeight < 2f || (objectHeight > 8 && objectHeight < 22f))
+                {
+                    for (int j = 0; j < 20f; j++)
+                    {
+                        if (Physics.Raycast(new Vector3(genCursor.x + Random.Range(-5, 5), 50f,genCursor.z + Random.Range(-3,3)), Vector3.down, out hit, Mathf.Infinity, ~ground))
+                        {
+                            thisObj = Instantiate(grassPrefab, hit.point - Vector3.up * 0.3f, Quaternion.identity);
+                            thisObj.transform.eulerAngles = Vector3.up * Random.Range(0, 360);
+                            thisObj.transform.parent = grassHolder.transform;
+                            ColorUtility.TryParseHtmlString(grassColors[Random.Range(0, grassColors.Length)], out thisColor);
+                            propertyBlock.SetColor("_MainColor", thisColor);
+                            thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                        }
+                    }
+                    
+                }
+                else i--;
+
+            }
+        }
 
         //Debug.Log(genCursor);
 
@@ -165,9 +198,9 @@ public class MapGenerator : MonoBehaviour
                         else
                         {
                             thisObj = Instantiate(prefabs[2], hit.point, Quaternion.identity);
-                            ColorUtility.TryParseHtmlString("#44774d", out thisColor);
-                            propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                            //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
+                            //propertyBlock.SetColor("_BaseColor", thisColor);
+                            //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
                     default:
@@ -187,35 +220,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        GameObject grassHolder = new GameObject("WorldGrass");
-        grassHolder.transform.position = Vector3.zero;
-        grassHolder.transform.rotation = Quaternion.identity;
-        grassHolder.isStatic = true;
-        //GRASS
-        for (int i = 0; i < 500f; i++)
-        {
-
-            genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
-
-            if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
-            {
-                int rand;
-                rand = Random.Range(0, 2);
-                objectHeight = 50f - hit.distance;
-
-                if (objectHeight < 2f || (objectHeight > 8 && objectHeight < 22f))
-                {
-                    thisObj = Instantiate(grassPrefab, hit.point, Quaternion.identity);
-                    thisObj.transform.eulerAngles = Vector3.up * Random.Range(0, 360);
-                    thisObj.transform.parent = grassHolder.transform;
-                    ColorUtility.TryParseHtmlString(grassColors[Random.Range(0,grassColors.Length)], out thisColor);
-                    propertyBlock.SetColor("_MainColor", thisColor);
-                    thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                }
-                else i--;
-                
-            }
-        }
+        
 
     }
 

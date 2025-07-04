@@ -341,7 +341,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "c36747eed6c04109bb31a4b998fdee94"
+                    "m_Id": "4702dd6405aa4f119812f9ddbbac8fd7"
                 },
                 "m_SlotId": 0
             }
@@ -2946,7 +2946,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": false,
     "m_CastShadows": false,
     "m_ReceiveShadows": false,

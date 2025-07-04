@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ce118826f6adfcc429958691ee72da54, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 4b0cc45a52aac0d49ae0b6e8b7c11b3f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8254687373856176130, guid: 157df3e1018f97a4b98c9bf595a4b47a, type: 3}
     - target: {fileID: 919132149155446097, guid: 4b0cc45a52aac0d49ae0b6e8b7c11b3f, type: 3}
       propertyPath: m_Name
       value: Grass

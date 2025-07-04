@@ -17,6 +17,7 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject firstButton;
+    [SerializeField] private GameObject firstSettingsButton;
 
     // Start is called before the first frame update
     void Start()
@@ -91,11 +92,13 @@ public class TitleScreen : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstSettingsButton);
     }
 
     public void ShowMainMenuPanel()
     {
         settingsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstButton);
     }
 }

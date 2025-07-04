@@ -116,6 +116,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -169,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 8733429697405204941, guid: c9fb93435ff35dd43a48263eadb2b314, type: 3}
     - target: {fileID: 9182467953664046804, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: objectName
-      value: "\u58C1 (\u5927)"
+      value: "\u58C1"
       objectReference: {fileID: 0}
     - target: {fileID: 9182467953664046804, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: shootRotation.y

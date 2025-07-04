@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] float cameraCollisionRadius = 0.3f;    // sphere cast radius
     [SerializeField] float cameraMinDistance = 1f;  // minimum distance from player
 
+    public bool shoulderSwapped = false;
+
     public string camXInput = "CamX1";
     public string camYInput = "CamY1";
     public string shldrSwapBtn = "ShoulderSwap1";
@@ -59,6 +61,12 @@ public class CameraController : MonoBehaviour
         //     rotationY += Input.GetAxis(camXInput) * invertXVal *  RotSpeedY;
         // }
 
+        // change offset according to player zoom (set in player)
+        if (Mathf.Abs(offsetXTarget - offsetX) > 0.01f)
+        {
+            offsetX = Mathf.Lerp(offsetX, offsetXTarget, Time.deltaTime * 3);
+        }
+
         if (playerActive)
         {
             //increase speed if diagonal input
@@ -78,6 +86,9 @@ public class CameraController : MonoBehaviour
             // third-person shoulder swap
             if (Input.GetButtonDown(shldrSwapBtn))
             {
+                shoulderSwapped = !shoulderSwapped;
+
+                offsetXTarget = -offsetXTarget;
                 offsetX = -offsetX;
             }
         }
