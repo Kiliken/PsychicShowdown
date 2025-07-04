@@ -1,0 +1,23 @@
+## Server checklist
+
+- Seed made by the server and checked from client just once in the title screen;
+- Objects index with and integer;
+- Jump, dash, itemPickup, itemThrow flags;
+- Check the hit from the opponent side;
+- Ip, Port and PlayerSide can only be changed from the luncher;
+- Jump and dash dont really move the character for the online part, they just play sound and particles;
+- itemPickup make the item disapper on the other side;
+- itemThrow spawn and item of the same type of the index and give it a direction
+
+
+
+## Possible data 
+
+playerSide,playerPosition,playerRotation,JumpFlag,DashFlag,itemPickupFlag,itemIdex,itemType,itemThorwFlag,
+
+bytes size:
+
+1,12,4,1,1,1,2,1,1,(maybe just 4)
+
+current size: 24 bytes
+max size: 522 bytes

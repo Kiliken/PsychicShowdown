@@ -162,13 +162,13 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            thisObj = Instantiate(prefabs[1], hit.point, Quaternion.identity);
+                            thisObj = Instantiate(prefabs[Random.Range(1,3)], hit.point, Quaternion.identity);
                             propertyBlock.SetColor("_BaseColor", Color.gray);
                             thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
 
                         break;
-                    case true when (objectHeight < 7f):
+                    case true when (objectHeight < 6f):
                         // sand
 
                         if (rand != 0)
@@ -180,13 +180,13 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            thisObj = Instantiate(prefabs[3], hit.point, Quaternion.identity);
+                            thisObj = Instantiate(prefabs[Random.Range(3, 5)], hit.point, Quaternion.identity);
                             ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
                             propertyBlock.SetColor("_BaseColor", thisColor);
                             thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                         break;
-                    case true when (objectHeight < 12f):
+                    case true when (objectHeight < 22f):
                         //forest
                         if (rand != 0)
                         {
@@ -197,7 +197,7 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            thisObj = Instantiate(prefabs[2], hit.point, Quaternion.identity);
+                            thisObj = Instantiate(prefabs[Random.Range(5, 7)], hit.point, Quaternion.identity);
                             //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
                             //propertyBlock.SetColor("_BaseColor", thisColor);
                             //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -212,7 +212,7 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            thisObj = Instantiate(prefabs[4], hit.point, Quaternion.identity);
+                            thisObj = Instantiate(prefabs[Random.Range(7, 9)], hit.point, Quaternion.identity);
                         }
                         break;
 
