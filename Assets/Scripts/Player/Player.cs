@@ -309,7 +309,7 @@ public class Player : MonoBehaviour
 
         //take damage
         hp = Mathf.Max(0, Mathf.Min(hp - damage, maxHP));
-        hpBar.UpdateHPBar();
+        playerPanel.UpdateHPBar();
         Debug.Log("Player " + playerNo + " received " + damage + " damage.");
 
         // disable hurtbox for splitsecond
