@@ -76,3 +76,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .vscode/settings.json
 .vscode/settings.json
+
+# Server stuff
+/[Ss]erver[Ss]ide/[Rr]elease/
+!Server.csproj

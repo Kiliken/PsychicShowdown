@@ -242,7 +242,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-        seed = Random.Range(6, 4587);
+        //seed = Random.Range(6, 4587);
 
         if (!isTitle)
         {
