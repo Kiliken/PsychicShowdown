@@ -63,7 +63,7 @@ Before school festival:
 @ make aim faster
 @ stop sprinting when aiming
 - jump effect
-- new objects
+@ adjust new objects
 - special items
 
 - hand animations
@@ -73,8 +73,8 @@ Before school festival:
 - dash effect (?)
 
 Chen:
-- add a way for UI to be controllable with controller
-- rework player UI
+@ add a way for UI to be controllable with controller
+@ rework player UI
 - rework main menu
 - rework game over menu
 - in-game menu (not Pause) for quitting the game
@@ -86,9 +86,8 @@ Paolo:
 @ torii gate size
 @ lighting
 @ shader rework
-- new terrain generation
-- grass
-- environment destruction
+@ new terrain generation
+@ grass
 - add new objects
 
 

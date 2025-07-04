@@ -62,15 +62,15 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-
+        hp = maxHP;
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        hp = maxHP;
-        playerPanel.UpdateHPBar();
+
+        //playerPanel.UpdateHPBar();
         // set up player cam in other scripts
         movementScript = GetComponent<PlayerMovement>();
         movementScript.playerCam = playerCam;

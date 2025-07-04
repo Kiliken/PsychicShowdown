@@ -40,6 +40,7 @@ public class ThrowableObject : MonoBehaviour
     public int holdingPlayer = 0;
     [SerializeField] protected Vector3 grabbedRotation;
     [SerializeField] protected Vector3 shootRotation;
+    [SerializeField] protected Vector3 holdPosPadding;
 
     [SerializeField] protected float disableHitboxVelo = 20f;    // the magnitude of the velocity to disable the hitbox when thrown
     protected bool objectDisabled = false;
@@ -56,11 +57,11 @@ public class ThrowableObject : MonoBehaviour
         model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
-        if(transform.Find("Effect"))
+        if (transform.Find("Effect"))
             highlightEffect = transform.Find("Effect").gameObject;
         ShowHideHighlight(false);
         sfxPlayer = GetComponent<ObjSFXPlayer>();
-        if(!objSpecificDmg)
+        if (!objSpecificDmg)
             damage = damages[objectSize];
         if (!objSpecificSpeed)
         {
@@ -76,7 +77,7 @@ public class ThrowableObject : MonoBehaviour
         // aim
         if (aiming)
         {
-            transform.position = shootPos.position;
+            transform.position = shootPos.position + holdPosPadding;
             transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
             if (objectVisible)
                 ShowHideObject(false, true);
@@ -91,7 +92,7 @@ public class ThrowableObject : MonoBehaviour
             // snap to player
             else
             {
-                transform.position = grabbedTransform.position;
+                transform.position = grabbedTransform.position + holdPosPadding;
                 transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(grabbedRotation.x, grabbedRotation.y, grabbedRotation.z);
                 canThrow = true;
                 grabbed = true;
@@ -252,7 +253,7 @@ public class ThrowableObject : MonoBehaviour
 
     public void ShowHideHighlight(bool show)
     {
-        if(!highlightEffect) return;
-        highlightEffect.GetComponent <MeshRenderer>().enabled = show;
+        if (!highlightEffect) return;
+        highlightEffect.GetComponent<MeshRenderer>().enabled = show;
     }
 }
