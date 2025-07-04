@@ -7,9 +7,26 @@ public class PlayerPanel : MonoBehaviour
     public GameObject playerObject;
     private PlayerMovement playerMovement;
     private Player player;
+    [SerializeField] private bool isP1;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        if (isP1)
+        {
+            playerObject = GameObject.Find("Player1");
+        }
+        else
+        {
+            playerObject = GameObject.Find("Player2");
+        }
+        
+        //playerObject.player.
+    }
+
     void Start()
     {
+        
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         player = playerObject.GetComponent<Player>();
         player.hpBar = GetComponentInChildren<CellHPBar>();
@@ -23,5 +40,10 @@ public class PlayerPanel : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateHPBar()
+    {
+
     }
 }
