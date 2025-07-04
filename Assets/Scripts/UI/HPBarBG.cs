@@ -3,22 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Triangle : MonoBehaviour
+public class HPBarBG : MonoBehaviour
 {
-    public float minSpeed = 10f;
-    public float maxSpeed = 360f;
-    public float cycleDuration = 4f;
-
-    public float shakeDuration = 0.2f;
-    public float shakeMagnitude = 10f;
-
-    private float angle = 0f;
-    private Quaternion initialRotation;
-
     private RectTransform rectTransform;
     private Image image;
     private Color originalColor;
     private Vector3 originalPosition;
+
+    public float shakeDuration = 0.2f;
+    public float shakeMagnitude = 10f;
 
     void Awake()
     {
@@ -28,30 +21,15 @@ public class Triangle : MonoBehaviour
         originalPosition = rectTransform.anchoredPosition;
     }
 
-    void Start()
-    {
-        initialRotation = transform.rotation;
-    }
-
-    void Update()
-    {
-        float t = (Time.time % cycleDuration) / cycleDuration;
-        float speedFactor = Mathf.Sin(t * Mathf.PI);
-        float currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, speedFactor);
-
-        angle += currentSpeed * Time.deltaTime;
-
-        transform.rotation = initialRotation * Quaternion.Euler(0f, 0f, -angle);
-    }
-
     public void TakeDamage()
     {
-        StopAllCoroutines();
+        StopAllCoroutines(); // In case multiple hits happen
         StartCoroutine(FlashAndShake());
     }
 
     private IEnumerator FlashAndShake()
     {
+        // Turn red
         image.color = Color.red;
 
         float elapsed = 0f;
@@ -65,6 +43,7 @@ public class Triangle : MonoBehaviour
             yield return null;
         }
 
+        // Reset position and color
         rectTransform.anchoredPosition = originalPosition;
         image.color = originalColor;
     }

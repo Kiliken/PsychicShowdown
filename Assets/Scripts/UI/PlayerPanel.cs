@@ -9,13 +9,15 @@ public class PlayerPanel : MonoBehaviour
     private Player player;
     [SerializeField] private bool isP1;
     private CellHPBar cellHPBar;
+    private HPBarBG hpBarBG;
+    private Triangle[] triangles;
     // Start is called before the first frame update
 
     void Awake()
     {
         if (isP1)
         {
-            playerObject = GameObject.Find("Player1");
+            playerObject = GameObject.Find("Player");
         }
         else
         {
@@ -32,6 +34,8 @@ public class PlayerPanel : MonoBehaviour
         GetComponentInChildren<JumpDotsUI>().player = playerMovement;
         GetComponentInChildren<DashDotsUI>().player = playerMovement;
         GetComponentInChildren<CellHPBar>().player = player;
+        hpBarBG = GetComponentInChildren<HPBarBG>();
+        triangles = GetComponentsInChildren<Triangle>();
         cellHPBar = GetComponentInChildren<CellHPBar>();
         cellHPBar.UpdateHPBar();
     }
@@ -45,5 +49,10 @@ public class PlayerPanel : MonoBehaviour
     public void UpdateHPBar()
     {
         cellHPBar.UpdateHPBar();
+        hpBarBG.TakeDamage();
+        foreach (Triangle tri in triangles)
+        {
+            tri.TakeDamage();
+        }
     }
 }
