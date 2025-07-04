@@ -8,6 +8,7 @@ public class PlayerPanel : MonoBehaviour
     private PlayerMovement playerMovement;
     private Player player;
     [SerializeField] private bool isP1;
+    private CellHPBar cellHPBar;
     // Start is called before the first frame update
 
     void Awake()
@@ -20,20 +21,19 @@ public class PlayerPanel : MonoBehaviour
         {
             playerObject = GameObject.Find("Player2");
         }
-        
-        //playerObject.player.
+
+        player = playerObject.GetComponent<Player>();
+        player.playerPanel = this;
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
 
     void Start()
     {
-        
-        playerMovement = playerObject.GetComponent<PlayerMovement>();
-        player = playerObject.GetComponent<Player>();
-        player.hpBar = GetComponentInChildren<CellHPBar>();
         GetComponentInChildren<JumpDotsUI>().player = playerMovement;
         GetComponentInChildren<DashDotsUI>().player = playerMovement;
         GetComponentInChildren<CellHPBar>().player = player;
-        GetComponentInChildren<CellHPBar>().UpdateHPBar();
+        cellHPBar = GetComponentInChildren<CellHPBar>();
+        cellHPBar.UpdateHPBar();
     }
 
     // Update is called once per frame
@@ -44,6 +44,6 @@ public class PlayerPanel : MonoBehaviour
 
     public void UpdateHPBar()
     {
-
+        cellHPBar.UpdateHPBar();
     }
 }
