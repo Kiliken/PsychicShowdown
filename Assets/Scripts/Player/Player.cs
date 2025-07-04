@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform objPosL;
     [SerializeField] Transform objPosR;
     [SerializeField] LayerMask objLayerMask; // both object and obstacle (large objects)
-    public CellHPBar hpBar;
+    public PlayerPanel playerPanel;
 
     public float objDetectionRange = 20f;
     [SerializeField] GameObject currentTargetObj;    // object currently in player crosshair
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         hp = maxHP;
-        hpBar.UpdateHPBar();
+        playerPanel.UpdateHPBar();
         // set up player cam in other scripts
         movementScript = GetComponent<PlayerMovement>();
         movementScript.playerCam = playerCam;
