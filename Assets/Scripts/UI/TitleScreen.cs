@@ -25,6 +25,8 @@ public class TitleScreen : MonoBehaviour
         sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "AlphaPortFHD";
         Debug.Log(sceneToUse);
         EventSystem.current.SetSelectedGameObject(firstButton);
+        mainMenuPanel.SetActive(true);
+        settingsPanel.SetActive(false);
     }
 
 

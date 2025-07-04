@@ -36,6 +36,7 @@ public class CellHPBar : MonoBehaviour
             }
             
         }
+        UpdateHPBar();
     }
 
     public void UpdateHPBar()
