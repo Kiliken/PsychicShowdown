@@ -204,6 +204,10 @@ MonoBehaviour:
   holdingPlayer: 0
   grabbedRotation: {x: 0, y: 0, z: 0}
   shootRotation: {x: 0, y: 0, z: 0}
+  holdPosPadding: {x: 0, y: 0, z: 0}
+  rbCollisionMask:
+    serializedVersion: 2
+    m_Bits: 1088
   disableHitboxVelo: 20
   destroyAfterSec: 3
   effectParticle: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}

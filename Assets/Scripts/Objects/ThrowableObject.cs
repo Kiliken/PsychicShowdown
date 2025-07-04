@@ -42,6 +42,7 @@ public class ThrowableObject : MonoBehaviour
     [SerializeField] protected Vector3 shootRotation;
     [SerializeField] protected Vector3 holdPosPadding;
 
+    [SerializeField] protected LayerMask rbCollisionMask;
     [SerializeField] protected float disableHitboxVelo = 20f;    // the magnitude of the velocity to disable the hitbox when thrown
     protected bool objectDisabled = false;
     [SerializeField] protected float destroyAfterSec = 3f;
@@ -118,7 +119,7 @@ public class ThrowableObject : MonoBehaviour
         //Debug.Log(rb.velocity.magnitude);
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!thrown && !canGrab)
         {
@@ -171,7 +172,7 @@ public class ThrowableObject : MonoBehaviour
     {
         if (thrown)
         {
-            if (collision.gameObject.layer == 6 || collision.gameObject.layer == 10)
+            if (((1 << collision.gameObject.layer) & rbCollisionMask.value) != 0)
             {
                 // break or effect
                 ObjectEffect();

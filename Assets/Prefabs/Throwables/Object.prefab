@@ -156,18 +156,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectID: 0
+  objectName: Object (size)
   objectSize: 0
   canGrab: 1
   canThrow: 0
   aiming: 0
   damage: 10
+  objSpecificDmg: 0
   throwSpeed: 150
   grabSpeed: 30
+  objSpecificSpeed: 0
   grabbedTransform: {fileID: 0}
   shootPos: {fileID: 0}
   holdingPlayer: 0
   grabbedRotation: {x: 0, y: 0, z: 0}
   shootRotation: {x: 0, y: 0, z: 0}
+  holdPosPadding: {x: 0, y: 0, z: 0}
+  rbCollisionMask:
+    serializedVersion: 2
+    m_Bits: 1088
   disableHitboxVelo: 20
   destroyAfterSec: 3
   effectParticle: {fileID: 3744313135594803531, guid: 0908949f2cf77c1479cad4b994e79353, type: 3}

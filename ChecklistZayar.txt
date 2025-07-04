@@ -62,7 +62,7 @@ Before school festival:
 @ make grenade explosion bigger (buffed)
 @ make aim faster
 @ stop sprinting when aiming
-- jump effect
+@ jump effect
 @ adjust new objects
 - special items
 

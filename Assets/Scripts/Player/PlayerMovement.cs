@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion targetModelRotation;
 
     [Header("Jumping")]
+    [SerializeField] GameObject jumpEffect;
     [SerializeField] float jumpForce = 10f;
     [SerializeField] float jumpCooldown = 0.25f;
     [SerializeField] float airMultiplier = 0.4f;
@@ -222,6 +224,7 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
         sfxPlayer.PlaySFX(0);
+        Instantiate(jumpEffect, transform.position, quaternion.identity);
 
         Invoke(nameof(ResetJump), jumpCooldown);
     }

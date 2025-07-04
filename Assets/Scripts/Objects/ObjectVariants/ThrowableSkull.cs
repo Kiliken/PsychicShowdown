@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ThrowableSkull : ThrowableObject
@@ -64,12 +65,41 @@ public class ThrowableSkull : ThrowableObject
 
     }
 
+
+    protected override void FixedUpdate()
+    {
+        if (!thrown && !canGrab)
+        {
+            // grab
+            if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
+            {
+                rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed));
+            }
+        }
+        else if (thrown && !effectActivated)
+        {
+            if (Vector3.Distance(transform.position, grabbedTransform.position) > 0.5f)
+            {
+                rb.MovePosition(Vector3.MoveTowards(transform.position, player2Pos.position, 2f));
+            }
+        }
+    }
+
+
     public override void ObjectEffect()
     {
         if (effectActivated) return;
 
+        rb.useGravity = true;
+
         Debug.Log("skull hit");
+
         sfxPlayer.PlaySFX(0);
+        if (effectParticle != null)
+        {
+            Instantiate(effectParticle, transform.position, quaternion.identity);
+        }
+
         effectActivated = true;
         //Destroy(this.gameObject);
     }
@@ -77,7 +107,7 @@ public class ThrowableSkull : ThrowableObject
     public override void ThrowObject()
     {
         aiming = false;
-        rb.useGravity = true;
+        //rb.useGravity = true;
 
         ShowHideObject(true, true);
         //model.GetComponent<MeshRenderer>().enabled = true;
@@ -93,6 +123,14 @@ public class ThrowableSkull : ThrowableObject
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        if (thrown)
+        {
+            Debug.Log(collision.gameObject.name);
+            if (((1 << collision.gameObject.layer) & rbCollisionMask.value) != 0)
+            {
+                // break or effect
+                ObjectEffect();
+            }
+        }
     }
 }
