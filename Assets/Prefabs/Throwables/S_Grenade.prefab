@@ -52,7 +52,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4859442534783862867
 MonoBehaviour:
@@ -77,7 +77,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 449942268754428325, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 450872778435669836, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
       propertyPath: m_LocalScale.x
@@ -208,7 +208,7 @@ MonoBehaviour:
   destroyAfterSec: 3
   effectParticle: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}
   explodeTime: 0.5
-  explosionDamage: 1
+  explosionDamage: 2
 --- !u!1001 &2296833048147463960
 PrefabInstance:
   m_ObjectHideFlags: 0

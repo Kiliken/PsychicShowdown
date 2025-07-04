@@ -8,7 +8,7 @@ public class ThrowableGrenade : ThrowableObject
     ExplosionHitbox explosionHitbox;
     [SerializeField] float explodeTime = 2f;
     private float explodeTimer = 0f;
-    public int explosionDamage = 1;
+    public int explosionDamage = 2;
     private bool hit = false;
 
     protected override void Start()

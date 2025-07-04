@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     float mediumZoom = 80f; // for medium object
     float largeZoom = 100f; // for large object
     [SerializeField] float adsZoom = 30f;
-    [SerializeField] float adsSpeed = 120f;
+    [SerializeField] float adsSpeed = 180f; // 120
     [SerializeField] float camSenNormal = 3f;   // camera sensitivity normal
     [SerializeField] float camSenADS = 0.5f;    // camera sensitivity ADS
 
@@ -172,6 +172,8 @@ public class Player : MonoBehaviour
                     camController.RotSpeedX = camController.RotSpeedY = camSenADS;
                     if (holdingObjR)
                         rightObject.ShowHideObject(false, false);
+
+                    if (movementScript.isSprinting) movementScript.isSprinting = false;
                 }
 
                 triggerInUseL = true;
@@ -253,6 +255,8 @@ public class Player : MonoBehaviour
                     camController.RotSpeedX = camController.RotSpeedY = camSenADS;
                     if (holdingObjL)
                         leftObject.ShowHideObject(false, false);
+
+                    if (movementScript.isSprinting) movementScript.isSprinting = false;
                 }
 
                 triggerInUseR = true;

@@ -466,7 +466,7 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   defaultZoom: 60
   adsZoom: 30
-  adsSpeed: 120
+  adsSpeed: 180
   camSenNormal: 0.1
   camSenADS: 0.05
   objPosL: {fileID: 7905273318132535730}
@@ -474,7 +474,7 @@ MonoBehaviour:
   objLayerMask:
     serializedVersion: 2
     m_Bits: 1152
-  hpBar: {fileID: 0}
+  playerPanel: {fileID: 0}
   objDetectionRange: 20
   currentTargetObj: {fileID: 0}
   leftObject: {fileID: 0}
