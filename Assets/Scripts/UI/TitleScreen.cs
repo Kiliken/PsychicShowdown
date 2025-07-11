@@ -16,42 +16,80 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] Transform worldObj;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject settingsPanel;
+    //private GameObject curDefaultButton;
+    private GameObject lastValidSelection;
     [SerializeField] private GameObject firstButton;
     [SerializeField] private GameObject firstSettingsButton;
+    private float navCooldown = 0.2f;
+    private float lastNavTime = 0f;
+
+    private float volume = 0.5f;
+    private float p1Sensitivity = 0.5f;
+    private float p2Sensitivity = 0.5f;
+    private bool p1controlisPS = true;
+    private bool p2contorlisPS = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "AlphaPortFHD";
         Debug.Log(sceneToUse);
-        EventSystem.current.SetSelectedGameObject(firstButton);
-        mainMenuPanel.SetActive(true);
-        settingsPanel.SetActive(false);
+        ShowMainMenuPanel();
+        //EventSystem.current.SetSelectedGameObject(firstButton);
+        //mainMenuPanel.SetActive(true);
+        //curDefaultButton = firstButton;
+        //settingsPanel.SetActive(false);
     }
 
 
     // Update is called once per frame
     private void Update()
     {
+        var current = EventSystem.current.currentSelectedGameObject;
+
+        if (current != null && current != lastValidSelection)
+        {
+
+            lastValidSelection = current;
+        }
+
 
         PlayerInput();
+
+
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastValidSelection);
+        }
+
+        
+        //if (EventSystem.current.currentSelectedGameObject == null) 
+        //{
+        //    EventSystem.current.SetSelectedGameObject(curDefaultButton);
+        //    Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject?.name);
+        //}
+        
     }
 
     private void PlayerInput()
     {
-        float horizontal1 = Input.GetAxisRaw("Horizontal1");
-
         float vertical1 = Input.GetAxisRaw("Vertical1");
-        float horizontal2 = Input.GetAxisRaw("Horizontal2");
-
         float vertical2 = Input.GetAxisRaw("Vertical2");
-        if (vertical1 > 0f || vertical2 > 0f)
+
+        float now = Time.time;
+        if (now - lastNavTime > navCooldown)
         {
-            Navigate(Vector2.up);
-        }
-        else if (vertical1 < 0f || vertical2 < 0f)
-        {
-            Navigate(Vector2.down);
+            if (vertical1 > 0.5f || vertical2 > 0.5f)
+            {
+                Navigate(Vector2.up);
+                lastNavTime = now;
+            }
+            else if (vertical1 < -0.5f || vertical2 < -0.5f)
+            {
+                Navigate(Vector2.down);
+                lastNavTime = now;
+            }
         }
     }
 
@@ -82,6 +120,7 @@ public class TitleScreen : MonoBehaviour
     }
 
     public void LoadPlayScene(){
+        Debug.Log("Loading scene: " + sceneToUse);
         SceneManager.LoadScene(sceneToUse);
     }
 
@@ -92,9 +131,12 @@ public class TitleScreen : MonoBehaviour
 
     public void ShowSettingPanel()
     {
+        //Debug.Log("Showing settings panel");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstSettingsButton);
+        //curDefaultButton = firstSettingsButton;
+        lastValidSelection = firstSettingsButton;
     }
 
     public void ShowMainMenuPanel()
@@ -102,5 +144,38 @@ public class TitleScreen : MonoBehaviour
         settingsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstButton);
+        //curDefaultButton = firstButton;\
+        lastValidSelection = firstButton;
+    }
+
+    public void SetSoundVolume(float value)
+    {
+        volume = value;
+        Debug.Log("Sound volume set to: " + volume);
+
+    }
+
+    public void SetP1Sensitivity(float value)
+    {
+        p1Sensitivity = value;
+        Debug.Log("Player 1 sensitivity set to: " + p1Sensitivity);
+    }
+
+    public void SetP2Sensitivity(float value)
+    {
+        p2Sensitivity = value;
+        Debug.Log("Player 2 sensitivity set to: " + p2Sensitivity);
+    }
+
+    public void SetP1ControlType(bool isPS)
+    {
+        p1controlisPS = isPS;
+        Debug.Log("Player 1 control type set to: " + (p1controlisPS ? "PlayStation" : "Xbox"));
+    }
+
+    public void SetP2ControlType(bool isPS)
+    {
+        p2contorlisPS = isPS;
+        Debug.Log("Player 2 control type set to: " + (p2contorlisPS ? "PlayStation" : "Xbox"));
     }
 }
