@@ -93,11 +93,11 @@ public class ControlManager : MonoBehaviour
             }
         }
 
-        gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
-        if (playerScript.playerNo == 1)
-            playstation = gameSettings.p1ControllerIsPS;
-        else
-            playstation = gameSettings.p2ControllerIsPS;
+        // gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
+        // if (playerScript.playerNo == 1)
+        //     playstation = gameSettings.p1ControllerIsPS;
+        // else
+        //     playstation = gameSettings.p2ControllerIsPS;
     }
 
     // Update is called once per frame
@@ -109,7 +109,7 @@ public class ControlManager : MonoBehaviour
     public void SetControls(){
         if (playerScript.playerNo == 1)
         {
-            if(!playstation)
+            if(playstation)
             {
                 Debug.Log("Player 1 Playstation controls");
                 playerMovementScript.moveXInput = moveX1_P;
@@ -144,7 +144,7 @@ public class ControlManager : MonoBehaviour
         }
         else
         {
-            if (!playstation)
+            if (playstation)
             {
                 Debug.Log("Player 2 Playstation controls");
                 playerMovementScript.moveXInput = moveX2_P;
