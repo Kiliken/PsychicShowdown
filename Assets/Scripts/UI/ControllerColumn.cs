@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
 {
@@ -16,10 +17,13 @@ public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
 
     private float lastInputTime;
     private float inputCooldown = 0.3f;
+    private TitleScreen ts;
+    [SerializeField] int playerIndex; // 1 for Player 1, 2 for Player 2
 
     void Start()
     {
         UpdateVisuals();
+        ts = FindObjectOfType<TitleScreen>();
     }
 
     void Update()
@@ -37,20 +41,16 @@ public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
                 {
                     selectedIndex = 1;
                     lastInputTime = Time.time;
+                    ApplySelection();
+                    UpdateVisuals();
                 }
                 else if (h < -0.5f)
                 {
                     selectedIndex = 0;
                     lastInputTime = Time.time;
+                    ApplySelection();
+                    UpdateVisuals();
                 }
-
-                UpdateVisuals();
-            }
-
-            if (Input.GetButtonDown("Jump1") || Input.GetButtonDown("Jump2")
-                || Input.GetButtonDown("Jump1X") || Input.GetButtonDown("Jump2X"))
-            {
-                ApplySelection();
             }
         }
     }
@@ -92,6 +92,14 @@ public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
 
     private void ApplySelection()
     {
+        if (selectedIndex == 0)
+        {
+            ts.SetControl(playerIndex, true); // true for PlayStation
+        }
+        else if (selectedIndex == 1)
+        {
+            ts.SetControl(playerIndex, false); // false for Xbox
+        }
         Debug.Log($"Platform selected: {(selectedIndex == 0 ? "PlayStation" : "Xbox")}");
     }
 

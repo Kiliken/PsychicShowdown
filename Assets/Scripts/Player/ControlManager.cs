@@ -93,11 +93,11 @@ public class ControlManager : MonoBehaviour
             }
         }
 
-        // gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
-        // if (playerScript.playerNo == 1)
-        //     playstation = gameSettings.p1ControllerIsPS;
-        // else
-        //     playstation = gameSettings.p2ControllerIsPS;
+        gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
+        if (playerScript.playerNo == 1)
+            playstation = gameSettings.p1ControllerIsPS;
+        else
+            playstation = gameSettings.p2ControllerIsPS;
     }
 
     // Update is called once per frame

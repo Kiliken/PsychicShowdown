@@ -1285,6 +1285,7 @@ MonoBehaviour:
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   hoveredColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.69803923}
   normalColor: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 0.29803923}
+  playerIndex: 2
 --- !u!1 &415781983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3213,6 +3214,7 @@ MonoBehaviour:
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   hoveredColor: {r: 0.2754717, g: 0.2754717, b: 0.2754717, a: 0.7}
   normalColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0.3}
+  playerIndex: 1
 --- !u!1 &1095421536
 GameObject:
   m_ObjectHideFlags: 0

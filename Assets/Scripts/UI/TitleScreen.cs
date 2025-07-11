@@ -169,6 +169,18 @@ public class TitleScreen : MonoBehaviour
 
     }
 
+    public void SetControl(int p, bool isPS)
+    {
+
+        if (p == 1)
+        {
+            SetP1ControlType(isPS);
+        }
+        else if (p == 2)
+        {
+            SetP2ControlType(isPS);
+        }
+    }
     public void SetP1Sensitivity(float value)
     {
         p1Sensitivity = value;
