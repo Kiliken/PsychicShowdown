@@ -109,7 +109,7 @@ public class ControlManager : MonoBehaviour
     public void SetControls(){
         if (playerScript.playerNo == 1)
         {
-            if(playstation)
+            if(!playstation)
             {
                 Debug.Log("Player 1 Playstation controls");
                 playerMovementScript.moveXInput = moveX1_P;
@@ -144,7 +144,7 @@ public class ControlManager : MonoBehaviour
         }
         else
         {
-            if (playstation)
+            if (!playstation)
             {
                 Debug.Log("Player 2 Playstation controls");
                 playerMovementScript.moveXInput = moveX2_P;
