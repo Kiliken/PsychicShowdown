@@ -29,6 +29,10 @@ public class TitleScreen : MonoBehaviour
     private bool p1controlisPS = true;
     private bool p2contorlisPS = true;
 
+    [SerializeField] private Slider soundSlider;
+    [SerializeField] private Slider p1SensitivitySlider;
+    [SerializeField] private Slider p2SensitivitySlider;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,13 @@ public class TitleScreen : MonoBehaviour
         //mainMenuPanel.SetActive(true);
         //curDefaultButton = firstButton;
         //settingsPanel.SetActive(false);
+        soundSlider.onValueChanged.AddListener(SetSoundVolume);
+        SetSoundVolume(soundSlider.value);
+        p1SensitivitySlider.onValueChanged.AddListener(SetP1Sensitivity);
+        SetP1Sensitivity(p1SensitivitySlider.value);
+        p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
+        SetP2Sensitivity(p2SensitivitySlider.value);
+
     }
 
 
