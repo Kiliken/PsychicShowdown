@@ -132,7 +132,7 @@ public class ThrowableObject : MonoBehaviour
     }
 
 
-    public void GrabObject(Transform posTransform, Transform shootTransform, int player)
+    public virtual void GrabObject(Transform posTransform, Transform shootTransform, int player)
     {
         if (objectSize == 2)
         {

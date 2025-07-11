@@ -7,6 +7,7 @@ public class ThrowableSkull : ThrowableObject
 {
     Transform player1Pos;
     Transform player2Pos;
+    Transform targetPos;
 
 
     // Start is called before the first frame update
@@ -80,7 +81,7 @@ public class ThrowableSkull : ThrowableObject
         {
             if (Vector3.Distance(transform.position, grabbedTransform.position) > 0.5f)
             {
-                rb.MovePosition(Vector3.MoveTowards(transform.position, player2Pos.position, 2f));
+                rb.MovePosition(Vector3.MoveTowards(transform.position, targetPos.position, 2f));
             }
         }
     }
@@ -119,6 +120,15 @@ public class ThrowableSkull : ThrowableObject
         if (highlightEffect)
             highlightEffect.SetActive(false);
         thrown = true;
+    }
+
+    public override void GrabObject(Transform posTransform, Transform shootTransform, int player)
+    {
+        base.GrabObject(posTransform, shootTransform, player);
+        if (holdingPlayer == 1)
+            targetPos = player2Pos;
+        else
+            targetPos = player1Pos;
     }
 
     protected override void OnCollisionEnter(Collision collision)

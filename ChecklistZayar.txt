@@ -55,8 +55,8 @@ Before school festival:
 @ make items easier to pick up (box cast, highlight)
 @ show object name under crosshair
 @ fix object text color
+@ adjust camera offset according to object size
 - adjust object sizes
-- adjust camera offset according to object size
 - adjust player move speed, etc
 
 @ make grenade explosion bigger (buffed)
