@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Alpha/TitleScreen.unity
     guid: 4d177a49123d6c849873b01b4352d54d
   - enabled: 1
-    path: Assets/Scenes/Alpha/AlphaPortFHD.unity
-    guid: 04fbbd362d649cb40b756b1a69660fee
-  - enabled: 1
-    path: Assets/Scenes/Alpha/AlphaPort.unity
-    guid: 6aba012bff7f5be44a96edc4454aa48b
+    path: Assets/Scenes/Beta/BetaPortFHD.unity
+    guid: 9c1c508a11001fc43b08997bd136332d
   - enabled: 1
     path: Assets/Scenes/Alpha/EndAndRestart.unity
     guid: 07af084225e4aaa4c9ee41b798d14b5c

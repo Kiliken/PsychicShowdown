@@ -100,7 +100,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   seed: 10
-  offset: {x: 28.4, y: 0}
+  offset: {x: 0, y: 0}
   octaves: 4
   persistence: 0.5
   lacunarity: 2
@@ -117,4 +117,5 @@ MonoBehaviour:
   - {fileID: 3420252350212449942, guid: 8e343b2d212c8534b810adc49a3c41a6, type: 3}
   - {fileID: 6158476659521676308, guid: 4cdb7f8263229ce4a999f6ab3891620c, type: 3}
   - {fileID: 3420252350212449942, guid: b3f880142ad28184686670244050d26c, type: 3}
+  - {fileID: 4170002303778691914, guid: ffe67a03d07aa064cb9a1a499d5dbd99, type: 3}
   grassPrefab: {fileID: 2490552829948126379, guid: cb959446dea53314bb2c7067d638965d, type: 3}

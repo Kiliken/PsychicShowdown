@@ -212,7 +212,7 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            thisObj = Instantiate(prefabs[Random.Range(7, 9)], hit.point, Quaternion.identity);
+                            thisObj = Instantiate(prefabs[Random.Range(7, 10)], hit.point, Quaternion.identity);
                         }
                         break;
 
