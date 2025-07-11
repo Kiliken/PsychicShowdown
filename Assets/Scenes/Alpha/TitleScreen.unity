@@ -2321,6 +2321,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &681201748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3154204760724158937, guid: c3cf506d8065ae445acd660823c58648, type: 3}
+  m_PrefabInstance: {fileID: 1282497149}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938d3b59ad0aace4b807c41d72dfcc93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &717852892
 GameObject:
   m_ObjectHideFlags: 0
@@ -4512,6 +4523,7 @@ MonoBehaviour:
   soundSlider: {fileID: 415781985}
   p1SensitivitySlider: {fileID: 532640906}
   p2SensitivitySlider: {fileID: 558868609}
+  gameSettings: {fileID: 681201748}
 --- !u!1 &1543784487
 GameObject:
   m_ObjectHideFlags: 0

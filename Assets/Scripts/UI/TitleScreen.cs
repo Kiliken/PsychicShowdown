@@ -27,17 +27,19 @@ public class TitleScreen : MonoBehaviour
     private float p1Sensitivity = 0.5f;
     private float p2Sensitivity = 0.5f;
     private bool p1controlisPS = true;
-    private bool p2contorlisPS = true;
+    private bool p2controlisPS = true;
 
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider p1SensitivitySlider;
     [SerializeField] private Slider p2SensitivitySlider;
 
+    [SerializeField] private GameSettings gameSettings;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "AlphaPortFHD";
+        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "BetaPortFHD";
         Debug.Log(sceneToUse);
         ShowMainMenuPanel();
         //EventSystem.current.SetSelectedGameObject(firstButton);
@@ -131,6 +133,9 @@ public class TitleScreen : MonoBehaviour
     }
 
     public void LoadPlayScene(){
+        Debug.Log("Settings values: \nvolume:" + volume + "\np1 sensitivity: " + p1Sensitivity + "\np1 Controller:" + (p1controlisPS ? "PlayStation" : "Xbox"
+            + "\np2 sensitivity: " + p2Sensitivity + "\np2 Controller: " + (p2controlisPS ? "PlayStation" : "Xbox")));
+        gameSettings.SetSettings(volume, p1Sensitivity, p1controlisPS, p2Sensitivity, p2controlisPS);
         Debug.Log("Loading scene: " + sceneToUse);
         SceneManager.LoadScene(sceneToUse);
     }
@@ -186,7 +191,7 @@ public class TitleScreen : MonoBehaviour
 
     public void SetP2ControlType(bool isPS)
     {
-        p2contorlisPS = isPS;
-        Debug.Log("Player 2 control type set to: " + (p2contorlisPS ? "PlayStation" : "Xbox"));
+        p2controlisPS = isPS;
+        Debug.Log("Player 2 control type set to: " + (p2controlisPS ? "PlayStation" : "Xbox"));
     }
 }

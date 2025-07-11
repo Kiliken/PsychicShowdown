@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
+    public float soundVolume;
+    public bool p1ControllerIsPS;
+    public float p1Sensitivity;
+    public bool p2ControllerIsPS;
+    public float p2Sensitivity;
+
+
     void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameSettings");
@@ -29,5 +36,14 @@ public class GameSettings : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetSettings(float vol, float p1sen, bool p1con, float p2sen, bool p2con)
+    {
+        soundVolume = vol;
+        p1Sensitivity = p1sen;
+        p2Sensitivity = p2sen;
+        p1ControllerIsPS = p1con;
+        p2ControllerIsPS = p2con;
     }
 }
