@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Unity.UI;
 using UnityEngine.Rendering.UI;
 using UnityEngine.EventSystems;
 using System.Transactions;
-using UnityEditor.UI;
 
 public class TitleScreen : MonoBehaviour
 {

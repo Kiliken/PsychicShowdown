@@ -105,6 +105,7 @@ public class MapGenerator : MonoBehaviour
         GameObject grassHolder = new GameObject("WorldGrass");
         grassHolder.transform.position = Vector3.zero;
         grassHolder.transform.rotation = Quaternion.identity;
+        Quaternion spawnRotation;
         grassHolder.isStatic = true;
         //GRASS
         for (int i = 0; i < 30f; i++)
@@ -123,7 +124,9 @@ public class MapGenerator : MonoBehaviour
                         if (Physics.Raycast(new Vector3(genCursor.x + Random.Range(-5, 5), 50f,genCursor.z + Random.Range(-3,3)), Vector3.down, out hit, Mathf.Infinity, ~ground))
                         {
                             thisObj = Instantiate(grassPrefab, hit.point - Vector3.up * 0.3f, Quaternion.identity);
-                            thisObj.transform.eulerAngles = Vector3.up * Random.Range(0, 360);
+                            //thisObj.transform.eulerAngles = Vector3.up * Random.Range(0, 360);
+                            spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                            thisObj.transform.rotation = spawnRotation;
                             thisObj.transform.parent = grassHolder.transform;
                             ColorUtility.TryParseHtmlString(grassColors[Random.Range(0, grassColors.Length)], out thisColor);
                             propertyBlock.SetColor("_MainColor", thisColor);
@@ -250,22 +253,12 @@ public class MapGenerator : MonoBehaviour
             GenerateObjects();
         }
 
-    }
-
-    private void Update()
-    {
         if (isTitle)
         {
-            offset.y += 0.75f * Time.deltaTime;
-            offset.x += 0.75f * Time.deltaTime;
             GenerateMap();
-
-            if (offset.y >= 100f)
-            {
-                offset.y = 0f;
-                offset.x = 0f;
-            }
+            //GenerateObjects();
         }
+
     }
 }
 

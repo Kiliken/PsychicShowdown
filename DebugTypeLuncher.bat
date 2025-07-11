@@ -22,7 +22,7 @@ set /p commands="[Unity] "
 
 
 if "%commands:~0,5%"=="-land" (
-    set commands=-screen-fullscreen 1 -screen-height 1080 -screen-width 1920 -screen-quality Ultra -scene AlphaPortFHD
+    set commands=-screen-fullscreen 1 -screen-height 1080 -screen-width 1920 -screen-quality Ultra
 )
 
 if "%commands:~0,5%"=="-port" (
