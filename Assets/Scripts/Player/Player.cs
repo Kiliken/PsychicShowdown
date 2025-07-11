@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
+        camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 

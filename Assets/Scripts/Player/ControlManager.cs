@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ControlManager : MonoBehaviour
 {
-    //public bool playstation = true;
+    public bool playstation = true;
     Player playerScript;
     PlayerMovement playerMovementScript;
     CameraController cameraControllerScript;
@@ -87,11 +87,17 @@ public class ControlManager : MonoBehaviour
         for (int i = 0; i < cName.Length; i++)
         {
             Debug.Log(cName[i]);
-            if(cName[i] != "")
+            if (cName[i] != "")
             {
                 currentConnectionCount++;
             }
         }
+
+        gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
+        if (playerScript.playerNo == 1)
+            playstation = gameSettings.p1ControllerIsPS;
+        else
+            playstation = gameSettings.p2ControllerIsPS;
     }
 
     // Update is called once per frame
@@ -103,7 +109,7 @@ public class ControlManager : MonoBehaviour
     public void SetControls(){
         if (playerScript.playerNo == 1)
         {
-            if(gameSettings.p1ControllerIsPS)
+            if(playstation)
             {
                 Debug.Log("Player 1 Playstation controls");
                 playerMovementScript.moveXInput = moveX1_P;
@@ -138,7 +144,7 @@ public class ControlManager : MonoBehaviour
         }
         else
         {
-            if (gameSettings.p2ControllerIsPS)
+            if (playstation)
             {
                 Debug.Log("Player 2 Playstation controls");
                 playerMovementScript.moveXInput = moveX2_P;

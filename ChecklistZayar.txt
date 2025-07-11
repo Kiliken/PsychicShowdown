@@ -64,13 +64,15 @@ Before school festival:
 @ stop sprinting when aiming
 @ jump effect
 @ adjust new objects
-- special items
 
+
+---POST BETA---
+- special items
 - hand animations
 - intro
 - new end screen
 - make barrier/space smaller when the timer reaches a set time (discussion required)
-- dash effect (?)
+- dash effect
 
 Chen:
 @ add a way for UI to be controllable with controller
@@ -88,7 +90,7 @@ Paolo:
 @ shader rework
 @ new terrain generation
 @ grass
-- object spawning
+- object spawning (random, special)
 - add new objects
 
 

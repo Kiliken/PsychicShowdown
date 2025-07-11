@@ -226,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Jump()
+    public void Jump()
     {
         grounded = false;
         hitGround = false;
