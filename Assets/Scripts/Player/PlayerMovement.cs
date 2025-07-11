@@ -25,9 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] GameObject jumpEffect;
-    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float jumpForce = 11f; // 10
     [SerializeField] float jumpCooldown = 0.25f;
     [SerializeField] float airMultiplier = 0.4f;
+    [SerializeField] float fallSpeed = 1.5f;
     private bool canJump = true;
     public int jumpsLeft = 3;
     public int maxJumps = 3;
@@ -199,14 +200,24 @@ public class PlayerMovement : MonoBehaviour
             if (grounded)
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
             else
+            {
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+                if (!grounded && rb.velocity.y < 0f)
+                {
+                    //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 1.05f, rb.velocity.z);
+                    rb.AddForce(Vector3.down * fallSpeed * 10f, ForceMode.Force);
+                    //Debug.Log(rb.velocity.y);
+                }
+            }
+                
         }
     }
 
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;

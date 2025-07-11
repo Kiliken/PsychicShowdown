@@ -420,9 +420,10 @@ MonoBehaviour:
   moveSpeedSprint: 20
   moveSpeedDash: 70
   jumpEffect: {fileID: 2417599410679479793, guid: 701b2b0cb1bbf2048a6dd16fba743c59, type: 3}
-  jumpForce: 10
+  jumpForce: 11
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  fallSpeed: 1.5
   jumpsLeft: 3
   maxJumps: 3
   dashCooldown: 0.4

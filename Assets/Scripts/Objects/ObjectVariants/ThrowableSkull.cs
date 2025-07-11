@@ -45,10 +45,10 @@ public class ThrowableSkull : ThrowableObject
             }
         }
         // if thrown and low velocity, disable hitbox and collider
-        else if (thrown && rb.velocity.magnitude > 0 && rb.velocity.magnitude < disableHitboxVelo)
-        {
-            DisableObject();
-        }
+        // else if (thrown && rb.velocity.magnitude > 0 && rb.velocity.magnitude < disableHitboxVelo && !effectActivated)
+        // {
+        //     DisableObject();
+        // }
         // set object to be destoryed after collision/effect activation
         if (effectActivated)
         {
