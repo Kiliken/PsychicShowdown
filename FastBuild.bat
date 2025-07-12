@@ -4,6 +4,6 @@ if exist "C:\Program Files\Unity\Hub\Editor\2022.3.56f1\Editor\Unity.exe" set un
 if exist "D:\Program Files\Unity\Editor\2022.3.56f1\Editor\Unity.exe" set unity="D:\Program Files\Unity\Editor\2022.3.56f1\Editor\Unity.exe"
 
 
-%unity% -quit -batchmode -projectPath %cd% -buildWindowsPlayer "%cd%\Build\Test\GameTest.exe"
+%unity% -quit -batchmode -projectPath %cd% -buildWindows64Player "%cd%\Build\Test\GameTest.exe"
 
 pause

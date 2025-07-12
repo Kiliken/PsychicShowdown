@@ -29,9 +29,9 @@ public class WinnerDisplay : MonoBehaviour
         else if (GameData.winner == 2)
         {
             winnerText.text = "プレイヤー２勝";
-            winner.GetChild(0).gameObject.SetActive(true);
-            loser.GetChild(1).gameObject.SetActive(true);
-            torii.GetChild(0).gameObject.SetActive(true);
+            winner.GetChild(1).gameObject.SetActive(true);
+            loser.GetChild(0).gameObject.SetActive(true);
+            torii.GetChild(1).gameObject.SetActive(true);
 
         }
         else if (GameData.winner == 0)

@@ -24,6 +24,12 @@ public class GameSettings : MonoBehaviour
         
         QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = 60;
+
+        soundVolume = 0.5f; // Default volume
+        p1Sensitivity = 0.5f; // Default player 1 sensitivity
+        p2Sensitivity = 0.5f; // Default player 2 sensitivity
+        p1ControllerIsPS = false; 
+        p2ControllerIsPS = false; // Default controller type for player 2
     }
 
     // Start is called before the first frame update

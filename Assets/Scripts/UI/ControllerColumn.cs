@@ -12,7 +12,7 @@ public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
     [SerializeField] private Color hoveredColor = new Color(1f, 1f, 1f, 0.7f);
     [SerializeField] private Color normalColor = new Color(1f, 1f, 1f, 0.3f);
 
-    private int selectedIndex = 0; // 0 = PS, 1 = Xbox
+    public int selectedIndex = 0; // 0 = PS, 1 = Xbox
     private int hoveredIndex = -1;
 
     private float lastInputTime;
@@ -55,7 +55,7 @@ public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    void UpdateVisuals()
+    public void UpdateVisuals()
     {
         SetImageState(psImage, 0);
         SetImageState(xboxImage, 1);

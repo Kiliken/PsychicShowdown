@@ -14,10 +14,6 @@ public class SliderColumn : MonoBehaviour, IPointerEnterHandler
     void Start()
     {
         slider = GetComponentInChildren<Slider>();
-        if (slider != null)
-        {
-            slider.value = 0.5f;
-        }
     }
 
     void Update()

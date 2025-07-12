@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
 
     public bool playerActive = true;
     public GameManager gameManager;
+    private GameSettings gameSettings;
 
 
     private void Awake()
@@ -90,6 +91,18 @@ public class Player : MonoBehaviour
             objectText = GameObject.Find("Canvas/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
 
         defaultZoom = smallZoom;
+
+
+        gameSettings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
+        if (playerNo == 1)
+        {
+            camSenNormal = 1f + (gameSettings.p1Sensitivity * 4);
+            
+        } 
+        else if (playerNo == 2)
+        {
+            camSenNormal = 1f + (gameSettings.p2Sensitivity * 4);
+        }
     }
 
 
@@ -362,4 +375,6 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+
 }
