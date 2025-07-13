@@ -66,6 +66,27 @@ Before school festival:
 @ adjust new objects
 
 
+
+Made in Beta
+- object sizes are increased
+- objects are now easier to pick up (new detection, highlighting)
+- camera distance now adjusts to the size of object held
+- sprinting
+- new objects
+- new effects
+- new UI and functions
+- game system adjustments
+- bug fixes
+
+After Beta
+- net play
+- special items
+- hand animations
+- More UI and design components
+- effects
+
+
+
 ---POST BETA---
 - special items
 - hand animations
@@ -78,7 +99,7 @@ Chen:
 @ add a way for UI to be controllable with controller
 @ rework player UI
 - rework main menu
-- rework game over menu
+@ rework game over menu
 - in-game menu (not Pause) for quitting the game
 - options menu
 - UI for objects holding in left and right hands
