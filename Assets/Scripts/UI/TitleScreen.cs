@@ -47,27 +47,30 @@ public class TitleScreen : MonoBehaviour
         //EventSystem.current.SetSelectedGameObject(firstButton);
         //mainMenuPanel.SetActive(true);
         //curDefaultButton = firstButton;
-        //settingsPanel.SetActive(false);
+        //settingsPanel.SetAcitive(false);
         volume = gameSettings.soundVolume;
+        Debug.Log("Volume set to at begin: " + volume);
         p1Sensitivity = gameSettings.p1Sensitivity;
         p2Sensitivity = gameSettings.p2Sensitivity;
         p1controlisPS = gameSettings.p1ControllerIsPS;
         p2controlisPS = gameSettings.p2ControllerIsPS;
-        
-
+        soundSlider.value = volume;
+        Debug.Log("Sound slider value set to: " + soundSlider.value);
+        Debug.Log(volume);
+        p1SensitivitySlider.value = gameSettings.p1Sensitivity;
+        p2SensitivitySlider.value = gameSettings.p2Sensitivity;
 
 
         soundSlider.onValueChanged.AddListener(SetSoundVolume);
         p1SensitivitySlider.onValueChanged.AddListener(SetP1Sensitivity);
         p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
 
-        soundSlider.value = volume;
+       
         p1ControllerColumn.selectedIndex = gameSettings.p1ControllerIsPS ? 0 : 1;
         p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
         p1ControllerColumn.UpdateVisuals();
         p2ControllerColumn.UpdateVisuals();
-        p1SensitivitySlider.value = gameSettings.p1Sensitivity;
-        p2SensitivitySlider.value = gameSettings.p2Sensitivity;
+        SetSoundVolume(volume);
 
 
         ShowMainMenuPanel();
