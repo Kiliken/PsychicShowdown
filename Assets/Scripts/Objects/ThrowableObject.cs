@@ -253,6 +253,17 @@ public class ThrowableObject : MonoBehaviour
         Debug.Log("object disabled");
     }
 
+
+    public void RemoveObject()
+    {
+        DisableObject();
+        effectActivated = true;
+
+        // ADD DISAPPEAR EFFECT
+        Destroy(this.gameObject);   // remove later
+    }
+
+
     public void ShowHideHighlight(bool show)
     {
         if (!highlightEffect) return;

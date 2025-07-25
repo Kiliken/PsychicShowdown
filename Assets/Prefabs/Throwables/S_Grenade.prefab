@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectID: 0
-  objectName: "\u30B0\u30EC\u30CD\u30FC\u30C9"
+  objectName: GRENADE
   objectSize: 0
   canGrab: 1
   canThrow: 0

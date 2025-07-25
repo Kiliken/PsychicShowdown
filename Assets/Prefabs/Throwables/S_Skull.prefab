@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectID: 0
-  objectName: "\u982D\u9AA8"
+  objectName: SKULL
   objectSize: 0
   canGrab: 1
   canThrow: 0

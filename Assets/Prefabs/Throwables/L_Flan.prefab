@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectID: 0
-  objectName: "\u30D7\u30EA\u30F3"
+  objectName: FLAN
   objectSize: 2
   canGrab: 1
   canThrow: 0
