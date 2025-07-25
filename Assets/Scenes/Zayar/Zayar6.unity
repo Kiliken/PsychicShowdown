@@ -2394,6 +2394,10 @@ PrefabInstance:
       propertyPath: m_VolumeLayerMask.m_Bits
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3874159737026299036, guid: a6e2cfde55f50564da64856b99275765, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4186433665518776946, guid: a6e2cfde55f50564da64856b99275765, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15900673

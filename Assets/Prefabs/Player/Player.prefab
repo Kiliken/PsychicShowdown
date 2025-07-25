@@ -477,7 +477,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   playerPanel: {fileID: 0}
-  objDetectionRange: 20
+  objDetectionRange: 30
   currentTargetObj: {fileID: 0}
   leftObject: {fileID: 0}
   rightObject: {fileID: 0}

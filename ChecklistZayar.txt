@@ -88,22 +88,31 @@ After Beta
 
 
 ---POST BETA---
+@ destroy function item
+@ add explosion to microwave
+- fix grab distance bug
+@ change item text (English, more readable)
+- add disappear effect for items
 - special items
-- hand animations
-- intro
-- new end screen
-- make barrier/space smaller when the timer reaches a set time (discussion required)
 - dash effect
+- hand animations
+
+
+
 
 Chen:
 @ add a way for UI to be controllable with controller
 @ rework player UI
-- rework main menu
+@ rework main menu
 @ rework game over menu
+@ options menu
 - in-game menu (not Pause) for quitting the game
-- options menu
 - UI for objects holding in left and right hands
 - screen fade
+- intro/count down
+- tutorial screen
+- new end screen?
+
 
 Paolo:
 @ torii gate size
@@ -112,8 +121,9 @@ Paolo:
 @ new terrain generation
 @ grass
 - object spawning (random, special)
+- disappear shader
 - add new objects
-
+- make barrier/space smaller when the timer reaches a set time
 
 
 SPECIAL OBJECTS:

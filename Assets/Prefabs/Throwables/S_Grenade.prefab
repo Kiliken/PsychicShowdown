@@ -52,7 +52,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4859442534783862867
 MonoBehaviour:
@@ -210,7 +210,7 @@ MonoBehaviour:
     m_Bits: 1088
   disableHitboxVelo: 20
   destroyAfterSec: 3
-  effectParticle: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}
+  effectParticle: {fileID: 6191664386755193019, guid: 02a473b18c6b7be4587ec45dc1ee0452, type: 3}
   explodeTime: 0.5
   explosionDamage: 2
 --- !u!1001 &2296833048147463960

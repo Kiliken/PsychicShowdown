@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     PlayerSFXPlayer sfxPlayer;
     ObjHolder objHolder;
     Transform shootPos;
+    Transform detectPos;
     public Transform playerCam;   // camera transform
     Camera cam;     // camera
     CameraController camController;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask objLayerMask; // both object and obstacle (large objects)
     public PlayerPanel playerPanel;
 
-    public float objDetectionRange = 20f;
+    public float objDetectionRange = 30f;   // 20 default
     [SerializeField] GameObject currentTargetObj;    // object currently in player crosshair
     [SerializeField] ThrowableObject leftObject;    // object holding in left
     [SerializeField] ThrowableObject rightObject;    // object holding in right
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
+        detectPos = playerCam.GetChild(1).transform;
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
@@ -97,8 +99,8 @@ public class Player : MonoBehaviour
         if (playerNo == 1)
         {
             camSenNormal = 1f + (gameSettings.p1Sensitivity * 4);
-            
-        } 
+
+        }
         else if (playerNo == 2)
         {
             camSenNormal = 1f + (gameSettings.p2Sensitivity * 4);
@@ -120,13 +122,36 @@ public class Player : MonoBehaviour
     // detect pickable objects in front of player
     private void ObjectDetection()
     {
+        // 
+        // SPHERECAST VISUALIZATION DEBUG
+        Vector3 origin = detectPos.position;
+        Vector3 direction = playerCam.transform.forward;
+        float distance = objDetectionRange;
+        float radius = sphereRadius;
+
+        // For drawing the path of the spherecast
+        Debug.DrawRay(origin, direction * distance, Color.red, 0.1f);
+
+        // Draw multiple wire spheres along the cast path
+        int numSteps = 10;
+        for (int i = 0; i <= numSteps; i++)
+        {
+            float step = (float)i / numSteps;
+            Vector3 point = origin + direction * (distance * step);
+            DebugExtension.DebugWireSphere(point, Color.yellow, radius, 0.1f);
+        }
+
         // object detection
         RaycastHit hit;
-        if (Physics.SphereCast(shootPos.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
+        if (Physics.SphereCast(detectPos.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
             if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
             {
+                if (currentTargetObj)
+                {
+                    currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(false);
+                }
                 currentTargetObj = hit.transform.gameObject;
                 if (currentTargetObj.GetComponent<ThrowableObject>().canGrab && (!leftAiming && !rightAiming))
                 {
