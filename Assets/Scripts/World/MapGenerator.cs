@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Mesh Generator")]
     [SerializeField]
     DrawMode drawMode;
+
+    bool genFlag = false;
 
     [SerializeField]
     int mapWidth;
@@ -49,11 +53,35 @@ public class MapGenerator : MonoBehaviour
     GameObject grassPrefab;
     string[] grassColors = { "#FFFFFF", "#FFEBBD", "#C2FFFF", "#DBB5B7" };
 
+    [NonSerialized]
+    public int objectCount = 0;
+
+    private float maxObjects = 50;
+
+    private Vector3 genCursor;
+    private LayerMask ground;
+    private RaycastHit hit;
+    private MaterialPropertyBlock propertyBlock;
+
+    private GameObject thisObj;
+    private Color thisColor;
+    private float objectHeight = 0;
+
+    private float timer = 150;
+
+    [SerializeField]
+    private GameObject suddenDeath;
+
     //[SerializeField]
     //TerrainType[] regions;
 
     public void GenerateMap()
     {
+        if (genFlag)
+            return;
+
+        genFlag = true;
+
         float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistence, lacunarity, offset);
         float[,] falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, mapHeight);
 
@@ -67,7 +95,7 @@ public class MapGenerator : MonoBehaviour
                 noiseMap[x, y] = noiseMap[x, y] - falloffMap[x, y];
 
 
-                float currentheight = noiseMap[x, y];
+                //float currentheight = noiseMap[x, y];
                 /*for (int i=0; i < regions.Length; i++)
                 {
                     if(currentheight <= regions[i].height)
@@ -86,21 +114,14 @@ public class MapGenerator : MonoBehaviour
         //    display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
         else if (drawMode == DrawMode.Mesh)
             display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve)); // TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight)
-        //else if (drawMode == DrawMode.ColorMap)
+                                                                                                                  //else if (drawMode == DrawMode.ColorMap)
 
+        genFlag = false;
     }
 
     public void GenerateObjects()
     {
         Random.InitState(seed);
-        Vector3 genCursor = Vector3.zero;
-        LayerMask ground = LayerMask.NameToLayer("Ground");
-        RaycastHit hit;
-        MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
-
-        GameObject thisObj;
-        Color thisColor = Color.white;
-        float objectHeight = 0;
 
         GameObject grassHolder = new GameObject("WorldGrass");
         grassHolder.transform.position = Vector3.zero;
@@ -121,7 +142,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     for (int j = 0; j < 20f; j++)
                     {
-                        if (Physics.Raycast(new Vector3(genCursor.x + Random.Range(-5, 5), 50f,genCursor.z + Random.Range(-3,3)), Vector3.down, out hit, Mathf.Infinity, ~ground))
+                        if (Physics.Raycast(new Vector3(genCursor.x + Random.Range(-5, 5), 50f, genCursor.z + Random.Range(-3, 3)), Vector3.down, out hit, Mathf.Infinity, ~ground))
                         {
                             thisObj = Instantiate(grassPrefab, hit.point - Vector3.up * 0.3f, Quaternion.identity);
                             //thisObj.transform.eulerAngles = Vector3.up * Random.Range(0, 360);
@@ -133,7 +154,7 @@ public class MapGenerator : MonoBehaviour
                             thisObj.GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
                     }
-                    
+
                 }
                 else i--;
 
@@ -142,16 +163,23 @@ public class MapGenerator : MonoBehaviour
 
         //Debug.Log(genCursor);
 
-        for (int i = 0; i < 50f; i++)
+        for (int i = 0; i < maxObjects; i++)
         {
-            
-            genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
+            SpanwObject();
+        }
+
+    }
+
+    private void SpanwObject()
+    {
+        genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
 
             if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
             {
                 int rand;
                 rand = Random.Range(0, 2);
                 objectHeight = 50f - hit.distance;
+                objectCount++;
                 switch (true)
                 {
                     case true when (objectHeight < 2f):
@@ -165,7 +193,7 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            thisObj = Instantiate(prefabs[Random.Range(1,3)], hit.point, Quaternion.identity);
+                            thisObj = Instantiate(prefabs[Random.Range(1, 3)], hit.point, Quaternion.identity);
                             propertyBlock.SetColor("_BaseColor", Color.gray);
                             thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                         }
@@ -221,10 +249,6 @@ public class MapGenerator : MonoBehaviour
 
                 }
             }
-        }
-
-        
-
     }
 
     private void OnValidate()
@@ -247,6 +271,11 @@ public class MapGenerator : MonoBehaviour
     {
         //seed = Random.Range(6, 4587);
 
+        genCursor = Vector3.zero;
+        ground = LayerMask.NameToLayer("Ground");
+        propertyBlock = new MaterialPropertyBlock();
+        thisColor = Color.white;
+
         if (!isTitle)
         {
             GenerateMap();
@@ -256,9 +285,50 @@ public class MapGenerator : MonoBehaviour
         if (isTitle)
         {
             GenerateMap();
-            //GenerateObjects();
         }
 
+    }
+
+    private void Update()
+    {
+        if (!isTitle)
+        {
+            
+            if (timer > 30)
+            {
+                timer -= Time.deltaTime;
+
+                if (timer < 90 && suddenDeath.activeSelf == false) suddenDeath.SetActive(true);
+
+                if (suddenDeath.activeSelf == true)
+                {
+                    suddenDeath.transform.localScale -= Vector3.one * 100 * Time.deltaTime;
+                    generatorLimit -= Time.deltaTime;
+                    maxObjects -= Time.deltaTime;
+                }
+                
+            }
+
+
+            if (objectCount < maxObjects)
+            {
+                SpanwObject();
+            }
+        }
+
+
+        if (isTitle)
+        {
+            offset.y += 0.75f * Time.deltaTime;
+            offset.x += 0.75f * Time.deltaTime;
+            GenerateMap();
+
+            if (offset.y >= 100f)
+            {
+                offset.y = 0f;
+                offset.x = 0f;
+            }
+        }
     }
 }
 
