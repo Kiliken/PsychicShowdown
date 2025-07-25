@@ -22,6 +22,7 @@ public class ControlManager : MonoBehaviour
     private string grabThrowLeftBtn1_P = "GrabThrowL1";
     private string grabThrowRightBtn1_P = "GrabThrowR1";
     private string aimCancelBtn1_P = "AimCancel1";
+    private string pauseBtn1_P = "Pause1";
     // private string blockL1_P = "BlockL1";
     // private string blockR1_P = "BlockR1";
 
@@ -37,6 +38,7 @@ public class ControlManager : MonoBehaviour
     private string grabThrowLeftBtn2_P = "GrabThrowL2";
     private string grabThrowRightBtn2_P = "GrabThrowR2";
     private string aimCancelBtn2_P = "AimCancel2";
+    private string pauseBtn2_P = "Pause2";
     // private string blockL2_P = "BlockL2";
     // private string blockR2_P = "BlockR2";
 
@@ -52,6 +54,7 @@ public class ControlManager : MonoBehaviour
     private string grabThrowLeftBtn1_X = "GrabThrowL1X";
     private string grabThrowRightBtn1_X = "GrabThrowR1X";
     private string aimCancelBtn1_X = "AimCancel1X";
+    private string pauseBtn1_X = "Pause1X";
     // private string blockL1_X = "BlockL1X";
     // private string blockR1_X = "BlockR1X";
 
@@ -67,8 +70,12 @@ public class ControlManager : MonoBehaviour
     private string grabThrowLeftBtn2_X = "GrabThrowL2X";
     private string grabThrowRightBtn2_X = "GrabThrowR2X";
     private string aimCancelBtn2_X = "AimCancel2X";
+    private string pauseBtn2_X = "Pause2X";
     // private string blockL2_X = "BlockL2X";
     // private string blockR2_X = "BlockR2X";
+
+
+
 
 
     void Awake(){
@@ -186,12 +193,6 @@ public class ControlManager : MonoBehaviour
 
 
 
-
-
-
-
-
-
         if (playstation)
         {
             if (playerScript.playerNo == 1)
@@ -208,6 +209,7 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_P;
                 playerScript.grabThrowRightBtn = grabThrowRightBtn1_P;
                 playerScript.aimCancelBtn = aimCancelBtn1_P;
+                playerScript.pauseBtn = pauseBtn1_P;
             }
             else
             {
@@ -223,6 +225,7 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_P;
                 playerScript.grabThrowRightBtn = grabThrowRightBtn2_P;
                 playerScript.aimCancelBtn = aimCancelBtn2_P;
+                playerScript.pauseBtn = pauseBtn2_P;
             }
             playerScript.triggerNegative = -1;
         }
@@ -242,6 +245,7 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_X;
                 playerScript.grabThrowRightBtn = grabThrowRightBtn1_X;
                 playerScript.aimCancelBtn = aimCancelBtn1_X;
+                playerScript.pauseBtn = pauseBtn1_X;
             }
             else
             {
@@ -257,6 +261,7 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_X;
                 playerScript.grabThrowRightBtn = grabThrowRightBtn2_X;
                 playerScript.aimCancelBtn = aimCancelBtn2_X;
+                playerScript.pauseBtn = pauseBtn2_X;
             }
             playerScript.triggerNegative = 0;
         }

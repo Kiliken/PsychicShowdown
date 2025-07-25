@@ -54,12 +54,15 @@ public class Player : MonoBehaviour
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
+    public string pauseBtn = "Pause1"; // pause button for player 1
     public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
 
     public bool playerActive = true;
     public GameManager gameManager;
     private GameSettings gameSettings;
 
+
+    InGameMenu pauseMenu; // reference to the pause menu script
 
     private void Awake()
     {
@@ -78,6 +81,7 @@ public class Player : MonoBehaviour
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
+        pauseMenu = GameObject.Find("GameUI").GetComponent<InGameMenu>();
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
@@ -86,9 +90,9 @@ public class Player : MonoBehaviour
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 
         if (playerNo == 1)
-            objectText = GameObject.Find("Canvas/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
         else
-            objectText = GameObject.Find("Canvas/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
 
         defaultZoom = smallZoom;
 
@@ -158,6 +162,9 @@ public class Player : MonoBehaviour
         //Debug.Log(Input.GetAxisRaw(grabThrowLeftBtn));
         // Left Trigger 
         // xbox axis is 0
+
+
+
         if (Input.GetAxisRaw(grabThrowLeftBtn) != triggerNegative && !aimCanceledL)
         {
             if (!triggerInUseL && !rightAiming)
@@ -319,6 +326,23 @@ public class Player : MonoBehaviour
             rightAiming = false;
             camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
         }
+
+        if (Input.GetButtonDown(pauseBtn))
+        {
+            Debug.Log("Pause button pressed for player " + playerNo);
+            if (gameManager.gameStarted)
+            {
+                if (pauseMenu.isPlayerPauseMenuActive(playerNo))
+                {
+                    pauseMenu.HidePauseMenu(playerNo);
+                }
+                else
+                {
+                    pauseMenu.ShowPauseMenu(playerNo);
+                }
+            }
+        }
+
     }
 
     public void ReceiveDamage(int damage)
