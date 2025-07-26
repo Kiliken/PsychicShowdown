@@ -293,7 +293,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (!isTitle)
         {
-            
+            Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
             if (timer > 30)
             {
                 timer -= Time.deltaTime;
@@ -303,8 +303,20 @@ public class MapGenerator : MonoBehaviour
                 if (suddenDeath.activeSelf == true)
                 {
                     suddenDeath.transform.localScale -= Vector3.one * 100 * Time.deltaTime;
-                    generatorLimit -= Time.deltaTime;
-                    maxObjects -= Time.deltaTime;
+                    generatorLimit -= Time.deltaTime * 1f;
+                    maxObjects -= Time.deltaTime * 1f;
+
+                    //delete object outside of the zone
+                    GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
+
+                    for (int i = 0; i < objects.Length; i++)
+                    {
+                        if (Vector3.Distance(Vector3.zero, new Vector3(objects[i].transform.position.x,0f,objects[i].transform.position.z)) >= generatorLimit && objects[i].GetComponent<ThrowableObject>().canGrab)
+                        {
+                            objects[i].GetComponent<ThrowableObject>().RemoveObject();
+                            break;
+                        }
+                    }
                 }
                 
             }
