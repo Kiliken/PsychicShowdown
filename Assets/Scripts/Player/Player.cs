@@ -70,7 +70,16 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         hp = maxHP;
-        
+        movementScript = GetComponent<PlayerMovement>();
+        if (playerNo == 1)
+        {
+            movementScript.isP1 = true;
+
+        }
+        else if (playerNo == 2)
+        {
+            movementScript.isP1 = false;
+        }
     }
 
 
@@ -80,12 +89,12 @@ public class Player : MonoBehaviour
 
         //playerPanel.UpdateHPBar();
         // set up player cam in other scripts
-        movementScript = GetComponent<PlayerMovement>();
+
         movementScript.playerCam = playerCam;
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
-        pauseMenu = GameObject.Find("GameUI").GetComponent<InGameMenu>();
+        pauseMenu = GameObject.Find("PauseScreens").GetComponent<InGameMenu>();
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
@@ -94,9 +103,9 @@ public class Player : MonoBehaviour
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 
         if (playerNo == 1)
-            objectText = GameObject.Find("GameUI/P1UICanvas/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
         else
-            objectText = GameObject.Find("GameUI/P2UICanvas/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
 
         defaultZoom = smallZoom;
 
@@ -105,12 +114,15 @@ public class Player : MonoBehaviour
         if (playerNo == 1)
         {
             camSenNormal = 1f + (gameSettings.p1Sensitivity * 4);
+            movementScript.isP1 = true;
             
         } 
         else if (playerNo == 2)
         {
             camSenNormal = 1f + (gameSettings.p2Sensitivity * 4);
+            movementScript.isP1 = false;
         }
+
     }
 
 
