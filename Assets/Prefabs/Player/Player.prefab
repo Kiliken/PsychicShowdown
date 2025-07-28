@@ -438,12 +438,12 @@ MonoBehaviour:
   dashStopPadding: 0.5
   dashCollisionMask:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 17472
   isSprinting: 0
   playerHeight: 2.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   grounded: 0
   hitGround: 0
   maxSlopeAngle: 40

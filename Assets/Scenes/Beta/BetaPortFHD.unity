@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 656964002}
   - component: {fileID: 656964001}
   - component: {fileID: 656964000}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: mapLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2389,7 +2389,7 @@ GameObject:
   - component: {fileID: 1076854868}
   - component: {fileID: 1076854867}
   - component: {fileID: 1076854866}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: suddenDeath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2519,7 +2519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314166748779640681, guid: a6e2cfde55f50564da64856b99275765, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 12287
+      value: 28671
       objectReference: {fileID: 0}
     - target: {fileID: 4314166748779640681, guid: a6e2cfde55f50564da64856b99275765, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
@@ -3877,7 +3877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: dashCollisionMask.m_Bits
-      value: 1088
+      value: 17472
       objectReference: {fileID: 0}
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: hp

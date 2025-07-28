@@ -210,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
                     //Debug.Log(rb.velocity.y);
                 }
             }
-                
+
         }
     }
 
@@ -309,6 +309,48 @@ public class PlayerMovement : MonoBehaviour
         if (disableGravityDuringDash) rb.useGravity = true;
         isDashing = false;
         playerHurtbox.SetActive(true); // re-enable hurtbox
+
+        Invoke(nameof(ResetDash), dashCooldown);
+    }
+
+    // OLD DASH
+    private IEnumerator DashCoroutine1()
+    {
+        canDash = false;
+        isDashing = true;
+        dashesLeft--;
+
+        Vector3 direction = moveDirection.normalized;
+        if (direction == Vector3.zero) direction = playerModel.transform.forward;   // dash into facing direction if no movement
+
+        Vector3 start = rb.position;
+        Vector3 target = start + direction * maxDashDistance;
+
+        // raycast into dashing direction and check if there is an object
+        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
+        {
+            target = hit.point - direction * dashStopPadding;
+        }
+
+        float elapsed = 0f;
+        float duration = dashDuration;
+
+        if (disableGravityDuringDash) rb.useGravity = false;
+        if (resetVelocityOnDash) rb.velocity = Vector3.zero;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            Vector3 newPos = Vector3.Lerp(start, target, t);
+            rb.MovePosition(newPos);
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.MovePosition(target);
+
+        if (disableGravityDuringDash) rb.useGravity = true;
+        isDashing = false;
 
         Invoke(nameof(ResetDash), dashCooldown);
     }

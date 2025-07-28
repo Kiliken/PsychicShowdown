@@ -90,7 +90,7 @@ After Beta
 ---POST BETA---
 @ destroy function item
 @ add explosion to microwave
-- fix grab distance bug
+@ fix grab distance bug
 @ change item text (English, more readable)
 - add disappear effect for items
 - special items
