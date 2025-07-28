@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +12,21 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject p1PauseMenu;
     [SerializeField] private GameObject p2PauseMenu;
 
+    [SerializeField] private EventSystemUpdate p1EventSystem;
+    [SerializeField] private EventSystemUpdate p2EventSystem;
+
+    [SerializeField] private GameObject p1firstSelected;
+    [SerializeField] private GameObject p2firstSelected;
+
     // Start is called before the first frame update
     void Start()
     {
         p1PauseMenu.SetActive(false);
         p2PauseMenu.SetActive(false);
+        GameObject p1ES = GameObject.Find("EventSystemP1");
+        GameObject p2ES = GameObject.Find("EventSystemP2");
+        p1EventSystem = p1ES.GetComponent<EventSystemUpdate>();
+        p2EventSystem = p2ES.GetComponent<EventSystemUpdate>();
     }
 
     // Update is called once per frame
@@ -31,12 +42,18 @@ public class InGameMenu : MonoBehaviour
             Debug.Log("Showing pause menu for Player 1");
             p1PauseMenu.SetActive(true);
             isP1MenuActive = true;
+            EventSystemUpdate eventSystem = p1EventSystem;
+            eventSystem.SetSelectedGameObject(null); // clear selection
+            eventSystem.SetSelectedGameObject(p1firstSelected);
         }
         else if (playerNo == 2)
         {
             Debug.Log("Showing pause menu for Player 2");
             p2PauseMenu.SetActive(true);
             isP2MenuActive = true;
+            EventSystemUpdate eventSystem = p2EventSystem;
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(p2firstSelected);
         }
 
     }

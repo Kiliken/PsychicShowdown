@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class HoverOnlyButton : Button
 {
-    private GameSettings gs;
+    protected GameSettings gs;
 
     protected override void Start()
     {
@@ -62,7 +62,7 @@ public class HoverOnlyButton : Button
         }
     }
 
-    void TriggerClick()
+    protected void TriggerClick()
     {
 
         onClick.Invoke();

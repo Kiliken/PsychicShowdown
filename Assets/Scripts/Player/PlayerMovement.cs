@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -72,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     public string jumpBtn = "Jump1";
     public string dashBtn = "Dash1";
     public string sprintBtn = "Sprint1";
-
+    public bool inputActive = true;
 
     void Start()
     {
@@ -83,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
         playerHurtbox = transform.Find("Hurtbox").gameObject;
+        inputActive = true;
     }
 
 
@@ -98,7 +101,11 @@ public class PlayerMovement : MonoBehaviour
                 jumpsLeft = maxJumps;
             }
 
-            PlayerInput();
+            if(inputActive)
+            {
+                PlayerInput();
+            }
+            
 
             if (dashesLeft != maxDashes)
             {
@@ -113,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    
 
     private void FixedUpdate()
     {
