@@ -8,18 +8,18 @@ public class ThrowableFlan : ThrowableObject
     [SerializeField] protected LayerMask jumpCollisionMask;
 
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
+    // // Start is called before the first frame update
+    // protected override void Start()
+    // {
 
-    }
+    // }
 
 
-    // Update is called once per frame
-    protected override void Update()
-    {
+    // // Update is called once per frame
+    // protected override void Update()
+    // {
 
-    }
+    // }
 
 
     protected override void OnCollisionEnter(Collision collision)
@@ -31,7 +31,7 @@ public class ThrowableFlan : ThrowableObject
             if (collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
             {
                 // only make player jump if they are colliding on the top
-                if (collision.gameObject.transform.position.y > transform.position.y)
+                if (collision.gameObject.transform.position.y > transform.position.y + 2)
                 {
                     jumpingPlayer = collision.gameObject.GetComponent<PlayerMovement>();
                     jumpingPlayer.Jump(true);

@@ -25,6 +25,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186755651062854309, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -99,13 +111,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectID: 0
-  objectName: FLAN
+  objectName: PUDDING
   objectSize: 2
   canGrab: 1
   canThrow: 0
   aiming: 0
-  damage: 1
-  objSpecificDmg: 0
+  damage: 2
+  objSpecificDmg: 1
   throwSpeed: 120
   grabSpeed: 0.7
   objSpecificSpeed: 0

@@ -3958,7 +3958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2301223929033686733, guid: 143da52e6fb224b4baaefeea968d6f1b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6468864782148127530, guid: 143da52e6fb224b4baaefeea968d6f1b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3966,7 +3966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6468864782148127530, guid: 143da52e6fb224b4baaefeea968d6f1b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.42634
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 6468864782148127530, guid: 143da52e6fb224b4baaefeea968d6f1b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4609,6 +4609,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3154204760724158937, guid: c3cf506d8065ae445acd660823c58648, type: 3}
+      propertyPath: p1ControllerIsPS
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154204760724158937, guid: c3cf506d8065ae445acd660823c58648, type: 3}
+      propertyPath: p2ControllerIsPS
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4444781120343858787, guid: c3cf506d8065ae445acd660823c58648, type: 3}
       propertyPath: m_Name
       value: GameSettings

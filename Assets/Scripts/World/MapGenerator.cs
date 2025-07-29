@@ -174,81 +174,81 @@ public class MapGenerator : MonoBehaviour
     {
         genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
 
-            if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
+        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
+        {
+            int rand;
+            rand = Random.Range(0, 2);
+            objectHeight = 50f - hit.distance;
+            objectCount++;
+            switch (true)
             {
-                int rand;
-                rand = Random.Range(0, 2);
-                objectHeight = 50f - hit.distance;
-                objectCount++;
-                switch (true)
-                {
-                    case true when (objectHeight < 2f):
-                        //grass
-                        if (rand != 0)
-                        {
-                            thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            ColorUtility.TryParseHtmlString("#503D35", out thisColor);
-                            propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
-                        else
-                        {
-                            thisObj = Instantiate(prefabs[Random.Range(1, 3)], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.gray);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
+                case true when (objectHeight < 2f):
+                    //grass
+                    if (rand != 0)
+                    {
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        ColorUtility.TryParseHtmlString("#503D35", out thisColor);
+                        propertyBlock.SetColor("_BaseColor", thisColor);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
+                    else
+                    {
+                        thisObj = Instantiate(prefabs[Random.Range(1, 3)], hit.point, Quaternion.identity);
+                        propertyBlock.SetColor("_BaseColor", Color.gray);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
 
-                        break;
-                    case true when (objectHeight < 6f):
-                        // sand
+                    break;
+                case true when (objectHeight < 6f):
+                    // sand
 
-                        if (rand != 0)
-                        {
-                            thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            ColorUtility.TryParseHtmlString("#716749", out thisColor);
-                            propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
-                        else
-                        {
-                            thisObj = Instantiate(prefabs[Random.Range(3, 5)], hit.point, Quaternion.identity);
-                            ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
-                            propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
-                        break;
-                    case true when (objectHeight < 22f):
-                        //forest
-                        if (rand != 0)
-                        {
-                            thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            ColorUtility.TryParseHtmlString("#39483c", out thisColor);
-                            propertyBlock.SetColor("_BaseColor", thisColor);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
-                        else
-                        {
-                            thisObj = Instantiate(prefabs[Random.Range(5, 7)], hit.point, Quaternion.identity);
-                            //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
-                            //propertyBlock.SetColor("_BaseColor", thisColor);
-                            //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
-                        break;
-                    default:
-                        if (rand != 0)
-                        {
-                            thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
-                            propertyBlock.SetColor("_BaseColor", Color.gray);
-                            thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
-                        }
-                        else
-                        {
-                            thisObj = Instantiate(prefabs[Random.Range(7, 10)], hit.point, Quaternion.identity);
-                        }
-                        break;
+                    if (rand != 0)
+                    {
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        ColorUtility.TryParseHtmlString("#716749", out thisColor);
+                        propertyBlock.SetColor("_BaseColor", thisColor);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
+                    else
+                    {
+                        thisObj = Instantiate(prefabs[Random.Range(3, 5)], hit.point, Quaternion.identity);
+                        ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
+                        propertyBlock.SetColor("_BaseColor", thisColor);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
+                    break;
+                case true when (objectHeight < 22f):
+                    //forest
+                    if (rand != 0)
+                    {
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        ColorUtility.TryParseHtmlString("#39483c", out thisColor);
+                        propertyBlock.SetColor("_BaseColor", thisColor);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
+                    else
+                    {
+                        thisObj = Instantiate(prefabs[Random.Range(5, 7)], hit.point, Quaternion.identity);
+                        //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
+                        //propertyBlock.SetColor("_BaseColor", thisColor);
+                        //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
+                    break;
+                default:
+                    if (rand != 0)
+                    {
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        propertyBlock.SetColor("_BaseColor", Color.gray);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                    }
+                    else
+                    {
+                        thisObj = Instantiate(prefabs[Random.Range(7, 10)], hit.point, Quaternion.identity);
+                    }
+                    break;
 
-                }
             }
+        }
     }
 
     private void OnValidate()
@@ -311,14 +311,17 @@ public class MapGenerator : MonoBehaviour
 
                     for (int i = 0; i < objects.Length; i++)
                     {
-                        if (Vector3.Distance(Vector3.zero, new Vector3(objects[i].transform.position.x,0f,objects[i].transform.position.z)) >= generatorLimit && objects[i].GetComponent<ThrowableObject>().canGrab)
+                        if (objects[i].GetComponent<ThrowableObject>())
                         {
-                            objects[i].GetComponent<ThrowableObject>().RemoveObject();
-                            break;
+                            if (Vector3.Distance(Vector3.zero, new Vector3(objects[i].transform.position.x, 0f, objects[i].transform.position.z)) >= generatorLimit && objects[i].GetComponent<ThrowableObject>().canGrab)
+                            {
+                                objects[i].GetComponent<ThrowableObject>().RemoveObject();
+                                break;
+                            }
                         }
                     }
                 }
-                
+
             }
 
 
