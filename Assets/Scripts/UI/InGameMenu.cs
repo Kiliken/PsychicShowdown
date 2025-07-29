@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InGameMenu : MonoBehaviour
 {
@@ -86,5 +87,12 @@ public class InGameMenu : MonoBehaviour
             return isP2MenuActive;
         }
         return false;
+    }
+
+
+    public void QuitToMainMenu()
+    {
+        Debug.Log("Returning to Main Menu...");
+        SceneManager.LoadScene("TitleScreen");
     }
 }

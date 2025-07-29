@@ -8,18 +8,20 @@ public class HoverOnlyButtonMulti : HoverOnlyButton
 {
     public EventSystem targetEventSystem;
     public bool isP1;
-    
+
 
     protected override void Start()
     {
         base.Start();
+        string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
+
         if (targetEventSystem == null)
         {
-            string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
             GameObject found = GameObject.Find(targetName);
             if (found != null)
             {
                 targetEventSystem = found.GetComponent<EventSystem>();
+                Debug.Log($"{gameObject.name} found its EventSystem: {targetEventSystem.name}");
             }
             else
             {
@@ -28,42 +30,70 @@ public class HoverOnlyButtonMulti : HoverOnlyButton
         }
     }
 
+
     void Update()
     {
-        void Update()
+        if (targetEventSystem == null)
         {
-            if (targetEventSystem == null || targetEventSystem.currentSelectedGameObject == null)
-                return;
+            Debug.LogWarning($"{gameObject.name}: targetEventSystem is NULL.");
+            return;
+        }
 
-            if (targetEventSystem.currentSelectedGameObject == gameObject)
+        GameObject selected = targetEventSystem.currentSelectedGameObject;
+        if (selected != gameObject)
+        {
+            // Uncomment for debugging if needed
+            // Debug.Log($"{gameObject.name}: not selected. CurrentSelected = {selected?.name}");
+            return;
+        }
+
+        if (gs == null)
+        {
+            gs = FindObjectOfType<GameSettings>();
+            if (gs == null)
             {
-                if (gs == null) return;
-
-                bool clicked = false;
-
-                if (gs.p1ControllerIsPS && Input.GetButtonDown("Jump1"))
-                {
-                    clicked = true;
-                }
-                else if (!gs.p1ControllerIsPS && Input.GetButtonDown("Jump1X"))
-                {
-                    clicked = true;
-                }
-
-                if (gs.p2ControllerIsPS && Input.GetButtonDown("Jump2"))
-                {
-                    clicked = true;
-                }
-                else if (!gs.p2ControllerIsPS && Input.GetButtonDown("Jump2X"))
-                {
-                    clicked = true;
-                }
-
-                if (clicked) TriggerClick();
+                Debug.LogWarning($"{gameObject.name}: GameSettings (gs) is NULL.");
+                return;
             }
         }
 
+        bool clicked = false;
+
+        if (isP1)
+        {
+            if (gs.p1ControllerIsPS && Input.GetButtonDown("Jump1"))
+            {
+                Debug.Log($"{gameObject.name}: P1 PS input detected");
+                clicked = true;
+            }
+            else if (!gs.p1ControllerIsPS && Input.GetButtonDown("Jump1X"))
+            {
+                Debug.Log($"{gameObject.name}: P1 Xbox input detected");
+                clicked = true;
+            }
+        }
+        else // Player 2
+        {
+            if (gs.p2ControllerIsPS && Input.GetButtonDown("Jump2"))
+            {
+                Debug.Log($"{gameObject.name}: P2 PS input detected");
+                clicked = true;
+            }
+            else if (!gs.p2ControllerIsPS && Input.GetButtonDown("Jump2X"))
+            {
+                Debug.Log($"{gameObject.name}: P2 Xbox input detected");
+                clicked = true;
+            }
+        }
+
+        if (clicked)
+        {
+            Debug.Log($"{gameObject.name}: TriggerClick for {(isP1 ? "P1" : "P2")}");
+            TriggerClick();
+        }
     }
+
+
 
     public override void OnPointerEnter(PointerEventData eventData)
     {

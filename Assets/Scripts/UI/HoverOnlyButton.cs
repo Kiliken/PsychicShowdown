@@ -6,11 +6,16 @@ public class HoverOnlyButton : Button
 {
     protected GameSettings gs;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         gs = FindObjectOfType<GameSettings>();
     }
+    //protected override void Start()
+    //{
+    //    base.Start();
+    //    gs = FindObjectOfType<GameSettings>();
+    //}
 
     void Update()
     {

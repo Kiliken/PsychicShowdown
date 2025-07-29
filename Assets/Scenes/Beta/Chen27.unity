@@ -4677,6 +4677,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: targetEventSystem
+      value: 
+      objectReference: {fileID: 1887518526}
+    - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 0.4862745
       objectReference: {fileID: 0}
@@ -4687,6 +4691,14 @@ PrefabInstance:
     - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_Colors.m_NormalColor.r
       value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 146212267}
+    - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5120357940220102201, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_Pivot.x
@@ -4773,6 +4785,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: targetEventSystem
+      value: 
+      objectReference: {fileID: 1887518526}
+    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 0.4862745
       objectReference: {fileID: 0}
@@ -4784,9 +4800,29 @@ PrefabInstance:
       propertyPath: m_Colors.m_NormalColor.r
       value: 0.4862745
       objectReference: {fileID: 0}
+    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1802482089}
+    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163261785238676406, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_Name
+      value: ContinueButtonP1
+      objectReference: {fileID: 0}
     - target: {fileID: 8163261785238676406, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_TagString
       value: P2UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881190448058471318, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_Name
+      value: QuitButtonP1
       objectReference: {fileID: 0}
     - target: {fileID: 8881190448058471318, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_TagString
@@ -4850,17 +4886,9 @@ PrefabInstance:
       value: P2PauseMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.4862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.4862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118925321200375934, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.4862745
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 146212267}
     - target: {fileID: 5120357940220102201, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4923,11 +4951,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5120357940220102201, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.7999878
       objectReference: {fileID: 0}
     - target: {fileID: 5120357940220102201, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -268.33923
+      value: -270.90002
       objectReference: {fileID: 0}
     - target: {fileID: 5120357940220102201, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4942,24 +4970,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.48584908
+      propertyPath: targetEventSystem
+      value: 
+      objectReference: {fileID: 703309975}
+    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1141671922}
+    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueGame
       objectReference: {fileID: 0}
     - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.48584908
-      objectReference: {fileID: 0}
-    - target: {fileID: 7839999560433053587, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.48584908
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8163261785238676406, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_TagString
-      value: P2UI
+      propertyPath: m_Name
+      value: ContinueButtonP2
       objectReference: {fileID: 0}
     - target: {fileID: 8881190448058471318, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
-      propertyPath: m_TagString
-      value: P2UI
+      propertyPath: m_Name
+      value: QuitButtonP2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5285,8 +5317,8 @@ SceneRoots:
   - {fileID: 1078785951}
   - {fileID: 1141671913}
   - {fileID: 1031260081}
-  - {fileID: 1074640288}
   - {fileID: 146212266}
+  - {fileID: 1074640288}
   - {fileID: 2015955967}
   - {fileID: 1256267936}
   - {fileID: 1887518524}

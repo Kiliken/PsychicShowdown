@@ -391,18 +391,26 @@ public class Player : MonoBehaviour
             // If the pause menu is active, disable player movement and camera control
             movementScript.inputActive = false;
             camController.inputActive = false;
-            Debug.Log("set inactive" + playerNo);
+            //Debug.Log("set inactive" + playerNo);
         }
         else
         {
             // If the pause menu is not active, enable player movement and camera control
             movementScript.inputActive = true;
             camController.inputActive = true;
-            Debug.Log("set active" + playerNo);
+            //Debug.Log("set active" + playerNo);
         }
     }
 
-    
+
+    public void ContinueGame()
+    {
+        pauseMenu.HidePauseMenu(playerNo);
+        movementScript.inputActive = true;
+        camController.inputActive = true;
+    }
+
+
     public void SetPlayerActive(bool a)
     {
         playerActive = a;
