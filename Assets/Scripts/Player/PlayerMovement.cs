@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
             if (jumpsLeft > 0)
             {
                 jumpsLeft--;
-                Jump();
+                Jump(false);
             }
         }
 
@@ -226,13 +226,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void Jump()
+    public void Jump(bool high)
     {
         grounded = false;
         hitGround = false;
         canJump = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        if (high)
+            rb.AddForce(transform.up * (jumpForce * 3), ForceMode.Impulse);
+        else
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
         sfxPlayer.PlaySFX(0);
         Instantiate(jumpEffect, transform.position, quaternion.identity);

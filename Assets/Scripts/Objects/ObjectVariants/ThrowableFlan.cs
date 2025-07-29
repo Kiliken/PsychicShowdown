@@ -30,8 +30,14 @@ public class ThrowableFlan : ThrowableObject
         {
             if (collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
             {
-                jumpingPlayer = collision.gameObject.GetComponent<PlayerMovement>();
-                jumpingPlayer.Jump();
+                // only make player jump if they are colliding on the top
+                if (collision.gameObject.transform.position.y > transform.position.y)
+                {
+                    jumpingPlayer = collision.gameObject.GetComponent<PlayerMovement>();
+                    jumpingPlayer.Jump(true);
+                    jumpingPlayer.jumpsLeft = jumpingPlayer.maxJumps;
+                }
+
             }
         }
     }
