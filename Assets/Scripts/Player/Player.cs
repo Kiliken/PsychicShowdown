@@ -368,6 +368,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Activates and runs the in game menu.
     public void InGameMenuInput()
     {
         if (Input.GetButtonDown(pauseBtn))
@@ -402,7 +403,7 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    // Continue the game from the pause menu by enabling player movement and camera control
     public void ContinueGame()
     {
         pauseMenu.HidePauseMenu(playerNo);

@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
     public string jumpBtn = "Jump1";
     public string dashBtn = "Dash1";
     public string sprintBtn = "Sprint1";
+
+    //For whether the player is in the pause menu or not
     public bool inputActive = true;
 
     [SerializeField] private EventSystemUpdate myEventSystem;
@@ -121,7 +123,8 @@ public class PlayerMovement : MonoBehaviour
                 jumpsLeft = maxJumps;
             }
 
-            if(inputActive)
+            //Runs regular player movement input if inputActive is true(not in pause menu)
+            if (inputActive)
             {
                 PlayerInput();
             }
@@ -209,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Handle menu navigation input
     private void MenuInput()
     {
         float vertical;
@@ -239,6 +243,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Navigate through UI elements using joystick
     private void Navigate(Vector2 dir)
     {
         if (myEventSystem == null) return;
@@ -268,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Check if two GameObjects are in the same Canvas
     private bool IsInSameCanvas(GameObject a, GameObject b)
     {
         Canvas canvasA = a.GetComponentInParent<Canvas>();
