@@ -140,6 +140,8 @@ Meteor (small):
 - Initially a small rock. Once thrown, it starts growing bigger and bigger until it hits something.
 - The damage it deals to the opponent will vary to the size it is at when it hits the enemy.
 
+- a strange looking crystal, once thrown, a meteor starts falling from the sky
+
 Pudding/Flan (large):
 - When jumped on, makes the player jump up very high, giving them a high vantage point.
 

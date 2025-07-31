@@ -138,7 +138,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 12287
+    m_Bits: 28671
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   camYInput: CamY1
   shldrSwapBtn: ShoulderSwap1
   playerActive: 1
+  inputActive: 1
 --- !u!114 &1001549543190950324
 MonoBehaviour:
   m_ObjectHideFlags: 0
