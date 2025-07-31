@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
@@ -55,6 +58,7 @@ public class Player : MonoBehaviour
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
+    public string pauseBtn = "Pause1"; // pause button for player 1
     public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
 
     public bool playerActive = true;
@@ -62,9 +66,21 @@ public class Player : MonoBehaviour
     private GameSettings gameSettings;
 
 
+    InGameMenu pauseMenu; // reference to the pause menu script
+
     private void Awake()
     {
         hp = maxHP;
+        movementScript = GetComponent<PlayerMovement>();
+        if (playerNo == 1)
+        {
+            movementScript.isP1 = true;
+
+        }
+        else if (playerNo == 2)
+        {
+            movementScript.isP1 = false;
+        }
     }
 
 
@@ -74,12 +90,13 @@ public class Player : MonoBehaviour
 
         //playerPanel.UpdateHPBar();
         // set up player cam in other scripts
-        movementScript = GetComponent<PlayerMovement>();
+
         movementScript.playerCam = playerCam;
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
         detectPos = playerCam.GetChild(1).transform;
+        pauseMenu = GameObject.Find("PauseScreens").GetComponent<InGameMenu>();
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
@@ -88,9 +105,9 @@ public class Player : MonoBehaviour
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 
         if (playerNo == 1)
-            objectText = GameObject.Find("Canvas/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
         else
-            objectText = GameObject.Find("Canvas/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
 
         defaultZoom = smallZoom;
 
@@ -99,12 +116,15 @@ public class Player : MonoBehaviour
         if (playerNo == 1)
         {
             camSenNormal = 1f + (gameSettings.p1Sensitivity * 4);
+            movementScript.isP1 = true;
 
         }
         else if (playerNo == 2)
         {
             camSenNormal = 1f + (gameSettings.p2Sensitivity * 4);
+            movementScript.isP1 = false;
         }
+
     }
 
 
@@ -115,6 +135,7 @@ public class Player : MonoBehaviour
 
         ObjectDetection();
         PlayerInput();
+        InGameMenuInput();
         //GetCameraDistance();
     }
 
@@ -183,6 +204,9 @@ public class Player : MonoBehaviour
         //Debug.Log(Input.GetAxisRaw(grabThrowLeftBtn));
         // Left Trigger 
         // xbox axis is 0
+
+
+
         if (Input.GetAxisRaw(grabThrowLeftBtn) != triggerNegative && !aimCanceledL)
         {
             if (!triggerInUseL && !rightAiming)
@@ -344,6 +368,7 @@ public class Player : MonoBehaviour
             rightAiming = false;
             camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
         }
+
     }
 
     public void ReceiveDamage(int damage)
@@ -367,6 +392,50 @@ public class Player : MonoBehaviour
             Debug.Log("Player " + playerNo + " dead.");
         }
     }
+
+    //Activates and runs the in game menu.
+    public void InGameMenuInput()
+    {
+        if (Input.GetButtonDown(pauseBtn))
+        {
+            Debug.Log("Pause button pressed for player " + playerNo);
+            if (gameManager.gameStarted)
+            {
+                if (pauseMenu.isPlayerPauseMenuActive(playerNo))
+                {
+                    pauseMenu.HidePauseMenu(playerNo);
+                }
+                else
+                {
+                    pauseMenu.ShowPauseMenu(playerNo);
+                }
+            }
+        }
+
+        if (pauseMenu.isPlayerPauseMenuActive(playerNo))
+        {
+            // If the pause menu is active, disable player movement and camera control
+            movementScript.inputActive = false;
+            camController.inputActive = false;
+            //Debug.Log("set inactive" + playerNo);
+        }
+        else
+        {
+            // If the pause menu is not active, enable player movement and camera control
+            movementScript.inputActive = true;
+            camController.inputActive = true;
+            //Debug.Log("set active" + playerNo);
+        }
+    }
+
+    // Continue the game from the pause menu by enabling player movement and camera control
+    public void ContinueGame()
+    {
+        pauseMenu.HidePauseMenu(playerNo);
+        movementScript.inputActive = true;
+        camController.inputActive = true;
+    }
+
 
     public void SetPlayerActive(bool a)
     {

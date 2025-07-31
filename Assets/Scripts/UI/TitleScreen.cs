@@ -41,7 +41,7 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "BetaPortFHD";
+        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "Chen27";
         Debug.Log(sceneToUse);
         gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
         //EventSystem.current.SetSelectedGameObject(firstButton);

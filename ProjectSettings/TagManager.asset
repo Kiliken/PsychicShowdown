@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - Object
   - GameSettings
+  - P1UI
+  - P2UI
   layers:
   - Default
   - TransparentFX

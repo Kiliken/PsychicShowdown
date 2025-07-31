@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -73,6 +75,13 @@ public class PlayerMovement : MonoBehaviour
     public string dashBtn = "Dash1";
     public string sprintBtn = "Sprint1";
 
+    //For whether the player is in the pause menu or not
+    public bool inputActive = true;
+
+    [SerializeField] private EventSystemUpdate myEventSystem;
+    public bool isP1;
+    private float navCooldown = 0.2f;
+    private float lastNavTime = 0f;
 
     void Start()
     {
@@ -83,6 +92,22 @@ public class PlayerMovement : MonoBehaviour
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
         playerHurtbox = transform.Find("Hurtbox").gameObject;
+        inputActive = true;
+
+        if (myEventSystem == null)
+        {
+            string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
+            GameObject obj = GameObject.Find(targetName);
+            if (obj != null) myEventSystem = obj.GetComponent<EventSystemUpdate>();
+        }
+
+        if (isP1)
+        {
+            Debug.Log("this is P1");
+        } else
+        {
+            Debug.Log("this is p2");
+        }
     }
 
 
@@ -98,7 +123,16 @@ public class PlayerMovement : MonoBehaviour
                 jumpsLeft = maxJumps;
             }
 
-            PlayerInput();
+            //Runs regular player movement input if inputActive is true(not in pause menu)
+            if (inputActive)
+            {
+                PlayerInput();
+            }
+            else
+            {
+                MenuInput();
+            }
+
 
             if (dashesLeft != maxDashes)
             {
@@ -113,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    
 
     private void FixedUpdate()
     {
@@ -176,6 +211,79 @@ public class PlayerMovement : MonoBehaviour
             Dash();
         }
     }
+
+    // Handle menu navigation input
+    private void MenuInput()
+    {
+        float vertical;
+
+        if (isP1)
+        {
+            vertical = Input.GetAxisRaw("Vertical1");
+        }
+        else
+        {
+            vertical = Input.GetAxisRaw("Vertical2");
+        }
+
+        float now = Time.time;
+        if (now - lastNavTime > navCooldown)
+        {
+            if (vertical > 0.5f)
+            {
+                Navigate(Vector2.up);
+                lastNavTime = now;
+            }
+            else if (vertical < -0.5f)
+            {
+                Navigate(Vector2.down);
+                lastNavTime = now;
+            }
+
+        }
+    }
+
+    //Navigate through UI elements using joystick
+    private void Navigate(Vector2 dir)
+    {
+        if (myEventSystem == null) return;
+
+        var cur = myEventSystem.currentSelectedGameObject;
+        if (cur == null) return;
+
+        Selectable selectable = cur.GetComponent<Selectable>();
+        if (selectable == null) return;
+
+        Selectable next = null;
+
+        if (dir == Vector2.up) next = selectable.FindSelectableOnUp();
+        if (dir == Vector2.down) next = selectable.FindSelectableOnDown();
+        if (dir == Vector2.left) next = selectable.FindSelectableOnLeft();
+        if (dir == Vector2.right) next = selectable.FindSelectableOnRight();
+
+        if (next != null && !IsInSameCanvas(cur, next.gameObject))
+        {
+            Debug.LogWarning("Blocked cross-canvas navigation to: " + next.name);
+            next = null;
+        }
+
+        if (next != null)
+        {
+            myEventSystem.SetSelectedGameObject(next.gameObject);
+        }
+    }
+
+    //Check if two GameObjects are in the same Canvas
+    private bool IsInSameCanvas(GameObject a, GameObject b)
+    {
+        Canvas canvasA = a.GetComponentInParent<Canvas>();
+        Canvas canvasB = b.GetComponentInParent<Canvas>();
+
+        Debug.Log($"[Canvas Check] {a.name} in {canvasA?.name} vs {b.name} in {canvasB?.name}");
+
+        return canvasA != null && canvasA == canvasB;
+    }
+
 
 
     private void Move()
