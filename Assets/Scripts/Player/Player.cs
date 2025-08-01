@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
 
     //temporary player hp (remove after implementing actual hp)
     public int maxHP = 10;
-    public int hp = 10;
+    public int hp = 10;     //cast to sbyte
 
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
@@ -67,6 +68,17 @@ public class Player : MonoBehaviour
 
 
     InGameMenu pauseMenu; // reference to the pause menu script
+
+
+    //For online mode
+    [NonSerialized]
+    public byte leftHandFlag;
+    [NonSerialized]
+    public byte rightHandFlag;
+    [NonSerialized]
+    public ushort leftObjRef;
+    [NonSerialized]
+    public ushort rightObjRef;
 
     private void Awake()
     {
@@ -220,6 +232,7 @@ public class Player : MonoBehaviour
                         Debug.Log("Left grab");
                         leftObject.GrabObject(objPosL, shootPos, playerNo);
                         holdingObjL = true;
+                        //leftHandFlag++
 
                         GetCameraDistance();
 
@@ -270,6 +283,8 @@ public class Player : MonoBehaviour
                 leftObject.ThrowObject();
                 holdingObjL = false;
 
+                //leftHandFlag++ and objId = 0
+
                 GetCameraDistance();
 
 
@@ -303,6 +318,7 @@ public class Player : MonoBehaviour
                         Debug.Log("Right grab");
                         rightObject.GrabObject(objPosR, shootPos, playerNo);
                         holdingObjR = true;
+                        //rightHandFlag++
 
                         GetCameraDistance();
 
@@ -351,6 +367,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Right throw");
                 rightObject.ThrowObject();
                 holdingObjR = false;
+                //rightHandFlag++ and objId = 0
 
                 GetCameraDistance();
 

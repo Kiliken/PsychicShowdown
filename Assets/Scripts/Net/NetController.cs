@@ -92,13 +92,22 @@ public class NetController : MonoBehaviour
     void Update()
     {
         udpSend = NetManager.ParseByte(playerSide, player.transform);
-        //Debug.Log(Encoding.ASCII.GetString(udpSend));
 
         if (udpGet[0] != 0x4E)
         {
-            //GetData(udpGet.Substring(1, udpGet.Length - 1));
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();
+
+            /*
+            if((byte)(data.shootingFlag - reggaetonCheck) != 0)
+            {
+                playerOtherTurret.Fire();
+                reggaetonCheck++;
+
+                if (reggaetonCheck >= 0x10)
+                    reggaetonCheck -= 0x10;
+            }
+            */
         }
     }
 

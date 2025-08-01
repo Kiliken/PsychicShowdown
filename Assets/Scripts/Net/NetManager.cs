@@ -12,6 +12,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
+using UnityEngine.Rendering.Universal;
 /*
 
 Data:
@@ -81,8 +82,12 @@ public static class NetManager
         data.posY = BitConverter.ToSingle(bytes, 5);
         data.posZ = BitConverter.ToSingle(bytes, 9);
         data.rotBody = BitConverter.ToSingle(bytes, 13);
-        //data.rotHead = BitConverter.ToSingle(bytes, 17);
-        //data.shootingFlag = bytes[21];
+        //data.leftHand = bytes[17];
+        //data.rightHand = bytes[18];
+        //data.leftObjId = BitConverter.ToUInt16(bytes, 19);
+        //data.rightObjId = BitConverter.ToUInt16(bytes, 21);
+        //data.hp = (sbyte)bytes[23];
+        
         
         return data;
     }
@@ -96,8 +101,11 @@ public static class NetManager
         test = test.Concat(BitConverter.GetBytes(p.position.y)).ToArray();
         test = test.Concat(BitConverter.GetBytes(p.position.z)).ToArray();
         test = test.Concat(BitConverter.GetBytes(p.GetChild(0).eulerAngles.y)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(r)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(shotFlag)).ToArray();
+        //test = test.Concat(BitConverter.GetBytes(leftHand)).ToArray();
+        //test = test.Concat(BitConverter.GetBytes(rightHand)).ToArray();
+        //test = test.Concat(BitConverter.GetBytes(leftObjId)).ToArray();
+        //test = test.Concat(BitConverter.GetBytes(rightObjId)).ToArray();
+        //test = test.Concat(BitConverter.GetBytes(hp)).ToArray();
 
         return test;
     }
@@ -110,12 +118,17 @@ public static class NetManager
 
 public class NetData
 {
+    //Movement
     public float posX;
     public float posY;
     public float posZ;
     public float rotBody;
-    //public float rotHead;
-    //public float rotZ;
-    //public byte shootingFlag;
+
+    //ObjectInteraction
+    public byte leftHand;
+    public byte rightHand;
+    public ushort leftObjId;
+    public ushort rightObjId;
+    public sbyte hp;
 }
 
