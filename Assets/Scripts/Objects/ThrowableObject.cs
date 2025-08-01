@@ -260,6 +260,7 @@ public class ThrowableObject : MonoBehaviour
         effectActivated = true;
 
         // ADD DISAPPEAR EFFECT
+
         Destroy(this.gameObject);   // remove later
     }
 

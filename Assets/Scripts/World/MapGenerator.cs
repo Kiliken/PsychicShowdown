@@ -54,7 +54,7 @@ public class MapGenerator : MonoBehaviour
     string[] grassColors = { "#FFFFFF", "#FFEBBD", "#C2FFFF", "#DBB5B7" };
 
     [NonSerialized]
-    public int objectCount = 0;
+    public List<GameObject> objects;
 
     private float maxObjects = 50;
 
@@ -179,7 +179,6 @@ public class MapGenerator : MonoBehaviour
             int rand;
             rand = Random.Range(0, 2);
             objectHeight = 50f - hit.distance;
-            objectCount++;
             switch (true)
             {
                 case true when (objectHeight < 2f):
@@ -248,6 +247,9 @@ public class MapGenerator : MonoBehaviour
                     break;
 
             }
+
+            objects.Add(thisObj);
+            Debug.Log($"Objects count:{objects.Count}");
         }
     }
 
@@ -270,6 +272,8 @@ public class MapGenerator : MonoBehaviour
     private void Start()
     {
         //seed = Random.Range(6, 4587);
+
+        objects = new List<GameObject>();
 
         genCursor = Vector3.zero;
         ground = LayerMask.NameToLayer("Ground");
@@ -324,11 +328,16 @@ public class MapGenerator : MonoBehaviour
 
             }
 
+            for (int i = 0; i < objects.Count; i++)
+                if (objects[i] == null)
+                    objects.Remove(objects[i]);
+    
 
-            if (objectCount < maxObjects)
-            {
-                SpanwObject();
-            }
+
+            if (objects.Count < maxObjects)
+                    {
+                        SpanwObject();
+                    }
         }
 
 
