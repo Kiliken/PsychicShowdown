@@ -19,9 +19,16 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject p1firstSelected;
     [SerializeField] private GameObject p2firstSelected;
 
+    private void Awake()
+    {
+        p1PauseMenu = GameObject.Find("P1PauseMenu");
+        p2PauseMenu = GameObject.Find("P2PauseMenu");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+
         p1PauseMenu.SetActive(false);
         p2PauseMenu.SetActive(false);
         GameObject p1ES = GameObject.Find("EventSystemP1");

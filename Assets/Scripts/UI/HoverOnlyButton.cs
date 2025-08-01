@@ -69,6 +69,7 @@ public class HoverOnlyButton : Button
 
     protected void TriggerClick()
     {
+        Debug.Log("TRIGGER CLICK");
 
         onClick.Invoke();
     }

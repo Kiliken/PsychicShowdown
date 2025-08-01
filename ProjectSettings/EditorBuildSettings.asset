@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Beta/TitleScreen.unity
     guid: 4d177a49123d6c849873b01b4352d54d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Beta/BetaPortFHD.unity
     guid: 9c1c508a11001fc43b08997bd136332d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Beta/Chen27.unity
     guid: f598cebae9402e9418a61f8dbde989b7
   - enabled: 1
