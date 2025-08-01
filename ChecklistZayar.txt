@@ -98,14 +98,13 @@ After Beta
 - hand animations
 
 
-
-
 Chen:
 @ add a way for UI to be controllable with controller
 @ rework player UI
 @ rework main menu
 @ rework game over menu
-@ options menu
+~ options menu
+- remove new input system
 - in-game menu (not Pause) for quitting the game
 - UI for objects holding in left and right hands
 - screen fade
@@ -120,7 +119,7 @@ Paolo:
 @ shader rework
 @ new terrain generation
 @ grass
-- object spawning (random, special)
+@ object spawning (random, special)
 - disappear shader
 - add new objects
 - make barrier/space smaller when the timer reaches a set time
