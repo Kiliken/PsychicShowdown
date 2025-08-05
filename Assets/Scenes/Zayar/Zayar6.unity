@@ -4222,6 +4222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: S_Spear
       objectReference: {fileID: 0}
+    - target: {fileID: 7213910753408708730, guid: 2e88120b578cd5d4e8b43226e3eb7943, type: 3}
+      propertyPath: rbCollisionMask.m_Bits
+      value: 1216
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

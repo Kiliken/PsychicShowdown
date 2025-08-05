@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
         float radius = sphereRadius;
 
         // For drawing the path of the spherecast
-        Debug.DrawRay(origin, direction * distance, Color.red, 0.1f);
+        //Debug.DrawRay(origin, direction * distance, Color.red, 0.1f);
 
         // Draw multiple wire spheres along the cast path
         int numSteps = 10;
@@ -159,7 +159,9 @@ public class Player : MonoBehaviour
         {
             float step = (float)i / numSteps;
             Vector3 point = origin + direction * (distance * step);
-            DebugExtension.DebugWireSphere(point, Color.yellow, radius, 0.1f);
+
+            // SPHERE CAST DEBUG
+            //DebugExtension.DebugWireSphere(point, Color.yellow, radius, 0.1f);
         }
 
         // object detection

@@ -4,34 +4,35 @@ using UnityEngine;
 
 public class ObjHitbox : MonoBehaviour
 {
-    ThrowableObject objectScript;
-    private int holdingPlayer = 0;
+    protected ThrowableObject objectScript;
+    protected int holdingPlayer = 0;
     public bool hit = false;
 
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         objectScript = transform.parent.GetComponent<ThrowableObject>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        
+
     }
 
 
-    public void ActivateHitbox(int player){
+    public void ActivateHitbox(int player)
+    {
         holdingPlayer = player;
         GetComponent<BoxCollider>().enabled = true;
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (hit) return;
-        
+
         // if(other.gameObject.tag == "Player1" && holdingPlayer == 2){
         //     // apply damage
         //     Debug.Log("Hit player 1");
@@ -48,12 +49,15 @@ public class ObjHitbox : MonoBehaviour
         // }
 
         // may need to change tags to hurtbox later
-        if((other.gameObject.tag == "Player1" && holdingPlayer == 2) || (other.gameObject.tag == "Player2" && holdingPlayer == 1)){
-            if(holdingPlayer == 2){
+        if ((other.gameObject.tag == "Player1" && holdingPlayer == 2) || (other.gameObject.tag == "Player2" && holdingPlayer == 1))
+        {
+            if (holdingPlayer == 2)
+            {
                 Debug.Log("Hit player 1 " + other.gameObject.name);
                 // apply damage to player 1
             }
-            else if(holdingPlayer == 1){
+            else if (holdingPlayer == 1)
+            {
                 Debug.Log("Hit player 2 " + other.gameObject.name);
                 // apply damage to player 2
             }
@@ -64,6 +68,6 @@ public class ObjHitbox : MonoBehaviour
             hit = true;
             GetComponent<BoxCollider>().enabled = false;
         }
-        
+
     }
 }

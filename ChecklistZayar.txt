@@ -128,11 +128,11 @@ Paolo:
 SPECIAL OBJECTS:
 These are special objects with a lower spawn rate and/or spawn at a set time interval.
 
-Skull (small):
+@ Skull (small):
 - Once thrown, chases the other player and deal damage (cannot detect obstacles or large objects and will collide with them).
 - Once thrown, lights on fire like ghost rider and starts laughing.
 
-Spear (medium):
+@ Spear (small):
 - Once thrown, multiplies itself into 5-10 copies.
 
 Meteor (small):
@@ -141,7 +141,7 @@ Meteor (small):
 
 - a strange looking crystal, once thrown, a meteor starts falling from the sky
 
-Pudding/Flan (large):
+@ Pudding/Flan (large):
 - When jumped on, makes the player jump up very high, giving them a high vantage point.
 
 
