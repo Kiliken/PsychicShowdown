@@ -99,9 +99,20 @@ public class NetController : MonoBehaviour
             UpdatePosition();
 
             /*
-            if((byte)(data.shootingFlag - reggaetonCheck) != 0)
+            if((byte)(data.leftHand - reggaetonCheck) != 0)
             {
-                playerOtherTurret.Fire();
+                otherPlayer.ThrowLeftObject();
+                reggaetonCheck++;
+
+                if (reggaetonCheck >= 0x10)
+                    reggaetonCheck -= 0x10;
+            }
+            */
+
+             /*
+            if((byte)(data.rightHeand - reggaetonCheck) != 0)
+            {
+                otherPlayer.ThrowRightObject();
                 reggaetonCheck++;
 
                 if (reggaetonCheck >= 0x10)

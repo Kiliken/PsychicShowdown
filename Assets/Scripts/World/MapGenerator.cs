@@ -56,6 +56,8 @@ public class MapGenerator : MonoBehaviour
     [NonSerialized]
     public List<GameObject> objects;
 
+    private ushort objectsCount = 0;
+
     private float maxObjects = 50;
 
     private Vector3 genCursor;
@@ -247,6 +249,8 @@ public class MapGenerator : MonoBehaviour
                     break;
 
             }
+            thisObj.GetComponent<ThrowableObject>().objectID = objectsCount;
+            objectsCount++;
 
             objects.Add(thisObj);
             Debug.Log($"Objects count:{objects.Count}");

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
-public class Player : MonoBehaviour
+public class NETPlayer : MonoBehaviour
 {
     public int playerNo = 1;    // 1 or 2
     PlayerMovement movementScript;
