@@ -82,30 +82,30 @@ public static class NetManager
         data.posY = BitConverter.ToSingle(bytes, 5);
         data.posZ = BitConverter.ToSingle(bytes, 9);
         data.rotBody = BitConverter.ToSingle(bytes, 13);
-        //data.leftHand = bytes[17];
-        //data.rightHand = bytes[18];
-        //data.leftObjId = BitConverter.ToUInt16(bytes, 19);
-        //data.rightObjId = BitConverter.ToUInt16(bytes, 21);
-        //data.hp = (sbyte)bytes[23];
+        data.leftHand = bytes[17];
+        data.rightHand = bytes[18];
+        data.leftObjId = BitConverter.ToUInt16(bytes, 19);
+        data.rightObjId = BitConverter.ToUInt16(bytes, 21);
+        data.hp = (sbyte)bytes[23];
         
         
         return data;
     }
 
-    public static byte[] ParseByte(char side, Transform p/*, float r, byte shotFlag*/)
+    public static byte[] ParseByte(char side, NetData data)
     {
         byte[] test = new byte[0];
 
         test = test.Concat(new byte[] { (byte)side }).ToArray();
-        test = test.Concat(BitConverter.GetBytes(p.position.x)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(p.position.y)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(p.position.z)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(p.GetChild(0).eulerAngles.y)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(leftHand)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(rightHand)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(leftObjId)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(rightObjId)).ToArray();
-        //test = test.Concat(BitConverter.GetBytes(hp)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.posX)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.posY)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.posZ)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.rotBody)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.leftHand)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.rightHand)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.leftObjId)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.rightObjId)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(data.hp)).ToArray();
 
         return test;
     }

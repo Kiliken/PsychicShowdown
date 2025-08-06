@@ -56,7 +56,7 @@ public class MapGenerator : MonoBehaviour
     [NonSerialized]
     public List<GameObject> objects;
 
-    private ushort objectsCount = 0;
+    private ushort objectsCount = 1;
 
     private float maxObjects = 50;
 

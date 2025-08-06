@@ -190,7 +190,7 @@ public class Player : MonoBehaviour
                 {
                     currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(true);
                     objectText.text = currentTargetObj.GetComponent<ThrowableObject>().objectName;
-                    Debug.Log(hit.transform.name);
+                    //Debug.Log(hit.transform.name);
                 }
                 else
                 {

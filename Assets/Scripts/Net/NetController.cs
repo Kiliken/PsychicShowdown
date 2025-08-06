@@ -20,6 +20,8 @@ public class NetController : MonoBehaviour
 
     private NetData data;
 
+    private NetData thisSideData;
+
     static volatile byte[] udpSend = new byte[] { 0x4E };
     static volatile byte[] udpGet = new byte[] { 0x4E };
 
@@ -29,6 +31,11 @@ public class NetController : MonoBehaviour
     public char playerSide = 'A';
     [SerializeField] Transform player;
     [SerializeField] Transform playerOther;
+
+    private Player playerScript;
+
+    private byte rgCheckLeft = 0x00;
+    private byte rgCheckRight = 0x00;
 
     private static void SendGetData()
     {
@@ -81,7 +88,8 @@ public class NetController : MonoBehaviour
 
     void Start()
     {
-
+        playerScript = player.GetComponent<Player>();
+        thisSideData = new NetData();
         udpc = new UdpClient(ip, port);
         udpc.Client.ReceiveTimeout = 1000;
         udpDataThread = new Thread(new ThreadStart(SendGetData));
@@ -91,34 +99,67 @@ public class NetController : MonoBehaviour
     
     void Update()
     {
-        udpSend = NetManager.ParseByte(playerSide, player.transform);
+
+        thisSideData.posX = player.transform.position.x;
+        thisSideData.posY = player.transform.position.y;
+        thisSideData.posZ = player.transform.position.z;
+        thisSideData.rotBody = player.transform.GetChild(0).eulerAngles.y;
+        thisSideData.leftHand = playerScript.leftHandFlag;
+        thisSideData.leftObjId = playerScript.leftObjRef;
+        thisSideData.rightHand = playerScript.rightHandFlag;
+        thisSideData.rightObjId = playerScript.rightObjRef;
+        thisSideData.hp = (sbyte)playerScript.hp;
+
+
+
+        udpSend = NetManager.ParseByte(playerSide, thisSideData);
 
         if (udpGet[0] != 0x4E)
         {
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();
 
-            /*
-            if((byte)(data.leftHand - reggaetonCheck) != 0)
+            
+            if((byte)(data.leftHand - rgCheckLeft) != 0)
             {
-                otherPlayer.ThrowLeftObject();
-                reggaetonCheck++;
+                //otherPlayer.ThrowLeftObject();
+                if (data.leftObjId != 0)
+                {
+                    Debug.Log($"Enemy Left Object N{data.leftObjId} Taken");
+                }
+                else
+                {
+                    Debug.Log("Enemy Left Object Throwed");
+                }
 
-                if (reggaetonCheck >= 0x10)
-                    reggaetonCheck -= 0x10;
+
+                rgCheckLeft++;
+
+                if (rgCheckLeft >= 0x10)
+                    rgCheckLeft -= 0x10;
             }
-            */
+            
 
-             /*
-            if((byte)(data.rightHeand - reggaetonCheck) != 0)
+            
+            if((byte)(data.rightHand - rgCheckRight) != 0)
             {
-                otherPlayer.ThrowRightObject();
-                reggaetonCheck++;
+                //otherPlayer.ThrowRightObject();
 
-                if (reggaetonCheck >= 0x10)
-                    reggaetonCheck -= 0x10;
+                if (data.rightObjId != 0)
+                {
+                    Debug.Log($"Enemy Right Object N{data.rightObjId} Taken");
+                }
+                else
+                {
+                    Debug.Log("Enemy Right Object Throwed");
+                }
+
+                rgCheckRight++;
+
+                if (rgCheckRight >= 0x10)
+                    rgCheckRight -= 0x10;
             }
-            */
+            
         }
     }
 
