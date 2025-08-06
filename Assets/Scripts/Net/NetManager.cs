@@ -95,17 +95,21 @@ public static class NetManager
     public static byte[] ParseByte(char side, NetData data)
     {
         byte[] test = new byte[0];
+        byte[] temp = new byte[1];
 
         test = test.Concat(new byte[] { (byte)side }).ToArray();
         test = test.Concat(BitConverter.GetBytes(data.posX)).ToArray();
         test = test.Concat(BitConverter.GetBytes(data.posY)).ToArray();
         test = test.Concat(BitConverter.GetBytes(data.posZ)).ToArray();
         test = test.Concat(BitConverter.GetBytes(data.rotBody)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.leftHand)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.rightHand)).ToArray();
+        temp[0] = data.leftHand;
+        test = test.Concat(temp).ToArray();
+        temp[0] = data.rightHand;
+        test = test.Concat(temp).ToArray();
         test = test.Concat(BitConverter.GetBytes(data.leftObjId)).ToArray();
         test = test.Concat(BitConverter.GetBytes(data.rightObjId)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.hp)).ToArray();
+        temp[0] = (byte)data.hp;
+        test = test.Concat(temp).ToArray();
 
         return test;
     }

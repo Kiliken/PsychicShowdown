@@ -72,13 +72,13 @@ public class Player : MonoBehaviour
 
     //For online mode
     [NonSerialized]
-    public byte leftHandFlag;
+    public byte leftHandFlag = 0x00;
     [NonSerialized]
-    public byte rightHandFlag;
+    public byte rightHandFlag = 0x00;
     [NonSerialized]
-    public ushort leftObjRef;
+    public ushort leftObjRef = 0;
     [NonSerialized]
-    public ushort rightObjRef;
+    public ushort rightObjRef = 0;
 
     private void Awake()
     {

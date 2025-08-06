@@ -7,6 +7,7 @@ using System.Threading;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
+
 public class NetController : MonoBehaviour
 {
     [Header("Client")]
@@ -96,7 +97,7 @@ public class NetController : MonoBehaviour
         udpDataThread.Start();
     }
 
-    
+
     void Update()
     {
 
@@ -119,8 +120,9 @@ public class NetController : MonoBehaviour
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();
 
-            
-            if((byte)(data.leftHand - rgCheckLeft) != 0)
+            Debug.Log($"rf:{data.rightHand} lf:{data.leftHand}\n rId:{data.rightObjId} lId:{data.leftObjId}");
+
+            if ((byte)(data.leftHand - rgCheckLeft) != 0)
             {
                 //otherPlayer.ThrowLeftObject();
                 if (data.leftObjId != 0)
@@ -138,10 +140,10 @@ public class NetController : MonoBehaviour
                 if (rgCheckLeft >= 0x10)
                     rgCheckLeft -= 0x10;
             }
-            
 
-            
-            if((byte)(data.rightHand - rgCheckRight) != 0)
+
+
+            if ((byte)(data.rightHand - rgCheckRight) != 0)
             {
                 //otherPlayer.ThrowRightObject();
 
@@ -159,7 +161,7 @@ public class NetController : MonoBehaviour
                 if (rgCheckRight >= 0x10)
                     rgCheckRight -= 0x10;
             }
-            
+
         }
     }
 
