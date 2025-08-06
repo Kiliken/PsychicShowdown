@@ -210,9 +210,31 @@ SFX:
 - throw object
 - object hit
 - player take damage
+- BGM
+
+SFX:
+- sprinting
+- explosion (grenade/microwave/skull)
+- explosion (meteor)
+- splat sound
 - player death/lose
 - game end tune
-- BGM
+- menu blip
+- menu confirm
+
+MODELS:
+- Skull (optional)
+- Flan
+- Spear
+- Meteor 
+- Hands
+
+EFFECTS:
+- Sprint
+- splat effect (tomato, flan)
+- Skull's flame
+- Meteor plasma (fire enveloping the meteor as it falls to the ground)
+
 
 
 
