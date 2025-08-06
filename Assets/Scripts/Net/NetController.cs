@@ -23,6 +23,8 @@ public class NetController : MonoBehaviour
 
     private NetData thisSideData;
 
+    private MapGenerator map;
+
     static volatile byte[] udpSend = new byte[] { 0x4E };
     static volatile byte[] udpGet = new byte[] { 0x4E };
 
@@ -37,6 +39,9 @@ public class NetController : MonoBehaviour
 
     private byte rgCheckLeft = 0x00;
     private byte rgCheckRight = 0x00;
+
+    private ThrowableObject leftObj;
+    private ThrowableObject rightObj;
 
     private static void SendGetData()
     {
@@ -77,8 +82,9 @@ public class NetController : MonoBehaviour
     {
         player = (playerSide == 'A' ? GameObject.Find("Player").transform : GameObject.Find("Player2").transform);
         playerOther = (playerSide == 'A' ? GameObject.Find("Player2").transform : GameObject.Find("Player").transform);
+        Destroy(playerOther.GetComponent<Player>());
 
-        player.GetComponent<Player>().playerNo = 1;
+        //player.GetComponent<Player>().playerNo = 1;
         Destroy(playerOther.GetComponent<Rigidbody>());
 
         player.transform.GetComponent<Rigidbody>().useGravity = true;
@@ -91,6 +97,8 @@ public class NetController : MonoBehaviour
     {
         playerScript = player.GetComponent<Player>();
         thisSideData = new NetData();
+        map = FindAnyObjectByType<MapGenerator>();
+
         udpc = new UdpClient(ip, port);
         udpc.Client.ReceiveTimeout = 1000;
         udpDataThread = new Thread(new ThreadStart(SendGetData));
@@ -120,7 +128,7 @@ public class NetController : MonoBehaviour
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();
 
-            Debug.Log($"rf:{data.rightHand} lf:{data.leftHand}\n rId:{data.rightObjId} lId:{data.leftObjId}");
+            //Debug.Log($"rf:{data.rightHand} lf:{data.leftHand}\n rId:{data.rightObjId} lId:{data.leftObjId}");
 
             if ((byte)(data.leftHand - rgCheckLeft) != 0)
             {
@@ -128,10 +136,14 @@ public class NetController : MonoBehaviour
                 if (data.leftObjId != 0)
                 {
                     Debug.Log($"Enemy Left Object N{data.leftObjId} Taken");
+                    leftObj = FindObjectById(data.leftObjId);
+                    
                 }
                 else
                 {
                     Debug.Log("Enemy Left Object Throwed");
+                    leftObj.RemoveObject();
+                    leftObj = null;
                 }
 
 
@@ -150,10 +162,14 @@ public class NetController : MonoBehaviour
                 if (data.rightObjId != 0)
                 {
                     Debug.Log($"Enemy Right Object N{data.rightObjId} Taken");
+                    rightObj = FindObjectById(data.leftObjId);
+                    rightObj.canGrab = false;
                 }
                 else
                 {
                     Debug.Log("Enemy Right Object Throwed");
+                    rightObj.RemoveObject();
+                    rightObj = null;
                 }
 
                 rgCheckRight++;
@@ -181,5 +197,15 @@ public class NetController : MonoBehaviour
     {
         foreach (Behaviour behaviour in side.GetComponentsInChildren<Behaviour>())
             behaviour.enabled = true;
+    }
+
+    ThrowableObject FindObjectById(ushort id)
+    {
+        for (int i = 0; i < map.objects.Count; i++)
+        {
+            if (map.objects[i].GetComponent<ThrowableObject>().objectID == id)
+                return map.objects[i].GetComponent<ThrowableObject>();
+        }
+        return null;
     }
 }

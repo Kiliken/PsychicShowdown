@@ -250,18 +250,18 @@ public class ControlManager : MonoBehaviour
             else
             {
                 Debug.Log("Player 2 Xbox controls");
-                playerMovementScript.moveXInput = moveX2_X;
-                playerMovementScript.moveYInput = moveY2_X;
-                playerMovementScript.jumpBtn = jump2_X;
-                playerMovementScript.dashBtn = dash2_X;
-                playerMovementScript.sprintBtn = sprint2_X;
-                cameraControllerScript.camXInput = camX2_X;
-                cameraControllerScript.camYInput = camY2_X;
-                cameraControllerScript.shldrSwapBtn = shldrSwap2_X;
-                playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_X;
-                playerScript.grabThrowRightBtn = grabThrowRightBtn2_X;
-                playerScript.aimCancelBtn = aimCancelBtn2_X;
-                playerScript.pauseBtn = pauseBtn2_X;
+                playerMovementScript.moveXInput = moveX1_X;
+                playerMovementScript.moveYInput = moveY1_X;
+                playerMovementScript.jumpBtn = jump1_X;
+                playerMovementScript.dashBtn = dash1_X;
+                playerMovementScript.sprintBtn = sprint1_X;
+                cameraControllerScript.camXInput = camX1_X;
+                cameraControllerScript.camYInput = camY1_X;
+                cameraControllerScript.shldrSwapBtn = shldrSwap1_X;
+                playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_X;
+                playerScript.grabThrowRightBtn = grabThrowRightBtn1_X;
+                playerScript.aimCancelBtn = aimCancelBtn1_X;
+                playerScript.pauseBtn = pauseBtn1_X;
             }
             playerScript.triggerNegative = 0;
         }
