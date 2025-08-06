@@ -94,24 +94,20 @@ public static class NetManager
 
     public static byte[] ParseByte(char side, NetData data)
     {
-        byte[] test = new byte[0];
-        byte[] temp = new byte[1];
+        byte[] buffer = new byte[24];
 
-        test = test.Concat(new byte[] { (byte)side }).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.posX)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.posY)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.posZ)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.rotBody)).ToArray();
-        temp[0] = data.leftHand;
-        test = test.Concat(temp).ToArray();
-        temp[0] = data.rightHand;
-        test = test.Concat(temp).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.leftObjId)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(data.rightObjId)).ToArray();
-        temp[0] = (byte)data.hp;
-        test = test.Concat(temp).ToArray();
+        buffer[0] = (byte)side;
+        Array.Copy(BitConverter.GetBytes(data.posX), 0, buffer, 1, 4);
+        Array.Copy(BitConverter.GetBytes(data.posY), 0, buffer, 5, 4);
+        Array.Copy(BitConverter.GetBytes(data.posZ), 0, buffer, 9, 4);
+        Array.Copy(BitConverter.GetBytes(data.rotBody), 0, buffer, 13, 4);
+        buffer[17] = data.leftHand;
+        buffer[18] = data.rightHand;
+        Array.Copy(BitConverter.GetBytes(data.leftObjId), 0, buffer, 19, 2);
+        Array.Copy(BitConverter.GetBytes(data.rightObjId), 0, buffer, 21, 2);
+        buffer[23] = (byte)data.hp;
 
-        return test;
+        return buffer;
     }
 
    

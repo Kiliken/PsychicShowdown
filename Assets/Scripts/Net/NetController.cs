@@ -109,18 +109,7 @@ public class NetController : MonoBehaviour
     void Update()
     {
 
-        thisSideData.posX = player.transform.position.x;
-        thisSideData.posY = player.transform.position.y;
-        thisSideData.posZ = player.transform.position.z;
-        thisSideData.rotBody = player.transform.GetChild(0).eulerAngles.y;
-        thisSideData.leftHand = playerScript.leftHandFlag;
-        thisSideData.leftObjId = playerScript.leftObjRef;
-        thisSideData.rightHand = playerScript.rightHandFlag;
-        thisSideData.rightObjId = playerScript.rightObjRef;
-        thisSideData.hp = (sbyte)playerScript.hp;
-
-
-
+        PrepareNetData();
         udpSend = NetManager.ParseByte(playerSide, thisSideData);
 
         if (udpGet[0] != 0x4E)
@@ -128,7 +117,6 @@ public class NetController : MonoBehaviour
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();
 
-            //Debug.Log($"rf:{data.rightHand} lf:{data.leftHand}\n rId:{data.rightObjId} lId:{data.leftObjId}");
 
             if ((byte)(data.leftHand - rgCheckLeft) != 0)
             {
@@ -137,12 +125,13 @@ public class NetController : MonoBehaviour
                 {
                     Debug.Log($"Enemy Left Object N{data.leftObjId} Taken");
                     leftObj = FindObjectById(data.leftObjId);
-                    
+                    //grab LeftObject here
                 }
                 else
                 {
                     Debug.Log("Enemy Left Object Throwed");
-                    leftObj.RemoveObject();
+                    //throw LeftObject here
+                    
                     leftObj = null;
                 }
 
@@ -163,12 +152,13 @@ public class NetController : MonoBehaviour
                 {
                     Debug.Log($"Enemy Right Object N{data.rightObjId} Taken");
                     rightObj = FindObjectById(data.leftObjId);
-                    rightObj.canGrab = false;
+                    //grab RightObject here
                 }
                 else
                 {
                     Debug.Log("Enemy Right Object Throwed");
-                    rightObj.RemoveObject();
+                    //throw RightObject here
+                    
                     rightObj = null;
                 }
 
@@ -207,5 +197,18 @@ public class NetController : MonoBehaviour
                 return map.objects[i].GetComponent<ThrowableObject>();
         }
         return null;
+    }
+
+    void PrepareNetData()
+    {
+        thisSideData.posX = player.transform.position.x;
+        thisSideData.posY = player.transform.position.y;
+        thisSideData.posZ = player.transform.position.z;
+        thisSideData.rotBody = player.transform.GetChild(0).eulerAngles.y;
+        thisSideData.leftHand = playerScript.leftHandFlag;
+        thisSideData.leftObjId = playerScript.leftObjRef;
+        thisSideData.rightHand = playerScript.rightHandFlag;
+        thisSideData.rightObjId = playerScript.rightObjRef;
+        thisSideData.hp = (sbyte)playerScript.hp;
     }
 }
