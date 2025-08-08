@@ -25,6 +25,9 @@ public class NetController : MonoBehaviour
 
     private MapGenerator map;
 
+    [SerializeField]
+    private Transform gameUI;
+
     static volatile byte[] udpSend = new byte[] { 0x4E };
     static volatile byte[] udpGet = new byte[] { 0x4E };
 
@@ -84,7 +87,10 @@ public class NetController : MonoBehaviour
         playerOther = (playerSide == 'A' ? GameObject.Find("Player2").transform : GameObject.Find("Player").transform);
         Destroy(playerOther.GetComponent<Player>());
 
+        gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
+
         //player.GetComponent<Player>().playerNo = 1;
+        playerOther.gameObject.AddComponent<NETPlayer>();
         Destroy(playerOther.GetComponent<Rigidbody>());
 
         player.transform.GetComponent<Rigidbody>().useGravity = true;
