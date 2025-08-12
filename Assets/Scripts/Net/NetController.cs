@@ -94,7 +94,7 @@ public class NetController : MonoBehaviour
 
         //player.GetComponent<Player>().playerNo = 1;
         netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
-        
+
         //Destroy(playerOther.GetComponent<Rigidbody>());
         playerOther.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -107,7 +107,7 @@ public class NetController : MonoBehaviour
     void Start()
     {
         playerScript = player.GetComponent<Player>();
-        
+
         thisSideData = new NetData();
         map = FindAnyObjectByType<MapGenerator>();
 
@@ -121,8 +121,8 @@ public class NetController : MonoBehaviour
     void Update()
     {
 
-        if(playerShootPos == null)
-            playerShootPos = playerScript.shootPos; 
+        if (playerShootPos == null)
+            playerShootPos = playerScript.shootPos;
 
         PrepareNetData();
         udpSend = NetManager.ParseByte(playerSide, thisSideData);
@@ -136,6 +136,7 @@ public class NetController : MonoBehaviour
         {
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();
+            UpdateShootPos();
 
 
             if ((byte)(data.leftHand - rgCheckLeft) != 0)
@@ -207,6 +208,12 @@ public class NetController : MonoBehaviour
         playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
     }
 
+    void UpdateShootPos()
+    {
+        netPlayerScript.tempShootPos.position = new Vector3(data.camPosX, data.camPosY, data.camPosZ);
+        netPlayerScript.tempShootPos.eulerAngles = new Vector3(data.camRotX, data.camRotY, 0);
+    }
+
     void EnablePlayer(Transform side)
     {
         foreach (Behaviour behaviour in side.GetComponentsInChildren<Behaviour>())
@@ -238,6 +245,6 @@ public class NetController : MonoBehaviour
         thisSideData.camPosY = playerShootPos.position.y;
         thisSideData.camPosZ = playerShootPos.position.z;
         thisSideData.camRotX = playerShootPos.eulerAngles.x;
-        thisSideData.camRotY = playerShootPos.eulerAngles.x;
+        thisSideData.camRotY = playerShootPos.eulerAngles.y;
     }
 }
