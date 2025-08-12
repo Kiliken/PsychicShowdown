@@ -96,7 +96,7 @@ public class NETPlayer : MonoBehaviour
     public void ThrowLeftObject()
     {
         Debug.Log("Left throw");
-        leftObject.ThrowObject();
+        leftObject.ThrowObjectNet();
         holdingObjL = false;
         //sfxPlayer.PlaySFX(3);
     }
@@ -104,7 +104,7 @@ public class NETPlayer : MonoBehaviour
     public void ThrowRightObject()
     {
         Debug.Log("Right throw");
-        rightObject.ThrowObject();
+        rightObject.ThrowObjectNet();
         holdingObjR = false;
         //sfxPlayer.PlaySFX(3);
     }

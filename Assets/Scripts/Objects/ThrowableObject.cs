@@ -168,6 +168,29 @@ public class ThrowableObject : MonoBehaviour
         thrown = true;
     }
 
+    public virtual void ThrowObjectNet()
+    {
+        aiming = false;
+        rb.useGravity = true;
+
+        ShowHideObject(true, true);
+        //model.GetComponent<MeshRenderer>().enabled = true;
+        model.GetComponent<MeshCollider>().enabled = true;
+        model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
+        // activate hit box
+        hitbox.ActivateHitbox(holdingPlayer);
+
+        transform.position = shootPos.position + holdPosPadding;
+        transform.rotation = shootPos.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
+
+
+        rb.AddForce(shootPos.forward * throwSpeed, ForceMode.Impulse);
+        if (highlightEffect)
+            highlightEffect.SetActive(false);
+        thrown = true;
+
+    }
+
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
