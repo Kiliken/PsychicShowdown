@@ -6,6 +6,7 @@ using System.Text;
 using System.Configuration;
 using System.Threading;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 
 class BasicUdpServer
 {
@@ -16,6 +17,7 @@ class BasicUdpServer
     static volatile byte[] p2Data;
 
     static volatile int seed = 0;
+    static volatile Stopwatch stopWatch = new Stopwatch();
 
 
     public static void Main()
@@ -23,6 +25,7 @@ class BasicUdpServer
         Thread udpServerThread;
         udpServerThread = new Thread(new ThreadStart(ServerLoop));
         udpServerThread.Start();
+        stopWatch.Start();
         string command = "";
         Console.WriteLine("[Server] started on port " + port);
         do
@@ -36,13 +39,17 @@ class BasicUdpServer
                 StringifyBytes(p1Data);
                 Console.WriteLine("[Server] Player 2: ");
                 StringifyBytes(p2Data);
+                Console.WriteLine("[Server] Timer: " + stopWatch.ElapsedMilliseconds);
             }
 
             if (command == "reset")
             {
-                p1Data = new byte[] { 0x4E };
-                p2Data = new byte[] { 0x4E };
-                Console.WriteLine("[Server] data resetted ");
+                ResetData();
+            }
+
+            if (command == "kick")
+            {
+                KickAndReset();
             }
 
             if (command == "clear")
@@ -52,7 +59,7 @@ class BasicUdpServer
             }
 
             if (command == "help") Help();
-                
+
 
         } while (command != "close");
 
@@ -79,6 +86,23 @@ class BasicUdpServer
         " help\t SHOWS LIST OF AVIBILE COMMANDS\n"
         );
     }
+
+    static void ResetData()
+    {
+        p1Data = new byte[] { 0x4E };
+        p2Data = new byte[] { 0x4E };
+        stopWatch.Reset();
+        stopWatch.Start();
+        Console.WriteLine("[Server] data resetted ");
+    }
+    
+    static void KickAndReset()
+    {
+        p1Data = new byte[] { 0x4C };
+        p2Data = new byte[] { 0x4C };
+
+        Console.WriteLine("[Server] kicking player... ");
+    }
     
     private static void ServerLoop()
     {
@@ -103,7 +127,14 @@ class BasicUdpServer
                     p1Data = receivedData;
                     if (p2Data[0] == 0x4E)
                     {
-                        sdata = Encoding.ASCII.GetBytes("N");
+                        sdata = new byte[] { 0x4E };
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+                    if (p2Data[0] == 0x4B || p2Data[0] == 0x4C)
+                    {
+                        sdata = new byte[] { 0x4B };
+                        p1Data = new byte[] { 0x4C };
                         udpc.Send(sdata, sdata.Length, ep);
                         continue;
                     }
@@ -114,12 +145,30 @@ class BasicUdpServer
                     p2Data = receivedData;
                     if (p1Data[0] == 0x4E)
                     {
-                        sdata = Encoding.ASCII.GetBytes("N");
+                        sdata = new byte[] { 0x4E };
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+                    if (p2Data[0] == 0x4B || p2Data[0] == 0x4C)
+                    {
+                        sdata = new byte[] { 0x4B };
+                        p2Data = new byte[] { 0x4C };
                         udpc.Send(sdata, sdata.Length, ep);
                         continue;
                     }
                     udpc.Send(p1Data, p1Data.Length, ep);
                 }
+
+                if (p1Data == new byte[] { 0x4C } && p1Data == new byte[] { 0x4C })
+                {
+                    ResetData();
+                }
+
+                if (stopWatch.ElapsedMilliseconds > 180000)
+                {
+                    KickAndReset();
+                }
+
             }
             catch (SocketException ex)
             {

@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using UnityEngine.SceneManagement;
 
 
 public class NetController : MonoBehaviour
@@ -119,6 +120,11 @@ public class NetController : MonoBehaviour
         PrepareNetData();
         udpSend = NetManager.ParseByte(playerSide, thisSideData);
 
+        if (udpGet[0] == 0x4C)
+        {
+            SceneManager.LoadScene("TitleScreen");
+        }
+
         if (udpGet[0] != 0x4E)
         {
             data = NetManager.RetriveByte(udpGet);
@@ -138,7 +144,7 @@ public class NetController : MonoBehaviour
                 {
                     Debug.Log("Enemy Left Object Throwed");
                     //throw LeftObject here
-                    
+
                     leftObj = null;
                 }
 
@@ -165,7 +171,7 @@ public class NetController : MonoBehaviour
                 {
                     Debug.Log("Enemy Right Object Throwed");
                     //throw RightObject here
-                    
+
                     rightObj = null;
                 }
 
