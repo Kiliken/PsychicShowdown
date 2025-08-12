@@ -214,18 +214,18 @@ public class ControlManager : MonoBehaviour
             else
             {
                 Debug.Log("Player 2 Playstation controls");
-                playerMovementScript.moveXInput = moveX2_P;
-                playerMovementScript.moveYInput = moveY2_P;
-                playerMovementScript.jumpBtn = jump2_P;
-                playerMovementScript.dashBtn = dash2_P;
-                playerMovementScript.sprintBtn = sprint2_P;
-                cameraControllerScript.camXInput = camX2_P;
-                cameraControllerScript.camYInput = camY2_P;
-                cameraControllerScript.shldrSwapBtn = shldrSwap2_P;
-                playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_P;
-                playerScript.grabThrowRightBtn = grabThrowRightBtn2_P;
-                playerScript.aimCancelBtn = aimCancelBtn2_P;
-                playerScript.pauseBtn = pauseBtn2_P;
+                playerMovementScript.moveXInput = moveX1_P;
+                playerMovementScript.moveYInput = moveY1_P;
+                playerMovementScript.jumpBtn = jump1_P;
+                playerMovementScript.dashBtn = dash1_P;
+                playerMovementScript.sprintBtn = sprint1_P;
+                cameraControllerScript.camXInput = camX1_P;
+                cameraControllerScript.camYInput = camY1_P;
+                cameraControllerScript.shldrSwapBtn = shldrSwap1_P;
+                playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_P;
+                playerScript.grabThrowRightBtn = grabThrowRightBtn1_P;
+                playerScript.aimCancelBtn = aimCancelBtn1_P;
+                playerScript.pauseBtn = pauseBtn1_P;
             }
             playerScript.triggerNegative = -1;
         }

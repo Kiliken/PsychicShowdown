@@ -3572,6 +3572,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752090424586114728, guid: 1699ad11627f40948844959c3a565980, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1572386696005393296, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: hp
       value: 9
@@ -4554,6 +4558,14 @@ PrefabInstance:
     - target: {fileID: 4688077051249154267, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: objLayerMask.m_Bits
       value: 1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 6823707848414057955, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6823707848414057955, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6955162434689342156, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: m_Enabled

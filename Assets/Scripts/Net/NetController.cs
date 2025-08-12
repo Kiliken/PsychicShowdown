@@ -91,7 +91,8 @@ public class NetController : MonoBehaviour
 
         //player.GetComponent<Player>().playerNo = 1;
         playerOther.gameObject.AddComponent<NETPlayer>();
-        Destroy(playerOther.GetComponent<Rigidbody>());
+        //Destroy(playerOther.GetComponent<Rigidbody>());
+        playerOther.GetComponent<Rigidbody>().isKinematic = true;
 
         player.transform.GetComponent<Rigidbody>().useGravity = true;
         GameObject.Find((playerSide == 'A' ? "PlayerCam2" : "PlayerCam")).SetActive(false);
