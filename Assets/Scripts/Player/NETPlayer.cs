@@ -13,8 +13,10 @@ public class NETPlayer : MonoBehaviour
     public int playerNo = 1;    // 1 or 2
     PlayerSFXPlayer sfxPlayer;
     ObjHolder objHolder;
-    Transform shootPos;
+    [SerializeField] Transform shootPos;
     public Transform playerCam;   // camera transform
+
+    public Transform tempShootPos;
 
 
     [SerializeField] Transform objPosL;
@@ -52,9 +54,11 @@ public class NETPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tempShootPos = transform.GetChild(3).transform;
+
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
-        objHolder.playerCam = playerCam;
-        shootPos = playerCam.GetChild(0).transform;
+        objHolder.playerCam = tempShootPos;
+        shootPos = tempShootPos;
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
     }
@@ -72,18 +76,18 @@ public class NETPlayer : MonoBehaviour
     {
         leftObject = obj;
         Debug.Log("Left grab " + obj.objectName);
-        leftObject.GrabObject(objPosL, shootPos, playerNo);
+        leftObject.GrabObject(shootPos, shootPos, playerNo);
         holdingObjL = true;
-        sfxPlayer.PlaySFX(2);
+        //sfxPlayer.PlaySFX(2);
     }
 
     public void GrabRightObject(ThrowableObject obj)
     {
         rightObject = obj;
         Debug.Log("Right grab " + obj.objectName);
-        rightObject.GrabObject(objPosR, shootPos, playerNo);
+        rightObject.GrabObject(shootPos, shootPos, playerNo);
         holdingObjR = true;
-        sfxPlayer.PlaySFX(2);
+        //sfxPlayer.PlaySFX(2);
     }
 
     public void ThrowLeftObject()
@@ -91,7 +95,7 @@ public class NETPlayer : MonoBehaviour
         Debug.Log("Left throw");
         leftObject.ThrowObject();
         holdingObjL = false;
-        sfxPlayer.PlaySFX(3);
+        //sfxPlayer.PlaySFX(3);
     }
 
     public void ThrowRightObject()
@@ -99,7 +103,7 @@ public class NETPlayer : MonoBehaviour
         Debug.Log("Right throw");
         rightObject.ThrowObject();
         holdingObjR = false;
-        sfxPlayer.PlaySFX(3);
+        //sfxPlayer.PlaySFX(3);
     }
 
 }

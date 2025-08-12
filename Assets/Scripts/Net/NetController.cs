@@ -136,7 +136,7 @@ public class NetController : MonoBehaviour
             if ((byte)(data.leftHand - rgCheckLeft) != 0)
             {
                 //otherPlayer.ThrowLeftObject();
-                if (data.leftObjId != 0)
+                if (data.leftObjId != 0 && leftObj == null)
                 {
                     Debug.Log($"Enemy Left Object N{data.leftObjId} Taken");
                     leftObj = FindObjectById(data.leftObjId);
@@ -165,10 +165,10 @@ public class NetController : MonoBehaviour
             {
                 //otherPlayer.ThrowRightObject();
 
-                if (data.rightObjId != 0)
+                if (data.rightObjId != 0 && rightObj == null)
                 {
                     Debug.Log($"Enemy Right Object N{data.rightObjId} Taken");
-                    rightObj = FindObjectById(data.leftObjId);
+                    rightObj = FindObjectById(data.rightObjId);
                     //grab RightObject here
                     netPlayerScript.GrabRightObject(rightObj);
                 }

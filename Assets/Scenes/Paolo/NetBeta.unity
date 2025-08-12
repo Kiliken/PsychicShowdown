@@ -2629,8 +2629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b496e325a2b141040b5c3a766c16e8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 127.0.0.1
-  port: 25565
+  ip: 147.185.221.27
+  port: 38002
   gameUI: {fileID: 1667903861}
   playerSide: 66
   player: {fileID: 0}
@@ -3631,7 +3631,7 @@ PrefabInstance:
     - target: {fileID: 5471736018465175408, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 1031260082}
+      objectReference: {fileID: 0}
     - target: {fileID: 5471736018465175408, guid: 1699ad11627f40948844959c3a565980, type: 3}
       propertyPath: moveSpeedDefault
       value: 10
@@ -4514,6 +4514,14 @@ PrefabInstance:
     - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
+      propertyPath: playerActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2248099444933129275, guid: 49596e814f280624d9c00cd2100e2b53, type: 3}
       propertyPath: moveSpeedDefault
