@@ -40,6 +40,7 @@ public class NetController : MonoBehaviour
     [SerializeField] Transform playerOther;
 
     private Player playerScript;
+    private NETPlayer netPlayerScript;
 
     private byte rgCheckLeft = 0x00;
     private byte rgCheckRight = 0x00;
@@ -92,6 +93,7 @@ public class NetController : MonoBehaviour
 
         //player.GetComponent<Player>().playerNo = 1;
         playerOther.gameObject.AddComponent<NETPlayer>();
+        netPlayerScript = playerOther.GetComponent<NETPlayer>();
         //Destroy(playerOther.GetComponent<Rigidbody>());
         playerOther.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -139,11 +141,13 @@ public class NetController : MonoBehaviour
                     Debug.Log($"Enemy Left Object N{data.leftObjId} Taken");
                     leftObj = FindObjectById(data.leftObjId);
                     //grab LeftObject here
+                    netPlayerScript.GrabLeftObject(leftObj);
                 }
                 else
                 {
                     Debug.Log("Enemy Left Object Throwed");
                     //throw LeftObject here
+                    netPlayerScript.ThrowLeftObject();
 
                     leftObj = null;
                 }
@@ -166,11 +170,13 @@ public class NetController : MonoBehaviour
                     Debug.Log($"Enemy Right Object N{data.rightObjId} Taken");
                     rightObj = FindObjectById(data.leftObjId);
                     //grab RightObject here
+                    netPlayerScript.GrabRightObject(rightObj);
                 }
                 else
                 {
                     Debug.Log("Enemy Right Object Throwed");
                     //throw RightObject here
+                    netPlayerScript.ThrowRightObject();
 
                     rightObj = null;
                 }

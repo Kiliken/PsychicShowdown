@@ -135,7 +135,7 @@ public class ThrowableObject : MonoBehaviour
 
     public virtual void GrabObject(Transform posTransform, Transform shootTransform, int player)
     {
-        if (objectSize == 2)
+        if (objectSize > 0)
         {
             rb.isKinematic = false;
             model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");

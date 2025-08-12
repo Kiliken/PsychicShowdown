@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e05ba3c5f2e901144b78dad49a0be89b, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e05ba3c5f2e901144b78dad49a0be89b, type: 3}
       propertyPath: m_TagString
@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3405408981316816088, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3597075503209796589, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -277,6 +281,10 @@ PrefabInstance:
     - target: {fileID: 7571878978571524054, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: m_Name
       value: M_NewRock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571878978571524054, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: objectName

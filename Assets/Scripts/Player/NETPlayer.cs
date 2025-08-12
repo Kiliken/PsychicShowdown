@@ -65,7 +65,41 @@ public class NETPlayer : MonoBehaviour
     {
         if (!playerActive) return;
 
-        
+
+    }
+
+    public void GrabLeftObject(ThrowableObject obj)
+    {
+        leftObject = obj;
+        Debug.Log("Left grab " + obj.objectName);
+        leftObject.GrabObject(objPosL, shootPos, playerNo);
+        holdingObjL = true;
+        sfxPlayer.PlaySFX(2);
+    }
+
+    public void GrabRightObject(ThrowableObject obj)
+    {
+        rightObject = obj;
+        Debug.Log("Right grab " + obj.objectName);
+        rightObject.GrabObject(objPosR, shootPos, playerNo);
+        holdingObjR = true;
+        sfxPlayer.PlaySFX(2);
+    }
+
+    public void ThrowLeftObject()
+    {
+        Debug.Log("Left throw");
+        leftObject.ThrowObject();
+        holdingObjL = false;
+        sfxPlayer.PlaySFX(3);
+    }
+
+    public void ThrowRightObject()
+    {
+        Debug.Log("Right throw");
+        rightObject.ThrowObject();
+        holdingObjR = false;
+        sfxPlayer.PlaySFX(3);
     }
 
 }
