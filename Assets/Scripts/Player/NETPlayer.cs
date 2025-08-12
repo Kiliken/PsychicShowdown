@@ -57,6 +57,9 @@ public class NETPlayer : MonoBehaviour
         tempShootPos = transform.GetChild(3).transform;
 
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
+        objPosL = objHolder.transform.GetChild(0).transform;
+        objPosR = objHolder.transform.GetChild(1).transform;
+
         objHolder.playerCam = tempShootPos;
         shootPos = tempShootPos;
 
@@ -76,7 +79,7 @@ public class NETPlayer : MonoBehaviour
     {
         leftObject = obj;
         Debug.Log("Left grab " + obj.objectName);
-        leftObject.GrabObject(shootPos, shootPos, playerNo);
+        leftObject.GrabObject(objPosL, shootPos, playerNo);
         holdingObjL = true;
         //sfxPlayer.PlaySFX(2);
     }
@@ -85,7 +88,7 @@ public class NETPlayer : MonoBehaviour
     {
         rightObject = obj;
         Debug.Log("Right grab " + obj.objectName);
-        rightObject.GrabObject(shootPos, shootPos, playerNo);
+        rightObject.GrabObject(objPosR, shootPos, playerNo);
         holdingObjR = true;
         //sfxPlayer.PlaySFX(2);
     }
