@@ -47,6 +47,7 @@ public class NetController : MonoBehaviour
 
     private ThrowableObject leftObj;
     private ThrowableObject rightObj;
+    private Transform playerShootPos;
 
     private static void SendGetData()
     {
@@ -92,8 +93,8 @@ public class NetController : MonoBehaviour
         gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
 
         //player.GetComponent<Player>().playerNo = 1;
-        playerOther.gameObject.AddComponent<NETPlayer>();
-        netPlayerScript = playerOther.GetComponent<NETPlayer>();
+        netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
+        
         //Destroy(playerOther.GetComponent<Rigidbody>());
         playerOther.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -106,6 +107,7 @@ public class NetController : MonoBehaviour
     void Start()
     {
         playerScript = player.GetComponent<Player>();
+        
         thisSideData = new NetData();
         map = FindAnyObjectByType<MapGenerator>();
 
@@ -118,6 +120,9 @@ public class NetController : MonoBehaviour
 
     void Update()
     {
+
+        if(playerShootPos == null)
+            playerShootPos = playerScript.shootPos; 
 
         PrepareNetData();
         udpSend = NetManager.ParseByte(playerSide, thisSideData);
@@ -229,5 +234,10 @@ public class NetController : MonoBehaviour
         thisSideData.rightHand = playerScript.rightHandFlag;
         thisSideData.rightObjId = playerScript.rightObjRef;
         thisSideData.hp = (sbyte)playerScript.hp;
+        thisSideData.camPosX = playerShootPos.position.x;
+        thisSideData.camPosY = playerShootPos.position.y;
+        thisSideData.camPosZ = playerShootPos.position.z;
+        thisSideData.camRotX = playerShootPos.eulerAngles.x;
+        thisSideData.camRotY = playerShootPos.eulerAngles.x;
     }
 }

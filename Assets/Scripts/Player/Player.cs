@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     PlayerMovement movementScript;
     PlayerSFXPlayer sfxPlayer;
     ObjHolder objHolder;
-    Transform shootPos;
+    public Transform shootPos;
     Transform detectPos;
     public Transform playerCam;   // camera transform
     Camera cam;     // camera

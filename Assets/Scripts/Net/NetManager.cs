@@ -87,6 +87,11 @@ public static class NetManager
         data.leftObjId = BitConverter.ToUInt16(bytes, 19);
         data.rightObjId = BitConverter.ToUInt16(bytes, 21);
         data.hp = (sbyte)bytes[23];
+        data.camPosX = BitConverter.ToSingle(bytes, 24);
+        data.camPosY = BitConverter.ToSingle(bytes, 28);
+        data.camPosZ = BitConverter.ToSingle(bytes, 32);
+        data.camRotX = BitConverter.ToSingle(bytes, 36);
+        data.camRotY = BitConverter.ToSingle(bytes, 40);
         
         
         return data;
@@ -94,7 +99,7 @@ public static class NetManager
 
     public static byte[] ParseByte(char side, NetData data)
     {
-        byte[] buffer = new byte[24];
+        byte[] buffer = new byte[45];
 
         buffer[0] = (byte)side;
         Array.Copy(BitConverter.GetBytes(data.posX), 0, buffer, 1, 4);
@@ -106,6 +111,11 @@ public static class NetManager
         Array.Copy(BitConverter.GetBytes(data.leftObjId), 0, buffer, 19, 2);
         Array.Copy(BitConverter.GetBytes(data.rightObjId), 0, buffer, 21, 2);
         buffer[23] = (byte)data.hp;
+        Array.Copy(BitConverter.GetBytes(data.camPosX), 0, buffer, 24, 4);
+        Array.Copy(BitConverter.GetBytes(data.camPosY), 0, buffer, 28, 4);
+        Array.Copy(BitConverter.GetBytes(data.camPosZ), 0, buffer, 32, 4);
+        Array.Copy(BitConverter.GetBytes(data.camRotX), 0, buffer, 36, 4);
+        Array.Copy(BitConverter.GetBytes(data.camRotY), 0, buffer, 40, 4);
 
         return buffer;
     }
@@ -130,5 +140,12 @@ public class NetData
     public ushort leftObjId;
     public ushort rightObjId;
     public sbyte hp;
+
+    //Camera Pos
+    public float camPosX;
+    public float camPosY;
+    public float camPosZ;
+    public float camRotX;
+    public float camRotY;
 }
 
