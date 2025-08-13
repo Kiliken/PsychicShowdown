@@ -181,7 +181,7 @@ public class ThrowableObject : MonoBehaviour
         hitbox.ActivateHitbox(holdingPlayer);
 
         transform.position = shootPos.position + holdPosPadding;
-        transform.rotation = shootPos.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
+        transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
 
 
         rb.AddForce(shootPos.forward * throwSpeed, ForceMode.Impulse);
