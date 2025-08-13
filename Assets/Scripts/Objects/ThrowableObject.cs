@@ -163,13 +163,7 @@ public class ThrowableObject : MonoBehaviour
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
 
-        Debug.Log(transform.position);
-        Debug.Log(transform.rotation);
-
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
-
-        
-        Debug.Log(rb.velocity);
 
 
         if (highlightEffect)
@@ -189,16 +183,11 @@ public class ThrowableObject : MonoBehaviour
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
 
-        transform.position = shootPos.position + holdPosPadding;
-        transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
-
-        Debug.Log(transform.position);
-        Debug.Log(transform.rotation);
+        rb.position = shootPos.position + holdPosPadding;
+        rb.rotation = shootPos.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
 
         rb.AddForce(shootPos.forward * throwSpeed, ForceMode.Impulse);
 
-        
-        Debug.Log(rb.velocity);
 
         if (highlightEffect)
             highlightEffect.SetActive(false);
@@ -210,13 +199,13 @@ public class ThrowableObject : MonoBehaviour
     protected virtual void OnCollisionEnter(Collision collision)
     {
         if (thrown)
-        {
-            if (((1 << collision.gameObject.layer) & rbCollisionMask.value) != 0)
             {
-                // break or effect
-                ObjectEffect();
+                if (((1 << collision.gameObject.layer) & rbCollisionMask.value) != 0)
+                {
+                    // break or effect
+                    ObjectEffect();
+                }
             }
-        }
     }
 
 
