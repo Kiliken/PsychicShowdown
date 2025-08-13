@@ -127,12 +127,12 @@ public class NetController : MonoBehaviour
         PrepareNetData();
         udpSend = NetManager.ParseByte(playerSide, thisSideData);
 
-        if (udpGet[0] == 0x4C)
+        if (udpGet[0] == 0x4B)
         {
             SceneManager.LoadScene("TitleScreen");
         }
 
-        if (udpGet[0] != 0x4E)
+        if (udpGet[0] == 0x41 || udpGet[0] == 0x42)
         {
             data = NetManager.RetriveByte(udpGet);
             UpdatePosition();

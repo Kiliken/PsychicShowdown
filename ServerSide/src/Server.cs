@@ -17,7 +17,7 @@ class BasicUdpServer
     static volatile byte[] p2Data;
 
     static volatile int seed = 0;
-    static volatile Stopwatch stopWatch = new Stopwatch();
+    //static volatile Stopwatch stopWatch = new Stopwatch();
 
 
     public static void Main()
@@ -25,7 +25,7 @@ class BasicUdpServer
         Thread udpServerThread;
         udpServerThread = new Thread(new ThreadStart(ServerLoop));
         udpServerThread.Start();
-        stopWatch.Start();
+        //stopWatch.Start();
         string command = "";
         Console.WriteLine("[Server] started on port " + port);
         do
@@ -39,7 +39,7 @@ class BasicUdpServer
                 StringifyBytes(p1Data);
                 Console.WriteLine("[Server] Player 2: ");
                 StringifyBytes(p2Data);
-                Console.WriteLine("[Server] Timer: " + stopWatch.ElapsedMilliseconds);
+                //Console.WriteLine("[Server] Timer: " + stopWatch.ElapsedMilliseconds);
             }
 
             if (command == "reset")
@@ -91,15 +91,16 @@ class BasicUdpServer
     {
         p1Data = new byte[] { 0x4E };
         p2Data = new byte[] { 0x4E };
-        stopWatch.Reset();
-        stopWatch.Start();
+        //stopWatch.Reset();
+        //stopWatch.Start();
         Console.WriteLine("[Server] data resetted ");
     }
     
     static void KickAndReset()
     {
-        p1Data = new byte[] { 0x4C };
-        p2Data = new byte[] { 0x4C };
+        p1Data = new byte[] { 0x4B };
+        p2Data = new byte[] { 0x4B };
+		//stopWatch.Stop();
 
         Console.WriteLine("[Server] kicking player... ");
     }
@@ -149,7 +150,7 @@ class BasicUdpServer
                         udpc.Send(sdata, sdata.Length, ep);
                         continue;
                     }
-                    if (p2Data[0] == 0x4B || p2Data[0] == 0x4C)
+                    if (p1Data[0] == 0x4B || p1Data[0] == 0x4C)
                     {
                         sdata = new byte[] { 0x4B };
                         p2Data = new byte[] { 0x4C };
@@ -159,15 +160,20 @@ class BasicUdpServer
                     udpc.Send(p1Data, p1Data.Length, ep);
                 }
 
-                if (p1Data == new byte[] { 0x4C } && p1Data == new byte[] { 0x4C })
+                if (p1Data[0] == 0x4C  && p2Data [0] == 0x4C )
+                {
+                    ResetData();
+                }
+				
+				if (p1Data[0] == 0x52  || p2Data [0] == 0x52 )
                 {
                     ResetData();
                 }
 
-                if (stopWatch.ElapsedMilliseconds > 180000)
+                /*if (stopWatch.ElapsedMilliseconds > 180000)
                 {
                     KickAndReset();
-                }
+                }*/
 
             }
             catch (SocketException ex)
