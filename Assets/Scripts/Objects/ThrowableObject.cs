@@ -162,7 +162,16 @@ public class ThrowableObject : MonoBehaviour
         model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
         // activate hit box
         hitbox.ActivateHitbox(holdingPlayer);
+
+        Debug.Log(transform.position);
+        Debug.Log(transform.rotation);
+
         rb.AddForce(grabbedTransform.parent.transform.forward * throwSpeed, ForceMode.Impulse);
+
+        
+        Debug.Log(rb.velocity);
+
+
         if (highlightEffect)
             highlightEffect.SetActive(false);
         thrown = true;
@@ -183,8 +192,14 @@ public class ThrowableObject : MonoBehaviour
         transform.position = shootPos.position + holdPosPadding;
         transform.rotation = grabbedTransform.parent.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
 
+        Debug.Log(transform.position);
+        Debug.Log(transform.rotation);
 
         rb.AddForce(shootPos.forward * throwSpeed, ForceMode.Impulse);
+
+        
+        Debug.Log(rb.velocity);
+
         if (highlightEffect)
             highlightEffect.SetActive(false);
         thrown = true;
