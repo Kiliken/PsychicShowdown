@@ -2632,7 +2632,7 @@ MonoBehaviour:
   ip: 169.254.26.55
   port: 25565
   gameUI: {fileID: 1667903861}
-  playerSide: 66
+  playerSide: 65
   player: {fileID: 0}
   playerOther: {fileID: 0}
 --- !u!4 &1060199715
