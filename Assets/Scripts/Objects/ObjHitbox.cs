@@ -62,7 +62,10 @@ public class ObjHitbox : MonoBehaviour
                 // apply damage to player 2
             }
 
-            other.gameObject.transform.parent.GetComponent<Player>().ReceiveDamage(objectScript.damage);
+            if (other.gameObject.transform.parent.GetComponent<Player>() != null)
+            {
+                other.gameObject.transform.parent.GetComponent<Player>().ReceiveDamage(objectScript.damage); 
+            }
             objectScript.ObjectEffect();
             objectScript.DisableObject();
             hit = true;

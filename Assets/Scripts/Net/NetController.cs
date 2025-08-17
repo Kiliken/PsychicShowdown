@@ -96,6 +96,7 @@ public class NetController : MonoBehaviour
 
         //player.GetComponent<Player>().playerNo = 1;
         netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
+        netPlayerScript.playerNo = (playerSide == 'A' ? 2 : 1);
 
         //Destroy(playerOther.GetComponent<Rigidbody>());
         otherplayerRb = playerOther.GetComponent<Rigidbody>();

@@ -199,13 +199,14 @@ public class ThrowableObject : MonoBehaviour
     protected virtual void OnCollisionEnter(Collision collision)
     {
         if (thrown)
+        {
+            if (((1 << collision.gameObject.layer) & rbCollisionMask.value) != 0)
             {
-                if (((1 << collision.gameObject.layer) & rbCollisionMask.value) != 0)
-                {
-                    // break or effect
-                    ObjectEffect();
-                }
+                // break or effect
+                ObjectEffect();
+                Debug.Log(transform.position);
             }
+        }
     }
 
 

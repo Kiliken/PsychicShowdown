@@ -34,7 +34,10 @@ public class ExplosionHitbox : MonoBehaviour
         // may need to change tags to hurtbox later
         if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2")
         {
-            other.gameObject.transform.parent.GetComponent<Player>().ReceiveDamage(objectScript.explosionDamage);
+            if (other.gameObject.transform.parent.GetComponent<Player>() != null)
+            {
+                other.gameObject.transform.parent.GetComponent<Player>().ReceiveDamage(objectScript.explosionDamage);
+            }
             hit = true;
             GetComponent<SphereCollider>().enabled = false;
         }
