@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClips:
   - {fileID: 8300000, guid: e466fc7e49f1dca4dbd113a8514b6c31, type: 3}
-  relativeToPlayer: 1
+  relativeToPlayer: 0
   lowVolume: 0.05
   medVolume: 0.1
   highVolume: 0.5
@@ -237,7 +237,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e466fc7e49f1dca4dbd113a8514b6c31, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -281,7 +281,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
