@@ -49,6 +49,8 @@ public class NetController : MonoBehaviour
     private ThrowableObject rightObj;
     private Transform playerShootPos;
 
+    private Rigidbody otherplayerRb;
+
     private static void SendGetData()
     {
         long timeSpan = 0;
@@ -96,7 +98,8 @@ public class NetController : MonoBehaviour
         netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
 
         //Destroy(playerOther.GetComponent<Rigidbody>());
-        playerOther.GetComponent<Rigidbody>().isKinematic = true;
+        otherplayerRb = playerOther.GetComponent<Rigidbody>();
+        otherplayerRb.isKinematic = true;
 
         player.transform.GetComponent<Rigidbody>().useGravity = true;
         GameObject.Find((playerSide == 'A' ? "PlayerCam2" : "PlayerCam")).SetActive(false);
@@ -204,7 +207,7 @@ public class NetController : MonoBehaviour
 
     void UpdatePosition()
     {
-        playerOther.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
+        otherplayerRb.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
         playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
     }
 
@@ -212,6 +215,7 @@ public class NetController : MonoBehaviour
     {
         netPlayerScript.tempShootPos.position = new Vector3(data.camPosX, data.camPosY, data.camPosZ);
         netPlayerScript.tempShootPos.eulerAngles = new Vector3(data.camRotX, data.camRotY, 0);
+        playerOther.GetChild(1).eulerAngles = new Vector3(data.camRotX, data.camRotY, 0);
     }
 
     void EnablePlayer(Transform side)
