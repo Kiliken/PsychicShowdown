@@ -36,7 +36,7 @@ public class NetLoading : MonoBehaviour
 
     void Awake()
     {
-        DebugController dbctr = GameObject.FindAnyObjectByType<DebugController>();
+        DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
 
         if (dbctr.ip != string.Empty) ip = dbctr.ip;
         if (dbctr.port != 0) port = dbctr.port;

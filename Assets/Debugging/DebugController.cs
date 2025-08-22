@@ -27,10 +27,9 @@ public class DebugController : MonoBehaviour
 
         for(int i = 0; i < objs.Length; i++)
         {
-            if (objs[i].existenceFlag == 0x00 && objs.Length > 1)
+            if (objs[i].existenceFlag == 0x03 && objs[i] != this)
             {
-                Destroy(objs[i].gameObject);
-                continue;
+                Destroy(this.gameObject);
             }
                 
         }
@@ -76,7 +75,11 @@ public class DebugController : MonoBehaviour
     void Update()
     {
         if (existenceFlag == 0x00)
+        {
             existenceFlag = 0x03;
+            this.tag = "DebugCtrl";
+        }
+            
 
         if (Input.GetKeyDown(KeyCode.Backslash))
             showConsole = !showConsole;
