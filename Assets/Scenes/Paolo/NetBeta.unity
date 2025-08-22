@@ -2632,7 +2632,7 @@ MonoBehaviour:
   ip: 169.254.26.55
   port: 25565
   gameUI: {fileID: 1667903861}
-  playerSide: 65
+  playerSide: 66
   player: {fileID: 0}
   playerOther: {fileID: 0}
   gameManager: {fileID: 1373471946}
@@ -5295,6 +5295,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 833009420}
   - {fileID: 1919068183}
   - {fileID: 1060199715}
   - {fileID: 572862473}
@@ -5306,7 +5307,6 @@ SceneRoots:
   - {fileID: 749567097}
   - {fileID: 2015955967}
   - {fileID: 21568834}
-  - {fileID: 833009420}
   - {fileID: 563990732}
   - {fileID: 1444337213}
   - {fileID: 1541031977}

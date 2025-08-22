@@ -33,6 +33,7 @@ class BasicUdpServer
     
     static volatile int seed = 0;
 
+    static volatile byte flag = 0;
     static Random random = new Random();
     //static volatile Stopwatch stopWatch = new Stopwatch();
 
@@ -112,6 +113,7 @@ class BasicUdpServer
         p1Data = new byte[] { 0x4E };
         p2Data = new byte[] { 0x4E };
         seed = random.Next();
+        flag = 0;
         //stopWatch.Reset();
         //stopWatch.Start();
         Console.WriteLine("[Server] data resetted ");
@@ -147,7 +149,7 @@ class BasicUdpServer
                     ResetData();
                 }
 
-                if (p1Data[0] == 0x6C && p2Data[0] == 0x6C)
+                if (p1Data[0] == 0x6C && p2Data[0] == 0x6C && flag > 1)
                 {
                     ResetData();
                 }
@@ -209,7 +211,7 @@ class BasicUdpServer
                         udpc.Send(sdata, sdata.Length, ep);
                         continue;
                     }
-                     
+
                     if (receivedData[1] == 0x41)
                     {
                         p1Data = receivedData;
@@ -224,6 +226,7 @@ class BasicUdpServer
                         sdata[1] = p2Data[1];
                         Array.Copy(BitConverter.GetBytes(seed), 0, sdata, 2, 4);
                         udpc.Send(sdata, sdata.Length, ep);
+                        flag++;
                     }
                     if (receivedData[1] == 0x42)
                     {
@@ -239,6 +242,7 @@ class BasicUdpServer
                         sdata[1] = p1Data[1];
                         Array.Copy(BitConverter.GetBytes(seed), 0, sdata, 2, 4);
                         udpc.Send(sdata, sdata.Length, ep);
+                        flag++;
                     }
                 }
             }

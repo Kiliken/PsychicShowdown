@@ -15,12 +15,30 @@ public class DebugController : MonoBehaviour
     Queue myLogQueue = new Queue();
 
     public string sceneName = null;
+    public string ip = null;
+    public int port = 0;
+    public char playerSide = '0';
 
     void Awake()
     {
         if (GetArg("-scene") != null)
         {
             sceneName = GetArg("-scene");
+        }
+
+        if (GetArg("-ip") != null)
+        {
+            ip = GetArg("-ip");
+        }
+
+        if (GetArg("-port") != null)
+        {
+            port = int.Parse(GetArg("-port"));
+        }
+
+        if (GetArg("-player") != null)
+        {
+            playerSide = GetArg("-port")[0];
         }
     }
 

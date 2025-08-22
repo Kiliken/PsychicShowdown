@@ -123,7 +123,6 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateObjects()
     {
-        Random.InitState(seed);
 
         GameObject grassHolder = new GameObject("WorldGrass");
         grassHolder.transform.position = Vector3.zero;
@@ -275,7 +274,9 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-        //seed = Random.Range(6, 4587);
+
+        seed = (GameObject.FindObjectOfType<LoadedDataStorage>() != null ? GameObject.FindObjectOfType<LoadedDataStorage>().seed : 0);
+        Random.InitState(seed);
 
         objects = new List<GameObject>();
 

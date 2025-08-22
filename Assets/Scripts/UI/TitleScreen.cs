@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 public class TitleScreen : MonoBehaviour
 {
-    string sceneToUse = string.Empty;
+    string sceneToUse = "LoadingScene";
 
     [SerializeField] Transform worldObj;
     [SerializeField] private GameObject mainMenuPanel;
@@ -41,8 +41,8 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "BetaPortFHD";
-        Debug.Log(sceneToUse);
+        //sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "NetBeta";
+        //Debug.Log(sceneToUse);
         gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
         //EventSystem.current.SetSelectedGameObject(firstButton);
         //mainMenuPanel.SetActive(true);

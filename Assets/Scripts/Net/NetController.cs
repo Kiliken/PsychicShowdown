@@ -93,6 +93,12 @@ public class NetController : MonoBehaviour
 
     private void Awake()
     {
+        DebugController dbctr = GameObject.FindAnyObjectByType<DebugController>();
+
+        if (dbctr.ip != string.Empty) ip = dbctr.ip;
+        if (dbctr.port != 0) port = dbctr.port;
+        if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
+
         player = (playerSide == 'A' ? GameObject.Find("Player").transform : GameObject.Find("Player2").transform);
         playerOther = (playerSide == 'A' ? GameObject.Find("Player2").transform : GameObject.Find("Player").transform);
         Destroy(playerOther.GetComponent<Player>());

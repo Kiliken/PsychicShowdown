@@ -36,14 +36,20 @@ public class NetLoading : MonoBehaviour
 
     void Awake()
     {
-        udpc = new UdpClient(ip, port);
-        udpc.Client.ReceiveTimeout = 1000;
+        DebugController dbctr = GameObject.FindAnyObjectByType<DebugController>();
+
+        if (dbctr.ip != string.Empty) ip = dbctr.ip;
+        if (dbctr.port != 0) port = dbctr.port;
+        if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        udpc = new UdpClient(ip, port);
+        udpc.Client.ReceiveTimeout = 1000;
+
         byte[] buffer = new byte[2];
 
         buffer[0] = 0x6C;
