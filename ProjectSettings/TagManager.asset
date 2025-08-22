@@ -12,6 +12,7 @@ TagManager:
   - P1UI
   - P2UI
   - ServerData
+  - DebugCtrl
   layers:
   - Default
   - TransparentFX

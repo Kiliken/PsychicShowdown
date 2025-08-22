@@ -2818,7 +2818,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2934851253967011009, guid: 75feb7631c32a544a90fd125860d4605, type: 3}
-      propertyPath: sceneName
+      propertyPath: ip
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []

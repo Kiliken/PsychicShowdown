@@ -302,7 +302,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (!isTitle)
         {
-            Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
+            /*Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
             if (timer > 30)
             {
                 timer -= Time.deltaTime;
@@ -332,7 +332,7 @@ public class MapGenerator : MonoBehaviour
                 }
 
             }
-
+            */
             for (int i = 0; i < objects.Count; i++)
                 if (objects[i] == null)
                     objects.Remove(objects[i]);

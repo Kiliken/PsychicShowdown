@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2934851253967011009}
   m_Layer: 0
   m_Name: DebugController
-  m_TagString: Untagged
+  m_TagString: DebugCtrl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f396489d9f7c6459c8c8044040aad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: 
+  ip: 
+  port: 0
+  playerSide: 48
