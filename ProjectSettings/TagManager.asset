@@ -11,6 +11,7 @@ TagManager:
   - GameSettings
   - P1UI
   - P2UI
+  - ServerData
   layers:
   - Default
   - TransparentFX

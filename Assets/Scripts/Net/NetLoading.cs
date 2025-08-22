@@ -5,6 +5,10 @@ using System.Net.Sockets;
 using System.Net;
 using Debug = UnityEngine.Debug;
 using UnityEngine;
+using System;
+using System.Buffers;
+using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class NetLoading : MonoBehaviour
 {
@@ -18,14 +22,10 @@ public class NetLoading : MonoBehaviour
 
     public char playerSide = 'A';
 
-    private NetData data;
-
-    private NetData thisSideData;
-
-    private MapGenerator map;
+    LoadedDataStorage loadedData;
 
     [SerializeField]
-    private Transform gameUI;
+    private Transform spinner;
 
     byte[] udpSend = new byte[] { 0x4E };
     byte[] udpGet = new byte[] { 0x4E };
@@ -43,7 +43,15 @@ public class NetLoading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        byte[] buffer = new byte[2];
 
+        buffer[0] = 0x6C;
+        buffer[1] = (byte)playerSide;
+
+        udpSend = buffer;
+
+        loadedData = GameObject.FindFirstObjectByType<LoadedDataStorage>();
     }
 
     // Update is called once per frame
@@ -57,6 +65,17 @@ public class NetLoading : MonoBehaviour
         {
             SendGetData();
         }
+
+        spinner.eulerAngles += Vector3.forward * 100 *Time.deltaTime;
+        if (spinner.eulerAngles.z > 360f)
+            spinner.eulerAngles -= Vector3.forward * 360f;
+
+        if (udpGet[0] != 0x4E)
+        {
+            loadedData.seed = BitConverter.ToInt32(udpGet, 2);
+            SceneManager.LoadScene("NetBeta");
+        }
+            
     }
 
     void SendGetData()

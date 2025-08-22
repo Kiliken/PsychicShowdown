@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Beta/TitleScreen.unity
     guid: 4d177a49123d6c849873b01b4352d54d
   - enabled: 1
-    path: Assets/Scenes/Beta/BetaPortFHD.unity
-    guid: 9c1c508a11001fc43b08997bd136332d
-  - enabled: 0
-    path: Assets/Scenes/Beta/Chen27.unity
-    guid: f598cebae9402e9418a61f8dbde989b7
+    path: Assets/Scenes/Paolo/LoadingScene.unity
+    guid: 1b13bd90ad1b0774aaa7819772ba9fcb
+  - enabled: 1
+    path: Assets/Scenes/Paolo/NetBeta.unity
+    guid: 87b91d59b32121547831ab59c7599f4c
   - enabled: 1
     path: Assets/Scenes/Beta/EndAndRestart.unity
     guid: 07af084225e4aaa4c9ee41b798d14b5c
