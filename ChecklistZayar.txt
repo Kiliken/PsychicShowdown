@@ -128,15 +128,13 @@ ONLINE TO DO:
 @ test trajectory/hits
 @ fix skull bug
 @ sync time
-- enable map generation/random items
+@ enable map generation/random items
 - check if all items are being added
 @ Update HPs for both sides
 @ win/lose condition
-- UI timer
-- take damage outside barrier
+@ UI timer
 @ SFX for other player
 @ Effects for other player
-- UI for barrier
 @ return sound volume to normal
 
 
@@ -250,6 +248,11 @@ EFFECTS:
 - splat effect (tomato, flan)
 - Skull's flame
 - Meteor plasma (fire enveloping the meteor as it falls to the ground)
+
+Munakata sensei feedback:
+- add feedback effect for getting hit
+- add an intro countdown where both players can move around
+- map too wide, make smaller
 
 
 
