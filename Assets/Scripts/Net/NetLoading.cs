@@ -16,6 +16,8 @@ public class NetLoading : MonoBehaviour
     long timer = 0;
     private bool udpRunnig = true;
 
+    public char playerSide = 'A';
+
     private NetData data;
 
     private NetData thisSideData;

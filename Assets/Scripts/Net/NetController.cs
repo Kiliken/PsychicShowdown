@@ -44,6 +44,7 @@ public class NetController : MonoBehaviour
 
     private byte rgCheckLeft = 0x00;
     private byte rgCheckRight = 0x00;
+    private byte rgSoundCheck = 0x00;
 
     private ThrowableObject leftObj;
     private ThrowableObject rightObj;
@@ -197,6 +198,18 @@ public class NetController : MonoBehaviour
                     rgCheckRight -= 0x10;
             }
 
+            if ((byte)(data.soundFlag - rgSoundCheck) != 0)
+            {
+                Debug.Log($"Player sound:{data.soundIndex}");
+                //call the soundplayer fuction here
+
+
+                rgSoundCheck++;
+
+                if (rgSoundCheck >= 0x10)
+                    rgSoundCheck -= 0x10;
+            }
+
         }
     }
 
@@ -251,5 +264,7 @@ public class NetController : MonoBehaviour
         thisSideData.camPosZ = playerShootPos.position.z;
         thisSideData.camRotX = playerShootPos.eulerAngles.x;
         thisSideData.camRotY = playerShootPos.eulerAngles.y;
+        thisSideData.soundFlag = 0x00; //change this to your flag
+        thisSideData.soundIndex = 0x00; //change this to your index
     }
 }

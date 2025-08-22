@@ -83,6 +83,7 @@ class BasicUdpServer
         " reset\t RESETS STORED DATA\n" +
         " clear\t CLEAR THE CONSOLE\n" +
         " close\t CLOSE SERVER\n" +
+        " kick\t KICK BOTH PLAYER TO MAIN MENU\n" +
         " help\t SHOWS LIST OF AVIBILE COMMANDS\n"
         );
     }
@@ -123,6 +124,16 @@ class BasicUdpServer
                 receivedData = udpc.Receive(ref ep);
 
 
+                if (p1Data[0] == 0x4C  && p2Data [0] == 0x4C )
+                {
+                    ResetData();
+                }
+				
+				if (p1Data[0] == 0x52  || p2Data [0] == 0x52 )
+                {
+                    ResetData();
+                }
+
                 if (receivedData[0] == 0x41)
                 {
                     p1Data = receivedData;
@@ -158,16 +169,6 @@ class BasicUdpServer
                         continue;
                     }
                     udpc.Send(p1Data, p1Data.Length, ep);
-                }
-
-                if (p1Data[0] == 0x4C  && p2Data [0] == 0x4C )
-                {
-                    ResetData();
-                }
-				
-				if (p1Data[0] == 0x52  || p2Data [0] == 0x52 )
-                {
-                    ResetData();
                 }
 
                 /*if (stopWatch.ElapsedMilliseconds > 180000)
