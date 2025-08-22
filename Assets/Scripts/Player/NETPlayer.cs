@@ -33,7 +33,9 @@ public class NETPlayer : MonoBehaviour
     //temporary player hp (remove after implementing actual hp)
     public int maxHP = 10;
     public int hp = 10;     //cast to sbyte
+
     public bool playerActive = true;
+    public GameManager gameManager;
 
     // Effects
     [SerializeField] GameObject jumpEffect;
@@ -112,6 +114,30 @@ public class NETPlayer : MonoBehaviour
         rightObject.ThrowObjectNet();
         holdingObjR = false;
         //sfxPlayer.PlaySFX(3);
+    }
+
+
+    public void UpdateHP(sbyte newHP)
+    {
+        if (!playerActive || (int)newHP == hp) return;
+
+        //UPDATE UI
+        //playerPanel.UpdateHPBar();
+
+        hp = (int)newHP;
+        Debug.Log("Net Player HP: " + hp);
+
+        // disable hurtbox for splitsecond
+        // player dead
+        if (hp <= 0)
+        {
+            if (playerNo == 1)
+                gameManager.GameOver(2);
+            else
+                gameManager.GameOver(1);
+
+            Debug.Log("Net Player dead.");
+        }
     }
 
 

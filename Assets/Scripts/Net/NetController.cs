@@ -52,6 +52,10 @@ public class NetController : MonoBehaviour
 
     private Rigidbody otherplayerRb;
 
+    [Header("Other")]
+    [SerializeField] GameManager gameManager;
+
+
     private static void SendGetData()
     {
         long timeSpan = 0;
@@ -106,13 +110,15 @@ public class NetController : MonoBehaviour
         player.transform.GetComponent<Rigidbody>().useGravity = true;
         GameObject.Find((playerSide == 'A' ? "PlayerCam2" : "PlayerCam")).SetActive(false);
         EnablePlayer(player);
+
+        playerScript = player.GetComponent<Player>();
+        gameManager.player = playerScript;
+        gameManager.netPlayer = netPlayerScript;
     }
 
 
     void Start()
     {
-        playerScript = player.GetComponent<Player>();
-
         thisSideData = new NetData();
         map = FindAnyObjectByType<MapGenerator>();
 
@@ -140,6 +146,9 @@ public class NetController : MonoBehaviour
         if (udpGet[0] == 0x41 || udpGet[0] == 0x42)
         {
             data = NetManager.RetriveByte(udpGet);
+
+            netPlayerScript.UpdateHP(data.hp);
+
             UpdatePosition();
             UpdateShootPos();
 
