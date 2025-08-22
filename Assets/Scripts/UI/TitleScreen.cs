@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Unity.UI;
 using UnityEngine.Rendering.UI;
 using UnityEngine.EventSystems;
 using System.Transactions;
-using UnityEditor.UI;
+using System.Runtime.CompilerServices;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -16,42 +15,123 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] Transform worldObj;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject settingsPanel;
+    //private GameObject curDefaultButton;
+    private GameObject lastValidSelection;
     [SerializeField] private GameObject firstButton;
     [SerializeField] private GameObject firstSettingsButton;
+    private float navCooldown = 0.2f;
+    private float lastNavTime = 0f;
 
+    public float volume = 0.5f;
+    public float p1Sensitivity = 0.5f;
+    public bool p1controlisPS = true;
+    public float p2Sensitivity = 0.5f;
+    public bool p2controlisPS = true;
+
+    [SerializeField] private Slider soundSlider;
+    [SerializeField] private Slider p1SensitivitySlider;
+    [SerializeField] private Slider p2SensitivitySlider;
+
+    [SerializeField] private ControllerColumn p1ControllerColumn;
+    [SerializeField] private ControllerColumn p2ControllerColumn;
+
+    private GameSettings gameSettings;
+
+   
     // Start is called before the first frame update
     void Start()
     {
-        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "AlphaPortFHD";
+        sceneToUse = FindAnyObjectByType<DebugController>().sceneName != string.Empty ? FindAnyObjectByType<DebugController>().sceneName : "BetaPortFHD";
         Debug.Log(sceneToUse);
-        EventSystem.current.SetSelectedGameObject(firstButton);
-        mainMenuPanel.SetActive(true);
-        settingsPanel.SetActive(false);
+        gameSettings = GameObject.FindWithTag("GameSettings").GetComponent<GameSettings>();
+        //EventSystem.current.SetSelectedGameObject(firstButton);
+        //mainMenuPanel.SetActive(true);
+        //curDefaultButton = firstButton;
+        //settingsPanel.SetAcitive(false);
+        volume = gameSettings.soundVolume;
+        Debug.Log("Volume set to at begin: " + volume);
+        p1Sensitivity = gameSettings.p1Sensitivity;
+        p2Sensitivity = gameSettings.p2Sensitivity;
+        p1controlisPS = gameSettings.p1ControllerIsPS;
+        p2controlisPS = gameSettings.p2ControllerIsPS;
+        soundSlider.value = volume;
+        Debug.Log("Sound slider value set to: " + soundSlider.value);
+        Debug.Log(volume);
+        p1SensitivitySlider.value = gameSettings.p1Sensitivity;
+        p2SensitivitySlider.value = gameSettings.p2Sensitivity;
+
+
+        soundSlider.onValueChanged.AddListener(SetSoundVolume);
+        p1SensitivitySlider.onValueChanged.AddListener(SetP1Sensitivity);
+        p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
+
+       
+        p1ControllerColumn.selectedIndex = gameSettings.p1ControllerIsPS ? 0 : 1;
+        p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
+        p1ControllerColumn.UpdateVisuals();
+        p2ControllerColumn.UpdateVisuals();
+        SetSoundVolume(volume);
+
+
+        ShowMainMenuPanel();
     }
 
 
     // Update is called once per frame
     private void Update()
     {
+        var current = EventSystem.current.currentSelectedGameObject;
+
+        if (current != null && current != lastValidSelection)
+        {
+
+            lastValidSelection = current;
+        }
+
 
         PlayerInput();
+
+
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastValidSelection);
+        }
+
+        
+        //if (EventSystem.current.currentSelectedGameObject == null) 
+        //{
+        //    EventSystem.current.SetSelectedGameObject(curDefaultButton);
+        //    Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject?.name);
+        //}
+        
     }
 
     private void PlayerInput()
     {
-        float horizontal1 = Input.GetAxisRaw("Horizontal1");
-
         float vertical1 = Input.GetAxisRaw("Vertical1");
-        float horizontal2 = Input.GetAxisRaw("Horizontal2");
 
         float vertical2 = Input.GetAxisRaw("Vertical2");
-        if (vertical1 > 0f || vertical2 > 0f)
+
+        float vertical3 = Input.GetAxisRaw("Vertical3");
+
+        float now = Time.time;
+        if (now - lastNavTime > navCooldown)
         {
-            Navigate(Vector2.up);
-        }
-        else if (vertical1 < 0f || vertical2 < 0f)
-        {
-            Navigate(Vector2.down);
+            if (vertical1 > 0.5f || vertical2 > 0.5f || vertical3 > 0.5f)
+            {
+                Navigate(Vector2.up);
+                lastNavTime = now;
+            }
+            else if (vertical1 < -0.5f || vertical2 < -0.5f || vertical3 < -0.5f)
+            {
+                Navigate(Vector2.down);
+                lastNavTime = now;
+            }
+
+            if (vertical3 != 0f)
+            {
+                Debug.Log("Third controller input detected: " + vertical3);
+            }
         }
     }
 
@@ -82,6 +162,10 @@ public class TitleScreen : MonoBehaviour
     }
 
     public void LoadPlayScene(){
+        Debug.Log("Settings values: \nvolume:" + volume + "\np1 sensitivity: " + p1Sensitivity + "\np1 Controller:" + (p1controlisPS ? "PlayStation" : "Xbox"
+            + "\np2 sensitivity: " + p2Sensitivity + "\np2 Controller: " + (p2controlisPS ? "PlayStation" : "Xbox")));
+        gameSettings.SetSettings(volume, p1Sensitivity, p1controlisPS, p2Sensitivity, p2controlisPS);
+        Debug.Log("Loading scene: " + sceneToUse);
         SceneManager.LoadScene(sceneToUse);
     }
 
@@ -92,9 +176,12 @@ public class TitleScreen : MonoBehaviour
 
     public void ShowSettingPanel()
     {
+        //Debug.Log("Showing settings panel");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstSettingsButton);
+        //curDefaultButton = firstSettingsButton;
+        lastValidSelection = firstSettingsButton;
     }
 
     public void ShowMainMenuPanel()
@@ -102,5 +189,60 @@ public class TitleScreen : MonoBehaviour
         settingsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstButton);
+        //curDefaultButton = firstButton;\
+        lastValidSelection = firstButton;
+    }
+
+    public void SetSoundVolume(float value)
+    {
+        volume = value;
+        Debug.Log("Sound volume set to: " + volume);
+        gameSettings.soundVolume = volume;
+    }
+
+    public void SetControl(int p, bool isPS)
+    {
+
+        if (p == 1)
+        {
+            SetP1ControlType(isPS);
+            gameSettings.p1ControllerIsPS = isPS;
+        }
+        else if (p == 2)
+        {
+            SetP2ControlType(isPS);
+            gameSettings.p2ControllerIsPS = isPS;
+        }
+    }
+    public void SetP1Sensitivity(float value)
+    {
+        p1Sensitivity = value;
+        gameSettings.p1Sensitivity = p1Sensitivity;
+        Debug.Log("Player 1 sensitivity set to: " + p1Sensitivity);
+    }
+
+    public void SetP2Sensitivity(float value)
+    {
+        p2Sensitivity = value;
+        gameSettings.p2Sensitivity = p2Sensitivity;
+        Debug.Log("Player 2 sensitivity set to: " + p2Sensitivity);
+    }
+
+    public void SetP1ControlType(bool isPS)
+    {
+        p1controlisPS = isPS;
+        Debug.Log("Player 1 control type set to: " + (p1controlisPS ? "PlayStation" : "Xbox"));
+    }
+
+    public void SetP2ControlType(bool isPS)
+    {
+        p2controlisPS = isPS;
+        Debug.Log("Player 2 control type set to: " + (p2controlisPS ? "PlayStation" : "Xbox"));
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit game");
     }
 }

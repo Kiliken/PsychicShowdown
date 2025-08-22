@@ -95,7 +95,7 @@ public static class NetManager
         test = test.Concat(BitConverter.GetBytes(p.position.x)).ToArray();
         test = test.Concat(BitConverter.GetBytes(p.position.y)).ToArray();
         test = test.Concat(BitConverter.GetBytes(p.position.z)).ToArray();
-        test = test.Concat(BitConverter.GetBytes(p.eulerAngles.y)).ToArray();
+        test = test.Concat(BitConverter.GetBytes(p.GetChild(0).eulerAngles.y)).ToArray();
         //test = test.Concat(BitConverter.GetBytes(r)).ToArray();
         //test = test.Concat(BitConverter.GetBytes(shotFlag)).ToArray();
 

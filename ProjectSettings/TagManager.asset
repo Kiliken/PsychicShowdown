@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - Object
   - GameSettings
+  - P1UI
+  - P2UI
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - PlayerHurtbox
   - P1Hide
   - P2Hide
-  - 
+  - Barrier
   - 
   - 
   - 

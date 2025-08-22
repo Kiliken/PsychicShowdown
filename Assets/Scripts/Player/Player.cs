@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
@@ -11,6 +14,7 @@ public class Player : MonoBehaviour
     PlayerSFXPlayer sfxPlayer;
     ObjHolder objHolder;
     Transform shootPos;
+    Transform detectPos;
     public Transform playerCam;   // camera transform
     Camera cam;     // camera
     CameraController camController;
@@ -31,7 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask objLayerMask; // both object and obstacle (large objects)
     public PlayerPanel playerPanel;
 
-    public float objDetectionRange = 20f;
+    public float objDetectionRange = 30f;   // 20 default
     [SerializeField] GameObject currentTargetObj;    // object currently in player crosshair
     [SerializeField] ThrowableObject leftObject;    // object holding in left
     [SerializeField] ThrowableObject rightObject;    // object holding in right
@@ -54,15 +58,29 @@ public class Player : MonoBehaviour
     public string grabThrowLeftBtn = "GrabThrowL1";
     public string grabThrowRightBtn = "GrabThrowR1";
     public string aimCancelBtn = "AimCancel1";
+    public string pauseBtn = "Pause1"; // pause button for player 1
     public int triggerNegative = -1; // ps trigger negative is -1, xbox is 0
 
     public bool playerActive = true;
     public GameManager gameManager;
+    private GameSettings gameSettings;
 
+
+    InGameMenu pauseMenu; // reference to the pause menu script
 
     private void Awake()
     {
         hp = maxHP;
+        movementScript = GetComponent<PlayerMovement>();
+        if (playerNo == 1)
+        {
+            movementScript.isP1 = true;
+
+        }
+        else if (playerNo == 2)
+        {
+            movementScript.isP1 = false;
+        }
     }
 
 
@@ -72,23 +90,41 @@ public class Player : MonoBehaviour
 
         //playerPanel.UpdateHPBar();
         // set up player cam in other scripts
-        movementScript = GetComponent<PlayerMovement>();
+
         movementScript.playerCam = playerCam;
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
+        detectPos = playerCam.GetChild(1).transform;
+        pauseMenu = GameObject.Find("PauseScreens").GetComponent<InGameMenu>();
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
+        camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 
         if (playerNo == 1)
-            objectText = GameObject.Find("Canvas/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P1UI/ObjectText").GetComponent<TextMeshProUGUI>();
         else
-            objectText = GameObject.Find("Canvas/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
+            objectText = GameObject.Find("GameUI/P2UI/ObjectText").GetComponent<TextMeshProUGUI>();
 
         defaultZoom = smallZoom;
+
+
+        gameSettings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
+        if (playerNo == 1)
+        {
+            camSenNormal = 1f + (gameSettings.p1Sensitivity * 4);
+            movementScript.isP1 = true;
+
+        }
+        else if (playerNo == 2)
+        {
+            camSenNormal = 1f + (gameSettings.p2Sensitivity * 4);
+            movementScript.isP1 = false;
+        }
+
     }
 
 
@@ -99,6 +135,7 @@ public class Player : MonoBehaviour
 
         ObjectDetection();
         PlayerInput();
+        InGameMenuInput();
         //GetCameraDistance();
     }
 
@@ -106,13 +143,38 @@ public class Player : MonoBehaviour
     // detect pickable objects in front of player
     private void ObjectDetection()
     {
+        // 
+        // SPHERECAST VISUALIZATION DEBUG
+        Vector3 origin = detectPos.position;
+        Vector3 direction = playerCam.transform.forward;
+        float distance = objDetectionRange;
+        float radius = sphereRadius;
+
+        // For drawing the path of the spherecast
+        //Debug.DrawRay(origin, direction * distance, Color.red, 0.1f);
+
+        // Draw multiple wire spheres along the cast path
+        int numSteps = 10;
+        for (int i = 0; i <= numSteps; i++)
+        {
+            float step = (float)i / numSteps;
+            Vector3 point = origin + direction * (distance * step);
+
+            // SPHERE CAST DEBUG
+            //DebugExtension.DebugWireSphere(point, Color.yellow, radius, 0.1f);
+        }
+
         // object detection
         RaycastHit hit;
-        if (Physics.SphereCast(shootPos.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
+        if (Physics.SphereCast(detectPos.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
             if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
             {
+                if (currentTargetObj)
+                {
+                    currentTargetObj.GetComponent<ThrowableObject>().ShowHideHighlight(false);
+                }
                 currentTargetObj = hit.transform.gameObject;
                 if (currentTargetObj.GetComponent<ThrowableObject>().canGrab && (!leftAiming && !rightAiming))
                 {
@@ -144,6 +206,9 @@ public class Player : MonoBehaviour
         //Debug.Log(Input.GetAxisRaw(grabThrowLeftBtn));
         // Left Trigger 
         // xbox axis is 0
+
+
+
         if (Input.GetAxisRaw(grabThrowLeftBtn) != triggerNegative && !aimCanceledL)
         {
             if (!triggerInUseL && !rightAiming)
@@ -305,6 +370,7 @@ public class Player : MonoBehaviour
             rightAiming = false;
             camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
         }
+
     }
 
     public void ReceiveDamage(int damage)
@@ -328,6 +394,50 @@ public class Player : MonoBehaviour
             Debug.Log("Player " + playerNo + " dead.");
         }
     }
+
+    //Activates and runs the in game menu.
+    public void InGameMenuInput()
+    {
+        if (Input.GetButtonDown(pauseBtn))
+        {
+            Debug.Log("Pause button pressed for player " + playerNo);
+            if (gameManager.gameStarted)
+            {
+                if (pauseMenu.isPlayerPauseMenuActive(playerNo))
+                {
+                    pauseMenu.HidePauseMenu(playerNo);
+                }
+                else
+                {
+                    pauseMenu.ShowPauseMenu(playerNo);
+                }
+            }
+        }
+
+        if (pauseMenu.isPlayerPauseMenuActive(playerNo))
+        {
+            // If the pause menu is active, disable player movement and camera control
+            movementScript.inputActive = false;
+            camController.inputActive = false;
+            //Debug.Log("set inactive" + playerNo);
+        }
+        else
+        {
+            // If the pause menu is not active, enable player movement and camera control
+            movementScript.inputActive = true;
+            camController.inputActive = true;
+            //Debug.Log("set active" + playerNo);
+        }
+    }
+
+    // Continue the game from the pause menu by enabling player movement and camera control
+    public void ContinueGame()
+    {
+        pauseMenu.HidePauseMenu(playerNo);
+        movementScript.inputActive = true;
+        camController.inputActive = true;
+    }
+
 
     public void SetPlayerActive(bool a)
     {
@@ -361,4 +471,6 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+
 }

@@ -55,9 +55,11 @@ public class DebugController : MonoBehaviour
 
         //float y = 0f;
 
-        GUI.Box(new Rect(0, 0, Screen.width, 30), "");
+        GUI.Box(new Rect(0, 0, Screen.width, Screen.height * .06f), "");
         GUI.backgroundColor = new Color(0,0,0,0);
-        input = GUI.TextArea(new Rect(10f, 5f, Screen.width-20f, 30), input);
+        GUI.skin.label.fontSize = (int)(Screen.height * .03f);
+        GUI.skin.textArea.fontSize = (int)(Screen.height * .03f);
+        input = GUI.TextArea(new Rect(10f, 5f, Screen.width-20f, Screen.height * .06f), input);
         GUILayout.BeginArea(new Rect(10f, 30, Screen.width, Screen.height));
         GUILayout.Label("\n" + string.Join("\n", myLogQueue.ToArray()));
         GUILayout.EndArea();    

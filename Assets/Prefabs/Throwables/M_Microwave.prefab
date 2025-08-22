@@ -110,12 +110,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: objectName
-      value: "\u96FB\u5B50\u30EC\u30F3\u30B8"
+      value: MICROWAVE
       objectReference: {fileID: 0}
     - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: objectSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+      propertyPath: effectParticle
+      value: 
+      objectReference: {fileID: 6191664386755193019, guid: c144754d8b8987c47a968cc978929253, type: 3}
     - target: {fileID: 8850753224937880759, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
       propertyPath: m_Mesh
       value: 

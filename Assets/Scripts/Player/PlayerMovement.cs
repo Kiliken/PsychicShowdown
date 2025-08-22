@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,9 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] GameObject jumpEffect;
-    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float jumpForce = 11f; // 10
     [SerializeField] float jumpCooldown = 0.25f;
     [SerializeField] float airMultiplier = 0.4f;
+    [SerializeField] float fallSpeed = 1.5f;
     private bool canJump = true;
     public int jumpsLeft = 3;
     public int maxJumps = 3;
@@ -72,6 +75,13 @@ public class PlayerMovement : MonoBehaviour
     public string dashBtn = "Dash1";
     public string sprintBtn = "Sprint1";
 
+    //For whether the player is in the pause menu or not
+    public bool inputActive = true;
+
+    [SerializeField] private EventSystemUpdate myEventSystem;
+    public bool isP1;
+    private float navCooldown = 0.2f;
+    private float lastNavTime = 0f;
 
     void Start()
     {
@@ -82,6 +92,22 @@ public class PlayerMovement : MonoBehaviour
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
         playerHurtbox = transform.Find("Hurtbox").gameObject;
+        inputActive = true;
+
+        if (myEventSystem == null)
+        {
+            string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
+            GameObject obj = GameObject.Find(targetName);
+            if (obj != null) myEventSystem = obj.GetComponent<EventSystemUpdate>();
+        }
+
+        if (isP1)
+        {
+            Debug.Log("this is P1");
+        } else
+        {
+            Debug.Log("this is p2");
+        }
     }
 
 
@@ -97,7 +123,16 @@ public class PlayerMovement : MonoBehaviour
                 jumpsLeft = maxJumps;
             }
 
-            PlayerInput();
+            //Runs regular player movement input if inputActive is true(not in pause menu)
+            if (inputActive)
+            {
+                PlayerInput();
+            }
+            else
+            {
+                MenuInput();
+            }
+
 
             if (dashesLeft != maxDashes)
             {
@@ -112,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    
 
     private void FixedUpdate()
     {
@@ -158,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
             if (jumpsLeft > 0)
             {
                 jumpsLeft--;
-                Jump();
+                Jump(false);
             }
         }
 
@@ -175,6 +211,79 @@ public class PlayerMovement : MonoBehaviour
             Dash();
         }
     }
+
+    // Handle menu navigation input
+    private void MenuInput()
+    {
+        float vertical;
+
+        if (isP1)
+        {
+            vertical = Input.GetAxisRaw("Vertical1");
+        }
+        else
+        {
+            vertical = Input.GetAxisRaw("Vertical2");
+        }
+
+        float now = Time.time;
+        if (now - lastNavTime > navCooldown)
+        {
+            if (vertical > 0.5f)
+            {
+                Navigate(Vector2.up);
+                lastNavTime = now;
+            }
+            else if (vertical < -0.5f)
+            {
+                Navigate(Vector2.down);
+                lastNavTime = now;
+            }
+
+        }
+    }
+
+    //Navigate through UI elements using joystick
+    private void Navigate(Vector2 dir)
+    {
+        if (myEventSystem == null) return;
+
+        var cur = myEventSystem.currentSelectedGameObject;
+        if (cur == null) return;
+
+        Selectable selectable = cur.GetComponent<Selectable>();
+        if (selectable == null) return;
+
+        Selectable next = null;
+
+        if (dir == Vector2.up) next = selectable.FindSelectableOnUp();
+        if (dir == Vector2.down) next = selectable.FindSelectableOnDown();
+        if (dir == Vector2.left) next = selectable.FindSelectableOnLeft();
+        if (dir == Vector2.right) next = selectable.FindSelectableOnRight();
+
+        if (next != null && !IsInSameCanvas(cur, next.gameObject))
+        {
+            Debug.LogWarning("Blocked cross-canvas navigation to: " + next.name);
+            next = null;
+        }
+
+        if (next != null)
+        {
+            myEventSystem.SetSelectedGameObject(next.gameObject);
+        }
+    }
+
+    //Check if two GameObjects are in the same Canvas
+    private bool IsInSameCanvas(GameObject a, GameObject b)
+    {
+        Canvas canvasA = a.GetComponentInParent<Canvas>();
+        Canvas canvasB = b.GetComponentInParent<Canvas>();
+
+        Debug.Log($"[Canvas Check] {a.name} in {canvasA?.name} vs {b.name} in {canvasB?.name}");
+
+        return canvasA != null && canvasA == canvasB;
+    }
+
 
 
     private void Move()
@@ -199,14 +308,24 @@ public class PlayerMovement : MonoBehaviour
             if (grounded)
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
             else
+            {
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+                if (!grounded && rb.velocity.y < 0f)
+                {
+                    //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 1.05f, rb.velocity.z);
+                    rb.AddForce(Vector3.down * fallSpeed * 10f, ForceMode.Force);
+                    //Debug.Log(rb.velocity.y);
+                }
+            }
+
         }
     }
 
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
@@ -215,13 +334,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Jump()
+    public void Jump(bool high)
     {
         grounded = false;
         hitGround = false;
         canJump = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        if (high)
+            rb.AddForce(transform.up * (jumpForce * 3), ForceMode.Impulse);
+        else
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
         sfxPlayer.PlaySFX(0);
         Instantiate(jumpEffect, transform.position, quaternion.identity);
@@ -298,6 +421,48 @@ public class PlayerMovement : MonoBehaviour
         if (disableGravityDuringDash) rb.useGravity = true;
         isDashing = false;
         playerHurtbox.SetActive(true); // re-enable hurtbox
+
+        Invoke(nameof(ResetDash), dashCooldown);
+    }
+
+    // OLD DASH
+    private IEnumerator DashCoroutine1()
+    {
+        canDash = false;
+        isDashing = true;
+        dashesLeft--;
+
+        Vector3 direction = moveDirection.normalized;
+        if (direction == Vector3.zero) direction = playerModel.transform.forward;   // dash into facing direction if no movement
+
+        Vector3 start = rb.position;
+        Vector3 target = start + direction * maxDashDistance;
+
+        // raycast into dashing direction and check if there is an object
+        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
+        {
+            target = hit.point - direction * dashStopPadding;
+        }
+
+        float elapsed = 0f;
+        float duration = dashDuration;
+
+        if (disableGravityDuringDash) rb.useGravity = false;
+        if (resetVelocityOnDash) rb.velocity = Vector3.zero;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            Vector3 newPos = Vector3.Lerp(start, target, t);
+            rb.MovePosition(newPos);
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.MovePosition(target);
+
+        if (disableGravityDuringDash) rb.useGravity = true;
+        isDashing = false;
 
         Invoke(nameof(ResetDash), dashCooldown);
     }

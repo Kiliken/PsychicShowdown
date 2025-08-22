@@ -86,9 +86,10 @@ public class ThrowableObject : MonoBehaviour
         else if (!thrown && !canGrab)
         {
             // grab
-            if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
+            if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.5f)
             {
-                //transform.position = Vector3.Lerp(transform.position, grabbedTransform.position, grabSpeed * Time.deltaTime);
+                // TEMPORARY MOVE POS FIX
+                rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed * 100f * Time.deltaTime));
             }
             // snap to player
             else
@@ -121,18 +122,18 @@ public class ThrowableObject : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (!thrown && !canGrab)
-        {
-            // grab
-            if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
-            {
-                rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed));
-            }
-        }
+        // if (!thrown && !canGrab)
+        // {
+        //     // grab
+        //     if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
+        //     {
+        //         rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed));
+        //     }
+        // }
     }
 
 
-    public void GrabObject(Transform posTransform, Transform shootTransform, int player)
+    public virtual void GrabObject(Transform posTransform, Transform shootTransform, int player)
     {
         if (objectSize == 2)
         {
@@ -251,6 +252,18 @@ public class ThrowableObject : MonoBehaviour
         objectDisabled = true;
         Debug.Log("object disabled");
     }
+
+
+    public void RemoveObject()
+    {
+        DisableObject();
+        effectActivated = true;
+
+        // ADD DISAPPEAR EFFECT
+
+        Destroy(this.gameObject);   // remove later
+    }
+
 
     public void ShowHideHighlight(bool show)
     {

@@ -70,6 +70,9 @@ public class NetController : MonoBehaviour
         player = (playerSide == 'A' ? GameObject.Find("Player").transform : GameObject.Find("Player2").transform);
         playerOther = (playerSide == 'A' ? GameObject.Find("Player2").transform : GameObject.Find("Player").transform);
 
+        player.GetComponent<Player>().playerNo = 1;
+        Destroy(playerOther.GetComponent<Rigidbody>());
+
         player.transform.GetComponent<Rigidbody>().useGravity = true;
         GameObject.Find((playerSide == 'A' ? "PlayerCam2" : "PlayerCam")).SetActive(false);
         EnablePlayer(player);
@@ -108,7 +111,7 @@ public class NetController : MonoBehaviour
     void UpdatePosition()
     {
         playerOther.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
-        playerOther.eulerAngles = new Vector3(0, data.rotBody, 0);
+        playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
     }
 
     void EnablePlayer(Transform side)

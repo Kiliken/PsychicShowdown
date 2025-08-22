@@ -420,9 +420,10 @@ MonoBehaviour:
   moveSpeedSprint: 20
   moveSpeedDash: 70
   jumpEffect: {fileID: 2417599410679479793, guid: 701b2b0cb1bbf2048a6dd16fba743c59, type: 3}
-  jumpForce: 10
+  jumpForce: 11
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  fallSpeed: 1.5
   jumpsLeft: 3
   maxJumps: 3
   dashCooldown: 0.4
@@ -437,12 +438,12 @@ MonoBehaviour:
   dashStopPadding: 0.5
   dashCollisionMask:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 17472
   isSprinting: 0
   playerHeight: 2.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   grounded: 0
   hitGround: 0
   maxSlopeAngle: 40
@@ -476,7 +477,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   playerPanel: {fileID: 0}
-  objDetectionRange: 20
+  objDetectionRange: 30
   currentTargetObj: {fileID: 0}
   leftObject: {fileID: 0}
   rightObject: {fileID: 0}

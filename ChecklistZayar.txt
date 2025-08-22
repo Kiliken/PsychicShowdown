@@ -55,8 +55,8 @@ Before school festival:
 @ make items easier to pick up (box cast, highlight)
 @ show object name under crosshair
 @ fix object text color
+@ adjust camera offset according to object size
 - adjust object sizes
-- adjust camera offset according to object size
 - adjust player move speed, etc
 
 @ make grenade explosion bigger (buffed)
@@ -64,23 +64,54 @@ Before school festival:
 @ stop sprinting when aiming
 @ jump effect
 @ adjust new objects
-- special items
 
+
+
+Made in Beta
+- object sizes are increased
+- objects are now easier to pick up (new detection, highlighting)
+- camera distance now adjusts to the size of object held
+- sprinting
+- new objects
+- new effects
+- new UI and functions
+- game system adjustments
+- bug fixes
+
+After Beta
+- net play
+- special items
 - hand animations
-- intro
-- new end screen
-- make barrier/space smaller when the timer reaches a set time (discussion required)
-- dash effect (?)
+- More UI and design components
+- effects
+
+
+
+---POST BETA---
+@ destroy function item
+@ add explosion to microwave
+@ fix grab distance bug
+@ change item text (English, more readable)
+- add disappear effect for items
+- special items
+- dash effect
+- hand animations
+
 
 Chen:
 @ add a way for UI to be controllable with controller
 @ rework player UI
-- rework main menu
-- rework game over menu
+@ rework main menu
+@ rework game over menu
+~ options menu
+- remove new input system
 - in-game menu (not Pause) for quitting the game
-- options menu
 - UI for objects holding in left and right hands
 - screen fade
+- intro/count down
+- tutorial screen
+- new end screen?
+
 
 Paolo:
 @ torii gate size
@@ -88,25 +119,29 @@ Paolo:
 @ shader rework
 @ new terrain generation
 @ grass
+@ object spawning (random, special)
+- disappear shader
 - add new objects
-
+- make barrier/space smaller when the timer reaches a set time
 
 
 SPECIAL OBJECTS:
 These are special objects with a lower spawn rate and/or spawn at a set time interval.
 
-Skull (small):
+@ Skull (small):
 - Once thrown, chases the other player and deal damage (cannot detect obstacles or large objects and will collide with them).
 - Once thrown, lights on fire like ghost rider and starts laughing.
 
-Spear (medium):
+@ Spear (small):
 - Once thrown, multiplies itself into 5-10 copies.
 
 Meteor (small):
 - Initially a small rock. Once thrown, it starts growing bigger and bigger until it hits something.
 - The damage it deals to the opponent will vary to the size it is at when it hits the enemy.
 
-Pudding/Flan (large):
+- a strange looking crystal, once thrown, a meteor starts falling from the sky
+
+@ Pudding/Flan (large):
 - When jumped on, makes the player jump up very high, giving them a high vantage point.
 
 
@@ -175,9 +210,31 @@ SFX:
 - throw object
 - object hit
 - player take damage
+- BGM
+
+SFX:
+- sprinting
+- explosion (grenade/microwave/skull)
+- explosion (meteor)
+- splat sound
 - player death/lose
 - game end tune
-- BGM
+- menu blip
+- menu confirm
+
+MODELS:
+- Skull (optional)
+- Flan
+- Spear
+- Meteor 
+- Hands
+
+EFFECTS:
+- Sprint
+- splat effect (tomato, flan)
+- Skull's flame
+- Meteor plasma (fire enveloping the meteor as it falls to the ground)
+
 
 
 

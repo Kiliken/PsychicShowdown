@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
     public string shldrSwapBtn = "ShoulderSwap1";
 
     public bool playerActive = true;
+    public bool inputActive = true;
 
 
     // Start is called before the first frame update
@@ -39,6 +40,7 @@ public class CameraController : MonoBehaviour
     {
         camDistanceTarget = camDistance;
         offsetXTarget = offsetX;
+        inputActive = true;
     }
 
 
@@ -67,7 +69,7 @@ public class CameraController : MonoBehaviour
             offsetX = Mathf.Lerp(offsetX, offsetXTarget, Time.deltaTime * 3);
         }
 
-        if (playerActive)
+        if (playerActive && inputActive)
         {
             //increase speed if diagonal input
             float diagonalSpd = 1f;
