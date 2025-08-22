@@ -106,8 +106,6 @@ Chen:
 ~ options menu
 - rework UI for online mode
 - remove multiple event system
-- in-game menu (not Pause) for quitting the game
-- UI for objects holding in left and right hands
 - screen fade
 - intro/count down
 - tutorial screen
@@ -129,16 +127,17 @@ Paolo:
 ONLINE TO DO:
 @ test trajectory/hits
 @ fix skull bug
-- sync time
+@ sync time
 - enable map generation/random items
 - check if all items are being added
 @ Update HPs for both sides
-- win/lose condition
+@ win/lose condition
+- UI timer
 - take damage outside barrier
-- SFX for other player
-- Effects for other player
+@ SFX for other player
+@ Effects for other player
 - UI for barrier
-- return sound volume to normal
+@ return sound volume to normal
 
 
 

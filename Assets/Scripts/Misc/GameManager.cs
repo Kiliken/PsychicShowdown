@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
 
         player.gameManager = this;
         netPlayer.gameManager = this;
-        //timer.gameManager = this;
-        //timer.StartTimer(timeLimit);
+        timer.gameManager = this;
+        timer.StartTimer(timeLimit);
         gameStarted = true;
     }
 
@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
         //player2.SetPlayerActive(false);
 
         // pause timer
-        //timer.timerActive = false;
-        //timer.gameObject.SetActive(false);
+        timer.timerActive = false;
+        timer.gameObject.SetActive(false);
 
         // add draw
         if (winner == 1)
