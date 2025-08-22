@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 public class CommandList {
     //Write here your command
     public static DebugCommand<string> LOG {get;} = new DebugCommand<string>("log", "logs", "log", (x) =>{
-            Debug.Log(x);
+            if(x == "args") {
+                DebugController dbctrltest = GameObject.FindAnyObjectByType<DebugController>();
+                Debug.Log($"ip: {dbctrltest.ip}");
+                Debug.Log($"port: {dbctrltest.port}");
+                Debug.Log($"player: {dbctrltest.playerSide}");
+        }
         });
 
     public static DebugCommand<string> LOADSCENE { get; } = new DebugCommand<string>("loadScene", "Loads a scene", "loadScene", (x) => {
