@@ -202,7 +202,7 @@ public class NetController : MonoBehaviour
             {
                 Debug.Log($"Player sound:{data.soundIndex}");
                 //call the soundplayer fuction here
-
+                netPlayerScript.PlaySFXEffect(data.soundIndex);
 
                 rgSoundCheck++;
 
@@ -264,7 +264,7 @@ public class NetController : MonoBehaviour
         thisSideData.camPosZ = playerShootPos.position.z;
         thisSideData.camRotX = playerShootPos.eulerAngles.x;
         thisSideData.camRotY = playerShootPos.eulerAngles.y;
-        thisSideData.soundFlag = 0x00; //change this to your flag
-        thisSideData.soundIndex = 0x00; //change this to your index
+        thisSideData.soundFlag = playerScript.soundFlag; //change this to your flag
+        thisSideData.soundIndex = playerScript.soundIndex; //change this to your index
     }
 }

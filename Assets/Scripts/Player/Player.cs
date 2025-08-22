@@ -79,6 +79,10 @@ public class Player : MonoBehaviour
     public ushort leftObjRef = 0;
     [NonSerialized]
     public ushort rightObjRef = 0;
+    [NonSerialized]
+    public sbyte soundIndex = 0x00;
+    [NonSerialized] 
+    public byte soundFlag = 0x00;   // 0: not playing, 1: playing
 
     private void Awake()
     {
@@ -149,6 +153,14 @@ public class Player : MonoBehaviour
         PlayerInput();
         InGameMenuInput();
         //GetCameraDistance();
+
+        // flag reset
+        if (leftHandFlag >= 0x10)
+            leftHandFlag -= 0x10;
+        if (rightHandFlag >= 0x10)
+            rightHandFlag -= 0x10;
+        if(soundFlag >= 0x10) 
+            soundFlag -= 0x10;
     }
 
 
@@ -241,8 +253,8 @@ public class Player : MonoBehaviour
 
                         GetCameraDistance();
 
+                        soundIndex = 0x03;
                         sfxPlayer.PlaySFX(2);
-
                     }
                 }
                 // aim
@@ -294,9 +306,8 @@ public class Player : MonoBehaviour
 
                 GetCameraDistance();
 
-
+                soundIndex = 0x04;
                 sfxPlayer.PlaySFX(3);
-
             }
 
             if (holdingObjR)
@@ -333,8 +344,8 @@ public class Player : MonoBehaviour
 
                         GetCameraDistance();
 
+                        soundIndex = 0x03;
                         sfxPlayer.PlaySFX(2);
-
                     }
                 }
                 // aim
@@ -384,6 +395,7 @@ public class Player : MonoBehaviour
 
                 GetCameraDistance();
 
+                soundIndex = 0x04;
                 sfxPlayer.PlaySFX(3);
             }
 

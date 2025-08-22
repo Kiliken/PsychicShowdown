@@ -34,6 +34,9 @@ public class NETPlayer : MonoBehaviour
     public int hp = 10;     //cast to sbyte
     public bool playerActive = true;
 
+    // Effects
+    [SerializeField] GameObject jumpEffect;
+
 
     //For online mode
     [NonSerialized]
@@ -81,7 +84,6 @@ public class NETPlayer : MonoBehaviour
         Debug.Log("Left grab " + obj.objectName);
         leftObject.GrabObject(objPosL, shootPos, playerNo);
         holdingObjL = true;
-        //sfxPlayer.PlaySFX(2);
     }
 
     public void GrabRightObject(ThrowableObject obj)
@@ -107,6 +109,34 @@ public class NETPlayer : MonoBehaviour
         rightObject.ThrowObjectNet();
         holdingObjR = false;
         //sfxPlayer.PlaySFX(3);
+    }
+
+
+    public void PlaySFXEffect(sbyte effectNo)
+    {
+        switch(effectNo)
+        {
+            // cancel
+            case 0x00:
+                break;
+            // jump
+            case 0x01:
+                sfxPlayer.PlaySFX(0);
+                Instantiate(jumpEffect, transform.position, Quaternion.identity);
+                break;
+            // dash
+            case 0x02:
+                sfxPlayer.PlaySFX(1);
+                break;
+            // pick up
+            case 0x03:
+                sfxPlayer.PlaySFX(2);
+                break;
+            // throw
+            case 0x04:
+                sfxPlayer.PlaySFX(3);
+                break;
+        }
     }
 
 }

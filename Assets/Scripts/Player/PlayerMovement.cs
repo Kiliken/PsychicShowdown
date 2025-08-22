@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    Player playerScript;
     Rigidbody rb;
     [SerializeField] GameObject playerModel;
     [SerializeField] GameObject playerHurtbox;
@@ -85,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        playerScript = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         orientation = gameObject.transform;
@@ -346,8 +348,10 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
+        playerScript.soundIndex = 0x01;
         sfxPlayer.PlaySFX(0);
         Instantiate(jumpEffect, transform.position, quaternion.identity);
+        
 
         Invoke(nameof(ResetJump), jumpCooldown);
     }
@@ -363,6 +367,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canDash || isDashing) return;
         if (dashRoutine != null) StopCoroutine(dashRoutine);
+        playerScript.soundIndex = 0x02;
         sfxPlayer.PlaySFX(1);
         dashRoutine = StartCoroutine(DashCoroutine());
     }
