@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -57,6 +58,7 @@ public class NETPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         tempShootPos = transform.GetChild(3).transform;
 
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
@@ -67,6 +69,7 @@ public class NETPlayer : MonoBehaviour
         shootPos = tempShootPos;
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
+        jumpEffect = Resources.Load<GameObject>("Prefabs/Particles/JumpV");
     }
 
 
