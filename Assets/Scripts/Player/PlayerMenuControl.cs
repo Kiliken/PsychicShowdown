@@ -28,13 +28,14 @@ public class PlayerMenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        InGameMenuInput();
         MenuInput();
     }
 
     //Activates and runs the in game menu.
     public void InGameMenuInput()
     {
-        if (Input.GetButtonDown(pauseBtn))
+        if (Input.GetButtonDown(pauseBtn) || Input.GetKeyDown(KeyCode.Space))
         {
 
             Debug.Log("Pause button pressed");
@@ -104,12 +105,12 @@ public class PlayerMenuControl : MonoBehaviour
 
         if (now - lastNavTime > navCooldown)
         {
-            if (vertical > 0.5f)
+            if (vertical > 0.5f || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Navigate(Vector2.up);
                 lastNavTime = now;
             }
-            else if (vertical < -0.5f)
+            else if (vertical < -0.5f || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 Navigate(Vector2.down);
                 lastNavTime = now;
