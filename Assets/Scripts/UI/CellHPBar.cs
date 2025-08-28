@@ -16,8 +16,9 @@ public class CellHPBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float cellSpacing = 1f;
-        float cellWidth = 30f;
+        float cellSpacing = hpCellPrefab.GetComponent<RectTransform>().rect.width/120;
+        float cellWidth = hpCellPrefab.GetComponent<RectTransform>().rect.width;
+        Debug.Log(cellWidth);
 
         for (int i = 0; i < maxHP; i++)
         {

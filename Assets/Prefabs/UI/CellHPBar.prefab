@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8c43437f875d54087effc9d1455f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   hpCellPrefab: {fileID: 8259624196793958585, guid: 79d9fa21c27682b4f978daaae440a906, type: 3}
   container: {fileID: 8664877871488015871}
   maxHP: 15
