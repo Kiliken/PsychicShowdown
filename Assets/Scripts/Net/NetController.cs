@@ -103,7 +103,13 @@ public class NetController : MonoBehaviour
         playerOther = (playerSide == 'A' ? GameObject.Find("Player2").transform : GameObject.Find("Player").transform);
         Destroy(playerOther.GetComponent<Player>());
 
-        gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
+        //gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
+        //gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(0).gameObject.SetActive(true);
+
+        for(int i = 2; i < gameUI.GetChild(playerSide == 'A' ? 3 : 2).childCount; i++)
+        {
+            gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(i).gameObject.SetActive(false);
+        }
 
         //player.GetComponent<Player>().playerNo = 1;
         netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
