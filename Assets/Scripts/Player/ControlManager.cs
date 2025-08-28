@@ -7,6 +7,7 @@ public class ControlManager : MonoBehaviour
     public bool playstation = true;
     Player playerScript;
     PlayerMovement playerMovementScript;
+    PlayerMenuControl playerMenuControlScript;
     CameraController cameraControllerScript;
     GameSettings gameSettings;
 
@@ -81,6 +82,7 @@ public class ControlManager : MonoBehaviour
     void Awake(){
         playerScript = GetComponent<Player>();
         playerMovementScript = GetComponent<PlayerMovement>();
+        playerMenuControlScript = GetComponent<PlayerMenuControl>();
         cameraControllerScript = playerScript.playerCam.GetComponent<CameraController>();
         
     }
@@ -210,6 +212,9 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowRightBtn = grabThrowRightBtn1_P;
                 playerScript.aimCancelBtn = aimCancelBtn1_P;
                 playerScript.pauseBtn = pauseBtn1_P;
+
+                playerMenuControlScript.pauseBtn = pauseBtn1_P;
+                playerMenuControlScript.confirmBtn = jump1_P;
             }
             else
             {
@@ -246,6 +251,9 @@ public class ControlManager : MonoBehaviour
                 playerScript.grabThrowRightBtn = grabThrowRightBtn1_X;
                 playerScript.aimCancelBtn = aimCancelBtn1_X;
                 playerScript.pauseBtn = pauseBtn1_X;
+
+                playerMenuControlScript.pauseBtn = pauseBtn1_X;
+                playerMenuControlScript.confirmBtn = jump1_X;
             }
             else
             {

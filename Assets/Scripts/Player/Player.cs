@@ -67,7 +67,6 @@ public class Player : MonoBehaviour
     private GameSettings gameSettings;
 
 
-    InGameMenu pauseMenu; // reference to the pause menu script
 
 
     //For online mode
@@ -112,7 +111,7 @@ public class Player : MonoBehaviour
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
         detectPos = playerCam.GetChild(1).transform;
-        pauseMenu = GameObject.Find("PauseScreens").GetComponent<InGameMenu>();
+        //pauseMenu = GameObject.Find("PauseScreens").GetComponent<InGameMenu>();
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
@@ -151,7 +150,6 @@ public class Player : MonoBehaviour
 
         ObjectDetection();
         PlayerInput();
-        InGameMenuInput();
         //GetCameraDistance();
 
         // flag reset
@@ -435,49 +433,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //Activates and runs the in game menu.
-    public void InGameMenuInput()
-    {
-        if (Input.GetButtonDown(pauseBtn))
-        {
-            Debug.Log("Pause button pressed for player " + playerNo);
-            if (gameManager.gameStarted)
-            {
-                if (pauseMenu.isPlayerPauseMenuActive(playerNo))
-                {
-                    pauseMenu.HidePauseMenu(playerNo);
-                }
-                else
-                {
-                    pauseMenu.ShowPauseMenu(playerNo);
-                }
-            }
-        }
-
-        if (pauseMenu.isPlayerPauseMenuActive(playerNo))
-        {
-            // If the pause menu is active, disable player movement and camera control
-            movementScript.inputActive = false;
-            camController.inputActive = false;
-            //Debug.Log("set inactive" + playerNo);
-        }
-        else
-        {
-            // If the pause menu is not active, enable player movement and camera control
-            movementScript.inputActive = true;
-            camController.inputActive = true;
-            //Debug.Log("set active" + playerNo);
-        }
-    }
-
-    // Continue the game from the pause menu by enabling player movement and camera control
-    public void ContinueGame()
-    {
-        pauseMenu.HidePauseMenu(playerNo);
-        movementScript.inputActive = true;
-        camController.inputActive = true;
-    }
-
+    
 
     public void SetPlayerActive(bool a)
     {

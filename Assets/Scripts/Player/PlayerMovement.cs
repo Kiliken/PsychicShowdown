@@ -96,20 +96,20 @@ public class PlayerMovement : MonoBehaviour
         playerHurtbox = transform.Find("Hurtbox").gameObject;
         inputActive = true;
 
-        if (myEventSystem == null)
-        {
-            string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
-            GameObject obj = GameObject.Find(targetName);
-            if (obj != null) myEventSystem = obj.GetComponent<EventSystemUpdate>();
-        }
+        //if (myEventSystem == null)
+        //{
+        //    string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
+        //    GameObject obj = GameObject.Find(targetName);
+        //    if (obj != null) myEventSystem = obj.GetComponent<EventSystemUpdate>();
+        //}
 
-        if (isP1)
-        {
-            Debug.Log("this is P1");
-        } else
-        {
-            Debug.Log("this is p2");
-        }
+        //if (isP1)
+        //{
+        //    Debug.Log("this is P1");
+        //} else
+        //{
+        //    Debug.Log("this is p2");
+        //}
     }
 
 
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                MenuInput();
+                Debug.Log("Input is inactive, not processing player input.");
             }
 
 
@@ -213,79 +213,6 @@ public class PlayerMovement : MonoBehaviour
             Dash();
         }
     }
-
-    // Handle menu navigation input
-    private void MenuInput()
-    {
-        float vertical;
-
-        if (isP1)
-        {
-            vertical = Input.GetAxisRaw("Vertical1");
-        }
-        else
-        {
-            vertical = Input.GetAxisRaw("Vertical2");
-        }
-
-        float now = Time.time;
-        if (now - lastNavTime > navCooldown)
-        {
-            if (vertical > 0.5f)
-            {
-                Navigate(Vector2.up);
-                lastNavTime = now;
-            }
-            else if (vertical < -0.5f)
-            {
-                Navigate(Vector2.down);
-                lastNavTime = now;
-            }
-
-        }
-    }
-
-    //Navigate through UI elements using joystick
-    private void Navigate(Vector2 dir)
-    {
-        if (myEventSystem == null) return;
-
-        var cur = myEventSystem.currentSelectedGameObject;
-        if (cur == null) return;
-
-        Selectable selectable = cur.GetComponent<Selectable>();
-        if (selectable == null) return;
-
-        Selectable next = null;
-
-        if (dir == Vector2.up) next = selectable.FindSelectableOnUp();
-        if (dir == Vector2.down) next = selectable.FindSelectableOnDown();
-        if (dir == Vector2.left) next = selectable.FindSelectableOnLeft();
-        if (dir == Vector2.right) next = selectable.FindSelectableOnRight();
-
-        if (next != null && !IsInSameCanvas(cur, next.gameObject))
-        {
-            Debug.LogWarning("Blocked cross-canvas navigation to: " + next.name);
-            next = null;
-        }
-
-        if (next != null)
-        {
-            myEventSystem.SetSelectedGameObject(next.gameObject);
-        }
-    }
-
-    //Check if two GameObjects are in the same Canvas
-    private bool IsInSameCanvas(GameObject a, GameObject b)
-    {
-        Canvas canvasA = a.GetComponentInParent<Canvas>();
-        Canvas canvasB = b.GetComponentInParent<Canvas>();
-
-        Debug.Log($"[Canvas Check] {a.name} in {canvasA?.name} vs {b.name} in {canvasB?.name}");
-
-        return canvasA != null && canvasA == canvasB;
-    }
-
 
 
     private void Move()
