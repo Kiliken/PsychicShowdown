@@ -103,9 +103,9 @@ Chen:
 @ rework player UI
 @ rework main menu
 @ rework game over menu
-~ options menu
-- rework UI for online mode
-- remove multiple event system
+@ options menu
+@ rework UI for online mode
+@ remove multiple event system
 - screen fade
 - intro/count down
 - tutorial screen
@@ -136,6 +136,7 @@ ONLINE TO DO:
 @ SFX for other player
 @ Effects for other player
 @ return sound volume to normal
+- add automatic reset on game finish
 
 
 
@@ -185,9 +186,9 @@ NOTES:
 - When items are grabbed, they will move to your position
 
 Scene names:
-- AlphaPort
-- AlphaPortFHD
-- AlphaTest
+- TitleScreen
+- LoadingScreen
+- NetBeta
 
 
 PLAYER INPUTS:

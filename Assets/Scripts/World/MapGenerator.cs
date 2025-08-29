@@ -74,6 +74,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private GameObject suddenDeath;
 
+    System.Random objectRnd;
+
     //[SerializeField]
     //TerrainType[] regions;
 
@@ -173,12 +175,12 @@ public class MapGenerator : MonoBehaviour
 
     private void SpanwObject()
     {
-        genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
+        genCursor = new Vector3(objectRnd.Next((int)-generatorLimit, (int)generatorLimit), 50f, objectRnd.Next((int)-generatorLimit, (int)generatorLimit));
 
-        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
+        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity))
         {
             int rand;
-            rand = Random.Range(0, 2);
+            rand = objectRnd.Next(0, 2);
             objectHeight = 50f - hit.distance;
             switch (true)
             {
@@ -193,7 +195,7 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(1, 3)], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(1,3)], hit.point, Quaternion.identity);
                         propertyBlock.SetColor("_BaseColor", Color.gray);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
@@ -211,7 +213,7 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(3, 5)], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(3,5)], hit.point, Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -228,7 +230,7 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(5, 7)], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(5,7)], hit.point, Quaternion.identity);
                         //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
                         //propertyBlock.SetColor("_BaseColor", thisColor);
                         //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -243,7 +245,7 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(7, 10)], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(7,10)], hit.point, Quaternion.identity);
                     }
                     break;
 
@@ -277,6 +279,7 @@ public class MapGenerator : MonoBehaviour
 
         seed = (GameObject.FindObjectOfType<LoadedDataStorage>() != null ? GameObject.FindObjectOfType<LoadedDataStorage>().seed : 0);
         Random.InitState(seed);
+        objectRnd = new System.Random(seed);
 
         objects = new List<GameObject>();
 

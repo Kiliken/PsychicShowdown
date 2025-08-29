@@ -41,7 +41,7 @@ public class NetLoading : MonoBehaviour
         if (dbctr.ip != string.Empty) ip = dbctr.ip;
         if (dbctr.port != 0) port = dbctr.port;
         if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
-        
+
     }
 
     // Start is called before the first frame update
