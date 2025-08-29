@@ -7,7 +7,7 @@ public class CellHPBar : MonoBehaviour
     public Player player;
     public GameObject hpCellPrefab;
     public Transform container;
-    public int maxHP = 15;
+    public int maxHP = 10;
     public int currentHP = 10;
     [SerializeField] int playerNum;
 
@@ -48,6 +48,14 @@ public class CellHPBar : MonoBehaviour
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].SetActive(i < currentHP);
+        }
+    }
+
+    public void UpdateHPBarNet(sbyte hp)
+    {
+        for (int i = 0; i < cells.Count; i++)
+        {
+            cells[i].SetActive(i < hp);
         }
     }
 

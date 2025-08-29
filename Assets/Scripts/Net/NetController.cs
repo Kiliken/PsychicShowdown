@@ -54,6 +54,9 @@ public class NetController : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] GameManager gameManager;
+    private HPBarBG otherHpBarEffect;
+    private CellHPBar otherHpCells;
+    private sbyte otherHp = 10;
 
 
     private static void SendGetData()
@@ -111,6 +114,9 @@ public class NetController : MonoBehaviour
             gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(i).gameObject.SetActive(false);
         }
 
+        otherHpBarEffect = gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(0).GetComponent<HPBarBG>();
+        otherHpCells = gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(1).GetComponent<CellHPBar>();
+
         //player.GetComponent<Player>().playerNo = 1;
         netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
         netPlayerScript.playerNo = (playerSide == 'A' ? 2 : 1);
@@ -160,10 +166,17 @@ public class NetController : MonoBehaviour
             data = NetManager.RetriveByte(udpGet);
 
             netPlayerScript.UpdateHP(data.hp);
+            
 
             UpdatePosition();
             UpdateShootPos();
 
+            if(otherHp != data.hp)
+            {
+                otherHpBarEffect.TakeDamage();
+                otherHpCells.UpdateHPBarNet(data.hp);
+            }
+            otherHp = data.hp;
 
             if ((byte)(data.leftHand - rgCheckLeft) != 0)
             {
