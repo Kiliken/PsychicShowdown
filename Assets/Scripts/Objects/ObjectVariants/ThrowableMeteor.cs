@@ -7,7 +7,7 @@ public class ThrowableMeteor : ThrowableObject
 {
     [SerializeField] GameObject meteorPrefab;
     [HideInInspector] public Vector3 contactPoint;
-    private float spawnOffset = 50f;
+    private float spawnOffset = 100f;
 
 
     protected override void OnCollisionEnter(Collision collision)

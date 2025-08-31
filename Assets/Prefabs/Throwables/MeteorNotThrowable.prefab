@@ -25,6 +25,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7575595367313128856, guid: 9b023e146fe43e54297b065046706ecd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575595367313128856, guid: 9b023e146fe43e54297b065046706ecd, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 17792
       objectReference: {fileID: 0}

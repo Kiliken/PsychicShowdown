@@ -77,8 +77,8 @@ public class ThrowableSpear : ThrowableObject
     private void CloneObjects()
     {
         // transform axes
-        Vector3 up = transform.up;
-        Vector3 right = transform.right;
+        Vector3 up = rb.transform.up;
+        Vector3 right = rb.transform.right;
 
         // local-space offsets
         Vector3[] localOffsets = {
