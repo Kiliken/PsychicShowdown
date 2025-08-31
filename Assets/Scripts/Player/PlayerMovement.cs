@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+
 
     private void FixedUpdate()
     {
@@ -158,7 +158,13 @@ public class PlayerMovement : MonoBehaviour
             Move();
             SpeedControl();
             if (moveDirection != Vector3.zero)
-                targetModelRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
+            {
+                //targetModelRotation = Quaternion.LookRotation(moveDirection.normalized, Vector3.up);
+                Vector3 camForward = playerCam.forward;
+                camForward.y = 0;
+                targetModelRotation = Quaternion.LookRotation(camForward, Vector3.up);
+            }
+
         }
     }
 
@@ -278,7 +284,7 @@ public class PlayerMovement : MonoBehaviour
         playerScript.soundIndex = 0x01;
         sfxPlayer.PlaySFX(0);
         Instantiate(jumpEffect, transform.position, quaternion.identity);
-        
+
 
         Invoke(nameof(ResetJump), jumpCooldown);
     }
