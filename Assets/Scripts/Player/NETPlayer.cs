@@ -12,14 +12,15 @@ using static UnityEngine.GraphicsBuffer;
 public class NETPlayer : MonoBehaviour
 {
     public int playerNo = 1;    // 1 or 2
+    Rigidbody rb;
     PlayerSFXPlayer sfxPlayer;
     ObjHolder objHolder;
     [SerializeField] Transform shootPos;
     public Transform playerCam;   // camera transform
 
+    [SerializeField] Animator playerAnimator;
+
     public Transform tempShootPos;
-
-
     [SerializeField] Transform objPosL;
     [SerializeField] Transform objPosR;
 
@@ -60,7 +61,9 @@ public class NETPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+
+        playerAnimator = transform.GetChild(0).GetChild(1).GetComponent<Animator>();
         tempShootPos = transform.GetChild(3).transform;
 
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
@@ -83,12 +86,48 @@ public class NETPlayer : MonoBehaviour
 
     }
 
+    public void UpdatePosition(float newX, float newY, float newZ, float rotBody)
+    {
+        //rb.position = Vector3.Lerp(rb.position, new Vector3(newX, newY, newZ), Time.deltaTime * 10f);
+        Vector3 newPos = new Vector3(newX, newY, newZ);
+        Vector3 oldPos = rb.position;  // last frame position
+
+        // movement vector in world space
+        Vector3 moveDir = (newPos - oldPos) / Time.deltaTime;
+        float speed = moveDir.magnitude;
+        Debug.Log("net player velocity: " + speed);
+
+        // If speed is very small, treat as not moving
+        if (speed < 0.1f)   // threshold for idle
+        {
+            playerAnimator.SetFloat("PosX", 0f);
+            playerAnimator.SetFloat("PosY", 0f);
+        }
+        else
+        {
+            // world space to local
+            Vector3 localDir = transform.InverseTransformDirection(moveDir.normalized);
+
+            int moveX = Mathf.RoundToInt(Mathf.Clamp(localDir.x * speed, -1f, 1f));
+            int moveZ = Mathf.RoundToInt(Mathf.Clamp(localDir.z * speed, -1f, 1f));
+            Debug.Log("x: " + moveX + " z: " + moveZ);
+
+            // set animations
+            playerAnimator.SetFloat("PosX", moveX);
+            playerAnimator.SetFloat("PosY", moveZ);
+        }
+
+        transform.GetChild(0).eulerAngles = new Vector3(0, rotBody, 0);
+    }
+
+
     public void GrabLeftObject(ThrowableObject obj)
     {
         leftObject = obj;
         Debug.Log("Left grab " + obj.objectName);
         leftObject.GrabObject(objPosL, shootPos, playerNo);
         holdingObjL = true;
+        playerAnimator.SetTrigger("L_Grab");
     }
 
     public void GrabRightObject(ThrowableObject obj)
@@ -97,6 +136,7 @@ public class NETPlayer : MonoBehaviour
         Debug.Log("Right grab " + obj.objectName);
         rightObject.GrabObject(objPosR, shootPos, playerNo);
         holdingObjR = true;
+        playerAnimator.SetTrigger("R_Grab");
         //sfxPlayer.PlaySFX(2);
     }
 
@@ -105,6 +145,7 @@ public class NETPlayer : MonoBehaviour
         Debug.Log("Left throw");
         leftObject.ThrowObjectNet();
         holdingObjL = false;
+        playerAnimator.SetTrigger("L_Throw");
         //sfxPlayer.PlaySFX(3);
     }
 
@@ -113,6 +154,7 @@ public class NETPlayer : MonoBehaviour
         Debug.Log("Right throw");
         rightObject.ThrowObjectNet();
         holdingObjR = false;
+        playerAnimator.SetTrigger("R_Throw");
         //sfxPlayer.PlaySFX(3);
     }
 
@@ -143,7 +185,7 @@ public class NETPlayer : MonoBehaviour
 
     public void PlaySFXEffect(sbyte effectNo)
     {
-        switch(effectNo)
+        switch (effectNo)
         {
             // cancel
             case 0x00:

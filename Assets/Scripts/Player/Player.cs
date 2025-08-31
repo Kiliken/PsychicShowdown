@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     public Transform playerCam;   // camera transform
     Camera cam;     // camera
     CameraController camController;
+
+    [SerializeField] Animator playerAnimator;
+
     TextMeshProUGUI objectText; // for displaying the name of the object the player's crosshair is hovering on
 
     [SerializeField] float defaultZoom = 60f;
@@ -80,7 +83,7 @@ public class Player : MonoBehaviour
     public ushort rightObjRef = 0;
     [NonSerialized]
     public sbyte soundIndex = 0x00;
-    [NonSerialized] 
+    [NonSerialized]
     public byte soundFlag = 0x00;   // 0: not playing, 1: playing
 
     private void Awake()
@@ -116,6 +119,8 @@ public class Player : MonoBehaviour
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
         camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
+
+        movementScript.playerAnimator = playerAnimator;
 
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
 
@@ -157,7 +162,7 @@ public class Player : MonoBehaviour
             leftHandFlag -= 0x10;
         if (rightHandFlag >= 0x10)
             rightHandFlag -= 0x10;
-        if(soundFlag >= 0x10) 
+        if (soundFlag >= 0x10)
             soundFlag -= 0x10;
     }
 
@@ -251,6 +256,9 @@ public class Player : MonoBehaviour
 
                         GetCameraDistance();
 
+                        playerAnimator.SetTrigger("L_Grab");
+
+
                         soundIndex = 0x03;
                         sfxPlayer.PlaySFX(2);
                     }
@@ -304,6 +312,8 @@ public class Player : MonoBehaviour
 
                 GetCameraDistance();
 
+                playerAnimator.SetTrigger("L_Throw");
+
                 soundIndex = 0x04;
                 sfxPlayer.PlaySFX(3);
             }
@@ -338,9 +348,11 @@ public class Player : MonoBehaviour
 
                         rightHandFlag++;
                         rightObjRef = rightObject.objectID;
-                        
+
 
                         GetCameraDistance();
+
+                        playerAnimator.SetTrigger("R_Grab");
 
                         soundIndex = 0x03;
                         sfxPlayer.PlaySFX(2);
@@ -393,6 +405,8 @@ public class Player : MonoBehaviour
 
                 GetCameraDistance();
 
+                playerAnimator.SetTrigger("R_Throw");
+
                 soundIndex = 0x04;
                 sfxPlayer.PlaySFX(3);
             }
@@ -433,7 +447,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+
 
     public void SetPlayerActive(bool a)
     {

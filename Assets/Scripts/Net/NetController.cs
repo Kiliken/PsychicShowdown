@@ -109,7 +109,7 @@ public class NetController : MonoBehaviour
         //gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
         //gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(0).gameObject.SetActive(true);
 
-        for(int i = 2; i < gameUI.GetChild(playerSide == 'A' ? 3 : 2).childCount; i++)
+        for (int i = 2; i < gameUI.GetChild(playerSide == 'A' ? 3 : 2).childCount; i++)
         {
             gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(i).gameObject.SetActive(false);
         }
@@ -149,7 +149,6 @@ public class NetController : MonoBehaviour
 
     void Update()
     {
-
         if (playerShootPos == null)
             playerShootPos = playerScript.shootPos;
 
@@ -166,12 +165,12 @@ public class NetController : MonoBehaviour
             data = NetManager.RetriveByte(udpGet);
 
             netPlayerScript.UpdateHP(data.hp);
-            
+
 
             UpdatePosition();
             UpdateShootPos();
 
-            if(otherHp != data.hp)
+            if (otherHp != data.hp)
             {
                 otherHpBarEffect.TakeDamage();
                 otherHpCells.UpdateHPBarNet(data.hp);
@@ -255,8 +254,9 @@ public class NetController : MonoBehaviour
 
     void UpdatePosition()
     {
-        otherplayerRb.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
-        playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
+        // otherplayerRb.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
+        // playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
+        netPlayerScript.UpdatePosition(data.posX, thisSideData.posY, data.posZ, data.rotBody);
     }
 
     void UpdateShootPos()

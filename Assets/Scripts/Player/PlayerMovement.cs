@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] GameObject playerModel;
     [SerializeField] GameObject playerHurtbox;
+    public Animator playerAnimator;
     public Transform playerCam;
     PlayerSFXPlayer sfxPlayer;
     public bool playerActive = true;
@@ -91,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         orientation = gameObject.transform;
         jumpsLeft = maxJumps;
-
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
         playerHurtbox = transform.Find("Hurtbox").gameObject;
         inputActive = true;
@@ -163,8 +163,16 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 camForward = playerCam.forward;
                 camForward.y = 0;
                 targetModelRotation = Quaternion.LookRotation(camForward, Vector3.up);
-            }
 
+                // movement animations
+                playerAnimator.SetFloat("PosX", horizontalInput);
+                playerAnimator.SetFloat("PosY", verticalInput);
+            }
+            else
+            {
+                playerAnimator.SetFloat("PosX", 0);
+                playerAnimator.SetFloat("PosY", 0);
+            }
         }
     }
 
