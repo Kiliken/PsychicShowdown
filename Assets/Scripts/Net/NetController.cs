@@ -256,7 +256,7 @@ public class NetController : MonoBehaviour
     {
         // otherplayerRb.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
         // playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
-        netPlayerScript.UpdatePosition(data.posX, thisSideData.posY, data.posZ, data.rotBody);
+        netPlayerScript.UpdatePosition(data.posX, data.posY, data.posZ, data.rotBody);
     }
 
     void UpdateShootPos()

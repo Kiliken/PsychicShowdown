@@ -52,6 +52,8 @@ public class NETPlayer : MonoBehaviour
     [NonSerialized]
     public ushort rightObjRef;
 
+    private float animSmooth = 5f;  // for smoothing body animation
+
     private void Awake()
     {
         hp = maxHP;
@@ -88,37 +90,37 @@ public class NETPlayer : MonoBehaviour
 
     public void UpdatePosition(float newX, float newY, float newZ, float rotBody)
     {
-        //rb.position = Vector3.Lerp(rb.position, new Vector3(newX, newY, newZ), Time.deltaTime * 10f);
-        Vector3 newPos = new Vector3(newX, newY, newZ);
-        Vector3 oldPos = rb.position;  // last frame position
+        Vector3 targetPos = new Vector3(newX, newY, newZ);
 
-        // movement vector in world space
-        Vector3 moveDir = (newPos - oldPos) / Time.deltaTime;
+        // move rigidbody
+        rb.position = Vector3.Lerp(rb.position, targetPos, Time.deltaTime * 10f);
+
+        // calculate movement vector in world space
+        Vector3 moveDir = (targetPos - rb.position) / Time.deltaTime;
         float speed = moveDir.magnitude;
-        Debug.Log("net player velocity: " + speed);
 
-        // If speed is very small, treat as not moving
-        if (speed < 0.1f)   // threshold for idle
+        Quaternion targetRotation = Quaternion.Euler(0f, rotBody, 0f);
+
+        // movement relative to body rotation
+        Vector3 localDir = Vector3.zero;
+        if (speed >= 0.05f) // threshold for idle
         {
-            playerAnimator.SetFloat("PosX", 0f);
-            playerAnimator.SetFloat("PosY", 0f);
-        }
-        else
-        {
-            // world space to local
-            Vector3 localDir = transform.InverseTransformDirection(moveDir.normalized);
-
-            int moveX = Mathf.RoundToInt(Mathf.Clamp(localDir.x * speed, -1f, 1f));
-            int moveZ = Mathf.RoundToInt(Mathf.Clamp(localDir.z * speed, -1f, 1f));
-            Debug.Log("x: " + moveX + " z: " + moveZ);
-
-            // set animations
-            playerAnimator.SetFloat("PosX", moveX);
-            playerAnimator.SetFloat("PosY", moveZ);
+            localDir = Quaternion.Inverse(targetRotation) * moveDir.normalized;
         }
 
-        transform.GetChild(0).eulerAngles = new Vector3(0, rotBody, 0);
+        // X axis
+        float targetX = (speed >= 0.05f) ? Mathf.Clamp(localDir.x * speed, -1f, 1f) : 0f;
+        float currentX = playerAnimator.GetFloat("PosX");
+        playerAnimator.SetFloat("PosX", Mathf.Lerp(currentX, targetX, Time.deltaTime * animSmooth));
+        // Z axis
+        float targetZ = (speed >= 0.05f) ? Mathf.Clamp(localDir.z * speed, -1f, 1f) : 0f;
+        float currentZ = playerAnimator.GetFloat("PosY");
+        playerAnimator.SetFloat("PosY", Mathf.Lerp(currentZ, targetZ, Time.deltaTime * animSmooth));
+
+        // model rotation
+        transform.GetChild(0).rotation = targetRotation;
     }
+
 
 
     public void GrabLeftObject(ThrowableObject obj)
