@@ -92,12 +92,15 @@ After Beta
 @ add explosion to microwave
 @ fix grab distance bug
 @ change item text (English, more readable)
-- add disappear effect for items
 @ special items
-- dash effect
-- hand animations
-- 3 seconds timer
-- change model rotations for animations
+@ change model rotations for animations
+- local body animations
+- online body animations
+- local hand animations
+- online hand animations
+- 3 seconds timer (disable player input, pause timer)
+? dash effect
+? sprint effect
 
 
 Chen:
@@ -123,7 +126,7 @@ Paolo:
 @ grass
 @ object spawning (random, special)
 - disappear shader
-- add new objects
+@ add new objects
 @ make barrier/space smaller when the timer reaches a set time
 
 
@@ -132,7 +135,7 @@ ONLINE TO DO:
 @ fix skull bug
 @ sync time
 @ enable map generation/random items
-- check if all items are being added
+@ check if all items are being added
 @ Update HPs for both sides
 @ win/lose condition
 @ UI timer
