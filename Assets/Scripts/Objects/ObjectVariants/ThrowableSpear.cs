@@ -96,7 +96,7 @@ public class ThrowableSpear : ThrowableObject
         foreach (var offset in localOffsets)
         {
             // basePos + offset to get world pos
-            GameObject spear = Instantiate(childObject, transform.position + offset, transform.rotation);
+            GameObject spear = Instantiate(childObject, rb.position + offset, rb.rotation);
             spear.GetComponent<ThrowableSpear>().holdingPlayer = holdingPlayer;
             spear.GetComponent<ThrowableSpear>().canGrab = false;
             spear.GetComponent<ThrowableSpear>().isChild = true;

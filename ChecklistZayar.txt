@@ -109,6 +109,7 @@ Chen:
 - screen fade
 - intro/count down
 - tutorial screen
+- menu sfx
 - new end screen?
 
 
