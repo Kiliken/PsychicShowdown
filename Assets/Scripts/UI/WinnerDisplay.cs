@@ -55,7 +55,7 @@ public class WinnerDisplay : MonoBehaviour
             winner.GetChild(0).gameObject.SetActive(true);
             loser.GetChild(1).gameObject.SetActive(true);
             torii.GetChild(0).gameObject.SetActive(true);
-        } 
+        }
         else if (GameData.winner == 2)
         {
             winnerText.text = "プレイヤー２勝";
@@ -67,6 +67,11 @@ public class WinnerDisplay : MonoBehaviour
         else if (GameData.winner == 0)
         {
             winnerText.text = "引き分け";
+            loser.GetChild(0).gameObject.SetActive(true);
+            loser.GetChild(1).gameObject.SetActive(true);
+            int leftPlayer = UnityEngine.Random.Range(0, 2);
+            loser.GetChild(leftPlayer).transform.position = new Vector3(-82f, 21.1f, 58f);
+            loser.GetChild(leftPlayer).transform.eulerAngles = new Vector3(100f, -1f, 65f);
         }
 
         udpc = new UdpClient(ip, port);
