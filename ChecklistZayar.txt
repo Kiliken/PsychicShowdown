@@ -93,9 +93,11 @@ After Beta
 @ fix grab distance bug
 @ change item text (English, more readable)
 - add disappear effect for items
-- special items
+@ special items
 - dash effect
 - hand animations
+- 3 seconds timer
+- change model rotations for animations
 
 
 Chen:
@@ -106,11 +108,11 @@ Chen:
 @ options menu
 @ rework UI for online mode
 @ remove multiple event system
-- screen fade
-- intro/count down
+- fix navigation on pause screen
 - tutorial screen
+- intro/count down
+- screen fade
 - menu sfx
-- new end screen?
 
 
 Paolo:

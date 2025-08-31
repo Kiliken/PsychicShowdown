@@ -212,7 +212,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2198128965697629283, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198128965697629283, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_Size.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198128965697629283, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_Size.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4166443416431599005, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: m_LocalScale.x
@@ -258,6 +266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7545779262177817985, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8949717695086118722, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: m_Name
       value: L_Pillar
@@ -269,6 +281,18 @@ PrefabInstance:
     - target: {fileID: 9182467953664046804, guid: 06c8b124070273a4684924026ad40782, type: 3}
       propertyPath: objectSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182467953664046804, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: shootRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182467953664046804, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: grabbedRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182467953664046804, guid: 06c8b124070273a4684924026ad40782, type: 3}
+      propertyPath: grabbedRotation.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
