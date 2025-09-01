@@ -2612,7 +2612,7 @@ MonoBehaviour:
   ip: 147.185.221.27
   port: 38002
   gameUI: {fileID: 1667903861}
-  playerSide: 65
+  playerSide: 66
   player: {fileID: 0}
   playerOther: {fileID: 0}
   gameManager: {fileID: 1373471946}
