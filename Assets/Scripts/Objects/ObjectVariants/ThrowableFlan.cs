@@ -36,6 +36,7 @@ public class ThrowableFlan : ThrowableObject
                     jumpingPlayer = collision.gameObject.GetComponent<PlayerMovement>();
                     jumpingPlayer.Jump(true);
                     jumpingPlayer.jumpsLeft = jumpingPlayer.maxJumps;
+                    sfxPlayer.PlaySFX(0);
                 }
 
             }

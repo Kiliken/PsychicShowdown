@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public float timeLimit = 120f;
     //public float timeRemaining;
+    [SerializeField] private float countDownTime = 3f;
+    private float countDownTimer = 0f;
     public bool gameStarted = false;
     public bool gameEnded = false;
 
@@ -41,15 +43,33 @@ public class GameManager : MonoBehaviour
         player.gameManager = this;
         netPlayer.gameManager = this;
         timer.gameManager = this;
-        timer.StartTimer(timeLimit);
-        gameStarted = true;
+
+        player.SetPlayerActive(false);
+
+        // timer.StartTimer(timeLimit);
+        // gameStarted = true;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (gameEnded && !sceneChanged)
+        // initial count down
+        if (!gameStarted)
+        {
+            if (countDownTimer < countDownTime)
+            {
+                countDownTimer += Time.deltaTime;
+            }
+            else
+            {
+                player.SetPlayerActive(true);
+                timer.StartTimer(timeLimit);
+                gameStarted = true;
+            }
+        }
+        // switch to result screen when game ends
+        else if (gameEnded && !sceneChanged)
         {
             if (sceneChangeTimer < sceneChangeTime)
             {
@@ -61,6 +81,7 @@ public class GameManager : MonoBehaviour
                 sceneChanged = true;
             }
         }
+
     }
 
 

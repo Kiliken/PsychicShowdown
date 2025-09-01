@@ -80,10 +80,8 @@ public class PlayerMovement : MonoBehaviour
     //For whether the player is in the pause menu or not
     public bool inputActive = true;
 
-    [SerializeField] private EventSystemUpdate myEventSystem;
     public bool isP1;
-    private float navCooldown = 0.2f;
-    private float lastNavTime = 0f;
+
 
     void Start()
     {
