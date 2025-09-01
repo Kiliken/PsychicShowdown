@@ -94,11 +94,13 @@ After Beta
 @ change item text (English, more readable)
 @ special items
 @ change model rotations for animations
-- local body animations
-- online body animations
-- local hand animations
-- online hand animations
+@ local body animations
+@ online body animations
+@ local hand animations
+@ online hand animations
 - 3 seconds timer (disable player input, pause timer)
+@ replace logo
+- pudding sfx
 ? dash effect
 ? sprint effect
 
@@ -116,6 +118,7 @@ Chen:
 - intro/count down
 - screen fade
 - menu sfx
+- crosshair
 
 
 Paolo:
@@ -156,11 +159,9 @@ These are special objects with a lower spawn rate and/or spawn at a set time int
 @ Spear (small):
 - Once thrown, multiplies itself into 5-10 copies.
 
-Meteor (small):
+ @Meteor (small):
 - Initially a small rock. Once thrown, it starts growing bigger and bigger until it hits something.
 - The damage it deals to the opponent will vary to the size it is at when it hits the enemy.
-
-- a strange looking crystal, once thrown, a meteor starts falling from the sky
 
 @ Pudding/Flan (large):
 - When jumped on, makes the player jump up very high, giving them a high vantage point.
@@ -224,31 +225,35 @@ P1:
 - camera adjustments
 - bug fixes
 
-SFX:
-- jump
-- dash
-- pick up object
-- throw object
-- object hit
-- player take damage
-- BGM
+SFX TO ADD:
+@ jump
+@ dash
+@ pick up object
+@ throw object
+@ object hit
+@ player take damage
+@ BGM
+- Title BGM
+- pudding bounce
+- menu blip
+- menu confirm
 
-SFX:
+SFX TO MAKE:
 - sprinting
 - explosion (grenade/microwave/skull)
 - explosion (meteor)
 - splat sound
 - player death/lose
 - game end tune
-- menu blip
-- menu confirm
+
 
 MODELS:
-- Skull (optional)
-- Flan
-- Spear
-- Meteor 
-- Hands
+@ Skull (optional)
+@ Flan
+@ Spear
+@ Meteor 
+@ Hands
+
 
 EFFECTS:
 - Sprint
