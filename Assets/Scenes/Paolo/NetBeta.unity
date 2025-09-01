@@ -5291,11 +5291,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &2051756860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8881190448058471318, guid: a883f4584845ca542824aa5efcd56ba2, type: 3}
   m_PrefabInstance: {fileID: 1203386434381028415}
 =======
+=======
+>>>>>>> Stashed changes
 --- !u!1 &2102451573 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7060222280091771595, guid: 286e34d534ed1cf48a2aa2eaadeb05db, type: 3}
