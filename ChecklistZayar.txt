@@ -100,7 +100,7 @@ After Beta
 @ online hand animations
 @ 3 seconds timer (disable player input, pause timer)
 @ replace logo
-- pudding sfx
+@ pudding sfx
 ? dash effect
 ? sprint effect
 
