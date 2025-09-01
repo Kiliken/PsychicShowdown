@@ -113,7 +113,7 @@ public class ThrowableObject : MonoBehaviour
         {
             //enumerator here
             //only for wall for now
-            if(objectName == "WALL")
+            if(objectName != "TREE")
             {
                 StartCoroutine(Dissolve());
             }

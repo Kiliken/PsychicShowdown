@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 63447a17d69b6ef4d9f034f0576d4666, type: 3}
       propertyPath: m_Name
-      value: wizard_rig (1)
+      value: wizard_rig_prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
