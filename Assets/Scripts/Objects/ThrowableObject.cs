@@ -113,7 +113,7 @@ public class ThrowableObject : MonoBehaviour
         {
             //enumerator here
             //only for wall for now
-            if(objectName != "TREE")
+            if (objectName != "TREE")
             {
                 StartCoroutine(Dissolve());
             }
@@ -309,7 +309,7 @@ public class ThrowableObject : MonoBehaviour
         highlightEffect.GetComponent<MeshRenderer>().enabled = show;
     }
 
-    IEnumerator Dissolve()
+    protected IEnumerator Dissolve()
     {
         float elapsed = 0f;
         while (elapsed < destroyAfterSec)

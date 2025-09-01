@@ -98,7 +98,7 @@ After Beta
 @ online body animations
 @ local hand animations
 @ online hand animations
-- 3 seconds timer (disable player input, pause timer)
+@ 3 seconds timer (disable player input, pause timer)
 @ replace logo
 - pudding sfx
 ? dash effect
