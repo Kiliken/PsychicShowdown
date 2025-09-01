@@ -2615,7 +2615,7 @@ MonoBehaviour:
   playerSide: 65
   player: {fileID: 0}
   playerOther: {fileID: 0}
-  gameManager: {fileID: 1373471946}
+  gameManager: {fileID: 0}
 --- !u!4 &1060199715
 Transform:
   m_ObjectHideFlags: 0
@@ -3918,17 +3918,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dde55fbbe0ae554191d6103f9b3b372, type: 3}
---- !u!114 &1373471946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7369497625216515599, guid: 5dde55fbbe0ae554191d6103f9b3b372, type: 3}
-  m_PrefabInstance: {fileID: 1373471945}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a90ae5d94475b65409ba90bd206fe328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1444337210
 GameObject:
   m_ObjectHideFlags: 0
@@ -4645,7 +4634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 2102451573}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1728620038
@@ -5573,6 +5562,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af0887d54489744ba7620637170780a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2102451573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7060222280091771595, guid: 286e34d534ed1cf48a2aa2eaadeb05db, type: 3}
+  m_PrefabInstance: {fileID: 21568834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2115718204 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4245613468580977978, guid: a77c808095012574f854139727a02a3c, type: 3}
