@@ -109,11 +109,11 @@ public class NETPlayer : MonoBehaviour
         }
 
         // X axis
-        float targetX = (speed >= 0.25f) ? Mathf.Clamp(localDir.x, -1f, 1f) : 0f;
+        float targetX = (speed >= 0.1f) ? Mathf.Clamp(localDir.x, -1f, 1f) : 0f;
         float currentX = playerAnimator.GetFloat("PosX");
         playerAnimator.SetFloat("PosX", Mathf.Lerp(currentX, targetX, Time.deltaTime * animSmooth));
         // Z axis
-        float targetZ = (speed >= 0.25f) ? Mathf.Clamp(localDir.z, -1f, 1f) : 0f;
+        float targetZ = (speed >= 0.1f) ? Mathf.Clamp(localDir.z, -1f, 1f) : 0f;
         float currentZ = playerAnimator.GetFloat("PosY");
         playerAnimator.SetFloat("PosY", Mathf.Lerp(currentZ, targetZ, Time.deltaTime * animSmooth));
 
