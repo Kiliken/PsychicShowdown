@@ -86,7 +86,6 @@ After Beta
 - effects
 
 
-
 ---POST BETA---
 @ destroy function item
 @ add explosion to microwave
@@ -129,6 +128,7 @@ Paolo:
 @ grass
 @ object spawning (random, special)
 - disappear shader
+- add automatic reset on game finish
 @ add new objects
 @ make barrier/space smaller when the timer reaches a set time
 
