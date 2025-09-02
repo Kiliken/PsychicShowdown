@@ -84,54 +84,8 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-    m_RemovedComponents:
-    - {fileID: 7658884572979897920, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7571878978571524054, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 4601066110392831298}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
---- !u!1 &4641032676551826091 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7571878978571524054, guid: 6a15dfc02b108c343bbc44a1622dea71, type: 3}
-  m_PrefabInstance: {fileID: 2989534118562942333}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4601066110392831298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4641032676551826091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 836796d966ee3484dab8dd4f132c4c64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectID: 0
-  objectName: Object (size)
-  objectSize: 0
-  canGrab: 1
-  canThrow: 0
-  aiming: 0
-  damage: 1
-  objSpecificDmg: 0
-  throwSpeed: 120
-  grabSpeed: 0.7
-  objSpecificSpeed: 0
-  grabbedTransform: {fileID: 0}
-  shootPos: {fileID: 0}
-  holdingPlayer: 0
-  grabbedRotation: {x: 0, y: 0, z: 0}
-  shootRotation: {x: 0, y: 0, z: 0}
-  holdPosPadding: {x: 0, y: 0, z: 0}
-  rbCollisionMask:
-    serializedVersion: 2
-    m_Bits: 1088
-  disableHitboxVelo: 20
-  destroyAfterSec: 3
-  effectParticle: {fileID: 3744313135594803531, guid: 0908949f2cf77c1479cad4b994e79353, type: 3}
-  meteorPrefab: {fileID: 0}
-  contactPoint: {x: 0, y: 0, z: 0}

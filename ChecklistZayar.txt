@@ -86,16 +86,22 @@ After Beta
 - effects
 
 
-
 ---POST BETA---
 @ destroy function item
 @ add explosion to microwave
 @ fix grab distance bug
 @ change item text (English, more readable)
-- add disappear effect for items
-- special items
-- dash effect
-- hand animations
+@ special items
+@ change model rotations for animations
+@ local body animations
+@ online body animations
+@ local hand animations
+@ online hand animations
+@ 3 seconds timer (disable player input, pause timer)
+@ replace logo
+@ pudding sfx
+? dash effect
+? sprint effect
 
 
 Chen:
@@ -103,15 +109,15 @@ Chen:
 @ rework player UI
 @ rework main menu
 @ rework game over menu
-~ options menu
-- rework UI for online mode
-- remove multiple event system
-- in-game menu (not Pause) for quitting the game
-- UI for objects holding in left and right hands
-- screen fade
-- intro/count down
+@ options menu
+@ rework UI for online mode
+@ remove multiple event system
+- fix navigation on pause screen
 - tutorial screen
-- new end screen?
+- intro/count down
+- screen fade
+- menu sfx
+- crosshair
 
 
 Paolo:
@@ -122,23 +128,24 @@ Paolo:
 @ grass
 @ object spawning (random, special)
 - disappear shader
-- add new objects
+- add automatic reset on game finish
+@ add new objects
 @ make barrier/space smaller when the timer reaches a set time
 
 
 ONLINE TO DO:
 @ test trajectory/hits
 @ fix skull bug
-- sync time
-- enable map generation/random items
-- check if all items are being added
+@ sync time
+@ enable map generation/random items
+@ check if all items are being added
 @ Update HPs for both sides
-- win/lose condition
-- take damage outside barrier
-- SFX for other player
-- Effects for other player
-- UI for barrier
-- return sound volume to normal
+@ win/lose condition
+@ UI timer
+@ SFX for other player
+@ Effects for other player
+@ return sound volume to normal
+- add automatic reset on game finish
 
 
 
@@ -152,11 +159,9 @@ These are special objects with a lower spawn rate and/or spawn at a set time int
 @ Spear (small):
 - Once thrown, multiplies itself into 5-10 copies.
 
-Meteor (small):
+ @Meteor (small):
 - Initially a small rock. Once thrown, it starts growing bigger and bigger until it hits something.
 - The damage it deals to the opponent will vary to the size it is at when it hits the enemy.
-
-- a strange looking crystal, once thrown, a meteor starts falling from the sky
 
 @ Pudding/Flan (large):
 - When jumped on, makes the player jump up very high, giving them a high vantage point.
@@ -188,9 +193,9 @@ NOTES:
 - When items are grabbed, they will move to your position
 
 Scene names:
-- AlphaPort
-- AlphaPortFHD
-- AlphaTest
+- TitleScreen
+- LoadingScreen
+- NetBeta
 
 
 PLAYER INPUTS:
@@ -220,37 +225,46 @@ P1:
 - camera adjustments
 - bug fixes
 
-SFX:
-- jump
-- dash
-- pick up object
-- throw object
-- object hit
-- player take damage
-- BGM
+SFX TO ADD:
+@ jump
+@ dash
+@ pick up object
+@ throw object
+@ object hit
+@ player take damage
+@ BGM
+- Title BGM
+- pudding bounce
+- menu blip
+- menu confirm
 
-SFX:
+SFX TO MAKE:
 - sprinting
 - explosion (grenade/microwave/skull)
 - explosion (meteor)
 - splat sound
 - player death/lose
 - game end tune
-- menu blip
-- menu confirm
+
 
 MODELS:
-- Skull (optional)
-- Flan
-- Spear
-- Meteor 
-- Hands
+@ Skull (optional)
+@ Flan
+@ Spear
+@ Meteor 
+@ Hands
+
 
 EFFECTS:
 - Sprint
 - splat effect (tomato, flan)
 - Skull's flame
 - Meteor plasma (fire enveloping the meteor as it falls to the ground)
+
+Munakata sensei feedback:
+- add feedback effect for getting hit
+- add an intro countdown where both players can move around
+- map too wide, make smaller
 
 
 

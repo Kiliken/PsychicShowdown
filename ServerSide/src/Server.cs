@@ -8,15 +8,34 @@ using System.Threading;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 
+
+
+/*
+Flags Description:
+
+0x4E (N) : Null, not empty
+0x41 (A) : Player A data recived
+0x42 (B) : Player B data recived
+0x4B (K) : Starting flag for Kick function (player still in the session)
+0x4C (L) : Last flag of the Kick funcion (player alredy left the session)
+0x6C (l) : Currently in the loading screen
+0x57 (W) : Currently in the winning screen
+
+
+*/
+
 class BasicUdpServer
 {
     static int port = 25565;
     static UdpClient udpc = new UdpClient(port);
-    
+
     static volatile byte[] p1Data;
     static volatile byte[] p2Data;
-
+    
     static volatile int seed = 0;
+
+    static volatile byte flag = 0;
+    static Random random = new Random();
     //static volatile Stopwatch stopWatch = new Stopwatch();
 
 
@@ -28,6 +47,7 @@ class BasicUdpServer
         //stopWatch.Start();
         string command = "";
         Console.WriteLine("[Server] started on port " + port);
+
         do
         {
             Console.Write("[Server] ");
@@ -39,6 +59,7 @@ class BasicUdpServer
                 StringifyBytes(p1Data);
                 Console.WriteLine("[Server] Player 2: ");
                 StringifyBytes(p2Data);
+                Console.WriteLine("[Server] Current Seed: " + seed);
                 //Console.WriteLine("[Server] Timer: " + stopWatch.ElapsedMilliseconds);
             }
 
@@ -83,6 +104,7 @@ class BasicUdpServer
         " reset\t RESETS STORED DATA\n" +
         " clear\t CLEAR THE CONSOLE\n" +
         " close\t CLOSE SERVER\n" +
+        " kick\t KICK BOTH PLAYER TO MAIN MENU\n" +
         " help\t SHOWS LIST OF AVIBILE COMMANDS\n"
         );
     }
@@ -91,20 +113,22 @@ class BasicUdpServer
     {
         p1Data = new byte[] { 0x4E };
         p2Data = new byte[] { 0x4E };
+        seed = random.Next();
+        flag = 0;
         //stopWatch.Reset();
         //stopWatch.Start();
         Console.WriteLine("[Server] data resetted ");
     }
-    
+
     static void KickAndReset()
     {
         p1Data = new byte[] { 0x4B };
         p2Data = new byte[] { 0x4B };
-		//stopWatch.Stop();
+        //stopWatch.Stop();
 
         Console.WriteLine("[Server] kicking player... ");
     }
-    
+
     private static void ServerLoop()
     {
         byte[] sdata;
@@ -112,6 +136,7 @@ class BasicUdpServer
 
         p1Data = new byte[] { 0x4E };
         p2Data = new byte[] { 0x4E };
+        seed = random.Next();
 
 
         while (true)
@@ -119,10 +144,27 @@ class BasicUdpServer
             //ServerLoopStart
             try
             {
+
+                if (p1Data[0] == 0x4C && p2Data[0] == 0x4C)
+                {
+                    ResetData();
+                }
+
+                if (p1Data[0] == 0x6C && p2Data[0] == 0x6C && flag > 1)
+                {
+                    ResetData();
+                }
+
+                if (p1Data[0] == 0x52 || p2Data[0] == 0x52)
+                {
+                    ResetData();
+                }
+
+                //Getdata
                 IPEndPoint ep = null;
                 receivedData = udpc.Receive(ref ep);
 
-
+                //Ingame
                 if (receivedData[0] == 0x41)
                 {
                     p1Data = receivedData;
@@ -141,7 +183,7 @@ class BasicUdpServer
                     }
                     udpc.Send(p2Data, p2Data.Length, ep);
                 }
-                else if (receivedData[0] == 0x42)
+                if (receivedData[0] == 0x42)
                 {
                     p2Data = receivedData;
                     if (p1Data[0] == 0x4E)
@@ -160,21 +202,76 @@ class BasicUdpServer
                     udpc.Send(p1Data, p1Data.Length, ep);
                 }
 
-                if (p1Data[0] == 0x4C  && p2Data [0] == 0x4C )
+
+                //Loading screen
+                if (receivedData[0] == 0x6C)
                 {
-                    ResetData();
-                }
-				
-				if (p1Data[0] == 0x52  || p2Data [0] == 0x52 )
-                {
-                    ResetData();
+                    if (receivedData.Length == 1)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+
+                    if (receivedData[1] == 0x41)
+                    {
+                        p1Data = receivedData;
+                        if (p2Data[0] == 0x4E)
+                        {
+                            sdata = new byte[] { 0x4E };
+                            udpc.Send(sdata, sdata.Length, ep);
+                            continue;
+                        }
+                        sdata = new byte[6];
+                        sdata[0] = 0x6C;
+                        sdata[1] = p2Data[1];
+                        Array.Copy(BitConverter.GetBytes(seed), 0, sdata, 2, 4);
+                        udpc.Send(sdata, sdata.Length, ep);
+                        flag++;
+                    }
+                    if (receivedData[1] == 0x42)
+                    {
+                        p2Data = receivedData;
+                        if (p1Data[0] == 0x4E)
+                        {
+                            sdata = new byte[] { 0x4E };
+                            udpc.Send(sdata, sdata.Length, ep);
+                            continue;
+                        }
+                        sdata = new byte[6];
+                        sdata[0] = 0x6C;
+                        sdata[1] = p1Data[1];
+                        Array.Copy(BitConverter.GetBytes(seed), 0, sdata, 2, 4);
+                        udpc.Send(sdata, sdata.Length, ep);
+                        flag++;
+                    }
                 }
 
-                /*if (stopWatch.ElapsedMilliseconds > 180000)
+                //Winning screen
+                if (receivedData[0] == 0x57)
                 {
-                    KickAndReset();
-                }*/
+                    if (receivedData.Length == 1)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
 
+                    if (receivedData[1] == 0x41)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        p1Data = sdata;
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+                    if (receivedData[1] == 0x42)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        p2Data = sdata;
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+                }
             }
             catch (SocketException ex)
             {

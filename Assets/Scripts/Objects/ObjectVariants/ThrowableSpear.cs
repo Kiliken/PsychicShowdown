@@ -47,12 +47,38 @@ public class ThrowableSpear : ThrowableObject
             CloneObjects();
     }
 
+    public override void ThrowObjectNet()
+    {
+        aiming = false;
+        rb.useGravity = true;
+
+        ShowHideObject(true, true);
+        //model.GetComponent<MeshRenderer>().enabled = true;
+        model.GetComponent<MeshCollider>().enabled = true;
+        //model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
+        // activate hit box
+        hitbox.ActivateHitbox(holdingPlayer);
+
+        rb.position = shootPos.position + holdPosPadding;
+        rb.rotation = shootPos.rotation * Quaternion.Euler(shootRotation.x, shootRotation.y, shootRotation.z);
+
+        rb.AddForce(shootPos.forward * throwSpeed, ForceMode.Impulse);
+
+
+        if (highlightEffect)
+            highlightEffect.SetActive(false);
+        thrown = true;
+
+        if (!isChild)
+            CloneObjects();
+    }
+
 
     private void CloneObjects()
     {
         // transform axes
-        Vector3 up = transform.up;
-        Vector3 right = transform.right;
+        Vector3 up = rb.transform.up;
+        Vector3 right = rb.transform.right;
 
         // local-space offsets
         Vector3[] localOffsets = {
@@ -70,7 +96,7 @@ public class ThrowableSpear : ThrowableObject
         foreach (var offset in localOffsets)
         {
             // basePos + offset to get world pos
-            GameObject spear = Instantiate(childObject, transform.position + offset, transform.rotation);
+            GameObject spear = Instantiate(childObject, rb.position + offset, rb.rotation);
             spear.GetComponent<ThrowableSpear>().holdingPlayer = holdingPlayer;
             spear.GetComponent<ThrowableSpear>().canGrab = false;
             spear.GetComponent<ThrowableSpear>().isChild = true;

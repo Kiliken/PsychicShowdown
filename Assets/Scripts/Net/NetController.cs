@@ -44,12 +44,20 @@ public class NetController : MonoBehaviour
 
     private byte rgCheckLeft = 0x00;
     private byte rgCheckRight = 0x00;
+    private byte rgSoundCheck = 0x00;
 
     private ThrowableObject leftObj;
     private ThrowableObject rightObj;
     private Transform playerShootPos;
 
     private Rigidbody otherplayerRb;
+
+    [Header("Other")]
+    [SerializeField] GameManager gameManager;
+    private HPBarBG otherHpBarEffect;
+    private CellHPBar otherHpCells;
+    private sbyte otherHp = 10;
+
 
     private static void SendGetData()
     {
@@ -88,11 +96,26 @@ public class NetController : MonoBehaviour
 
     private void Awake()
     {
+        DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
+
+        if (dbctr.ip != string.Empty) ip = dbctr.ip;
+        if (dbctr.port != 0) port = dbctr.port;
+        if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
+
         player = (playerSide == 'A' ? GameObject.Find("Player").transform : GameObject.Find("Player2").transform);
         playerOther = (playerSide == 'A' ? GameObject.Find("Player2").transform : GameObject.Find("Player").transform);
         Destroy(playerOther.GetComponent<Player>());
 
-        gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
+        //gameUI.GetChild(playerSide == 'A' ? 2 : 3).gameObject.SetActive(true);
+        //gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(0).gameObject.SetActive(true);
+
+        for (int i = 2; i < gameUI.GetChild(playerSide == 'A' ? 3 : 2).childCount; i++)
+        {
+            gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(i).gameObject.SetActive(false);
+        }
+
+        otherHpBarEffect = gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(0).GetComponent<HPBarBG>();
+        otherHpCells = gameUI.GetChild(playerSide == 'A' ? 3 : 2).GetChild(1).GetComponent<CellHPBar>();
 
         //player.GetComponent<Player>().playerNo = 1;
         netPlayerScript = playerOther.gameObject.AddComponent<NETPlayer>();
@@ -105,13 +128,15 @@ public class NetController : MonoBehaviour
         player.transform.GetComponent<Rigidbody>().useGravity = true;
         GameObject.Find((playerSide == 'A' ? "PlayerCam2" : "PlayerCam")).SetActive(false);
         EnablePlayer(player);
+
+        playerScript = player.GetComponent<Player>();
+        gameManager.player = playerScript;
+        gameManager.netPlayer = netPlayerScript;
     }
 
 
     void Start()
     {
-        playerScript = player.GetComponent<Player>();
-
         thisSideData = new NetData();
         map = FindAnyObjectByType<MapGenerator>();
 
@@ -124,7 +149,6 @@ public class NetController : MonoBehaviour
 
     void Update()
     {
-
         if (playerShootPos == null)
             playerShootPos = playerScript.shootPos;
 
@@ -139,9 +163,19 @@ public class NetController : MonoBehaviour
         if (udpGet[0] == 0x41 || udpGet[0] == 0x42)
         {
             data = NetManager.RetriveByte(udpGet);
+
+            netPlayerScript.UpdateHP(data.hp);
+
+
             UpdatePosition();
             UpdateShootPos();
 
+            if (otherHp != data.hp)
+            {
+                otherHpBarEffect.TakeDamage();
+                otherHpCells.UpdateHPBarNet(data.hp);
+            }
+            otherHp = data.hp;
 
             if ((byte)(data.leftHand - rgCheckLeft) != 0)
             {
@@ -197,6 +231,18 @@ public class NetController : MonoBehaviour
                     rgCheckRight -= 0x10;
             }
 
+            if ((byte)(data.soundFlag - rgSoundCheck) != 0)
+            {
+                Debug.Log($"Player sound:{data.soundIndex}");
+                //call the soundplayer fuction here
+                netPlayerScript.PlaySFXEffect(data.soundIndex);
+
+                rgSoundCheck++;
+
+                if (rgSoundCheck >= 0x10)
+                    rgSoundCheck -= 0x10;
+            }
+
         }
     }
 
@@ -208,8 +254,9 @@ public class NetController : MonoBehaviour
 
     void UpdatePosition()
     {
-        otherplayerRb.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
-        playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
+        // otherplayerRb.position = Vector3.Lerp(playerOther.position, new Vector3(data.posX, data.posY, data.posZ), Time.deltaTime * 10f);
+        // playerOther.GetChild(0).eulerAngles = new Vector3(0, data.rotBody, 0);
+        netPlayerScript.UpdatePosition(data.posX, data.posY, data.posZ, data.rotBody);
     }
 
     void UpdateShootPos()
@@ -251,5 +298,7 @@ public class NetController : MonoBehaviour
         thisSideData.camPosZ = playerShootPos.position.z;
         thisSideData.camRotX = playerShootPos.eulerAngles.x;
         thisSideData.camRotY = playerShootPos.eulerAngles.y;
+        thisSideData.soundFlag = playerScript.soundFlag; //change this to your flag
+        thisSideData.soundIndex = playerScript.soundIndex; //change this to your index
     }
 }

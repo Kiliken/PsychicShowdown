@@ -15,13 +15,51 @@ public class DebugController : MonoBehaviour
     Queue myLogQueue = new Queue();
 
     public string sceneName = null;
+    public string ip = null;
+    public int port = 0;
+    public char playerSide = '0';
+
+    public byte existenceFlag = 0x00;
 
     void Awake()
     {
+        DebugController[] objs = GameObject.FindObjectsOfType<DebugController>();
+
+        for(int i = 0; i < objs.Length; i++)
+        {
+            if (objs[i].existenceFlag == 0x03 && objs[i] != this)
+            {
+                Destroy(this.gameObject);
+            }
+                
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+
+
         if (GetArg("-scene") != null)
         {
             sceneName = GetArg("-scene");
         }
+
+        if (GetArg("-ip") != null)
+        {
+            ip = GetArg("-ip");
+            
+        }
+
+        if (GetArg("-port") != null)
+        {
+            port = int.Parse(GetArg("-port"));
+            
+        }
+
+        if (GetArg("-player") != null)
+        {
+            playerSide = GetArg("-player")[0];
+        }
+        
+        
     }
 
     void Start()
@@ -36,7 +74,14 @@ public class DebugController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Backslash))
+        if (existenceFlag == 0x00)
+        {
+            existenceFlag = 0x03;
+            this.tag = "DebugCtrl";
+        }
+            
+
+        if (Input.GetKeyDown(KeyCode.Backslash))
             showConsole = !showConsole;
         
         if (input.Contains("\n"))

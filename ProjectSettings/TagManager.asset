@@ -11,6 +11,9 @@ TagManager:
   - GameSettings
   - P1UI
   - P2UI
+  - ServerData
+  - DebugCtrl
+  - SceneCamera
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Meteor : ThrowableObject
 {
+    private Vector3 explosionOffset = new Vector3(0, -7f, 0);
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -45,7 +47,7 @@ public class Meteor : ThrowableObject
         // instantiate hit effect
         if (effectParticle != null)
         {
-            Instantiate(effectParticle, transform.position, quaternion.identity);
+            Instantiate(effectParticle, transform.position + explosionOffset, quaternion.identity);
         }
         effectActivated = true;
         //Destroy(this.gameObject);

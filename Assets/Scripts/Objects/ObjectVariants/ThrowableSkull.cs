@@ -53,6 +53,8 @@ public class ThrowableSkull : ThrowableObject
         // set object to be destoryed after collision/effect activation
         if (effectActivated)
         {
+            StartCoroutine(Dissolve());
+
             if (destroyTimer < destroyAfterSec)
             {
                 destroyTimer += Time.deltaTime;

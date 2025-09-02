@@ -79,6 +79,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 449942268754428325, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 450872778435669836, guid: de8f94a9587ab49409ce9f040ca5e084, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4
@@ -282,6 +286,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8d265be3f5a50bb489ae9084be1bfe85, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d265be3f5a50bb489ae9084be1bfe85, type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
@@ -343,6 +351,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8d265be3f5a50bb489ae9084be1bfe85, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 049af0a3a9408874dba00d9ee9f87ead, type: 2}
     - target: {fileID: 919132149155446097, guid: 8d265be3f5a50bb489ae9084be1bfe85, type: 3}
       propertyPath: m_Name
       value: Model

@@ -50,11 +50,14 @@ public class ThrowableObject : MonoBehaviour
     [SerializeField] protected GameObject effectParticle;
     protected bool objectVisible = true;
 
+    //Dissolve test
+    Material dissolveMaterial;
 
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        dissolveMaterial = transform.GetChild(1).GetComponent<MeshRenderer>().material;
         model = transform.GetChild(1).gameObject;
         rb = GetComponent<Rigidbody>();
         hitbox = transform.GetChild(0).GetComponent<ObjHitbox>();
@@ -108,6 +111,13 @@ public class ThrowableObject : MonoBehaviour
         // set object to be destoryed after collision/effect activation
         if (effectActivated)
         {
+            //enumerator here
+            //only for wall for now
+            if (objectName != "TREE")
+            {
+                StartCoroutine(Dissolve());
+            }
+
             if (destroyTimer < destroyAfterSec)
             {
                 destroyTimer += Time.deltaTime;
@@ -135,11 +145,8 @@ public class ThrowableObject : MonoBehaviour
 
     public virtual void GrabObject(Transform posTransform, Transform shootTransform, int player)
     {
-        if (objectSize > 0)
-        {
-            rb.isKinematic = false;
-            model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
-        }
+        rb.isKinematic = false;
+        model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Object");
 
         grabbedTransform = posTransform;
         shootPos = shootTransform;
@@ -297,5 +304,19 @@ public class ThrowableObject : MonoBehaviour
     {
         if (!highlightEffect) return;
         highlightEffect.GetComponent<MeshRenderer>().enabled = show;
+    }
+
+    protected IEnumerator Dissolve()
+    {
+        float elapsed = 0f;
+        while (elapsed < destroyAfterSec)
+        {
+            float dissolveAmount = Mathf.Lerp(0f, 1f, elapsed / destroyAfterSec);
+            dissolveMaterial.SetFloat("_DissolveController", dissolveAmount);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        dissolveMaterial.SetFloat("_DissolveController", 1f); // Ensure it's fully dissolved
     }
 }

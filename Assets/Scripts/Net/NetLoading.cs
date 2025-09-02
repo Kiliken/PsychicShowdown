@@ -5,6 +5,10 @@ using System.Net.Sockets;
 using System.Net;
 using Debug = UnityEngine.Debug;
 using UnityEngine;
+using System;
+using System.Buffers;
+using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class NetLoading : MonoBehaviour
 {
@@ -16,14 +20,12 @@ public class NetLoading : MonoBehaviour
     long timer = 0;
     private bool udpRunnig = true;
 
-    private NetData data;
+    public char playerSide = 'A';
 
-    private NetData thisSideData;
-
-    private MapGenerator map;
+    LoadedDataStorage loadedData;
 
     [SerializeField]
-    private Transform gameUI;
+    private Transform spinner;
 
     byte[] udpSend = new byte[] { 0x4E };
     byte[] udpGet = new byte[] { 0x4E };
@@ -34,14 +36,28 @@ public class NetLoading : MonoBehaviour
 
     void Awake()
     {
-        udpc = new UdpClient(ip, port);
-        udpc.Client.ReceiveTimeout = 1000;
+        DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
+
+        if (dbctr.ip != string.Empty) ip = dbctr.ip;
+        if (dbctr.port != 0) port = dbctr.port;
+        if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        udpc = new UdpClient(ip, port);
+        udpc.Client.ReceiveTimeout = 1000;
 
+        byte[] buffer = new byte[2];
+
+        buffer[0] = 0x6C;
+        buffer[1] = (byte)playerSide;
+
+        udpSend = buffer;
+
+        loadedData = GameObject.FindFirstObjectByType<LoadedDataStorage>();
     }
 
     // Update is called once per frame
@@ -55,6 +71,17 @@ public class NetLoading : MonoBehaviour
         {
             SendGetData();
         }
+
+        spinner.eulerAngles += Vector3.forward * 100 *Time.deltaTime;
+        if (spinner.eulerAngles.z > 360f)
+            spinner.eulerAngles -= Vector3.forward * 360f;
+
+        if (udpGet[0] != 0x4E)
+        {
+            loadedData.seed = BitConverter.ToInt32(udpGet, 2);
+            SceneManager.LoadScene("NetBeta");
+        }
+            
     }
 
     void SendGetData()

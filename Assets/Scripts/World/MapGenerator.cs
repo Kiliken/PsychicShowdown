@@ -74,6 +74,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private GameObject suddenDeath;
 
+    System.Random objectRnd;
+
     //[SerializeField]
     //TerrainType[] regions;
 
@@ -123,7 +125,6 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateObjects()
     {
-        Random.InitState(seed);
 
         GameObject grassHolder = new GameObject("WorldGrass");
         grassHolder.transform.position = Vector3.zero;
@@ -174,12 +175,12 @@ public class MapGenerator : MonoBehaviour
 
     private void SpanwObject()
     {
-        genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
+        genCursor = new Vector3(objectRnd.Next((int)-generatorLimit, (int)generatorLimit), 50f, objectRnd.Next((int)-generatorLimit, (int)generatorLimit));
 
-        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
+        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity))
         {
             int rand;
-            rand = Random.Range(0, 2);
+            rand = objectRnd.Next(0, 2);
             objectHeight = 50f - hit.distance;
             switch (true)
             {
@@ -194,9 +195,9 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(1, 3)], hit.point, Quaternion.identity);
-                        propertyBlock.SetColor("_BaseColor", Color.gray);
-                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(1,4)], hit.point, Quaternion.identity);
+                        //propertyBlock.SetColor("_BaseColor", Color.gray);
+                        //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
 
                     break;
@@ -212,10 +213,10 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(3, 5)], hit.point, Quaternion.identity);
-                        ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
-                        propertyBlock.SetColor("_BaseColor", thisColor);
-                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(4,8)], hit.point, Quaternion.identity);
+                        //ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
+                        //propertyBlock.SetColor("_BaseColor", thisColor);
+                        //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     break;
                 case true when (objectHeight < 22f):
@@ -229,7 +230,7 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(5, 7)], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(8,11)], hit.point, Quaternion.identity);
                         //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
                         //propertyBlock.SetColor("_BaseColor", thisColor);
                         //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -244,7 +245,7 @@ public class MapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[Random.Range(7, 10)], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[objectRnd.Next(11,14)], hit.point, Quaternion.identity);
                     }
                     break;
 
@@ -275,7 +276,10 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-        //seed = Random.Range(6, 4587);
+
+        seed = (GameObject.FindObjectOfType<LoadedDataStorage>() != null ? GameObject.FindObjectOfType<LoadedDataStorage>().seed : 0);
+        Random.InitState(seed);
+        objectRnd = new System.Random(seed);
 
         objects = new List<GameObject>();
 
@@ -301,7 +305,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (!isTitle)
         {
-            Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
+            /*Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
             if (timer > 30)
             {
                 timer -= Time.deltaTime;
@@ -331,7 +335,7 @@ public class MapGenerator : MonoBehaviour
                 }
 
             }
-
+            */
             for (int i = 0; i < objects.Count; i++)
                 if (objects[i] == null)
                     objects.Remove(objects[i]);
