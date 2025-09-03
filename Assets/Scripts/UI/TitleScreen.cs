@@ -15,6 +15,7 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] Transform worldObj;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject tutorialPanel;
     //private GameObject curDefaultButton;
     private GameObject lastValidSelection;
     [SerializeField] private GameObject firstButton;
@@ -39,6 +40,8 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] private AudioSource hoverSound;
     [SerializeField] private AudioSource clickSound;
     private GameSettings gameSettings;
+
+    [SerializeField] private GameObject firstTutorial;
 
 
     // Start is called before the first frame update
@@ -75,8 +78,10 @@ public class TitleScreen : MonoBehaviour
         //p2ControllerColumn.UpdateVisuals();
         SetSoundVolume(volume);
 
-
+        settingsPanel.SetActive(false);
+        tutorialPanel.SetActive(false);
         ShowMainMenuPanel();
+        
 
         BGM.volume = 0.2f;
         hoverSound.volume = 0.3f;
@@ -201,6 +206,13 @@ public class TitleScreen : MonoBehaviour
         lastValidSelection = firstButton;
     }
 
+    public void ShowTutorialMenu()
+    {
+        mainMenuPanel.SetActive(false);
+        tutorialPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstTutorial);
+    }
+
     public void SetSoundVolume(float value)
     {
         volume = value;
@@ -258,4 +270,6 @@ public class TitleScreen : MonoBehaviour
     {
         clickSound.Play();
     }
+
+
 }
