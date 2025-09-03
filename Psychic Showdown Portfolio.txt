@@ -1,0 +1,95 @@
+Psychic Showdown Portfolio
+
+- An overview of the programming part briefly explaining the client and server sides including the development tools used.
+
+- Explanation on the client side including explanations about the player, throwable objects and the game system. Explanations of how the objects are composed, what scripts are included and how they interact with each other, technical highlights (code snippets) will be included.
+Objects included in explanation:
+	- Player/Camera (Player dash, camera movement)
+	- NET Player (Net player animations)
+	- Throwable Objects
+
+- Explanation on the server side including how the server is set up and how the data communication is done.
+--------------------------------
+
+This game is made using Unity 2022.3.56. During the early stages of the development before the server implementation, the game was first implemented as a split-screen game. However, since this is an online game, the programming side of the game consists of a client side which is the base game system, and a server side which handles data communication between the two players.
+
+--------------------------------
+
+CLIENT SIDE
+The client side is the base game system which involves the implementation of the core gameplay mechanics. Among them, I would like to focus on the two most important parts; the players and the throwable items.
+--------------------------------
+
+PLAYER
+This is the character that the client-side player controls. The Player functions through a number of scripts interacting with one another attached to it. The camera, an object separate to the Player, follows the player around in the game and has its own class. 
+
+Player Object
+Player.cs : Contains basic information (HP, Player No., etc.) and handles functions for detecting, grabbing and throwing objects.
+PlayerMovement.cs : Handles the movement (walk, sprint, jump, dash) for the player and performs collision checks.
+ObjHolder.cs : Updates the positions of the items being held by the player and changes their holding positions when necessary.
+PlayerSFXPlayer.cs : Plays the SE for the player.
+ControlManager.cs : Sets the control scheme (Xbox or PlayStation) for the player.
+
+Camera Object
+CameraController.cs : A robust controller script that makes the camera follow the player in a third-person perspective.  
+
+Technical Highlights
+
+Dashing Ability (PlayerMovement.cs)
+The dash coroutine not only moves the player to a position at high speed, but also makes sure that the player does not clip through the wall or the ground by doing raycast checks. If something is in the way of the dashing path, the coroutine makes sure that the player only moves to the point of collision and not beyond it. During the dash, the hurtbox of the player is disabled so that they would not take damage.
+
+[INSERT CODE SNIPPET]
+
+Camera Controller (CameraController.cs)
+Instead of using something like Unity's Cinemachine, the camera script is written from scratch. The camera is similar to the ones in third-person shooters today and feels smooth to control. The distance, offset distance, angular rotation limit, rotation speed, axis inversion and shoulder swap can all be adjusted through the editor. Here is the Update function of the script.
+
+[INSERT CODE SNIPPET]
+
+--------------------------------
+
+NET PLAYER
+This is the character that the opponent player is controlling through the server. Unlike the client-sided Player, the Net Player is essentially a "puppet" who acts according to the instructions received from the server. The Net Player does not exist as a separate object. It is originally the Player object which gets turned into a Net Player by NetController.
+
+Player Object (Net Player)
+NETPlayer.cs : By receiving data of the opponent player from NetController, performs actions like moving, grabbing and throwing objects.
+ObjHolder.cs : Updates the positions of the items being held by the player and changes their holding positions when necessary.
+PlayerSFXPlayer.cs : Plays the SE for the player.
+
+NetController Object
+NetController.cs : Responsible for sending and receiving data between clients and instructing the Net Player what to do. Depending on which Player No. the client-sided player is (Player 1 or 2), it turns the other Player object into the Net Player and removes unnecessary scripts and components.
+
+Technical Highlights
+
+Net Player Movement (NETPlayer.cs)
+The UpdatePosition function moves the Net Player to the position the opponent player has moved to through the data from the server and also sets its facing rotation. In addition, it calculates the direction the Net Player is moving in from its last position and new position, and sets the movement animation.
+
+[INSERT CODE SNIPPET]
+
+--------------------------------
+
+THROWABLE ITEMS
+These are the items that the players throw at each other in the game. The items have 3 classes; small, medium and large, each with their own size, damage and movement speeds. In addition, there are variant items which have unique effects. 
+
+Throwable Item Object
+ThrowableObject.cs : The base script of the throwable items containing functions for being grabbed and thrown. The attributes like damage, throw speed, position and rotation while being held or shot can be set through the editor. 
+ObjHitbox.cs : Responsible for dealing damage to the other player.
+ObjSFXPlayer.cs : Responsible for playing SE of the objects.
+
+Throwable Item Object (Variants inheriting from ThrowableObject.cs,)
+ThrowableGrenade.cs : Explodes and deals damage after being thrown.
+ThrowableSpear.cs : Splits itself into multiple copies after being thrown.
+ThrowableSkull.cs : Chases the other player after being thrown.
+ThrowableMeteor.cs : Spawns a giant meteor from above to the impact point after being thrown.
+ThrowableFlan.cs : Launches the players high up in the air when they jump onto it.
+
+
+
+
+
+
+
+
+
+
+
+
+
