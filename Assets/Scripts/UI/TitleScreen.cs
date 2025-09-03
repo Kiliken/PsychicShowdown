@@ -35,9 +35,12 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] private ControllerColumn p1ControllerColumn;
     [SerializeField] private ControllerColumn p2ControllerColumn;
 
+    [SerializeField] private AudioSource BGM;
+    [SerializeField] private AudioSource hoverSound;
+    [SerializeField] private AudioSource clickSound;
     private GameSettings gameSettings;
 
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,22 +61,25 @@ public class TitleScreen : MonoBehaviour
         Debug.Log("Sound slider value set to: " + soundSlider.value);
         Debug.Log(volume);
         p1SensitivitySlider.value = gameSettings.p1Sensitivity;
-        p2SensitivitySlider.value = gameSettings.p2Sensitivity;
+        //p2SensitivitySlider.value = gameSettings.p2Sensitivity;
 
 
         soundSlider.onValueChanged.AddListener(SetSoundVolume);
         p1SensitivitySlider.onValueChanged.AddListener(SetP1Sensitivity);
-        p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
+        //p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
 
        
         p1ControllerColumn.selectedIndex = gameSettings.p1ControllerIsPS ? 0 : 1;
-        p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
+        //p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
         p1ControllerColumn.UpdateVisuals();
-        p2ControllerColumn.UpdateVisuals();
+        //p2ControllerColumn.UpdateVisuals();
         SetSoundVolume(volume);
 
 
         ShowMainMenuPanel();
+
+        BGM.volume = 0.2f;
+        hoverSound.volume = 1.0f;
     }
 
 
@@ -152,6 +158,8 @@ public class TitleScreen : MonoBehaviour
         if (next != null)
         {
             EventSystem.current.SetSelectedGameObject(next.gameObject);
+            hoverSound.Play();
+
         }
 
     }

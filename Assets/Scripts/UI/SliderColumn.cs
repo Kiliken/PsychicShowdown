@@ -10,6 +10,7 @@ public class SliderColumn : MonoBehaviour, IPointerEnterHandler
 
     [SerializeField] private float sliderSpeed = 0.5f;
     [SerializeField] private float deadzone = 0.3f;
+    [SerializeField] private AudioSource BGM;
 
     void Start()
     {
@@ -30,6 +31,9 @@ public class SliderColumn : MonoBehaviour, IPointerEnterHandler
                 slider.value = Mathf.Clamp(slider.value, slider.minValue, slider.maxValue);
             }
         }
+
+        BGM.volume = slider.value * 2 / 5;
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)

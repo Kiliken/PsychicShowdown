@@ -22,6 +22,7 @@ public class ControllerColumn : MonoBehaviour, IPointerEnterHandler
 
     void Start()
     {
+        //ts.SetControl(playerIndex, false); // true for PlayStation
         UpdateVisuals();
         ts = FindObjectOfType<TitleScreen>();
     }
