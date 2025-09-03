@@ -79,7 +79,7 @@ public class TitleScreen : MonoBehaviour
         ShowMainMenuPanel();
 
         BGM.volume = 0.2f;
-        hoverSound.volume = 1.0f;
+        hoverSound.volume = 0.3f;
     }
 
 
@@ -252,5 +252,10 @@ public class TitleScreen : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Quit game");
+    }
+
+    public void PlayClick()
+    {
+        clickSound.Play();
     }
 }

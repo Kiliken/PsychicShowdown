@@ -5,11 +5,14 @@ using UnityEngine.EventSystems;
 public class HoverOnlyButton : Button
 {
     protected GameSettings gs;
+    protected TitleScreen ts;
+
 
     protected override void Awake()
     {
         base.Awake();
         gs = FindObjectOfType<GameSettings>();
+        ts = FindObjectOfType<TitleScreen>();
     }
     //protected override void Start()
     //{
@@ -115,6 +118,7 @@ public class HoverOnlyButton : Button
 
     public override void OnSubmit(BaseEventData eventData)
     {
+        ts.PlayClick();
         // Block Unity's default submit input (A/X/Cross)
         Debug.Log("Blocked default submit");
     }
