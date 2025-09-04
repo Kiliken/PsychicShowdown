@@ -37,7 +37,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump1"))
                 {
                     clicked = true;
-                    Debug.Log("p1ps");
+                    //Debug.Log("p1ps");
                 }
             }
             else
@@ -45,7 +45,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump1X"))
                 {
                     clicked = true;
-                    Debug.Log("p1x");
+                    //Debug.Log("p1x");
                 }
             }
 
@@ -54,7 +54,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump2"))
                 {
                     clicked = true;
-                    Debug.Log("p2ps");
+                    //Debug.Log("p2ps");
                 }
                 }
             else
@@ -62,7 +62,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump2X"))
                 {
                     clicked = true;
-                    Debug.Log("p2x");
+                    //Debug.Log("p2x");
                 }
             }
 

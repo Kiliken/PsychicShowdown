@@ -42,6 +42,9 @@ public class TitleScreen : MonoBehaviour
     private GameSettings gameSettings;
 
     [SerializeField] private GameObject firstTutorial;
+    [SerializeField] private Tutorial tutorial;
+
+
 
 
     // Start is called before the first frame update
@@ -167,7 +170,20 @@ public class TitleScreen : MonoBehaviour
 
         }
 
+        if (tutorialPanel.activeSelf)
+        {
+            if (dir == Vector2.up && tutorial.curTutorialStep > 0)
+            {
+                tutorial.curTutorialStep -= 1;
+            }
+            if (dir == Vector2.down && tutorial.curTutorialStep != 4 && tutorial.curTutorialStep != 9)
+            {
+                tutorial.curTutorialStep += 1;
+            }
+
+        }
     }
+
 
     void FixedUpdate()
     {
@@ -213,6 +229,14 @@ public class TitleScreen : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstTutorial);
     }
 
+    public void HideTutorialMenu()
+    {
+        tutorialPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstButton);
+        lastValidSelection = firstButton;
+    }
+
     public void SetSoundVolume(float value)
     {
         volume = value;
@@ -238,32 +262,32 @@ public class TitleScreen : MonoBehaviour
     {
         p1Sensitivity = value;
         gameSettings.p1Sensitivity = p1Sensitivity;
-        Debug.Log("Player 1 sensitivity set to: " + p1Sensitivity);
+        //Debug.Log("Player 1 sensitivity set to: " + p1Sensitivity);
     }
 
     public void SetP2Sensitivity(float value)
     {
         p2Sensitivity = value;
         gameSettings.p2Sensitivity = p2Sensitivity;
-        Debug.Log("Player 2 sensitivity set to: " + p2Sensitivity);
+        //Debug.Log("Player 2 sensitivity set to: " + p2Sensitivity);
     }
 
     public void SetP1ControlType(bool isPS)
     {
         p1controlisPS = isPS;
-        Debug.Log("Player 1 control type set to: " + (p1controlisPS ? "PlayStation" : "Xbox"));
+        //Debug.Log("Player 1 control type set to: " + (p1controlisPS ? "PlayStation" : "Xbox"));
     }
 
     public void SetP2ControlType(bool isPS)
     {
         p2controlisPS = isPS;
-        Debug.Log("Player 2 control type set to: " + (p2controlisPS ? "PlayStation" : "Xbox"));
+        //Debug.Log("Player 2 control type set to: " + (p2controlisPS ? "PlayStation" : "Xbox"));
     }
 
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quit game");
+        //Debug.Log("Quit game");
     }
 
     public void PlayClick()
