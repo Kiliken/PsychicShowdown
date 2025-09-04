@@ -82,9 +82,273 @@ ThrowableMeteor.cs : Spawns a giant meteor from above to the impact point after 
 ThrowableFlan.cs : Launches the players high up in the air when they jump onto it.
 
 
+### Overview
 
+This game was developed using **Unity 2022.3.56**. In the early stages of development—before server implementation—the game was first designed as a split-screen local multiplayer. However, since the final product is an **online multiplayer game**, the programming architecture consists of two sides:
 
+* **Client Side** – the base game system and local player logic
+* **Server Side** – handles data communication between the two players
 
+---
+
+### CLIENT SIDE
+
+The client side handles the core gameplay systems. This includes the implementation of fundamental mechanics like player control and item interaction. Two major components are:
+
+* The **Player** (the controllable character)
+* The **Throwable Items** (interactable weapons)
+
+---
+
+### PLAYER
+
+This is the character controlled by the local (client-side) player. The Player GameObject consists of multiple scripts that work together. The **Camera**, although separate from the Player object, follows it and has its own logic.
+
+#### Player Object
+
+* **Player.cs**
+  Manages basic information (e.g., HP, Player Number) and handles object detection, grabbing, and throwing.
+
+* **PlayerMovement.cs**
+  Controls player movement (walking, sprinting, jumping, dashing) and performs collision checks.
+
+* **ObjHolder.cs**
+  Updates the position of held items and adjusts holding positions when necessary.
+
+* **PlayerSFXPlayer.cs**
+  Plays sound effects related to the player.
+
+* **ControlManager.cs**
+  Determines the player's control scheme (e.g., Xbox or PlayStation).
+
+#### Camera Object
+
+* **CameraController.cs**
+  A robust third-person camera system that smoothly follows the player.
+
+---
+
+#### 🛠 Technical Highlights
+
+**Dashing Mechanic** (*PlayerMovement.cs*)
+The dash coroutine moves the player rapidly while performing raycast checks to prevent clipping through walls or terrain. If an obstacle is detected, the player will only dash up to the point of collision. During the dash, the player's hurtbox is disabled to prevent damage.
+
+```csharp
+[INSERT CODE SNIPPET]
+```
+
+**Custom Camera Controller** (*CameraController.cs*)
+Instead of using Unity's Cinemachine, this camera system is built from scratch. It provides a modern third-person shooter feel, with adjustable settings (distance, offset, rotation limits, inversion, shoulder swap, etc.) all tweakable via the Unity Inspector.
+
+```csharp
+[INSERT CODE SNIPPET]
+```
+
+---
+
+### NET PLAYER
+
+This is the character controlled by the opponent through the server. Unlike the client-side Player, the Net Player is essentially a **"puppet"** that acts based on server commands. It is not a separate object but is converted from a regular Player object by the **NetController**.
+
+#### Net Player Scripts
+
+* **NETPlayer.cs**
+  Receives opponent data from the NetController and performs corresponding actions like movement, grabbing, and throwing.
+
+* **ObjHolder.cs**
+  Same function as on the client side – manages held object positions.
+
+* **PlayerSFXPlayer.cs**
+  Plays sound effects for the Net Player.
+
+#### NetController Object
+
+* **NetController.cs**
+  Handles all data exchange between clients. Based on the player's ID (Player 1 or 2), it turns the opposing Player object into a Net Player, removing unnecessary scripts/components.
+
+---
+
+#### 🛠 Technical Highlights
+
+**Net Player Movement** (*NETPlayer.cs*)
+The `UpdatePosition()` method moves the Net Player to the location received from the server and updates its facing direction. It also calculates movement direction based on position deltas and updates the appropriate animation state.
+
+```csharp
+[INSERT CODE SNIPPET]
+```
+
+---
+
+### THROWABLE ITEMS
+
+These are objects players throw at each other. They are divided into three classes: **small**, **medium**, and **large**, each differing in size, damage, and speed. Some items are **variants** with special effects.
+
+#### Base Throwable Object
+
+* **ThrowableObject.cs**
+  Core script managing the grabbing and throwing mechanics. Attributes like damage, throw speed, held position/rotation can be adjusted in the Inspector.
+
+* **ObjHitbox.cs**
+  Handles collision and damage to opponents.
+
+* **ObjSFXPlayer.cs**
+  Manages sound effects for items.
+
+#### Variant Objects (inherit from `ThrowableObject.cs`)
+
+* **ThrowableGrenade.cs**
+  Explodes after being thrown and deals area damage.
+
+* **ThrowableSpear.cs**
+  Splits into multiple copies after being thrown.
+
+* **ThrowableSkull.cs**
+  Homes in on the opponent after being thrown.
+
+* **ThrowableMeteor.cs**
+  Summons a giant meteor that crashes at the impact location.
+
+* **ThrowableFlan.cs**
+  Launches players high into the air when jumped on.
+
+---
+
+## 🇯🇵 Japanese Translation（日本語版）
+
+---
+
+### 概要
+
+このゲームは **Unity 2022.3.56** を使用して開発されました。開発初期段階では、サーバー実装前にローカルマルチプレイのスプリットスクリーン形式で構築されていました。しかし、最終的には**オンライン対戦型ゲーム**として完成させるため、プログラム構成は以下の2つに分かれています：
+
+* **クライアント側**：基本的なゲームシステムおよびローカルプレイヤーの処理
+* **サーバー側**：2人のプレイヤー間のデータ通信を処理
+
+---
+
+### クライアント側
+
+クライアント側では、ゲームプレイのコアとなるシステムが処理されます。主に以下の2つのコンポーネントに焦点を当てています：
+
+* **プレイヤーキャラクター**（操作可能なキャラクター）
+* **投擲アイテム**（投げ合う武器）
+
+---
+
+### プレイヤー
+
+これはクライアント側のプレイヤーが操作するキャラクターです。複数のスクリプトによって構成され、それぞれが連携しています。**カメラ**はプレイヤーとは別のオブジェクトとして存在し、プレイヤーを追従するように動作します。
+
+#### プレイヤーオブジェクト
+
+* **Player.cs**
+  HPやプレイヤー番号などの基本情報を管理し、オブジェクトの検出・掴み・投げ処理を行います。
+
+* **PlayerMovement.cs**
+  移動（歩き、ダッシュ、ジャンプ、突進）を制御し、コリジョンチェックも実行します。
+
+* **ObjHolder.cs**
+  持っているアイテムの位置を更新し、必要に応じて持ち方を変更します。
+
+* **PlayerSFXPlayer.cs**
+  プレイヤーの効果音（SE）を再生します。
+
+* **ControlManager.cs**
+  Xbox または PlayStation のコントローラ設定を適用します。
+
+#### カメラオブジェクト
+
+* **CameraController.cs**
+  プレイヤーを追従する三人称視点のカメラ制御スクリプトです。
+
+---
+
+#### 🛠 技術的ハイライト
+
+**ダッシュ機能**（*PlayerMovement.cs*）
+ダッシュ処理は、プレイヤーを高速で移動させるだけでなく、レイキャストによって壁や地面をすり抜けないよう制御しています。障害物がある場合は、衝突ポイントまでしか移動しません。ダッシュ中はヒットボックスが無効化され、ダメージを受けない仕様です。
+
+```csharp
+[INSERT CODE SNIPPET]
+```
+
+**カスタムカメラ制御**（*CameraController.cs*）
+UnityのCinemachineを使わず、独自に設計されたカメラシステムです。現代的な三人称シューティングゲームのような操作感を実現しています。距離、オフセット、回転制限、回転速度、反転、ショルダースワップなど、エディタから調整可能です。
+
+```csharp
+[INSERT CODE SNIPPET]
+```
+
+---
+
+### ネットプレイヤー
+
+これは、サーバー経由で相手プレイヤーが操作しているキャラクターです。クライアント側のプレイヤーとは異なり、\*\*「操り人形」\*\*として動作し、サーバーからの指示に従って動きます。専用のオブジェクトではなく、**NetController** によって既存の Player オブジェクトが変換されます。
+
+#### ネットプレイヤー用スクリプト
+
+* **NETPlayer.cs**
+  NetController から受け取ったデータを元に、移動・掴み・投げのアクションを実行します。
+
+* **ObjHolder.cs**
+  アイテムの位置管理を担当します（クライアント側と同様）。
+
+* **PlayerSFXPlayer.cs**
+  効果音を再生します。
+
+#### NetController オブジェクト
+
+NetController オブジェクト
+
+NetController.cs
+クライアント間のデータ送受信を管理し、相手プレイヤーのオブジェクトを「ネットプレイヤー」に変換します。プレイヤー番号（Player 1 または Player 2）に応じて、相手の Player オブジェクトから不要なスクリプトやコンポーネントを削除します。
+
+🛠 技術的ハイライト
+
+ネットプレイヤーの移動処理（NETPlayer.cs）
+UpdatePosition() 関数は、サーバーから受け取った位置情報を使ってネットプレイヤーを移動させ、向きを更新します。さらに、前回位置と現在位置の差分から移動方向を計算し、アニメーションステートを切り替えます。
+
+[INSERT CODE SNIPPET]
+
+投擲アイテム
+
+このゲームでは、プレイヤーが互いに投げ合うことができるオブジェクトが存在します。投擲アイテムは以下の3つのカテゴリに分類され、それぞれサイズ・ダメージ・速度が異なります：
+
+小型
+
+中型
+
+大型
+
+さらに、特別な効果を持つ「バリアント（派生）アイテム」も用意されています。
+
+投擲アイテムの基本オブジェクト
+
+ThrowableObject.cs
+掴む、投げるといった基本機能を持つベーススクリプトです。ダメージ、投擲速度、保持時の位置・回転などはインスペクターで設定可能です。
+
+ObjHitbox.cs
+相手プレイヤーに対してダメージを与える当たり判定処理を行います。
+
+ObjSFXPlayer.cs
+アイテムの効果音（SE）を再生します。
+
+バリアントアイテム（ThrowableObject.cs を継承）
+
+ThrowableGrenade.cs
+投げた後に爆発し、範囲ダメージを与えます。
+
+ThrowableSpear.cs
+投げた後に複数のコピーに分裂します。
+
+ThrowableSkull.cs
+相手プレイヤーを自動で追尾します。
+
+ThrowableMeteor.cs
+落下地点に巨大な隕石を召喚して落下させます。
+
+ThrowableFlan.cs
+プレイヤーがジャンプすると高く飛ばされるギミックアイテムです。
 
 
 
