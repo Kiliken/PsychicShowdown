@@ -5,11 +5,14 @@ using UnityEngine.EventSystems;
 public class HoverOnlyButton : Button
 {
     protected GameSettings gs;
+    protected TitleScreen ts;
+
 
     protected override void Awake()
     {
         base.Awake();
         gs = FindObjectOfType<GameSettings>();
+        ts = FindObjectOfType<TitleScreen>();
     }
     //protected override void Start()
     //{
@@ -34,7 +37,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump1"))
                 {
                     clicked = true;
-                    Debug.Log("p1ps");
+                    //Debug.Log("p1ps");
                 }
             }
             else
@@ -42,7 +45,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump1X"))
                 {
                     clicked = true;
-                    Debug.Log("p1x");
+                    //Debug.Log("p1x");
                 }
             }
 
@@ -51,7 +54,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump2"))
                 {
                     clicked = true;
-                    Debug.Log("p2ps");
+                    //Debug.Log("p2ps");
                 }
                 }
             else
@@ -59,7 +62,7 @@ public class HoverOnlyButton : Button
                 if (Input.GetButtonDown("Jump2X"))
                 {
                     clicked = true;
-                    Debug.Log("p2x");
+                    //Debug.Log("p2x");
                 }
             }
 
@@ -115,6 +118,7 @@ public class HoverOnlyButton : Button
 
     public override void OnSubmit(BaseEventData eventData)
     {
+        ts.PlayClick();
         // Block Unity's default submit input (A/X/Cross)
         Debug.Log("Blocked default submit");
     }

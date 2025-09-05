@@ -15,6 +15,7 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] Transform worldObj;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject tutorialPanel;
     //private GameObject curDefaultButton;
     private GameObject lastValidSelection;
     [SerializeField] private GameObject firstButton;
@@ -35,9 +36,17 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] private ControllerColumn p1ControllerColumn;
     [SerializeField] private ControllerColumn p2ControllerColumn;
 
+    [SerializeField] private AudioSource BGM;
+    [SerializeField] private AudioSource hoverSound;
+    [SerializeField] private AudioSource clickSound;
     private GameSettings gameSettings;
 
-   
+    [SerializeField] private GameObject firstTutorial;
+    [SerializeField] private Tutorial tutorial;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,22 +67,27 @@ public class TitleScreen : MonoBehaviour
         Debug.Log("Sound slider value set to: " + soundSlider.value);
         Debug.Log(volume);
         p1SensitivitySlider.value = gameSettings.p1Sensitivity;
-        p2SensitivitySlider.value = gameSettings.p2Sensitivity;
+        //p2SensitivitySlider.value = gameSettings.p2Sensitivity;
 
 
         soundSlider.onValueChanged.AddListener(SetSoundVolume);
         p1SensitivitySlider.onValueChanged.AddListener(SetP1Sensitivity);
-        p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
+        //p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
 
        
         p1ControllerColumn.selectedIndex = gameSettings.p1ControllerIsPS ? 0 : 1;
-        p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
+        //p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
         p1ControllerColumn.UpdateVisuals();
-        p2ControllerColumn.UpdateVisuals();
+        //p2ControllerColumn.UpdateVisuals();
         SetSoundVolume(volume);
 
-
+        settingsPanel.SetActive(false);
+        tutorialPanel.SetActive(false);
         ShowMainMenuPanel();
+        
+
+        BGM.volume = 0.2f;
+        hoverSound.volume = 0.3f;
     }
 
 
@@ -152,9 +166,24 @@ public class TitleScreen : MonoBehaviour
         if (next != null)
         {
             EventSystem.current.SetSelectedGameObject(next.gameObject);
+            hoverSound.Play();
+
         }
 
+        if (tutorialPanel.activeSelf)
+        {
+            if (dir == Vector2.up && tutorial.curTutorialStep > 0)
+            {
+                tutorial.curTutorialStep -= 1;
+            }
+            if (dir == Vector2.down && tutorial.curTutorialStep != 4 && tutorial.curTutorialStep != 9)
+            {
+                tutorial.curTutorialStep += 1;
+            }
+
+        }
     }
+
 
     void FixedUpdate()
     {
@@ -193,6 +222,21 @@ public class TitleScreen : MonoBehaviour
         lastValidSelection = firstButton;
     }
 
+    public void ShowTutorialMenu()
+    {
+        mainMenuPanel.SetActive(false);
+        tutorialPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstTutorial);
+    }
+
+    public void HideTutorialMenu()
+    {
+        tutorialPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstButton);
+        lastValidSelection = firstButton;
+    }
+
     public void SetSoundVolume(float value)
     {
         volume = value;
@@ -218,31 +262,38 @@ public class TitleScreen : MonoBehaviour
     {
         p1Sensitivity = value;
         gameSettings.p1Sensitivity = p1Sensitivity;
-        Debug.Log("Player 1 sensitivity set to: " + p1Sensitivity);
+        //Debug.Log("Player 1 sensitivity set to: " + p1Sensitivity);
     }
 
     public void SetP2Sensitivity(float value)
     {
         p2Sensitivity = value;
         gameSettings.p2Sensitivity = p2Sensitivity;
-        Debug.Log("Player 2 sensitivity set to: " + p2Sensitivity);
+        //Debug.Log("Player 2 sensitivity set to: " + p2Sensitivity);
     }
 
     public void SetP1ControlType(bool isPS)
     {
         p1controlisPS = isPS;
-        Debug.Log("Player 1 control type set to: " + (p1controlisPS ? "PlayStation" : "Xbox"));
+        //Debug.Log("Player 1 control type set to: " + (p1controlisPS ? "PlayStation" : "Xbox"));
     }
 
     public void SetP2ControlType(bool isPS)
     {
         p2controlisPS = isPS;
-        Debug.Log("Player 2 control type set to: " + (p2controlisPS ? "PlayStation" : "Xbox"));
+        //Debug.Log("Player 2 control type set to: " + (p2controlisPS ? "PlayStation" : "Xbox"));
     }
 
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quit game");
+        //Debug.Log("Quit game");
     }
+
+    public void PlayClick()
+    {
+        clickSound.Play();
+    }
+
+
 }

@@ -4,6 +4,7 @@ using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class InGameMenu : MonoBehaviour
 {
@@ -19,10 +20,13 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject p1firstSelected;
     [SerializeField] private GameObject p2firstSelected;
 
+    private GameObject lastValidSelection;
+    private float navCooldown = 0.2f;
+    private float lastNavTime = 0f;
     private void Awake()
     {
         p1PauseMenu = GameObject.Find("P1PauseMenu");
-        p2PauseMenu = GameObject.Find("P2PauseMenu");
+        //p2PauseMenu = GameObject.Find("P2PauseMenu");
     }
 
     // Start is called before the first frame update
@@ -30,16 +34,81 @@ public class InGameMenu : MonoBehaviour
     {
 
         p1PauseMenu.SetActive(false);
-        p2PauseMenu.SetActive(false);
-        GameObject p1ES = GameObject.Find("EventSystemP1");
-        GameObject p2ES = GameObject.Find("EventSystemP2");
-        p1EventSystem = p1ES.GetComponent<EventSystemUpdate>();
-        p2EventSystem = p2ES.GetComponent<EventSystemUpdate>();
+        //p2PauseMenu.SetActive(false);
+        //GameObject p1ES = GameObject.Find("EventSystemP1");
+        //GameObject p2ES = GameObject.Find("EventSystemP2");
+        //p1EventSystem = p1ES.GetComponent<EventSystemUpdate>();
+        //p2EventSystem = p2ES.GetComponent<EventSystemUpdate>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var current = EventSystem.current.currentSelectedGameObject;
+
+        if (current != null && current != lastValidSelection)
+        {
+
+            lastValidSelection = current;
+        }
+
+
+        PlayerInput();
+
+
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastValidSelection);
+        }
+    }
+
+    private void PlayerInput()
+    {
+        float vertical1 = Input.GetAxisRaw("Vertical1");
+
+        float vertical2 = Input.GetAxisRaw("Vertical2");
+
+        float vertical3 = Input.GetAxisRaw("Vertical3");
+
+        float now = Time.time;
+        if (now - lastNavTime > navCooldown)
+        {
+            if (vertical1 > 0.5f || vertical2 > 0.5f || vertical3 > 0.5f)
+            {
+                Navigate(Vector2.up);
+                lastNavTime = now;
+            }
+            else if (vertical1 < -0.5f || vertical2 < -0.5f || vertical3 < -0.5f)
+            {
+                Navigate(Vector2.down);
+                lastNavTime = now;
+            }
+
+            if (vertical3 != 0f)
+            {
+                Debug.Log("Third controller input detected: " + vertical3);
+            }
+        }
+    }
+
+    private void Navigate(Vector2 dir)
+    {
+        var cur = EventSystem.current.currentSelectedGameObject;
+        if (cur == null) return;
+
+        Selectable selectable = cur.GetComponent<Selectable>();
+        if (selectable == null) return;
+
+        Selectable next = null;
+        if (dir == Vector2.up) next = selectable.FindSelectableOnUp();
+        if (dir == Vector2.down) next = selectable.FindSelectableOnDown();
+        if (dir == Vector2.left) next = selectable.FindSelectableOnLeft();
+        if (dir == Vector2.right) next = selectable.FindSelectableOnRight();
+
+        if (next != null)
+        {
+            EventSystem.current.SetSelectedGameObject(next.gameObject);
+        }
 
     }
 
@@ -53,6 +122,8 @@ public class InGameMenu : MonoBehaviour
             EventSystemUpdate eventSystem = p1EventSystem;
             eventSystem.SetSelectedGameObject(null); // clear selection
             eventSystem.SetSelectedGameObject(p1firstSelected);
+
+            
         }
         else if (playerNo == 2)
         {
