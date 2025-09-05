@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Beta/TitleScreen.unity
-    guid: 4d177a49123d6c849873b01b4352d54d
+    path: Assets/Scenes/Beta/OnlineTitleScreen.unity
+    guid: d1f5ca7ddca0a3548b8fe861b39e9a1d
   - enabled: 1
     path: Assets/Scenes/Paolo/LoadingScene.unity
     guid: 1b13bd90ad1b0774aaa7819772ba9fcb

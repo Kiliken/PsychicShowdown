@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEditor;
 
 [ExecuteAlways]
@@ -17,3 +17,4 @@ public class SceneViewFollower : MonoBehaviour
         
     }
 }
+*/
