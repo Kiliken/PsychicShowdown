@@ -101,7 +101,7 @@ public class WinnerDisplay : MonoBehaviour
 
     public void ToTitleScreen()
     {
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene("OnlineTitleScreen");
     }
 
     void SendGetData()

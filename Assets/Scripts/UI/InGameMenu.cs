@@ -171,6 +171,6 @@ public class InGameMenu : MonoBehaviour
     public void QuitToMainMenu()
     {
         Debug.Log("Returning to Main Menu...");
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene("OnlineTitleScreen");
     }
 }
