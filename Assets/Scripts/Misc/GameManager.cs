@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public Player player;
     public NETPlayer netPlayer;
+    public NetController netController;
+
     [SerializeField] RoundTimerUI timer;
     [SerializeField] GameObject player1WinText;
     [SerializeField] GameObject player2WinText;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                
                 SceneManager.LoadScene("EndAndRestart");
                 sceneChanged = true;
             }
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
         }
 
         gameEnded = true;
+        netController.DestroyNetThread();
     }
 
 

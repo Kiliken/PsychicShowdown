@@ -96,6 +96,9 @@ public class NetController : MonoBehaviour
 
     private void Awake()
     {
+        udpSend = new byte[] { 0x4E };
+        udpGet = new byte[] { 0x4E };
+
         DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
 
         if (dbctr.ip != string.Empty) ip = dbctr.ip;
@@ -132,6 +135,7 @@ public class NetController : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         gameManager.player = playerScript;
         gameManager.netPlayer = netPlayerScript;
+        gameManager.netController = this;
     }
 
 
