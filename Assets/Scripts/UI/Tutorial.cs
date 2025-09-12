@@ -14,6 +14,7 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] private GameObject firstPage;
     [SerializeField] private GameObject secPage;
+    [SerializeField] private GameObject thirdPage;
     private int curPage = 0;
 
     [SerializeField] private GameObject controllerIcon;
@@ -32,6 +33,8 @@ public class Tutorial : MonoBehaviour
         background.sprite = enBG;
         firstPage.SetActive(true);
         secPage.SetActive(false);
+        thirdPage.SetActive(false);
+        controllerIcon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -103,10 +106,19 @@ public class Tutorial : MonoBehaviour
             firstPage.SetActive(false);
             secPage.SetActive(true);
             curPage = 2;
+            EventSystemUpdate.current.SetSelectedGameObject(tutorialSteps[0]);
+            curTutorialStep = 0;
+            controllerIcon.SetActive(true);
+        }
+        else if (curPage == 2)
+        {
+            secPage.SetActive(false);
+            thirdPage.SetActive(true);
+            curPage = 3;
             EventSystemUpdate.current.SetSelectedGameObject(tutorialSteps[5]);
             curTutorialStep = 5;
         }
-        else if (curPage == 2)
+        else if (curPage == 3)
         {
             ts.LoadPlayScene();
         }
@@ -115,14 +127,23 @@ public class Tutorial : MonoBehaviour
     private void Prev()
     {
         Debug.Log("Previous tutorial page");
-    
+        if (curPage == 3)
+        {
+            thirdPage.SetActive(false);
+            secPage.SetActive(true);
+            curPage = 2;
+            EventSystemUpdate.current.SetSelectedGameObject(tutorialSteps[0]);
+            curTutorialStep = 0;
+        }
+        else
         if (curPage == 2)
         {
             secPage.SetActive(false);
             firstPage.SetActive(true);
             curPage = 1;
-            EventSystemUpdate.current.SetSelectedGameObject(tutorialSteps[0]);
+            EventSystemUpdate.current.SetSelectedGameObject(null);
             curTutorialStep = 0;
+            controllerIcon.SetActive(false);
         }
         else if (curPage == 1)
         {
