@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                
+                netController.DestroyNetThread();
                 SceneManager.LoadScene("EndAndRestart");
                 sceneChanged = true;
             }
@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
         }
 
         gameEnded = true;
-        netController.DestroyNetThread();
     }
 
 
