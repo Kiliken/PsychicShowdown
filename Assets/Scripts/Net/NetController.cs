@@ -58,6 +58,8 @@ public class NetController : MonoBehaviour
     private CellHPBar otherHpCells;
     private sbyte otherHp = 10;
 
+    private byte inactivity = 0x00;
+    private bool hasLeft = false;
 
 
     private static void SendGetData()
@@ -99,6 +101,9 @@ public class NetController : MonoBehaviour
     {
         udpSend = new byte[] { 0x4E };
         udpGet = new byte[] { 0x4E };
+
+        inactivity = 0x00;
+        hasLeft = false;
 
         DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
 
@@ -171,6 +176,7 @@ public class NetController : MonoBehaviour
 
             netPlayerScript.UpdateHP(data.hp);
 
+            hasLeft = true;
 
             UpdatePosition();
             UpdateShootPos();
@@ -248,6 +254,17 @@ public class NetController : MonoBehaviour
                     rgSoundCheck -= 0x10;
             }
 
+        }
+
+        if (udpGet[0] == 0x4E && hasLeft)
+        {
+            inactivity++;
+        }
+
+        if(inactivity > 0x10)
+        {
+            DestroyNetThread();
+            SceneManager.LoadScene("OnlineTitleScreen");
         }
     }
 
