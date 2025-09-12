@@ -1513,6 +1513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderSpeed: 0.5
   deadzone: 0.3
+  BGM: {fileID: 0}
 --- !u!1 &425218754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,7 +2568,7 @@ MonoBehaviour:
   m_text: "\u7D42\u4E86"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
-  m_sharedMaterial: {fileID: 7364799293880838112, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
+  m_sharedMaterial: {fileID: -1546890502946199909, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2886,7 +2887,7 @@ MonoBehaviour:
   m_text: "\u623B\u308B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
-  m_sharedMaterial: {fileID: 7364799293880838112, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
+  m_sharedMaterial: {fileID: -1546890502946199909, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3509,7 +3510,7 @@ MonoBehaviour:
   m_text: "\u8A2D\u5B9A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
-  m_sharedMaterial: {fileID: 7364799293880838112, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
+  m_sharedMaterial: {fileID: -1546890502946199909, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3719,6 +3720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderSpeed: 0.5
   deadzone: 0.3
+  BGM: {fileID: 0}
 --- !u!1 &1118820281
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,7 +4702,7 @@ MonoBehaviour:
   m_text: "\u30D7\u30EC\u30A4\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
-  m_sharedMaterial: {fileID: 7364799293880838112, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
+  m_sharedMaterial: {fileID: -1546890502946199909, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4894,6 +4896,7 @@ MonoBehaviour:
   worldObj: {fileID: 1118820282}
   mainMenuPanel: {fileID: 1780804937}
   settingsPanel: {fileID: 1002734657}
+  tutorialPanel: {fileID: 0}
   firstButton: {fileID: 401725893}
   firstSettingsButton: {fileID: 1727226385}
   volume: 0.5
@@ -4906,6 +4909,11 @@ MonoBehaviour:
   p2SensitivitySlider: {fileID: 558868609}
   p1ControllerColumn: {fileID: 1067069607}
   p2ControllerColumn: {fileID: 414512369}
+  BGM: {fileID: 0}
+  hoverSound: {fileID: 0}
+  clickSound: {fileID: 0}
+  firstTutorial: {fileID: 0}
+  tutorial: {fileID: 0}
 --- !u!1 &1543784487
 GameObject:
   m_ObjectHideFlags: 0
@@ -5375,6 +5383,53 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!1 &1669511651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1669511653}
+  - component: {fileID: 1669511652}
+  m_Layer: 0
+  m_Name: TitleNet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1669511652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669511651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a433357e4f36cb04bb5f31bb067980c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ip: 127.0.0.1
+  port: 25565
+  playerSide: 65
+--- !u!4 &1669511653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669511651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1677566481
 GameObject:
   m_ObjectHideFlags: 0
@@ -5586,6 +5641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderSpeed: 0.5
   deadzone: 0.3
+  BGM: {fileID: 0}
 --- !u!1 &1771076292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6193,3 +6249,4 @@ SceneRoots:
   - {fileID: 2067514427}
   - {fileID: 1118820282}
   - {fileID: 1513553157}
+  - {fileID: 1669511653}

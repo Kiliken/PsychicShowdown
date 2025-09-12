@@ -20,6 +20,7 @@ Flags Description:
 0x4C (L) : Last flag of the Kick funcion (player alredy left the session)
 0x6C (l) : Currently in the loading screen
 0x57 (W) : Currently in the winning screen
+0x54 (T) : Currently in the title screen
 
 
 */
@@ -249,6 +250,32 @@ class BasicUdpServer
 
                 //Winning screen
                 if (receivedData[0] == 0x57)
+                {
+                    if (receivedData.Length == 1)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+
+                    if (receivedData[1] == 0x41)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        p1Data = sdata;
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+                    if (receivedData[1] == 0x42)
+                    {
+                        sdata = new byte[] { 0x4E };
+                        p2Data = sdata;
+                        udpc.Send(sdata, sdata.Length, ep);
+                        continue;
+                    }
+                }
+
+                //Title Screen Reset
+                if (receivedData[0] == 0x54)
                 {
                     if (receivedData.Length == 1)
                     {
