@@ -97,6 +97,7 @@ public class NetLoading : MonoBehaviour
             udpc.Send(udpSend, udpSend.Length);
 
 
+
             udpGet = udpc.Receive(ref ep);
 
             stopWatch.Stop();

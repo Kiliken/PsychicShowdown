@@ -283,6 +283,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8286508543835545622, guid: 286e34d534ed1cf48a2aa2eaadeb05db, type: 3}
+      propertyPath: netController
+      value: 
+      objectReference: {fileID: 1060199714}
+    - target: {fileID: 8286508543835545622, guid: 286e34d534ed1cf48a2aa2eaadeb05db, type: 3}
       propertyPath: p1EventSystem
       value: 
       objectReference: {fileID: 0}

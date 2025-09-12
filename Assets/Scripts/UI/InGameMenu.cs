@@ -20,6 +20,8 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject p1firstSelected;
     [SerializeField] private GameObject p2firstSelected;
 
+    [SerializeField] private NetController netController;
+
     private GameObject lastValidSelection;
     private float navCooldown = 0.2f;
     private float lastNavTime = 0f;
@@ -171,6 +173,7 @@ public class InGameMenu : MonoBehaviour
     public void QuitToMainMenu()
     {
         Debug.Log("Returning to Main Menu...");
+        netController.DestroyNetThread();
         SceneManager.LoadScene("OnlineTitleScreen");
     }
 }

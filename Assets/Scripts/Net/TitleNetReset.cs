@@ -31,6 +31,9 @@ public class TitleNetReset : MonoBehaviour
 
     void Start()
     {
+        failCount = 0;
+        udpGet = new byte[] { 0x00 };
+
         DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
 
         if (dbctr.ip != string.Empty) ip = dbctr.ip;
@@ -74,9 +77,11 @@ public class TitleNetReset : MonoBehaviour
 
 
             udpc.Send(udpSend, udpSend.Length);
+            Debug.Log("Data Sent");
 
 
             udpGet = udpc.Receive(ref ep);
+            Debug.Log("Data Recived");
 
             stopWatch.Stop();
             timeSpan = stopWatch.ElapsedMilliseconds;
