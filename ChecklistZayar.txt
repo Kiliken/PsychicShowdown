@@ -113,11 +113,10 @@ Chen:
 @ rework UI for online mode
 @ remove multiple event system
 @ fix navigation on pause screen
-- tutorial screen (fix blur, set Japanese first)
-- intro/count down (set font)
-- screen fade
-- menu sfx
-- crosshair
+@ tutorial screen (fix blur, set Japanese first)
+@ intro/count down (set font)
+@ menu sfx
+@ crosshair
 
 
 Paolo:
@@ -128,7 +127,7 @@ Paolo:
 @ grass
 @ object spawning (random, special)
 @ disappear shader
-- add automatic reset on game finish/title
+@ add automatic reset on game finish/title
 @ add new objects
 @ make barrier/space smaller when the timer reaches a set time
 
@@ -145,11 +144,11 @@ ONLINE TO DO:
 @ SFX for other player
 @ Effects for other player
 @ return sound volume to normal
-- add automatic reset on game finish/title
+@ add automatic reset on game finish/title
 
 ONLINE BUGS/FIXES:
-- When the player dashes during the spear collision, the spear stops even when the player isn't hit
-- Items too buried in the ground
+@ When the player dashes during the spear collision, the spear stops even when the player isn't hit
+@ Items too buried in the ground
 
 
 
