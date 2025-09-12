@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -86,7 +85,7 @@ public class MapGenerator : MonoBehaviour
         new Vector3(0, 0.5f, 0), //tomato
         new Vector3(0, 2f, 0), //flan
         new Vector3(0, 1f, 0), //duck
-        new Vector3(0, 1f, 0), //chair
+        new Vector3(0, 2f, 0), //chair
         new Vector3(0, 1f, 0), //spear
         new Vector3(0, 0.5f, 0), //meteor
         new Vector3(0, 0, 0), //tree
@@ -370,20 +369,6 @@ public class MapGenerator : MonoBehaviour
                     {
                         SpanwObject();
                     }
-        }
-
-
-        if (isTitle)
-        {
-            offset.y += 0.75f * Time.deltaTime;
-            offset.x += 0.75f * Time.deltaTime;
-            GenerateMap();
-
-            if (offset.y >= 100f)
-            {
-                offset.y = 0f;
-                offset.x = 0f;
-            }
         }
     }
 }

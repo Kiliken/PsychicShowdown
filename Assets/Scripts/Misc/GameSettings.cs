@@ -30,6 +30,7 @@ public class GameSettings : MonoBehaviour
         p2Sensitivity = 0.5f; // Default player 2 sensitivity
         p1ControllerIsPS = false; 
         p2ControllerIsPS = false; // Default controller type for player 2
+        Cursor.visible = false;
     }
 
     // Start is called before the first frame update
