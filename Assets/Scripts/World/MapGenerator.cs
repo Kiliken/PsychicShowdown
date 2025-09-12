@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -78,6 +79,23 @@ public class MapGenerator : MonoBehaviour
 
     //[SerializeField]
     //TerrainType[] regions;
+    private static Vector3[] objOffset = 
+        { 
+        new Vector3(0, 1f, 0), //rock
+        new Vector3(0, 0, 0), //wall
+        new Vector3(0, 0.5f, 0), //tomato
+        new Vector3(0, 2f, 0), //flan
+        new Vector3(0, 1f, 0), //duck
+        new Vector3(0, 1f, 0), //chair
+        new Vector3(0, 1f, 0), //spear
+        new Vector3(0, 0.5f, 0), //meteor
+        new Vector3(0, 0, 0), //tree
+        new Vector3(0, 3f, 0), //guitar
+        new Vector3(0, 0, 0), //pillar
+        new Vector3(0, 0, 0), //grenade
+        new Vector3(0, 0, 0), //microwave
+        new Vector3(0, 1f, 0), //skull
+    };
 
     public void GenerateMap()
     {
@@ -179,8 +197,9 @@ public class MapGenerator : MonoBehaviour
 
         if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity))
         {
-            int rand;
+            int rand, randObj;
             rand = objectRnd.Next(0, 2);
+            randObj = 0;
             objectHeight = 50f - hit.distance;
             switch (true)
             {
@@ -188,14 +207,15 @@ public class MapGenerator : MonoBehaviour
                     //grass
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#503D35", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[objectRnd.Next(1,4)], hit.point, Quaternion.identity);
+                        randObj = objectRnd.Next(1, 4);
+                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], Quaternion.identity);
                         //propertyBlock.SetColor("_BaseColor", Color.gray);
                         //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
@@ -206,14 +226,15 @@ public class MapGenerator : MonoBehaviour
 
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#716749", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[objectRnd.Next(4,8)], hit.point, Quaternion.identity);
+                        randObj = objectRnd.Next(4, 8);
+                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], (randObj == 6 ? Quaternion.Euler(-90f, 0, 0) : Quaternion.identity));
                         //ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
                         //propertyBlock.SetColor("_BaseColor", thisColor);
                         //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -223,14 +244,15 @@ public class MapGenerator : MonoBehaviour
                     //forest
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#39483c", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[objectRnd.Next(8,11)], hit.point, Quaternion.identity);
+                        randObj = objectRnd.Next(8, 11);
+                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], (randObj == 9 ? Quaternion.Euler(90,0,0) : Quaternion.identity));
                         //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
                         //propertyBlock.SetColor("_BaseColor", thisColor);
                         //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -239,13 +261,15 @@ public class MapGenerator : MonoBehaviour
                 default:
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
                         propertyBlock.SetColor("_BaseColor", Color.gray);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        thisObj = Instantiate(prefabs[objectRnd.Next(11,14)], hit.point, Quaternion.identity);
+                        randObj = objectRnd.Next(11, 14);
+                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], Quaternion.identity);
+                        
                     }
                     break;
 
