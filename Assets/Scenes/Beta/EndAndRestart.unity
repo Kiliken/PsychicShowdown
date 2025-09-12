@@ -3029,7 +3029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30BF\u30A4\u30C8\u30EB\u3078"
+  m_text: TO TITLE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
   m_sharedMaterial: {fileID: -1546890502946199909, guid: fb3acb5ec92857f44865d724a373936c, type: 2}
