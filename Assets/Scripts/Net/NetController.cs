@@ -246,7 +246,7 @@ public class NetController : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    public void DestroyNetThread()
     {
         Debug.Log("Thread shutdown");
         udpDataThread.Abort();
