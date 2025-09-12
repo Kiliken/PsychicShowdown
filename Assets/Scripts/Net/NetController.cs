@@ -59,6 +59,7 @@ public class NetController : MonoBehaviour
     private sbyte otherHp = 10;
 
 
+
     private static void SendGetData()
     {
         long timeSpan = 0;
@@ -161,7 +162,7 @@ public class NetController : MonoBehaviour
 
         if (udpGet[0] == 0x4B)
         {
-            SceneManager.LoadScene("TitleScreen");
+            SceneManager.LoadScene("OnlineTitleScreen");
         }
 
         if (udpGet[0] == 0x41 || udpGet[0] == 0x42)
@@ -248,6 +249,11 @@ public class NetController : MonoBehaviour
             }
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        DestroyNetThread();
     }
 
     public void DestroyNetThread()

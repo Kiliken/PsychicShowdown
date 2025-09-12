@@ -146,21 +146,6 @@ class BasicUdpServer
             try
             {
 
-                if (p1Data[0] == 0x4C && p2Data[0] == 0x4C)
-                {
-                    ResetData();
-                }
-
-                if (p1Data[0] == 0x6C && p2Data[0] == 0x6C && flag > 1)
-                {
-                    ResetData();
-                }
-
-                if (p1Data[0] == 0x52 || p2Data[0] == 0x52)
-                {
-                    ResetData();
-                }
-
                 //Getdata
                 IPEndPoint ep = null;
                 receivedData = udpc.Receive(ref ep);
@@ -289,6 +274,7 @@ class BasicUdpServer
                         sdata = new byte[] { 0x4E };
                         p1Data = sdata;
                         udpc.Send(sdata, sdata.Length, ep);
+						seed = random.Next();
                         continue;
                     }
                     if (receivedData[1] == 0x42)
