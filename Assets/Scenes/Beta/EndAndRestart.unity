@@ -5977,7 +5977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1379516978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11305,6 +11305,8 @@ MonoBehaviour:
   winner: {fileID: 1228752232}
   loser: {fileID: 116697825}
   torii: {fileID: 287683315}
+  titleBtn: {fileID: 1379516977}
+  waitTime: 5
 --- !u!1 &2016985313
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ using System.Net;
 using System;
 using Debug = UnityEngine.Debug;
 
+
 public class WinnerDisplay : MonoBehaviour
 {
     [Header("Client")]
@@ -29,6 +30,11 @@ public class WinnerDisplay : MonoBehaviour
     [SerializeField] Transform winner;
     [SerializeField] Transform loser;
     [SerializeField] Transform torii;
+
+    [SerializeField] private GameObject titleBtn;
+    [SerializeField] private float waitTime = 5.0f;
+    private float waitTimer = 0.0f;
+    private bool btnActivated = false;
 
     Stopwatch stopWatch = new Stopwatch();
 
@@ -89,6 +95,21 @@ public class WinnerDisplay : MonoBehaviour
 
     private void Update()
     {
+        if (!btnActivated)
+        {
+            if (waitTimer < waitTime)
+            {
+                waitTimer += Time.deltaTime;
+            }
+            else
+            {
+                titleBtn.SetActive(true);
+                waitTimer = 0;
+                btnActivated = true;
+            }
+        }
+        
+
         if (timer < 33)
         {
             timer++;
