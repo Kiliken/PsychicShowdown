@@ -22,20 +22,12 @@ public class PlayerSFXPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
     // 0: jump, 1: dash, 2: pick up, 3: throw
     public void PlaySFX(int sfx)
     {
-        //audioSource.Stop();
-        // adjust volumes for each sfx
-        // switch (sfx)
-        // {
-        //     case 0:
-        //         audioSource.volume = 0.01f;
-        //         break;
-        // }
         audioSource.clip = playerAudio[sfx];
         audioSource.Play();
         playerScript.soundFlag++;

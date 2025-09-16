@@ -29,7 +29,6 @@ public class ThrowableObject : MonoBehaviour
     protected float[] throwSpeeds = new float[] { 120f, 80f, 50f }; // S, M, L
     [SerializeField] protected float throwSpeed = 120f;
     // GRAB SPEEDS
-    //protected float[] grabSpeeds = new float[]{30f, 20f, 10f}; // S, M, L 30 20 10
     protected float[] grabSpeeds = new float[] { 0.7f, 0.5f, 0.4f }; // S, M, L 30 20 10
     [SerializeField] protected float grabSpeed = 0.7f;
     [SerializeField] protected bool objSpecificSpeed = false;
@@ -91,7 +90,7 @@ public class ThrowableObject : MonoBehaviour
             // grab
             if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.5f)
             {
-                // TEMPORARY MOVE POS FIX
+                // MOVE POS FIX
                 rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed * 100f * Time.deltaTime));
             }
             // snap to player
@@ -111,8 +110,6 @@ public class ThrowableObject : MonoBehaviour
         // set object to be destoryed after collision/effect activation
         if (effectActivated)
         {
-            //enumerator here
-            //only for wall for now
             if (objectName != "TREE")
             {
                 StartCoroutine(Dissolve());
@@ -130,16 +127,10 @@ public class ThrowableObject : MonoBehaviour
         //Debug.Log(rb.velocity.magnitude);
     }
 
+
     protected virtual void FixedUpdate()
     {
-        // if (!thrown && !canGrab)
-        // {
-        //     // grab
-        //     if (!grabbed && Vector3.Distance(transform.position, grabbedTransform.position) > 0.1f)
-        //     {
-        //         rb.MovePosition(Vector3.MoveTowards(transform.position, grabbedTransform.position, grabSpeed));
-        //     }
-        // }
+
     }
 
 
@@ -164,7 +155,6 @@ public class ThrowableObject : MonoBehaviour
         rb.useGravity = true;
 
         ShowHideObject(true, true);
-        //model.GetComponent<MeshRenderer>().enabled = true;
         model.GetComponent<MeshCollider>().enabled = true;
         model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
         // activate hit box
@@ -178,13 +168,13 @@ public class ThrowableObject : MonoBehaviour
         thrown = true;
     }
 
+
     public virtual void ThrowObjectNet()
     {
         aiming = false;
         rb.useGravity = true;
 
         ShowHideObject(true, true);
-        //model.GetComponent<MeshRenderer>().enabled = true;
         model.GetComponent<MeshCollider>().enabled = true;
         model.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask();   // remove layer mask exclusions
         // activate hit box
@@ -195,11 +185,9 @@ public class ThrowableObject : MonoBehaviour
 
         rb.AddForce(shootPos.forward * throwSpeed, ForceMode.Impulse);
 
-
         if (highlightEffect)
             highlightEffect.SetActive(false);
         thrown = true;
-
     }
 
 
@@ -223,7 +211,6 @@ public class ThrowableObject : MonoBehaviour
         if (effectActivated) return;
 
         Debug.Log("thrown object collided");
-        //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
 
         // play sfx
         sfxPlayer.PlaySFX(0);
@@ -234,19 +221,14 @@ public class ThrowableObject : MonoBehaviour
             Instantiate(effectParticle, transform.position, quaternion.identity);
         }
         effectActivated = true;
-        //hitbox.hit = true;  // change later
-        //Destroy(this.gameObject);
     }
 
 
     public void ShowHideObject(bool show, bool culling)
     {
-        //model.GetComponent<MeshRenderer>().enabled = show;
         if (!culling)
         {
             model.GetComponent<MeshRenderer>().enabled = show;
-            //if (highlightEffect)
-            //    highlightEffect.GetComponent<MeshRenderer>().enabled = show;
         }
         else
         {
@@ -273,7 +255,6 @@ public class ThrowableObject : MonoBehaviour
             }
         }
 
-
         objectVisible = show;
     }
 
@@ -293,10 +274,7 @@ public class ThrowableObject : MonoBehaviour
     {
         DisableObject();
         effectActivated = true;
-
-        // ADD DISAPPEAR EFFECT
-
-        Destroy(this.gameObject);   // remove later
+        Destroy(this.gameObject);
     }
 
 
@@ -306,6 +284,8 @@ public class ThrowableObject : MonoBehaviour
         highlightEffect.GetComponent<MeshRenderer>().enabled = show;
     }
 
+
+    // dissolve shader
     protected IEnumerator Dissolve()
     {
         float elapsed = 0f;

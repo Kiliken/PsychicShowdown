@@ -93,21 +93,6 @@ public class PlayerMovement : MonoBehaviour
         sfxPlayer = GetComponent<PlayerSFXPlayer>();
         playerHurtbox = transform.Find("Hurtbox").gameObject;
         inputActive = true;
-
-        //if (myEventSystem == null)
-        //{
-        //    string targetName = isP1 ? "EventSystemP1" : "EventSystemP2";
-        //    GameObject obj = GameObject.Find(targetName);
-        //    if (obj != null) myEventSystem = obj.GetComponent<EventSystemUpdate>();
-        //}
-
-        //if (isP1)
-        //{
-        //    Debug.Log("this is P1");
-        //} else
-        //{
-        //    Debug.Log("this is p2");
-        //}
     }
 
 
@@ -188,7 +173,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isDashing)
         {
-            //moveSpeed = (horizontalInput != 0 || verticalInput != 0) ? moveSpeedDefault : 0f;
             if (horizontalInput != 0 || verticalInput != 0)
             {
                 moveSpeed = (isSprinting) ? moveSpeedSprint : moveSpeedDefault;
@@ -203,8 +187,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown(jumpBtn) && canJump)
         {
-            //if (isSprinting) isSprinting = false;
-
             if (jumpsLeft > 0)
             {
                 jumpsLeft--;
@@ -325,7 +307,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 start = rb.position;
         Vector3 target = start + direction * maxDashDistance;
 
-        //if (Physics.SphereCast(start, sphereRadius, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
         if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
         {
             target = hit.point - direction * dashStopPadding;
@@ -352,7 +333,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 horizontalPosition.y = groundHit.point.y + 2.1f; // slightly above ground to avoid clipping
                 target.y = groundHit.point.y + 2.1f;
-
             }
 
             rb.MovePosition(horizontalPosition);
@@ -369,68 +349,9 @@ public class PlayerMovement : MonoBehaviour
         Invoke(nameof(ResetDash), dashCooldown);
     }
 
-    // OLD DASH
-    private IEnumerator DashCoroutine1()
-    {
-        canDash = false;
-        isDashing = true;
-        dashesLeft--;
-
-        Vector3 direction = moveDirection.normalized;
-        if (direction == Vector3.zero) direction = playerModel.transform.forward;   // dash into facing direction if no movement
-
-        Vector3 start = rb.position;
-        Vector3 target = start + direction * maxDashDistance;
-
-        // raycast into dashing direction and check if there is an object
-        if (Physics.Raycast(start, direction, out RaycastHit hit, maxDashDistance, dashCollisionMask))
-        {
-            target = hit.point - direction * dashStopPadding;
-        }
-
-        float elapsed = 0f;
-        float duration = dashDuration;
-
-        if (disableGravityDuringDash) rb.useGravity = false;
-        if (resetVelocityOnDash) rb.velocity = Vector3.zero;
-
-        while (elapsed < duration)
-        {
-            float t = elapsed / duration;
-            Vector3 newPos = Vector3.Lerp(start, target, t);
-            rb.MovePosition(newPos);
-            elapsed += Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
-        }
-
-        rb.MovePosition(target);
-
-        if (disableGravityDuringDash) rb.useGravity = true;
-        isDashing = false;
-
-        Invoke(nameof(ResetDash), dashCooldown);
-    }
-
 
     private void ResetDash()
     {
         canDash = true;
-    }
-
-
-    private bool OnSlope()
-    {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
-        {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
-        }
-        return false;
-    }
-
-
-    private Vector3 GetSlopeMoveDirection()
-    {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }

@@ -261,7 +261,7 @@ public class NetController : MonoBehaviour
             inactivity++;
         }
 
-        if(inactivity > 0x10)
+        if (inactivity > 0x10)
         {
             DestroyNetThread();
             SceneManager.LoadScene("OnlineTitleScreen");

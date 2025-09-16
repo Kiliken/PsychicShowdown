@@ -21,13 +21,6 @@ public class ThrowableSpear : ThrowableObject
     }
 
 
-    // Update is called once per frame
-    // protected override void Update()
-    // {
-
-    // }
-
-
     public override void ThrowObject()
     {
         aiming = false;
@@ -130,7 +123,6 @@ public class ThrowableSpear : ThrowableObject
         if (effectActivated) return;
 
         Debug.Log("thrown object collided");
-        //GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Player", "Object"); // change later
 
         // play sfx
         sfxPlayer.PlaySFX(0);
@@ -143,14 +135,7 @@ public class ThrowableSpear : ThrowableObject
         // Stick spear at the point of contact
         StickSpear();
 
-        // instantiate hit effect
-        // if (effectParticle != null)
-        // {
-        //     Instantiate(effectParticle, transform.position, quaternion.identity);
-        // }
         effectActivated = true;
-        //hitbox.hit = true;  // change later
-        //Destroy(this.gameObject);
     }
 
 
@@ -161,9 +146,6 @@ public class ThrowableSpear : ThrowableObject
 
         // move spear so the tip lands on the contact point
         transform.position = contactPoint - tipOffset;
-
-        // align the spear to the normal of the surface
-        //transform.rotation = Quaternion.LookRotation(-contact.normal);
 
         // parent the spear to the hit object
 

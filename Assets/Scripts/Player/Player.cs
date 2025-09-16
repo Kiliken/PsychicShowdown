@@ -105,17 +105,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        //playerPanel.UpdateHPBar();
         // set up player cam in other scripts
-
         movementScript.playerCam = playerCam;
         objHolder = transform.GetChild(1).GetComponent<ObjHolder>();
         objHolder.playerCam = playerCam;
         shootPos = playerCam.GetChild(0).transform;
         detectPos = playerCam.GetChild(1).transform;
-        //pauseMenu = GameObject.Find("PauseScreens").GetComponent<InGameMenu>();
-
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
         camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
@@ -155,7 +150,6 @@ public class Player : MonoBehaviour
 
         ObjectDetection();
         PlayerInput();
-        //GetCameraDistance();
 
         // flag reset
         if (leftHandFlag >= 0x10)
@@ -170,7 +164,6 @@ public class Player : MonoBehaviour
     // detect pickable objects in front of player
     private void ObjectDetection()
     {
-        // 
         // SPHERECAST VISUALIZATION DEBUG
         Vector3 origin = detectPos.position;
         Vector3 direction = playerCam.transform.forward;
@@ -194,7 +187,6 @@ public class Player : MonoBehaviour
         // object detection
         RaycastHit hit;
         if (Physics.SphereCast(detectPos.position, sphereRadius, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
-        //if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, objDetectionRange, objLayerMask))
         {
             if (hit.collider.gameObject.tag == "Object" && hit.collider.gameObject != currentTargetObj)
             {
@@ -233,9 +225,6 @@ public class Player : MonoBehaviour
         //Debug.Log(Input.GetAxisRaw(grabThrowLeftBtn));
         // Left Trigger 
         // xbox axis is 0
-
-
-
         if (Input.GetAxisRaw(grabThrowLeftBtn) != triggerNegative && !aimCanceledL)
         {
             if (!triggerInUseL && !rightAiming)
@@ -344,7 +333,6 @@ public class Player : MonoBehaviour
                         Debug.Log("Right grab");
                         rightObject.GrabObject(objPosR, shootPos, playerNo);
                         holdingObjR = true;
-                        //rightHandFlag++
 
                         rightHandFlag++;
                         rightObjRef = rightObject.objectID;
@@ -425,6 +413,7 @@ public class Player : MonoBehaviour
 
     }
 
+
     public void ReceiveDamage(int damage)
     {
         if (!playerActive) return;
@@ -448,7 +437,6 @@ public class Player : MonoBehaviour
     }
 
 
-
     public void SetPlayerActive(bool a)
     {
         playerActive = a;
@@ -456,6 +444,8 @@ public class Player : MonoBehaviour
         camController.playerActive = a;
     }
 
+
+    // adjust camera distance according to sizes of objects held
     public void GetCameraDistance()
     {
         int l = (leftObject != null && holdingObjL) ? leftObject.objectSize : 0;

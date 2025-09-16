@@ -84,10 +84,10 @@ public class NETPlayer : MonoBehaviour
     void Update()
     {
         if (!playerActive) return;
-
-
     }
 
+
+    // update player position and rotation, and set animations
     public void UpdatePosition(float newX, float newY, float newZ, float rotBody)
     {
         Vector3 targetPos = new Vector3(newX, newY, newZ);
@@ -120,7 +120,6 @@ public class NETPlayer : MonoBehaviour
         // model rotation
         transform.GetChild(0).rotation = targetRotation;
     }
-
 
 
     public void GrabLeftObject(ThrowableObject obj)
@@ -164,9 +163,6 @@ public class NETPlayer : MonoBehaviour
     public void UpdateHP(sbyte newHP)
     {
         if (!playerActive || (int)newHP == hp) return;
-
-        //UPDATE UI
-        //playerPanel.UpdateHPBar();
 
         hp = (int)newHP;
         Debug.Log("Net Player HP: " + hp);

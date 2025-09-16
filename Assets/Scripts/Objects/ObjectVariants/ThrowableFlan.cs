@@ -8,20 +8,6 @@ public class ThrowableFlan : ThrowableObject
     [SerializeField] protected LayerMask jumpCollisionMask;
 
 
-    // // Start is called before the first frame update
-    // protected override void Start()
-    // {
-
-    // }
-
-
-    // // Update is called once per frame
-    // protected override void Update()
-    // {
-
-    // }
-
-
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);

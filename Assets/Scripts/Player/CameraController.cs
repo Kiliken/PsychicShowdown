@@ -50,19 +50,6 @@ public class CameraController : MonoBehaviour
         invertXVal = invertX ? -1 : 1;
         invertYVal = invertY ? -1 : 1;
 
-        // // diagonal input
-        // if(Input.GetAxisRaw(camXInput) != 0 && Input.GetAxisRaw(camYInput) != 0){
-        //     rotationX += Input.GetAxisRaw(camYInput) * invertYVal * RotSpeedX * 1.6f;
-        //     rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-        //     rotationY += Input.GetAxisRaw(camXInput) * invertXVal *  RotSpeedY * 1.6f;
-        // }
-        // // normal input
-        // else{
-        //     rotationX += Input.GetAxis(camYInput) * invertYVal * RotSpeedX;
-        //     rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
-        //     rotationY += Input.GetAxis(camXInput) * invertXVal *  RotSpeedY;
-        // }
-
         // change offset according to player zoom (set in player)
         if (Mathf.Abs(offsetXTarget - offsetX) > 0.01f)
         {
@@ -80,11 +67,6 @@ public class CameraController : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, camVertAngleMin, camVertAngleMax); // clamp vertical angle to not move all the way
             rotationY += Input.GetAxis(camXInput) * invertXVal * RotSpeedY * diagonalSpd;
 
-
-            // if(Input.GetAxis("Cam1X") != 0 || Input.GetAxis("Cam1Y") != 0){
-            //     Debug.Log("X: " + Input.GetAxis("Cam1X") + " Y: " + Input.GetAxis("Cam1Y"));
-            // }
-
             // third-person shoulder swap
             if (Input.GetButtonDown(shldrSwapBtn))
             {
@@ -95,12 +77,9 @@ public class CameraController : MonoBehaviour
             }
         }
 
-
         Quaternion targetRotation = Quaternion.Euler(rotationX, rotationY, 0);
         Vector3 pivotOffset = targetRotation * new Vector3(offsetX, offsetY, 0);    // include offset
         Vector3 focusPosition = followTarget.position + pivotOffset;
-
-        //transform.position = focusPosition - targetRotation * new Vector3(0, 0, camDistance);
 
         Vector3 desiredCameraPos = focusPosition - targetRotation * new Vector3(0, 0, camDistance);
         Vector3 direction = desiredCameraPos - focusPosition;
