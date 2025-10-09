@@ -79,37 +79,23 @@ public class Tutorial : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Prev();
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    Prev();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Next();
-        }
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    Next();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            ChangeLanguage();
-        }
+        //if (Input.GetKeyDown(KeyCode.DownArrow))
+        //{
+        //    ChangeLanguage();
+        //}
     }
 
-    //private void TutorialSteps()
-    //{
-    //    for (int i = 0; i < tutorialSteps.Length; i++)
-    //    {
-    //        if (i == curTutorialStep)
-    //        {
-    //            if (EventSystem.current.currentSelectedGameObject == tutorialSteps[i])
-    //            {
-    //                curTutorialStep = i;
-    //                Debug.Log(curTutorialStep + " selected step");
-    //            }
-    //        }
-    //    }
 
-    //}
 
     private void Next()
     {
