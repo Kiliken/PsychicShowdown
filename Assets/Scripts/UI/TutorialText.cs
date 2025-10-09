@@ -18,19 +18,19 @@ public class TutorialText : MonoBehaviour
         }
     }
 
-    public void ToggleText()
+    public void ToggleText(bool en)
     {
         if (tmp == null) return;
 
-        if (showingFirst)
+        if (en)
         {
-            tmp.text = text2;
-            showingFirst = false;
+            tmp.text = text1;
+
         }
         else
         {
-            tmp.text = text1;
-            showingFirst = true;
+            tmp.text = text2;
+
         }
     }
 }

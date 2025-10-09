@@ -77,7 +77,22 @@ public class Tutorial : MonoBehaviour
             }
         
         }
-        
+
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Prev();
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Next();
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            ChangeLanguage();
+        }
     }
 
     //private void TutorialSteps()
@@ -158,9 +173,10 @@ public class Tutorial : MonoBehaviour
     {
         Debug.Log("Change language");
         background.sprite = background.sprite == enBG ? jpBG : enBG;
+        bool lang = background.sprite == enBG;
         foreach (TutorialText tt in tutorialTexts)
         {
-            tt.ToggleText();
+            tt.ToggleText(lang);
         }
     }
 }
