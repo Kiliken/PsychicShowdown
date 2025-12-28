@@ -12,6 +12,8 @@ public class SliderColumn : MonoBehaviour, IPointerEnterHandler
     [SerializeField] private float deadzone = 0.3f;
     [SerializeField] private AudioSource BGM;
 
+    [SerializeField] private bool isBGMVolume = false;
+
     void Start()
     {
         slider = GetComponentInChildren<Slider>();
@@ -32,7 +34,8 @@ public class SliderColumn : MonoBehaviour, IPointerEnterHandler
             }
         }
 
-        BGM.volume = slider.value * 2 / 5;
+        if (isBGMVolume)
+            BGM.volume = slider.value * 2 / 5;
 
     }
 

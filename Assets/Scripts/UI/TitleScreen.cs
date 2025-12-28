@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 public class TitleScreen : MonoBehaviour
 {
-    string sceneToUse = "LoadingScene";
+    string sceneToUse = "BetaPortFHD";
 
     [SerializeField] Transform worldObj;
     [SerializeField] private GameObject mainMenuPanel;
@@ -67,27 +67,27 @@ public class TitleScreen : MonoBehaviour
         Debug.Log("Sound slider value set to: " + soundSlider.value);
         Debug.Log(volume);
         p1SensitivitySlider.value = gameSettings.p1Sensitivity;
-        //p2SensitivitySlider.value = gameSettings.p2Sensitivity;
+        p2SensitivitySlider.value = gameSettings.p2Sensitivity;
 
 
         soundSlider.onValueChanged.AddListener(SetSoundVolume);
         p1SensitivitySlider.onValueChanged.AddListener(SetP1Sensitivity);
-        //p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
+        p2SensitivitySlider.onValueChanged.AddListener(SetP2Sensitivity);
 
-       
+
         p1ControllerColumn.selectedIndex = gameSettings.p1ControllerIsPS ? 0 : 1;
-        //p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
+        p2ControllerColumn.selectedIndex = gameSettings.p2ControllerIsPS ? 0 : 1;
         p1ControllerColumn.UpdateVisuals();
-        //p2ControllerColumn.UpdateVisuals();
+        p2ControllerColumn.UpdateVisuals();
         SetSoundVolume(volume);
 
         settingsPanel.SetActive(false);
-        tutorialPanel.SetActive(false);
+        //tutorialPanel.SetActive(false);
         ShowMainMenuPanel();
-        
+
 
         BGM.volume = 0.2f;
-        hoverSound.volume = 0.3f;
+        //hoverSound.volume = 0.3f;
     }
 
 
@@ -111,13 +111,13 @@ public class TitleScreen : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(lastValidSelection);
         }
 
-        
+
         //if (EventSystem.current.currentSelectedGameObject == null) 
         //{
         //    EventSystem.current.SetSelectedGameObject(curDefaultButton);
         //    Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject?.name);
         //}
-        
+
     }
 
     private void PlayerInput()
@@ -166,22 +166,22 @@ public class TitleScreen : MonoBehaviour
         if (next != null)
         {
             EventSystem.current.SetSelectedGameObject(next.gameObject);
-            hoverSound.Play();
+            //hoverSound.Play();
 
         }
 
-        if (tutorialPanel.activeSelf)
-        {
-            if (dir == Vector2.up && tutorial.curTutorialStep > 0)
-            {
-                tutorial.curTutorialStep -= 1;
-            }
-            if (dir == Vector2.down && tutorial.curTutorialStep != 4 && tutorial.curTutorialStep != 9)
-            {
-                tutorial.curTutorialStep += 1;
-            }
+        // if (tutorialPanel.activeSelf)
+        // {
+        //     if (dir == Vector2.up && tutorial.curTutorialStep > 0)
+        //     {
+        //         tutorial.curTutorialStep -= 1;
+        //     }
+        //     if (dir == Vector2.down && tutorial.curTutorialStep != 4 && tutorial.curTutorialStep != 9)
+        //     {
+        //         tutorial.curTutorialStep += 1;
+        //     }
 
-        }
+        // }
     }
 
 
@@ -190,7 +190,8 @@ public class TitleScreen : MonoBehaviour
         worldObj.Rotate(0, 5 * Time.deltaTime, 0);
     }
 
-    public void LoadPlayScene(){
+    public void LoadPlayScene()
+    {
         Debug.Log("Settings values: \nvolume:" + volume + "\np1 sensitivity: " + p1Sensitivity + "\np1 Controller:" + (p1controlisPS ? "PlayStation" : "Xbox"
             + "\np2 sensitivity: " + p2Sensitivity + "\np2 Controller: " + (p2controlisPS ? "PlayStation" : "Xbox")));
         gameSettings.SetSettings(volume, p1Sensitivity, p1controlisPS, p2Sensitivity, p2controlisPS);
@@ -292,7 +293,7 @@ public class TitleScreen : MonoBehaviour
 
     public void PlayClick()
     {
-        clickSound.Play();
+        //clickSound.Play();
     }
 
 

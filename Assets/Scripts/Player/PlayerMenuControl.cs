@@ -35,35 +35,35 @@ public class PlayerMenuControl : MonoBehaviour
     //Activates and runs the in game menu.
     public void InGameMenuInput()
     {
-        if (Input.GetButtonDown(pauseBtn) || Input.GetKeyDown(KeyCode.Space))
-        {
+        // if (Input.GetButtonDown(pauseBtn) || Input.GetKeyDown(KeyCode.Space))
+        // {
 
-            Debug.Log("Pause button pressed");
-            if (isMenuActive)
-            {
-                HidePauseMenu();
-            }
-            else
-            {
-                ShowPauseMenu();
-            }
+        //     Debug.Log("Pause button pressed");
+        //     if (isMenuActive)
+        //     {
+        //         HidePauseMenu();
+        //     }
+        //     else
+        //     {
+        //         ShowPauseMenu();
+        //     }
 
-        }
+        // }
 
-        if (isMenuActive)
-        {
-            // If the pause menu is active, disable player movement and camera control
-            movementScript.inputActive = false;
-            camController.inputActive = false;
-            //Debug.Log("set inactive" + playerNo);
-        }
-        else
-        {
-            // If the pause menu is not active, enable player movement and camera control
-            movementScript.inputActive = true;
-            camController.inputActive = true;
-            //Debug.Log("set active" + playerNo);
-        }
+        // if (isMenuActive)
+        // {
+        //     // If the pause menu is active, disable player movement and camera control
+        //     movementScript.inputActive = false;
+        //     camController.inputActive = false;
+        //     //Debug.Log("set inactive" + playerNo);
+        // }
+        // else
+        // {
+        //     // If the pause menu is not active, enable player movement and camera control
+        //     movementScript.inputActive = true;
+        //     camController.inputActive = true;
+        //     //Debug.Log("set active" + playerNo);
+        // }
     }
 
     // Continue the game from the pause menu by enabling player movement and camera control

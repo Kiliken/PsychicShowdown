@@ -1513,7 +1513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderSpeed: 0.5
   deadzone: 0.3
-  BGM: {fileID: 0}
+  BGM: {fileID: 1513553156}
+  isBGMVolume: 0
 --- !u!1 &425218754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,7 +2089,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3720,7 +3721,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderSpeed: 0.5
   deadzone: 0.3
-  BGM: {fileID: 0}
+  BGM: {fileID: 1513553156}
+  isBGMVolume: 0
 --- !u!1 &1118820281
 GameObject:
   m_ObjectHideFlags: 0
@@ -4028,6 +4030,14 @@ PrefabInstance:
     - target: {fileID: 3154204760724158937, guid: c3cf506d8065ae445acd660823c58648, type: 3}
       propertyPath: p2Sensitivity
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154204760724158937, guid: c3cf506d8065ae445acd660823c58648, type: 3}
+      propertyPath: p1ControllerIsPS
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154204760724158937, guid: c3cf506d8065ae445acd660823c58648, type: 3}
+      propertyPath: p2ControllerIsPS
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4444781120343858787, guid: c3cf506d8065ae445acd660823c58648, type: 3}
       propertyPath: m_Name
@@ -4901,15 +4911,15 @@ MonoBehaviour:
   firstSettingsButton: {fileID: 1727226385}
   volume: 0.5
   p1Sensitivity: 0.5
-  p1controlisPS: 1
+  p1controlisPS: 0
   p2Sensitivity: 0.5
-  p2controlisPS: 1
+  p2controlisPS: 0
   soundSlider: {fileID: 415781985}
   p1SensitivitySlider: {fileID: 532640906}
   p2SensitivitySlider: {fileID: 558868609}
   p1ControllerColumn: {fileID: 1067069607}
   p2ControllerColumn: {fileID: 414512369}
-  BGM: {fileID: 0}
+  BGM: {fileID: 1513553156}
   hoverSound: {fileID: 0}
   clickSound: {fileID: 0}
   firstTutorial: {fileID: 0}
@@ -5383,53 +5393,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
---- !u!1 &1669511651
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1669511653}
-  - component: {fileID: 1669511652}
-  m_Layer: 0
-  m_Name: TitleNet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1669511652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669511651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a433357e4f36cb04bb5f31bb067980c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ip: 127.0.0.1
-  port: 25565
-  playerSide: 65
---- !u!4 &1669511653
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669511651}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1677566481
 GameObject:
   m_ObjectHideFlags: 0
@@ -5641,7 +5604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderSpeed: 0.5
   deadzone: 0.3
-  BGM: {fileID: 0}
+  BGM: {fileID: 1513553156}
+  isBGMVolume: 1
 --- !u!1 &1771076292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6249,4 +6213,3 @@ SceneRoots:
   - {fileID: 2067514427}
   - {fileID: 1118820282}
   - {fileID: 1513553157}
-  - {fileID: 1669511653}

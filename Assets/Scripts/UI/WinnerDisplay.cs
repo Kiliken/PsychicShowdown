@@ -45,9 +45,9 @@ public class WinnerDisplay : MonoBehaviour
     {
         DebugController dbctr = GameObject.FindGameObjectWithTag("DebugCtrl").GetComponent<DebugController>();
 
-        if (dbctr.ip != string.Empty) ip = dbctr.ip;
-        if (dbctr.port != 0) port = dbctr.port;
-        if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
+        //if (dbctr.ip != string.Empty) ip = dbctr.ip;
+        //if (dbctr.port != 0) port = dbctr.port;
+        //if (dbctr.playerSide != '0') playerSide = dbctr.playerSide;
     }
 
     void Start()
@@ -80,16 +80,16 @@ public class WinnerDisplay : MonoBehaviour
             loser.GetChild(leftPlayer).transform.eulerAngles = new Vector3(100f, -1f, 65f);
         }
 
-        udpc = new UdpClient(ip, port);
-        udpc.Client.ReceiveTimeout = 1000;
+        //udpc = new UdpClient(ip, port);
+        //udpc.Client.ReceiveTimeout = 1000;
 
-        byte[] buffer = new byte[2];
+        //byte[] buffer = new byte[2];
 
         //ResetFlag
-        buffer[0] = 0x57;
-        buffer[1] = (byte)playerSide;
+        //buffer[0] = 0x57;
+        //buffer[1] = (byte)playerSide;
 
-        udpSend = buffer;
+        //udpSend = buffer;
 
     }
 
@@ -108,21 +108,21 @@ public class WinnerDisplay : MonoBehaviour
                 btnActivated = true;
             }
         }
-        
 
-        if (timer < 33)
-        {
-            timer++;
-        }
-        else
-        {
-            SendGetData();
-        }
+
+        // if (timer < 33)
+        // {
+        //     timer++;
+        // }
+        // else
+        // {
+        //     SendGetData();
+        // }
     }
 
     public void ToTitleScreen()
     {
-        SceneManager.LoadScene("OnlineTitleScreen");
+        SceneManager.LoadScene("TitleScreen");
     }
 
     void SendGetData()

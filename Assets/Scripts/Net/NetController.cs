@@ -139,9 +139,9 @@ public class NetController : MonoBehaviour
         EnablePlayer(player);
 
         playerScript = player.GetComponent<Player>();
-        gameManager.player = playerScript;
-        gameManager.netPlayer = netPlayerScript;
-        gameManager.netController = this;
+        // gameManager.player = playerScript;
+        // gameManager.netPlayer = netPlayerScript;
+        // gameManager.netController = this;
     }
 
 
@@ -261,7 +261,7 @@ public class NetController : MonoBehaviour
             inactivity++;
         }
 
-        if(inactivity > 0x10)
+        if (inactivity > 0x10)
         {
             DestroyNetThread();
             SceneManager.LoadScene("OnlineTitleScreen");

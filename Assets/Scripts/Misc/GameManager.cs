@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
-    public NETPlayer netPlayer;
-    public NetController netController;
-
+    [SerializeField] Player player1;
+    [SerializeField] Player player2;
     [SerializeField] RoundTimerUI timer;
     [SerializeField] GameObject player1WinText;
     [SerializeField] GameObject player2WinText;
@@ -16,8 +14,6 @@ public class GameManager : MonoBehaviour
 
     public float timeLimit = 120f;
     //public float timeRemaining;
-    [SerializeField] private float countDownTime = 3f;
-    private float countDownTimer = 0f;
     public bool gameStarted = false;
     public bool gameEnded = false;
 
@@ -42,36 +38,18 @@ public class GameManager : MonoBehaviour
         //player1WinText = GameObject.FindGameObjectWithTag("P1WinText");
         //player2WinText = GameObject.FindGameObjectWithTag("P2WinText");
 
-        player.gameManager = this;
-        netPlayer.gameManager = this;
+        player1.gameManager = this;
+        player2.gameManager = this;
         timer.gameManager = this;
-
-        player.SetPlayerActive(false);
-
-        // timer.StartTimer(timeLimit);
-        // gameStarted = true;
+        timer.StartTimer(timeLimit);
+        gameStarted = true;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        // initial count down
-        if (!gameStarted)
-        {
-            if (countDownTimer < countDownTime)
-            {
-                countDownTimer += Time.deltaTime;
-            }
-            else
-            {
-                player.SetPlayerActive(true);
-                timer.StartTimer(timeLimit);
-                gameStarted = true;
-            }
-        }
-        // switch to result screen when game ends
-        else if (gameEnded && !sceneChanged)
+        if (gameEnded && !sceneChanged)
         {
             if (sceneChangeTimer < sceneChangeTime)
             {
@@ -79,12 +57,10 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                netController.DestroyNetThread();
                 SceneManager.LoadScene("EndAndRestart");
                 sceneChanged = true;
             }
         }
-
     }
 
 
@@ -93,8 +69,8 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
 
         // disable inputs for both Players
-        player.SetPlayerActive(false);
-        //player2.SetPlayerActive(false);
+        player1.SetPlayerActive(false);
+        player2.SetPlayerActive(false);
 
         // pause timer
         timer.timerActive = false;
@@ -125,13 +101,13 @@ public class GameManager : MonoBehaviour
 
     public void CompareHP()
     {
-        if (player.hp > netPlayer.hp)
+        if (player1.hp > player2.hp)
         {
-            GameOver(player.playerNo);
+            GameOver(1);
         }
-        else if (netPlayer.hp > player.hp)
+        else if (player2.hp > player1.hp)
         {
-            GameOver(netPlayer.playerNo);
+            GameOver(2);
         }
         else
         {

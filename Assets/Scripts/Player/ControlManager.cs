@@ -79,12 +79,13 @@ public class ControlManager : MonoBehaviour
 
 
 
-    void Awake(){
+    void Awake()
+    {
         playerScript = GetComponent<Player>();
         playerMovementScript = GetComponent<PlayerMovement>();
         playerMenuControlScript = GetComponent<PlayerMenuControl>();
         cameraControllerScript = playerScript.playerCam.GetComponent<CameraController>();
-        
+
     }
 
 
@@ -114,10 +115,11 @@ public class ControlManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void SetControls(){
+    public void SetControls()
+    {
         //if (playerScript.playerNo == 1)
         //{
         //    if(playstation)
@@ -219,18 +221,18 @@ public class ControlManager : MonoBehaviour
             else
             {
                 Debug.Log("Player 2 Playstation controls");
-                playerMovementScript.moveXInput = moveX1_P;
-                playerMovementScript.moveYInput = moveY1_P;
-                playerMovementScript.jumpBtn = jump1_P;
-                playerMovementScript.dashBtn = dash1_P;
-                playerMovementScript.sprintBtn = sprint1_P;
-                cameraControllerScript.camXInput = camX1_P;
-                cameraControllerScript.camYInput = camY1_P;
-                cameraControllerScript.shldrSwapBtn = shldrSwap1_P;
-                playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_P;
-                playerScript.grabThrowRightBtn = grabThrowRightBtn1_P;
-                playerScript.aimCancelBtn = aimCancelBtn1_P;
-                playerScript.pauseBtn = pauseBtn1_P;
+                playerMovementScript.moveXInput = moveX2_P;
+                playerMovementScript.moveYInput = moveY2_P;
+                playerMovementScript.jumpBtn = jump2_P;
+                playerMovementScript.dashBtn = dash2_P;
+                playerMovementScript.sprintBtn = sprint2_P;
+                cameraControllerScript.camXInput = camX2_P;
+                cameraControllerScript.camYInput = camY2_P;
+                cameraControllerScript.shldrSwapBtn = shldrSwap2_P;
+                playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_P;
+                playerScript.grabThrowRightBtn = grabThrowRightBtn2_P;
+                playerScript.aimCancelBtn = aimCancelBtn2_P;
+                playerScript.pauseBtn = pauseBtn2_P;
             }
             playerScript.triggerNegative = -1;
         }
@@ -258,18 +260,18 @@ public class ControlManager : MonoBehaviour
             else
             {
                 Debug.Log("Player 2 Xbox controls");
-                playerMovementScript.moveXInput = moveX1_X;
-                playerMovementScript.moveYInput = moveY1_X;
-                playerMovementScript.jumpBtn = jump1_X;
-                playerMovementScript.dashBtn = dash1_X;
-                playerMovementScript.sprintBtn = sprint1_X;
-                cameraControllerScript.camXInput = camX1_X;
-                cameraControllerScript.camYInput = camY1_X;
-                cameraControllerScript.shldrSwapBtn = shldrSwap1_X;
-                playerScript.grabThrowLeftBtn = grabThrowLeftBtn1_X;
-                playerScript.grabThrowRightBtn = grabThrowRightBtn1_X;
-                playerScript.aimCancelBtn = aimCancelBtn1_X;
-                playerScript.pauseBtn = pauseBtn1_X;
+                playerMovementScript.moveXInput = moveX2_X;
+                playerMovementScript.moveYInput = moveY2_X;
+                playerMovementScript.jumpBtn = jump2_X;
+                playerMovementScript.dashBtn = dash2_X;
+                playerMovementScript.sprintBtn = sprint2_X;
+                cameraControllerScript.camXInput = camX2_X;
+                cameraControllerScript.camYInput = camY2_X;
+                cameraControllerScript.shldrSwapBtn = shldrSwap2_X;
+                playerScript.grabThrowLeftBtn = grabThrowLeftBtn2_X;
+                playerScript.grabThrowRightBtn = grabThrowRightBtn2_X;
+                playerScript.aimCancelBtn = aimCancelBtn2_X;
+                playerScript.pauseBtn = pauseBtn2_X;
             }
             playerScript.triggerNegative = 0;
         }

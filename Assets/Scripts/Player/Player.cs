@@ -118,7 +118,6 @@ public class Player : MonoBehaviour
 
         cam = playerCam.gameObject.GetComponent<Camera>();
         camController = playerCam.gameObject.GetComponent<CameraController>();
-        camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
 
         movementScript.playerAnimator = playerAnimator;
 
@@ -145,6 +144,7 @@ public class Player : MonoBehaviour
             movementScript.isP1 = false;
         }
 
+        camController.RotSpeedX = camController.RotSpeedY = camSenNormal;
     }
 
 

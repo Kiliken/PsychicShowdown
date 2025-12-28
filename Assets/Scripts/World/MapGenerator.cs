@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,8 +57,6 @@ public class MapGenerator : MonoBehaviour
     [NonSerialized]
     public List<GameObject> objects;
 
-    private ushort objectsCount = 1;
-
     private float maxObjects = 50;
 
     private Vector3 genCursor;
@@ -74,27 +73,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private GameObject suddenDeath;
 
-    System.Random objectRnd;
-
     //[SerializeField]
     //TerrainType[] regions;
-    private static Vector3[] objOffset = 
-        { 
-        new Vector3(0, 1f, 0), //rock
-        new Vector3(0, 0, 0), //wall
-        new Vector3(0, 0.5f, 0), //tomato
-        new Vector3(0, 2f, 0), //flan
-        new Vector3(0, 1f, 0), //duck
-        new Vector3(0, 2f, 0), //chair
-        new Vector3(0, 1f, 0), //spear
-        new Vector3(0, 0.5f, 0), //meteor
-        new Vector3(0, 0, 0), //tree
-        new Vector3(0, 3f, 0), //guitar
-        new Vector3(0, 0, 0), //pillar
-        new Vector3(0, 0, 0), //grenade
-        new Vector3(0, 0, 0), //microwave
-        new Vector3(0, 1f, 0), //skull
-    };
 
     public void GenerateMap()
     {
@@ -142,6 +122,7 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateObjects()
     {
+        Random.InitState(seed);
 
         GameObject grassHolder = new GameObject("WorldGrass");
         grassHolder.transform.position = Vector3.zero;
@@ -192,13 +173,12 @@ public class MapGenerator : MonoBehaviour
 
     private void SpanwObject()
     {
-        genCursor = new Vector3(objectRnd.Next((int)-generatorLimit, (int)generatorLimit), 50f, objectRnd.Next((int)-generatorLimit, (int)generatorLimit));
+        genCursor = new Vector3(Random.Range(-generatorLimit, generatorLimit), 50f, Random.Range(-generatorLimit, generatorLimit));
 
-        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity))
+        if (Physics.Raycast(genCursor, Vector3.down, out hit, Mathf.Infinity, ~ground))
         {
-            int rand, randObj;
-            rand = objectRnd.Next(0, 2);
-            randObj = 0;
+            int rand;
+            rand = Random.Range(0, 2);
             objectHeight = 50f - hit.distance;
             switch (true)
             {
@@ -206,17 +186,16 @@ public class MapGenerator : MonoBehaviour
                     //grass
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#503D35", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        randObj = objectRnd.Next(1, 4);
-                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], Quaternion.identity);
-                        //propertyBlock.SetColor("_BaseColor", Color.gray);
-                        //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                        thisObj = Instantiate(prefabs[Random.Range(1, 3)], hit.point, Quaternion.identity);
+                        propertyBlock.SetColor("_BaseColor", Color.gray);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
 
                     break;
@@ -225,33 +204,31 @@ public class MapGenerator : MonoBehaviour
 
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#716749", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        randObj = objectRnd.Next(4, 8);
-                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], (randObj == 6 ? Quaternion.Euler(-90f, 0, 0) : Quaternion.identity));
-                        //ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
-                        //propertyBlock.SetColor("_BaseColor", thisColor);
-                        //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
+                        thisObj = Instantiate(prefabs[Random.Range(3, 5)], hit.point, Quaternion.identity);
+                        ColorUtility.TryParseHtmlString("#b3a0c0", out thisColor);
+                        propertyBlock.SetColor("_BaseColor", thisColor);
+                        thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     break;
                 case true when (objectHeight < 22f):
                     //forest
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                         ColorUtility.TryParseHtmlString("#39483c", out thisColor);
                         propertyBlock.SetColor("_BaseColor", thisColor);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        randObj = objectRnd.Next(8, 11);
-                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], (randObj == 9 ? Quaternion.Euler(90,0,0) : Quaternion.identity));
+                        thisObj = Instantiate(prefabs[Random.Range(5, 7)], hit.point, Quaternion.identity);
                         //ColorUtility.TryParseHtmlString("#44774d", out thisColor);
                         //propertyBlock.SetColor("_BaseColor", thisColor);
                         //thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
@@ -260,21 +237,17 @@ public class MapGenerator : MonoBehaviour
                 default:
                     if (rand != 0)
                     {
-                        thisObj = Instantiate(prefabs[0], hit.point + objOffset[0], Quaternion.identity);
+                        thisObj = Instantiate(prefabs[0], hit.point, Quaternion.identity);
                         propertyBlock.SetColor("_BaseColor", Color.gray);
                         thisObj.transform.GetChild(1).GetComponent<MeshRenderer>().SetPropertyBlock(propertyBlock);
                     }
                     else
                     {
-                        randObj = objectRnd.Next(11, 14);
-                        thisObj = Instantiate(prefabs[randObj], hit.point + objOffset[randObj], Quaternion.identity);
-                        
+                        thisObj = Instantiate(prefabs[Random.Range(7, 10)], hit.point, Quaternion.identity);
                     }
                     break;
 
             }
-            thisObj.GetComponent<ThrowableObject>().objectID = objectsCount;
-            objectsCount++;
 
             objects.Add(thisObj);
             Debug.Log($"Objects count:{objects.Count}");
@@ -299,10 +272,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-
-        seed = (GameObject.FindObjectOfType<LoadedDataStorage>() != null ? GameObject.FindObjectOfType<LoadedDataStorage>().seed : 0);
-        Random.InitState(seed);
-        objectRnd = new System.Random(seed);
+        //seed = Random.Range(6, 4587);
 
         objects = new List<GameObject>();
 
@@ -328,7 +298,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (!isTitle)
         {
-            /*Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
+            Debug.DrawLine(Vector3.zero, Vector3.left * generatorLimit, Color.red);
             if (timer > 30)
             {
                 timer -= Time.deltaTime;
@@ -358,17 +328,31 @@ public class MapGenerator : MonoBehaviour
                 }
 
             }
-            */
+
             for (int i = 0; i < objects.Count; i++)
                 if (objects[i] == null)
                     objects.Remove(objects[i]);
-    
+
 
 
             if (objects.Count < maxObjects)
-                    {
-                        SpanwObject();
-                    }
+            {
+                SpanwObject();
+            }
+        }
+
+
+        if (isTitle)
+        {
+            offset.y += 0.75f * Time.deltaTime;
+            offset.x += 0.75f * Time.deltaTime;
+            GenerateMap();
+
+            if (offset.y >= 100f)
+            {
+                offset.y = 0f;
+                offset.x = 0f;
+            }
         }
     }
 }
@@ -380,5 +364,3 @@ public struct TerrainType
     public float height;
     public Color color;
 }
-
-

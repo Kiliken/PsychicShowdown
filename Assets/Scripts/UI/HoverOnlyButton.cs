@@ -11,14 +11,15 @@ public class HoverOnlyButton : Button
     protected override void Awake()
     {
         base.Awake();
-        gs = FindObjectOfType<GameSettings>();
+        //gs = FindObjectOfType<GameSettings>();
         ts = FindObjectOfType<TitleScreen>();
     }
-    //protected override void Start()
-    //{
-    //    base.Start();
-    //    gs = FindObjectOfType<GameSettings>();
-    //}
+
+    protected override void Start()
+    {
+        base.Start();
+        gs = FindObjectOfType<GameSettings>();
+    }
 
     void Update()
     {
@@ -56,7 +57,7 @@ public class HoverOnlyButton : Button
                     clicked = true;
                     //Debug.Log("p2ps");
                 }
-                }
+            }
             else
             {
                 if (Input.GetButtonDown("Jump2X"))
@@ -118,7 +119,7 @@ public class HoverOnlyButton : Button
 
     public override void OnSubmit(BaseEventData eventData)
     {
-        ts.PlayClick();
+        //ts.PlayClick();
         // Block Unity's default submit input (A/X/Cross)
         Debug.Log("Blocked default submit");
     }
